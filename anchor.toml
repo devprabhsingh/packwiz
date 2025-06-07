@@ -1,0 +1,10 @@
+[lcl-host]
+realm-apid = 'localhost'
+
+[org]
+apid = 'devprabhsingh'
+
+[service]
+apid = 'packwiz'
+category = 'javascript'
+cert-style = 'acme'

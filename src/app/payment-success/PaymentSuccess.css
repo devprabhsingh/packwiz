@@ -1,0 +1,187 @@
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #ff6f20;
+}
+
+.success-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #ff6f20;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.success-button:hover {
+  background-color: #e45b12;
+}
+
+.transaction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0f0f0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: monospace;
+  margin-bottom: 6px;
+}
+
+.transaction-id {
+  font-size: 0.85rem;
+  word-break: break-all;
+  flex: 1;
+  margin-right: 10px;
+  color: #444;
+}
+
+.copy-button {
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: #2563eb;
+}
+
+.tracking-note {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.success-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 20px;
+  background-color: #fefefe;
+}
+
+.success-card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.email-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.success-message {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6f20;
+}
+
+.success-amount,
+.cod-message,
+.success-status {
+  margin-top: 10px;
+  font-size: 16px;
+}
+.success-status {
+  display: flex;
+  align-items: center;
+}
+
+.cod-tag {
+  font-weight: bold;
+}
+
+.transaction-box {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.transaction-label {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.transaction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transaction-id {
+  font-family: monospace;
+  font-size: 14px;
+  color: #222;
+}
+
+.copy-button {
+  background-color: #ff6f20;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.divider {
+  border-top: 1px solid #ddd;
+  margin: 20px 0;
+}
+
+.help-text {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.success-button {
+  display: inline-block;
+  margin-top: 20px;
+  background-color: #ff6f20;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.error-message {
+  color: red;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.retry-email {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.retry-email input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.retry-email button {
+  background-color: #ff6f20;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
