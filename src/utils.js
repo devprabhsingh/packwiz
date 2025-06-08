@@ -77,7 +77,6 @@ export async function getShipCharge(a, subtotal) {
 
     const { distance, duration } = directionsData.routes[0];
     const distanceInKm = distance / 1000;
-
     let myRate = null;
 
     // Condition 1: Only fetch your own rate if within 120 km
@@ -92,121 +91,135 @@ export async function getShipCharge(a, subtotal) {
 
       shippingPrice = Math.round(shippingPrice * 100) / 100;
 
-      myRate = shippingPrice;
+      myRate = {
+        price: shippingPrice,
+        courierName: "Packwiz Delivery",
+        deliveryTime: "1-2 days",
+      };
     }
 
-    // Always fetch EasyShip if within 150 km
-    if (distanceInKm <= 150) {
-      const requestBody = {
-        origin_address: {
-          line_1: "15 gore valley trail",
-          state: "Ontario",
-          city: "Brampton",
-          postal_code: "L6P1N7",
+    const requestBody = {
+      origin_address: {
+        line_1: "15 gore valley trail",
+        state: "Ontario",
+        city: "Brampton",
+        postal_code: "L6P1N7",
+      },
+      destination_address: {
+        country_alpha2: "CA",
+        line_1: a.properties.context.address.name || "",
+        state: a.properties.context.region.name || "",
+        city: a.properties.context.place.name || "",
+        postal_code: a.properties.context.postcode.name || "",
+      },
+      incoterms: "DDU",
+      insurance: { is_insured: false },
+      courier_settings: {
+        show_courier_logo_url: false,
+        apply_shipping_rules: true,
+      },
+      shipping_settings: { units: { weight: "kg", dimensions: "cm" } },
+      parcels: [
+        {
+          box: { length: 20, width: 20, height: 20, slug: "Custom" },
+          items: [
+            {
+              contains_battery_pi966: false,
+              contains_battery_pi967: false,
+              contains_liquids: false,
+              origin_country_alpha2: "CA",
+              quantity: 1,
+              declared_currency: "CAD",
+              description: "shrink wrap",
+              declared_customs_value: 10,
+              hs_code: "121233",
+              category: "sart",
+            },
+          ],
+          total_actual_weight: 20,
         },
-        destination_address: {
-          country_alpha2: "CA",
-          line_1: a.properties.context.address.name || "",
-          state: a.properties.context.region.name || "",
-          city: a.properties.context.place.name || "",
-          postal_code: a.properties.context.postcode.name || "",
+      ],
+    };
+
+    const easyshipResponse = await fetch(
+      "https://public-api.easyship.com/2024-09/rates",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer sand_3IBeyOtZq2RIkmilxofOR5bfe2UZVNGUFIQyfhc9vmw=`,
         },
-        incoterms: "DDU",
-        insurance: { is_insured: false },
-        courier_settings: {
-          show_courier_logo_url: false,
-          apply_shipping_rules: true,
-        },
-        shipping_settings: { units: { weight: "kg", dimensions: "cm" } },
-        parcels: [
-          {
-            box: { length: 20, width: 20, height: 20, slug: "Custom" },
-            items: [
-              {
-                contains_battery_pi966: false,
-                contains_battery_pi967: false,
-                contains_liquids: false,
-                origin_country_alpha2: "CA",
-                quantity: 1,
-                declared_currency: "CAD",
-                description: "shrink wrap",
-                declared_customs_value: 10,
-                hs_code: "121233",
-                category: "sart",
-              },
-            ],
-            total_actual_weight: 20,
-          },
-        ],
+        body: JSON.stringify(requestBody),
+      }
+    );
+
+    const data = await easyshipResponse.json();
+
+    var lowestPriceRate1 = null;
+    var lowestPriceRate2 = null;
+
+    // Step 1: Find the lowest rate for each unique courier
+    const lowestRatePerCourier = new Map();
+    data.rates.forEach((rate) => {
+      const courierName = rate.courier_service?.name;
+      const price = rate.total_charge;
+
+      if (courierName) {
+        // Ensure courierName exists
+        if (
+          !lowestRatePerCourier.has(courierName) ||
+          price < lowestRatePerCourier.get(courierName).total_charge
+        ) {
+          lowestRatePerCourier.set(courierName, rate);
+        }
+      }
+    });
+
+    // Step 2: Convert to array and sort by price
+    const uniqueCourierRates = Array.from(lowestRatePerCourier.values());
+    const sortedUniqueCourierRates = uniqueCourierRates.sort(
+      (a, b) => a.total_charge - b.total_charge
+    );
+
+    // Step 3: Get the absolute lowest rate (lowestPriceRate1)
+    const rawLowestRate1 = sortedUniqueCourierRates[0];
+
+    if (rawLowestRate1) {
+      lowestPriceRate1 = {
+        courierName: rawLowestRate1.courier_service?.name || "N/A",
+        serviceName: rawLowestRate1.courier_service?.service_type || "N/A",
+        price: rawLowestRate1.total_charge,
+        deliveryTime: `${rawLowestRate1.max_delivery_time} days`,
       };
 
-      const easyshipResponse = await fetch(
-        "https://public-api.easyship.com/2024-09/rates",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer sand_3IBeyOtZq2RIkmilxofOR5bfe2UZVNGUFIQyfhc9vmw=`,
-          },
-          body: JSON.stringify(requestBody),
+      // Step 4: Find the second lowest rate with a DIFFERENT (and preferably higher) price
+      // Iterate through the sorted list to find the first rate whose price is higher than rawLowestRate1's price.
+      let rawLowestRate2Candidate = null;
+      for (let i = 1; i < sortedUniqueCourierRates.length; i++) {
+        const currentRate = sortedUniqueCourierRates[i];
+
+        if (currentRate.total_charge > rawLowestRate1.total_charge) {
+          rawLowestRate2Candidate = currentRate;
+          break; // Found our second distinct-price rate
         }
-      );
+      }
 
-      const data = await easyshipResponse.json();
-      console.log(data);
-      var lowestPriceRate = null;
-      var fastestDeliveryRate = null;
-
-      if (data.rates && data.rates.length > 0) {
-        // Find the lowest price rate by sorting by total_charge
-        const sortedByPrice = [...data.rates].sort(
-          (a, b) => a.total_charge - b.total_charge
-        );
-        const rawLowestPriceRate = sortedByPrice[0];
-
-        // Find the fastest delivery rate by sorting by min_delivery_time
-        const sortedByDeliveryTime = [...data.rates].sort(
-          (a, b) => a.min_delivery_time - b.min_delivery_time
-        );
-        const rawFastestDeliveryRate = sortedByDeliveryTime[0];
-
-        if (rawLowestPriceRate) {
-          lowestPriceRate = {
-            courierName: rawLowestPriceRate.courier_service?.name || "N/A",
-            serviceName:
-              rawLowestPriceRate.courier_service?.service_type || "N/A",
-            totalCharge: rawLowestPriceRate.total_charge,
-            deliveryTime: `${rawLowestPriceRate.min_delivery_time}-${rawLowestPriceRate.max_delivery_time} days`,
-          };
-        }
-
-        // Map to desired concise format for fastest delivery rate
-        if (rawFastestDeliveryRate) {
-          fastestDeliveryRate = {
-            courierName: rawFastestDeliveryRate.courier_service?.name || "N/A",
-            serviceName:
-              rawFastestDeliveryRate.courier_service?.service_type || "N/A",
-            totalCharge: rawFastestDeliveryRate.total_charge,
-            deliveryTime: `${rawFastestDeliveryRate.min_delivery_time}-${rawFastestDeliveryRate.max_delivery_time} days`,
-          };
-        }
+      if (rawLowestRate2Candidate) {
+        lowestPriceRate2 = {
+          courierName: rawLowestRate2Candidate.courier_service?.name || "N/A",
+          serviceName:
+            rawLowestRate2Candidate.courier_service?.service_type || "N/A",
+          price: rawLowestRate2Candidate.total_charge,
+          deliveryTime: `${rawLowestRate2Candidate.max_delivery_time} days`,
+          // originalRate: rawLowestRate2Candidate,
+        };
       }
     }
 
-    return {
-      myRate, // Will be null if >120km
-      lowestPriceRate: lowestPriceRate,
-      fastestDeliveryRate: fastestDeliveryRate,
-    };
+    return [myRate, lowestPriceRate1, lowestPriceRate2];
   } catch (error) {
     console.error("Error in getShipCharge:", error);
-    return {
-      myRate: null,
-      lowestPriceRate: {},
-      fastestDeliveryRate: {},
-      error: true,
-      message: error.message,
-    };
+    return [];
   }
 }
 

@@ -10,8 +10,15 @@ const idmap = { b: 0, m: 1, s: 2, g: 3, t: 4, gb: 5, c: 6, f: 7 };
 
 const Checkout = () => {
   const router = useRouter();
-  const { clearCart, customerDetail, cartItems, subTotal, total, shipFees } =
-    useCart();
+  const {
+    clearCart,
+    customerDetail,
+    cartItems,
+    subTotal,
+    total,
+    shipFees,
+    courierName,
+  } = useCart();
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState();
@@ -96,6 +103,7 @@ const Checkout = () => {
         total,
         paymentMethod,
         transactionId: transactionId || "",
+        courierName,
       };
 
       const res = await fetch("/api/saveOrder", {
@@ -125,6 +133,7 @@ const Checkout = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     saveOrder();
+
     setLoading(true);
 
     if (!stripe || !elements) {
@@ -172,10 +181,10 @@ const Checkout = () => {
       const result = await res.json();
 
       if (result.success) {
-        setLoading(false);
         router.push(
           `/payment-success?amount=${order.total}&type=COD&transactionID=${transactionId}`
         );
+        setLoading(false);
       } else {
         console.error("Email sending failed:", result.error);
         alert("Order placed, but email failed to send.");

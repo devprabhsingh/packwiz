@@ -4,38 +4,43 @@ import { useRouter } from "next/navigation"; // Import router for redirection
 import { getAddresses, getShipCharge } from "@/utils";
 import { useCart } from "../context/CartContext";
 import Link from "next/link";
+import { LocateOff } from "lucide-react";
 
 const ShippingInfo = () => {
   const router = useRouter();
-  const { subTotal, setTotal, setCustomerDetail, setShipFees } = useCart();
+  const { subTotal, setTotal, setCustomerDetail, setShipFees, setCourierName } =
+    useCart();
   const [formData, setFormData] = useState({
-    streetAddress: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    country: "",
-    phone: "",
-    email: "",
-    confirmEmail: "",
-    name: "",
+    streetAddress: localStorage.getItem("streetAddress") || "",
+    city: localStorage.getItem("city") || "",
+    state: localStorage.getItem("state") || "",
+    postalCode: localStorage.getItem("postalCode") || "",
+    country: localStorage.getItem("country") || "",
+    phone: localStorage.getItem("phone") || "",
+    email: localStorage.getItem("email") || "",
+    confirmEmail: localStorage.getItem("email") || "",
+    name: localStorage.getItem("name") || "",
   });
+  const [fullAddress, setFullAddress] = useState("");
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
-  const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState("");
-  const [shipPrice, setShipPrice] = useState(0);
   const [loader, setLoader] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [shipRateOpts, setShipRateOpts] = useState([]);
+  const [selectedRate, setSelectedRate] = useState({});
+
   const safeSubTotal =
     typeof subTotal === "number" ? subTotal : parseFloat(subTotal) || 0;
 
   const taxRate = 0.13; // 13% tax
   const taxAmount = safeSubTotal * taxRate;
-  const total = safeSubTotal + taxAmount + (shipPrice || 0);
+  const total = safeSubTotal + taxAmount + (selectedRate?.price || 0);
 
   useEffect(() => {
-    if (query.length < 3) {
+    if (query.length < 2) {
       setResults([]);
       return;
     }
@@ -47,6 +52,22 @@ const ShippingInfo = () => {
 
     getRes();
   }, [query]);
+
+  const getShip = async (a) => {
+    setLoading2(true);
+    let rates = await getShipCharge(a, subTotal);
+    rates[1].price = Number((rates[1].price * 1.05).toFixed(2));
+    rates[2].price = Number((rates[2].price * 1.051).toFixed(2));
+    setShipRateOpts(rates);
+    setSelectedRate(rates[0]);
+  };
+
+  useEffect(() => {
+    const a = JSON.parse(localStorage.getItem("full_address"));
+    if (a) {
+      getShip(a);
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -104,6 +125,19 @@ const ShippingInfo = () => {
           }
           break;
 
+        case "streetAddress":
+        case "city":
+        case "state":
+        case "postalCode":
+        case "country":
+          if (!value.trim()) {
+            newErrors[name] =
+              `${name.charAt(0).toUpperCase() + name.slice(1)} is required`;
+          } else {
+            delete newErrors[name];
+          }
+          break;
+
         default:
           break;
       }
@@ -128,23 +162,23 @@ const ShippingInfo = () => {
   const validateForm = () => {
     let errors = {};
 
-    if (formData.name.trim().length < 3)
+    if (formData.name?.trim().length < 3)
       errors.name = "Name should be atleast 3 characters";
-    if (!formData.email.trim()) errors.email = "Email is required";
+    if (!formData.email?.trim()) errors.email = "Email is required";
     if (!isValidEmail(formData.email.trim()))
       errors.email = "Email is not valid";
     if (!isValidPhone(formData.phone.trim()))
       errors.phone = "Phone Number not valid";
-    if (!formData.streetAddress.trim())
+    if (!formData.streetAddress?.trim())
       errors.streetAddress = "Street address is required";
-    if (!formData.city.trim()) errors.city = "City is required";
-    if (!formData.state.trim()) errors.state = "State is required";
-    if (!formData.postalCode.trim())
+    if (!formData.city?.trim()) errors.city = "City is required";
+    if (!formData.state?.trim()) errors.state = "State is required";
+    if (!formData.postalCode?.trim())
       errors.postalCode = "Postal code is required";
-    if (!formData.country.trim()) errors.country = "Country is required";
-    if (!formData.confirmEmail.trim())
+    if (!formData.country?.trim()) errors.country = "Country is required";
+    if (!formData.confirmEmail?.trim())
       errors.confirmEmail = "Please confirm your email";
-    else if (formData.email.trim() !== formData.confirmEmail.trim())
+    else if (formData.email?.trim() !== formData.confirmEmail.trim())
       errors.confirmEmail = "Emails do not match";
     setFieldErrors(errors);
     return Object.keys(errors).length === 0;
@@ -152,6 +186,7 @@ const ShippingInfo = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    setCourierName(selectedRate.courierName);
     if (!validateForm()) {
       setError("Please fix the errors before proceeding.");
       return;
@@ -159,12 +194,25 @@ const ShippingInfo = () => {
     setError("");
     setCustomerDetail(formData);
     setLoader(true);
+
+    localStorage.setItem("streetAddress", formData.streetAddress);
+    localStorage.setItem("city", formData.city);
+    localStorage.setItem("state", formData.state);
+    localStorage.setItem("postalCode", formData.postalCode);
+    localStorage.setItem("country", formData.country);
+    localStorage.setItem("phone", formData.phone);
+    localStorage.setItem("email", formData.email);
+    localStorage.setItem("name", formData.name);
+    localStorage.setItem("full_address", JSON.stringify(fullAddress));
+
     router.push("/payment"); // Redirect to payment page
   };
 
   const selectAddress = (a) => {
     setSelectedAddress(a.properties.full_address);
+    setFullAddress(a);
     setResults([]);
+    setFieldErrors({});
 
     const context = a.properties.context;
 
@@ -178,19 +226,15 @@ const ShippingInfo = () => {
       email: formData.email,
       name: formData.name,
     });
+    getShip(a);
+  };
 
-    const getShip = async () => {
-      const rates = await getShipCharge(a, subTotal);
-      console.log(rates.lowestPriceRate.serviceName);
-      console.log(rates);
-      setShipPrice(rates.myRate);
-      let ship = rates.myRate;
-      setShipFees(Number(ship.toFixed(2)));
-      const tot = Number((safeSubTotal + ship + taxAmount).toFixed(2));
-      setTotal(tot);
-    };
-
-    getShip();
+  const selectShipRate = (i) => {
+    setSelectedRate(shipRateOpts[i]);
+    let shipRate = Number(shipRateOpts[i].price.toFixed(2));
+    setShipFees(shipRate);
+    const tot = Number((safeSubTotal + shipRate + taxAmount).toFixed(2));
+    setTotal(tot);
   };
 
   if (subTotal < 10) {
@@ -231,7 +275,7 @@ const ShippingInfo = () => {
       style={{
         backgroundColor: "white",
         borderRadius: "8px",
-        padding: "30px 0",
+        padding: "10px 0",
       }}
     >
       <form style={styles.form}>
@@ -351,22 +395,48 @@ const ShippingInfo = () => {
             )}
           </React.Fragment>
         ))}
-
-        {/* Global Error */}
-        {error && <p style={styles.error}>{error}</p>}
       </form>
       <div className="shipping-rates-box">
-        <h2>Select your courier</h2>
-        <div>
-          <div>
-            <p>Canpar</p>
-            <p>$20</p>
+        <h2 style={styles.header}>
+          <span className="payment-step">3</span>Select your courier
+        </h2>
+        {shipRateOpts.length > 0 ? (
+          shipRateOpts.map((option, index) =>
+            option?.price ? (
+              <div
+                className={`ship-option ${selectedRate.price === shipRateOpts[index].price ? "selected" : ""}`}
+                key={index}
+                onClick={() => selectShipRate(index)}
+              >
+                <div className="ship-option-inner">
+                  <p>{option.courierName}</p>
+                  <p>{option.price}</p>
+                </div>
+                <p>Delivery within {option.deliveryTime}</p>
+                {/* Conditional rendering for "Cash On Delivery Available" */}
+                {index === 0 && (
+                  <p className="cod-available">Cash On Delivery Available</p>
+                )}
+              </div>
+            ) : null
+          )
+        ) : (
+          <i className="no-options-message">
+            Once you enter the address, you will see a list of courier options
+            here
+          </i>
+        )}
+
+        {loading2 && Object.keys(selectedRate).length === 0 && (
+          <div style={{ height: "40px", width: "40px", margin: "auto" }}>
+            <img src="images/loader.gif" alt="loading.." />
           </div>
-          <p> Delivery within 3-4 working days</p>
-        </div>
+        )}
+
+        {Object.keys(selectedRate).length === 0}
 
         {/* Payment Summary */}
-        {shipPrice > 0 && (
+        {Object.keys(selectedRate).length > 0 && (
           <div style={styles.summary}>
             <div style={styles.summaryLine}>
               <span>Subtotal:</span>
@@ -378,7 +448,7 @@ const ShippingInfo = () => {
             </div>
             <div style={styles.summaryLine}>
               <span>Shipping:</span>
-              <span>${shipPrice.toFixed(2)}</span>
+              <span>${selectedRate.price.toFixed(2)}</span>
             </div>
             <hr />
             <div
@@ -394,8 +464,10 @@ const ShippingInfo = () => {
           </div>
         )}
 
+        {/* Global Error */}
+        {error && <p style={styles.error}>{error}</p>}
         {/* Proceed Button */}
-        <button type="submit" className="proceed-pay-btn" disabled={loading}>
+        <button onClick={handleSubmit} className="proceed-pay-btn">
           {loader ? (
             <img
               style={{ height: "40px", width: "40px" }}

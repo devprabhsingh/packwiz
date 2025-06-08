@@ -8,6 +8,7 @@ export const CartProvider = ({ children }) => {
   const [subTotal, setSubTotal] = useState(0);
   const [shipFees, setShipFees] = useState(0);
   const [total, setTotal] = useState(0);
+  const [courierName, setCourierName] = useState("");
   const [customerDetail, setCustomerDetail] = useState(null);
   const [emailSent, setEmailSent] = useState(false);
 
@@ -75,6 +76,8 @@ export const CartProvider = ({ children }) => {
         setCustomerDetail,
         setEmailSent,
         emailSent,
+        courierName,
+        setCourierName,
       }}
     >
       {children}

@@ -76,8 +76,8 @@ export const products = [
   [
     {
       id: "s01",
-      title: "Stretch wrap / Pallet wrap",
-      desc: "14inch, 80gauge",
+      title: "Pallet wrap",
+      desc: "14inch, 80gauge Stretch Wrap/Pallet Wrap",
       size: "450m",
       priceTable: { tier1: 15, tier2: 16, tier3: 12, tier4: 10 },
       image: "/images/shrink_wrap.png",

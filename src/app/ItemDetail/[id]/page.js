@@ -21,7 +21,7 @@ export default function ItemDetail() {
     (p) => p.id.startsWith(letter) && p.id !== id
   );
   const item = flatPs.find((item) => item.id == id);
-
+  const [price, setPrice] = useState(item.priceTable.tier1);
   const [quantity, setQuantity] = useState(1);
   const [addedProductId, setAddedProductId] = useState(null);
   const { addToCart } = useCart();
@@ -35,15 +35,19 @@ export default function ItemDetail() {
     return <div>Item not found.</div>;
   }
 
-  const increaseQty = () => setQuantity((prev) => prev + 1);
-  const decreaseQty = () => setQuantity((prev) => Math.max(1, prev - 1));
-
   const getPrice = (qty, p) => {
     if (qty <= 4) return p.tier1;
     if (qty <= 9) return p.tier2;
     if (qty <= 24) return p.tier3;
     return p.tier4;
   };
+
+  useEffect(() => {
+    setPrice(getPrice(quantity, item.priceTable));
+  }, [quantity]);
+
+  const increaseQty = () => setQuantity((prev) => prev + 1);
+  const decreaseQty = () => setQuantity((prev) => Math.max(1, prev - 1));
 
   const handleAddToCart = () => {
     const price = getPrice(quantity, item.priceTable);
@@ -144,6 +148,11 @@ export default function ItemDetail() {
             </tbody>
           </table>
 
+          <div>
+            <p>
+              Effective Price: <span style={{ color: "green" }}>${price}</span>
+            </p>
+          </div>
           <div className="qty-controls">
             <button onClick={decreaseQty}>-</button>
             <span>{quantity}</span>

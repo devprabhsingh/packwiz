@@ -2,19 +2,33 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import "./PaymentSuccess.css";
 
 export default function PaymentSuccess() {
   const searchParams = useSearchParams();
   const amount = parseFloat(searchParams.get("amount") || "0");
-  const transactionId = searchParams.get("transactionID");
+  const transactionId = searchParams.get("transactionId");
   const type = searchParams.get("type");
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(false);
-  }, [transactionId]);
+    window.history.pushState(null, "", window.location.href);
+
+    const onPopState = () => {
+      // User pressed back button, redirect to home page instead
+      router.replace("/");
+    };
+
+    window.addEventListener("popstate", onPopState);
+
+    return () => {
+      window.removeEventListener("popstate", onPopState);
+    };
+  }, [transactionId, router]);
 
   const handleCopy = () => {
     if (transactionId) {

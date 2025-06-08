@@ -30,6 +30,7 @@ const orderSchema = new mongoose.Schema(
     total: { type: Number, required: true },
     transactionId: { type: String },
     paymentMethod: { type: String },
+    courierName: { type: String },
   },
   { timestamps: true }
 );

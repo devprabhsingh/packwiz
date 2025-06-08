@@ -8,6 +8,30 @@ import { EmailTemplate } from "@/app/components/EmailTemplate";
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function tryFetchOrder(
+  email,
+  transactionId,
+  attempts = 5,
+  delayMs = 500
+) {
+  for (let i = 0; i < attempts; i++) {
+    await dbConnect(); // connect to DB
+    const order = await Order.findOne({ email, transactionId });
+
+    if (order) {
+      return order; // found!
+    }
+
+    console.warn(`Retry ${i + 1}/${attempts} - Order not found yet...`);
+    await delay(delayMs); // wait before retrying
+  }
+  return null; // not found after retries
+}
+
 export async function POST(req) {
   const sig = req.headers.get("stripe-signature");
   const rawBody = await req.text();
@@ -35,8 +59,7 @@ export async function POST(req) {
     const transactionId = paymentIntent.id;
 
     try {
-      await dbConnect();
-      const order = await Order.findOne({ email, transactionId });
+      const order = await tryFetchOrder(email, transactionId);
 
       if (!order) {
         console.error(
@@ -60,6 +83,7 @@ export async function POST(req) {
           shipFees={order.shipFees}
           total={order.total}
           transactionId={transactionId}
+          courierName={order.courierName}
         />
       );
 

@@ -1,12 +1,14 @@
-// components/PaymentMethodSelector.js
-
 import React from "react";
 import "../payment/Payment.css";
+import { useCart } from "../context/CartContext";
 
 const PaymentMethodSelector = ({ paymentMethod, onSelect }) => {
+  const { courierName } = useCart();
+
   return (
     <div className="payment-method-container">
       <h2>Select a payment method</h2>
+
       <div className="payment-buttons">
         <button
           onClick={() => onSelect("Online")}
@@ -17,12 +19,14 @@ const PaymentMethodSelector = ({ paymentMethod, onSelect }) => {
           <img src="/images/google-pay.png" alt="Google Pay" />
         </button>
 
-        <button
-          onClick={() => onSelect("COD")}
-          className={`payment-btn ${paymentMethod === "COD" ? "selected" : ""}`}
-        >
-          Cash on Delivery (COD)
-        </button>
+        {courierName === "Packwiz Delivery" && (
+          <button
+            onClick={() => onSelect("COD")}
+            className={`payment-btn ${paymentMethod === "COD" ? "selected" : ""}`}
+          >
+            Cash on Delivery (COD)
+          </button>
+        )}
       </div>
     </div>
   );

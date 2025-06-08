@@ -86,13 +86,14 @@
 }
 
 .qty-controls button {
-  font-size: 18px;
+  font-size: 19px;
   width: 36px;
   height: 36px;
-  background-color: #f1f1f1;
-  border: none;
+  background-color: #dcdcdc;
+  border: 1px solid #cfcfcf;
   border-radius: 5px;
   cursor: pointer;
+  color: black;
 }
 
 .qty-controls button:hover {
@@ -133,7 +134,7 @@
 }
 
 .buy-now {
-  background-color: #ff6f20;
+  background-color: #e45f16;
   color: #ffffff;
 }
 

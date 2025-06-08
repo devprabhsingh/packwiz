@@ -15,7 +15,7 @@ const pds = [
   {
     id: 2,
     idKey: "s",
-    name: "Stretch Wrap / Pallet Wrap",
+    name: "Pallet Wrap",
     image: "/images/shrink_wrap.png",
   },
   { id: 3, idKey: "g", name: "Gloves", image: "/images/gloves.png" },

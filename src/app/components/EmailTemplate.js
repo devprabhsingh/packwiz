@@ -11,6 +11,7 @@ export const EmailTemplate = ({
   shipFees,
   total,
   transactionId,
+  courierName,
 }) => {
   const firstName = name?.split(" ")[0] || "Customer";
 
@@ -132,6 +133,9 @@ export const EmailTemplate = ({
 
         <p style={{ marginTop: "20px" }}>
           <strong>Payment Method:</strong> {paymentMethod}
+        </p>
+        <p style={{ marginTop: "20px" }}>
+          <strong>Selected Courier:</strong> {courierName}
         </p>
         {transactionId && (
           <p>

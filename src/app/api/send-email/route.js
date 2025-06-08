@@ -23,6 +23,7 @@ export async function POST(req) {
       address,
       items,
       transactionId,
+      courierName,
     } = order;
 
     const cartItems = Array.isArray(items) ? items : [];
@@ -49,6 +50,7 @@ export async function POST(req) {
         shipFees={parseFloat(shipFees)}
         total={parseFloat(total)}
         transactionId={transactionId}
+        courierName={courierName}
       />
     );
 
