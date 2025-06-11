@@ -43,8 +43,8 @@ export async function getAddresses(query) {
 
   return mapboxData.features;
 }
-
-export async function getShipCharge(a, subtotal) {
+export async function getTotalWeightDim(cartItems) {}
+export async function getShipCharge(a, subtotal, cartItems) {
   const startLon = -79.674004;
   const startLat = 43.775972;
 
@@ -118,7 +118,7 @@ export async function getShipCharge(a, subtotal) {
         show_courier_logo_url: false,
         apply_shipping_rules: true,
       },
-      shipping_settings: { units: { weight: "kg", dimensions: "cm" } },
+      shipping_settings: { units: { weight: "kg", dimensions: "in" } },
       parcels: [
         {
           box: { length: 20, width: 20, height: 20, slug: "Custom" },

@@ -4,24 +4,29 @@ import { useRouter } from "next/navigation"; // Import router for redirection
 import { getAddresses, getShipCharge } from "@/utils";
 import { useCart } from "../context/CartContext";
 import Link from "next/link";
-import { LocateOff } from "lucide-react";
 
 const ShippingInfo = () => {
   const router = useRouter();
-  const { subTotal, setTotal, setCustomerDetail, setShipFees, setCourierName } =
-    useCart();
+  const {
+    subTotal,
+    setTotal,
+    setCustomerDetail,
+    setShipFees,
+    setCourierName,
+    cartItems,
+  } = useCart();
   const [formData, setFormData] = useState({
-    streetAddress: localStorage.getItem("streetAddress") || "",
-    city: localStorage.getItem("city") || "",
-    state: localStorage.getItem("state") || "",
-    postalCode: localStorage.getItem("postalCode") || "",
-    country: localStorage.getItem("country") || "",
-    phone: localStorage.getItem("phone") || "",
-    email: localStorage.getItem("email") || "",
-    confirmEmail: localStorage.getItem("email") || "",
-    name: localStorage.getItem("name") || "",
+    streetAddress: "",
+    city: "",
+    state: "",
+    postalCode: "",
+    country: "",
+    phone: "",
+    email: "",
+    confirmEmail: "",
+    name: "",
   });
-  const [fullAddress, setFullAddress] = useState("");
+  const [addressObj, setAddressObj] = useState({});
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [fieldErrors, setFieldErrors] = useState({});
@@ -53,9 +58,18 @@ const ShippingInfo = () => {
     getRes();
   }, [query]);
 
+  const selectShipRate = (i) => {
+    setSelectedRate(shipRateOpts[i]);
+    let shipRate = Number(shipRateOpts[i]?.price.toFixed(2));
+    setShipFees(shipRate);
+    const tot = Number((safeSubTotal + shipRate + taxAmount).toFixed(2));
+    setTotal(tot);
+  };
+
   const getShip = async (a) => {
     setLoading2(true);
-    let rates = await getShipCharge(a, subTotal);
+
+    let rates = await getShipCharge(a, subTotal, cartItems);
     rates[1].price = Number((rates[1].price * 1.05).toFixed(2));
     rates[2].price = Number((rates[2].price * 1.051).toFixed(2));
     setShipRateOpts(rates);
@@ -63,11 +77,27 @@ const ShippingInfo = () => {
   };
 
   useEffect(() => {
-    const a = JSON.parse(localStorage.getItem("full_address"));
+    const savedData = {
+      streetAddress: localStorage.getItem("streetAddress") || "",
+      city: localStorage.getItem("city") || "",
+      state: localStorage.getItem("state") || "",
+      postalCode: localStorage.getItem("postalCode") || "",
+      country: localStorage.getItem("country") || "",
+      phone: localStorage.getItem("phone") || "",
+      email: localStorage.getItem("email") || "",
+      confirmEmail: localStorage.getItem("email") || "",
+      name: localStorage.getItem("name") || "",
+    };
+    setFormData(savedData);
+    const a = JSON.parse(localStorage.getItem("addressObj"));
     if (a) {
       getShip(a);
     }
   }, []);
+
+  useEffect(() => {
+    selectShipRate(0);
+  }, [shipRateOpts]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -203,14 +233,14 @@ const ShippingInfo = () => {
     localStorage.setItem("phone", formData.phone);
     localStorage.setItem("email", formData.email);
     localStorage.setItem("name", formData.name);
-    localStorage.setItem("full_address", JSON.stringify(fullAddress));
+    localStorage.setItem("addressObj", JSON.stringify(addressObj));
 
     router.push("/payment"); // Redirect to payment page
   };
 
   const selectAddress = (a) => {
     setSelectedAddress(a.properties.full_address);
-    setFullAddress(a);
+    setAddressObj(a);
     setResults([]);
     setFieldErrors({});
 
@@ -227,14 +257,6 @@ const ShippingInfo = () => {
       name: formData.name,
     });
     getShip(a);
-  };
-
-  const selectShipRate = (i) => {
-    setSelectedRate(shipRateOpts[i]);
-    let shipRate = Number(shipRateOpts[i].price.toFixed(2));
-    setShipFees(shipRate);
-    const tot = Number((safeSubTotal + shipRate + taxAmount).toFixed(2));
-    setTotal(tot);
   };
 
   if (subTotal < 10) {
@@ -404,7 +426,7 @@ const ShippingInfo = () => {
           shipRateOpts.map((option, index) =>
             option?.price ? (
               <div
-                className={`ship-option ${selectedRate.price === shipRateOpts[index].price ? "selected" : ""}`}
+                className={`ship-option ${selectedRate?.price === shipRateOpts[index].price ? "selected" : ""}`}
                 key={index}
                 onClick={() => selectShipRate(index)}
               >
@@ -427,16 +449,14 @@ const ShippingInfo = () => {
           </i>
         )}
 
-        {loading2 && Object.keys(selectedRate).length === 0 && (
+        {loading2 && Object.keys(shipRateOpts || {}).length === 0 && (
           <div style={{ height: "40px", width: "40px", margin: "auto" }}>
             <img src="images/loader.gif" alt="loading.." />
           </div>
         )}
 
-        {Object.keys(selectedRate).length === 0}
-
         {/* Payment Summary */}
-        {Object.keys(selectedRate).length > 0 && (
+        {Object.keys(shipRateOpts || {}).length > 0 && (
           <div style={styles.summary}>
             <div style={styles.summaryLine}>
               <span>Subtotal:</span>
@@ -448,7 +468,7 @@ const ShippingInfo = () => {
             </div>
             <div style={styles.summaryLine}>
               <span>Shipping:</span>
-              <span>${selectedRate.price.toFixed(2)}</span>
+              <span>${selectedRate?.price.toFixed(2) || 0}</span>
             </div>
             <hr />
             <div
