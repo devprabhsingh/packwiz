@@ -5,16 +5,16 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const pds = [
-  { id: 0, idKey: "b", name: "Boxes", image: "/images/boxes.png" },
+  { id: 0, idKey: "bx", name: "Boxes", image: "/images/boxes.png" },
   {
     id: 1,
-    idKey: "m",
+    idKey: "mb",
     name: "Moving Blankets",
     image: "/images/moving_blankets.png",
   },
   {
     id: 2,
-    idKey: "s",
+    idKey: "sw",
     name: "Pallet Wrap",
     image: "/images/shrink_wrap.png",
   },
@@ -38,11 +38,11 @@ const pds = [
     name: "Garbage Bags",
     image: "/images/garbage_bags.png",
   },
-  { id: 8, idKey: "c", name: "Coveralls", image: "/images/coveralls.png" },
-  { id: 9, idKey: "f", name: "Felt pads", image: "/images/felt_pads.png" },
+  { id: 8, idKey: "cv", name: "Coveralls", image: "/images/coveralls.png" },
+  { id: 9, idKey: "fp", name: "Felt pads", image: "/images/felt_pads.png" },
   {
     id: 10,
-    idKey: "n",
+    idKey: "np",
     name: "Newsprint Packing Paper",
     image: "/images/packing-paper.png",
   },

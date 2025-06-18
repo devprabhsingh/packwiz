@@ -1,16 +1,17 @@
 import mongoose from "mongoose";
 let isConnected = false;
+import { categories } from "./data/numberSheet";
 
 export function getProductCat(productId) {
   if (!productId) return null;
 
-  if (productId.startsWith("b")) {
+  if (productId.startsWith("bx")) {
     return 0;
-  } else if (productId.startsWith("s")) {
+  } else if (productId.startsWith("mb")) {
     return 1;
-  } else if (productId.startsWith("m")) {
+  } else if (productId.startsWith("sw")) {
     return 2;
-  } else if (productId.startsWith("g")) {
+  } else if (productId.startsWith("gl")) {
     return 3;
   } else if (productId.startsWith("ct")) {
     return 4;
@@ -20,11 +21,11 @@ export function getProductCat(productId) {
     return 6;
   } else if (productId.startsWith("gb")) {
     return 7;
-  } else if (productId.startsWith("c")) {
+  } else if (productId.startsWith("cv")) {
     return 8;
-  } else if (productId.startsWith("f")) {
+  } else if (productId.startsWith("fp")) {
     return 9;
-  } else if (productId.startsWith("n")) {
+  } else if (productId.startsWith("np")) {
     return 10;
   } else {
     return null; // or -1 if you want to handle unknown cases
@@ -43,8 +44,235 @@ export async function getAddresses(query) {
 
   return mapboxData.features;
 }
-export async function getTotalWeightDim(cartItems) {}
+function getTotalWeightDim(cartItems) {
+  if (!cartItems || cartItems.length === 0) return {};
+
+  const items = cartItems.map((cItem) => {
+    const item = categories[getProductCat(cItem.id)];
+    return { ...item, ...cItem };
+  });
+
+  let finalConfig = {};
+  if (items.length === 1) {
+    const item = items[0];
+    const { id, qty } = item;
+    const d = item.dimensions?.[item.id] || item.dimensions || {};
+
+    const config1 = { l: d.l * qty, w: d.w, h: d.h };
+    const config2 = { l: d.l, w: d.w * qty, h: d.h };
+    const config3 = { l: d.l, w: d.w, h: d.h * qty };
+
+    const idChar = id.slice(0, 2);
+    switch (idChar) {
+      case "bx":
+        finalConfig = {
+          l: d.l,
+          w: d.w,
+          h: (d.h * qty).toFixed(2),
+        };
+        break;
+
+      case "mb":
+      case "cv":
+      case "fp":
+      case "np":
+        finalConfig = config3;
+        break;
+
+      case "sw":
+        if (qty <= 2) finalConfig = config2;
+        else if (qty <= 4) finalConfig = { l: 15, w: 10, h: 10 };
+        else if (qty <= 6) finalConfig = { l: 15, w: 10, h: 15 };
+        else finalConfig = { l: 15, w: 10 * qty, h: 15 };
+        break;
+
+      case "gl":
+        if (qty <= 2) finalConfig = { l: 9, w: 4.7, h: 3.1 * qty };
+        else if (qty <= 4) finalConfig = { l: 9, w: 9.4, h: 6.2 };
+        else if (qty <= 6) finalConfig = { l: 9, w: 9.4, h: 9.3 };
+        else finalConfig = { l: 9, w: 9.4, h: 3.1 * qty };
+        break;
+
+      case "ct":
+      case "gt":
+      case "rt":
+        finalConfig = qty <= 6 ? config3 : { l: 5, w: 5 * qty, h: 12 };
+        break;
+
+      default:
+        console.warn("No matching config rule for title:", title);
+        finalConfig = {};
+    }
+
+    let weight = item.weight;
+    let dims = item.dimensions;
+    if (item.id.slice(0, 2) === "bx") {
+      weight = weight[item.id];
+      dims = dims[item.id];
+    }
+
+    return [
+      {
+        box: {
+          length: Number(finalConfig.l),
+          width: Number(finalConfig.w),
+          height: Number(finalConfig.h),
+          slug: "Custom",
+        },
+        items: items.map((item) => {
+          return {
+            contains_battery_pi966: false,
+            contains_battery_pi967: false,
+            contains_liquids: false,
+            origin_country_alpha2: "CA",
+            quantity: item.qty,
+            declared_currency: "CAD",
+            description: item.title,
+            declared_customs_value: item.qty * item.price,
+            hs_code: item.hsCode,
+            category: item.cat.slice(0, 48),
+            actual_weight: Number(weight.toFixed(2)),
+
+            // dimensions: {
+            //   length: dims.l,
+            //   width: dims.w,
+            //   height: dims.h,
+            // },
+          };
+        }),
+      },
+    ];
+  } else {
+    const groupA = [];
+    const groupB = [];
+
+    items.forEach((item) => {
+      const group = getItemGroup(item.id, item.qty);
+      if (group === "A") {
+        groupA.push(item);
+      } else {
+        groupB.push(item);
+      }
+    });
+
+    // calculate entire weight of group A
+    let totalWeightA = groupA.reduce(
+      (sum, item) => sum + item.weight * item.qty,
+      0
+    );
+
+    if (totalWeightA > 30) {
+      // Sort groupA by descending total item weight (weight * qty)
+      groupA.sort((a, b) => b.weight * b.qty - a.weight * a.qty);
+      while (totalWeightA > 30 && groupA.length > 0) {
+        const heavyItem = groupA.shift(); // remove from A
+        groupB.push(heavyItem); // add to B
+        totalWeightA -= heavyItem.weight * heavyItem.qty;
+      }
+    }
+
+    const groupAParcel = [
+      {
+        items: groupA.map((item) => {
+          return {
+            contains_battery_pi966: false,
+            contains_battery_pi967: false,
+            contains_liquids: false,
+            origin_country_alpha2: "CA",
+            quantity: item.qty,
+            declared_currency: "CAD",
+            description: item.title,
+            declared_customs_value: item.qty * item.price,
+            hs_code: item.hsCode,
+            category: item.cat.slice(0, 48),
+            actual_weight: Number((item.qty * item.weight).toFixed(2)),
+            dimensions: {
+              length: item.dimensions.l,
+              width: item.dimensions.w,
+              height: item.dimensions.h,
+            },
+          };
+        }),
+      },
+    ];
+    console.log("groupAParcel", groupAParcel);
+    const groupBItems = groupB.map((item) => {
+      return {
+        contains_battery_pi966: false,
+        contains_battery_pi967: false,
+        contains_liquids: false,
+        origin_country_alpha2: "CA",
+        quantity: item.qty,
+        declared_currency: "CAD",
+        description: item.title,
+        declared_customs_value: item.qty * item.price,
+        hs_code: item.hsCode,
+        category: item.cat.slice(0, 48),
+        actual_weight: Number((item.qty * item.weight).toFixed(2)),
+        dimensions: {
+          length: item.dimensions.l,
+          width: item.dimensions.w,
+          height: item.dimensions.h,
+        },
+      };
+    });
+    console.log("groupB", groupBItems);
+    return;
+  }
+  const parcels = [
+    {
+      items: items.map((item) => {
+        return {
+          contains_battery_pi966: false,
+          contains_battery_pi967: false,
+          contains_liquids: false,
+          origin_country_alpha2: "CA",
+          quantity: item.qty,
+          declared_currency: "CAD",
+          description: item.title,
+          declared_customs_value: item.qty * item.price,
+          hs_code: item.hsCode,
+          category: item.cat.slice(0, 48),
+          actual_weight: Number((item.qty * item.weight).toFixed(2)),
+        };
+      }),
+    },
+  ];
+}
+
+function getItemGroup(itemId, qty) {
+  const prefix = itemId.slice(0, 2);
+
+  switch (prefix) {
+    case "gl":
+      return qty > 20 ? "B" : "A";
+
+    case "ct":
+    case "gt":
+    case "rt":
+      return qty >= 36 ? "B" : "A";
+
+    case "cv":
+      return qty > 20 ? "B" : "A";
+
+    case "sw":
+      return qty > 6 ? "B" : "A";
+
+    case "mb":
+      return qty <= 5 ? "A" : "B";
+
+    case "bx":
+    case "np":
+    case "fp":
+      return "B"; // Always bulky
+
+    default:
+      return "A"; // Default to groupable
+  }
+}
+
 export async function getShipCharge(a, subtotal, cartItems) {
+  const parcels = await getTotalWeightDim(cartItems);
   const startLon = -79.674004;
   const startLat = 43.775972;
 
@@ -119,26 +347,7 @@ export async function getShipCharge(a, subtotal, cartItems) {
         apply_shipping_rules: true,
       },
       shipping_settings: { units: { weight: "kg", dimensions: "in" } },
-      parcels: [
-        {
-          box: { length: 20, width: 20, height: 20, slug: "Custom" },
-          items: [
-            {
-              contains_battery_pi966: false,
-              contains_battery_pi967: false,
-              contains_liquids: false,
-              origin_country_alpha2: "CA",
-              quantity: 1,
-              declared_currency: "CAD",
-              description: "shrink wrap",
-              declared_customs_value: 10,
-              hs_code: "121233",
-              category: "sart",
-            },
-          ],
-          total_actual_weight: 20,
-        },
-      ],
+      parcels: parcels,
     };
 
     const easyshipResponse = await fetch(
@@ -235,5 +444,33 @@ export async function dbConnect() {
   } catch (error) {
     console.error("MongoDB connection error:", error);
     throw error;
+  }
+}
+
+export async function getTaxRate(province) {
+  switch (province) {
+    case "Alberta":
+    case "Yukon":
+    case "Nunavut":
+    case "Northwest Territories":
+      return 0.05;
+    case "British Columbia":
+    case "Manitoba":
+      return 0.12;
+    case "Saskatchewan":
+      return 0.11;
+    case "Quebec":
+      return 0.14975;
+    case "Ontario":
+      return 0.13;
+    case "New Brunswick":
+    case "Newfoundland & Labrador":
+    case "Prince Edward Island":
+      return 0.15;
+    case "Nova Scotia":
+      return 0.14;
+
+    default:
+      return 0;
   }
 }

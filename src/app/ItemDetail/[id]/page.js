@@ -113,8 +113,8 @@ export default function ItemDetail() {
           <table className="price-table">
             <thead>
               <tr>
-                <th>{category.title}</th>
-                <th>Price/{category.unit}</th>
+                <th>{category.unit}</th>
+                <th>Price</th>
               </tr>
             </thead>
             <tbody>

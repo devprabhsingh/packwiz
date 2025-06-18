@@ -1,7 +1,7 @@
 export const products = [
   [
     {
-      id: "b01",
+      id: "bx01",
       size: '8"X8"X8"',
       title: "Corrugated box",
       desc: "32ECT single wall",
@@ -9,7 +9,7 @@ export const products = [
       image: "/images/8inchcube.png",
     },
     {
-      id: "b02",
+      id: "bx02",
       size: '12"X12"X12"',
       title: "Corrugated box",
       desc: "32ECT single wall",
@@ -17,7 +17,7 @@ export const products = [
       image: "/images/12inchcube.png",
     },
     {
-      id: "b03",
+      id: "bx03",
       size: "16*13*13",
       title: "1.5 Cube corrugated box",
       desc: "32ECT single wall",
@@ -25,7 +25,7 @@ export const products = [
       image: "/images/1.5cube.png",
     },
     {
-      id: "b04",
+      id: "bx04",
       size: "18*15*12.5",
       title: "2 Cube corrugated box",
       desc: "32ECT single wall",
@@ -33,7 +33,7 @@ export const products = [
       image: "/images/2cube.png",
     },
     {
-      id: "b05",
+      id: "bx05",
       size: "18*18*16",
       title: "3 Cube corrugated box",
       desc: "32ECT single wall",
@@ -41,7 +41,7 @@ export const products = [
       image: "/images/3cube.png",
     },
     {
-      id: "b06",
+      id: "bx06",
       size: "18*18*21",
       title: "4 Cube corrugated box",
       desc: "32ECT single wall",
@@ -49,7 +49,7 @@ export const products = [
       image: "/images/4cube.png",
     },
     {
-      id: "b07",
+      id: "bx07",
       size: "24*21*48",
       title: "Wardrobe box with metal bar",
       desc: "32ECT single wall",
@@ -60,7 +60,7 @@ export const products = [
 
   [
     {
-      id: "m01",
+      id: "mb01",
       title: "Moving Blankets",
       desc: "Polyster non-woven",
       size: '72"L X 80"W',
@@ -75,7 +75,7 @@ export const products = [
   ],
   [
     {
-      id: "s01",
+      id: "sw01",
       title: "Pallet wrap",
       desc: "14inch, 80gauge Stretch Wrap/Pallet Wrap",
       size: "450m",
@@ -87,7 +87,7 @@ export const products = [
 
   [
     {
-      id: "g01",
+      id: "gl01",
       title: "Nitrile 5 mil gloves",
       desc: "Powder & Latex Free",
       size: "small",
@@ -96,7 +96,7 @@ export const products = [
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
     },
     {
-      id: "g02",
+      id: "gl02",
       title: "Nitrile 6 mil gloves",
       desc: "",
       size: "small",
@@ -105,7 +105,7 @@ export const products = [
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
     },
     {
-      id: "g03",
+      id: "gl03",
       title: "Nitrile 6 mil gloves",
       desc: "",
       size: "medium",
@@ -175,7 +175,7 @@ export const products = [
   ],
   [
     {
-      id: "c01",
+      id: "cv01",
       title: "Coveralls",
       desc: "Waterproof",
       size: "xl",
@@ -184,7 +184,7 @@ export const products = [
       image: "/images/coveralls.png",
     },
     {
-      id: "c01",
+      id: "cv02",
       title: "Coveralls",
       desc: "Dustproof",
       size: "xl",
@@ -195,7 +195,7 @@ export const products = [
   ],
   [
     {
-      id: "f01",
+      id: "fp01",
       desc: "117 pieces - Beige Color",
       title: "Felt pads",
       size: "Round, Rectangular, Square",
@@ -206,7 +206,7 @@ export const products = [
   ],
   [
     {
-      id: "n01",
+      id: "np01",
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: '36" X 24"',
@@ -214,7 +214,7 @@ export const products = [
       image: "/images/packing-paper.png",
     },
     {
-      id: "n02",
+      id: "np02",
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: "18",
@@ -227,34 +227,34 @@ export const products = [
 
 export const categories = [
   {
-    title: "Corrugated boxes",
+    title: "Corrugated Boxes",
     subtitle: "Strong. Reliable. Built to protect your goods",
-    unit: "box",
+    unit: "Boxes",
     hsCode: "4819.10",
     cat: "Cartons, boxes and cases, of corrugated paper",
     weight: {
-      b01: 0.15,
-      b02: 0.4,
-      b03: 0.6,
-      b04: 0.7,
-      b05: 1,
-      b06: 1.3,
-      b07: 4,
+      bx01: 0.15,
+      bx02: 0.4,
+      bx03: 0.6,
+      bx04: 0.7,
+      bx05: 1,
+      bx06: 1.3,
+      bx07: 4,
     },
     dimensions: {
-      b01: { l: 16, w: 16, h: 0.31 },
-      b02: { l: 24, w: 24, h: 0.31 },
-      b03: { l: 29, w: 26, h: 0.31 },
-      b04: { l: 33, w: 27.5, h: 0.31 },
-      b05: { l: 36, w: 34, h: 0.31 },
-      b06: { l: 39, w: 36, h: 0.31 },
-      b07: { l: 69, w: 24, h: 2 },
+      bx01: { l: 16, w: 16, h: 0.31 },
+      bx02: { l: 24, w: 24, h: 0.31 },
+      bx03: { l: 29, w: 26, h: 0.31 },
+      bx04: { l: 33, w: 27.5, h: 0.31 },
+      bx05: { l: 36, w: 34, h: 0.31 },
+      bx06: { l: 39, w: 36, h: 0.31 },
+      bx07: { l: 69, w: 24, h: 2 },
     },
   },
   {
     title: "Moving Blankets",
     subtitle: "Strong. Reliable. Built to protect your goods",
-    unit: "pc",
+    unit: "Blankets",
     hsCode: "6307.90",
     cat: "Other made-up textile articles, including non-woven blankets",
     weight: 2,
@@ -263,16 +263,18 @@ export const categories = [
   {
     title: "Stretch Wrap",
     subtitle: "Clear wrap, multiple uses",
-    unit: "roll",
+    unit: "Rolls",
     hsCode: "3920.20",
     cat: "Plates, sheets, film, foil and strip, of polymers of propylene",
     weight: 2.52,
-    dimensions: { l: 14, w: 6, h: 6 },
+    dimensions: { l: 15, w: 5, h: 5 },
+    // 4    14, 10,10
+    // 6 14, 10, 15
   },
   {
     title: "Gloves",
     subtitle: "Tear resistant and durable Nitrile gloves",
-    unit: "box(100pc)",
+    unit: "Box(100pc)",
     hsCode: "4015.19",
     cat: "Gloves, other than surgical or medical, of vulcanized rubber",
     weight: 0.55,
@@ -281,7 +283,7 @@ export const categories = [
   {
     title: "Clear/Packaging Tape",
     subtitle: "Acrylic Clear Packaging Tape",
-    unit: "roll",
+    unit: "Rolls",
     hsCode: "3919.10",
     cat: "Self-adhesive tape,of plastics (e.g. acrylic), in rolls not exceeding 20 cm width",
     weight: 0.18,
@@ -290,7 +292,7 @@ export const categories = [
   {
     title: "Green Painter's Tape",
     subtitle: "The Best-in-class masking tape",
-    unit: "roll",
+    unit: "Rolls",
     hsCode: "3919.10",
     cat: "Self-adhesive masking tape (plastic-based)",
     weight: 0.17,
@@ -299,7 +301,7 @@ export const categories = [
   {
     title: "Red Tuck Tape",
     subtitle: "Epoxy resin tuck tape",
-    unit: "roll",
+    unit: "Rolls",
     hsCode: "3919.10",
     cat: "Construction adhesive tape (plastic-based)",
     weight: 0.2,
@@ -308,7 +310,7 @@ export const categories = [
   {
     title: "Garbage bags Black/Clear",
     subtitle: "Strong. Heavy duty bags",
-    unit: "box(100pc)",
+    unit: "Box(100pc)",
     hsCode: "3923.21",
     cat: "Sacks and bags (including garbage bags) of polymers of ethylene",
     weight: 7.5,
@@ -317,7 +319,7 @@ export const categories = [
   {
     title: "Coveralls",
     subtitle: "Tear proof and water proof is what you need",
-    unit: "pc",
+    unit: "Pieces",
     hsCode: "6210.10",
     cat: "Garments made of plastic sheeting, including disposable coveralls",
     weight: 0.2,
@@ -326,7 +328,7 @@ export const categories = [
   {
     title: "Felt pads",
     subtitle: "Adhesive and good quality pads",
-    unit: "pack(117pc)",
+    unit: "Pack(117pc)",
     hsCode: "5602.10",
     cat: "Needleloom felt and articles thereof",
     weight: 0.08,
@@ -335,7 +337,7 @@ export const categories = [
   {
     title: "Newsprint Packing Paper",
     subtitle: "High quality packing paper to protect your goods",
-    unit: "(100 sheets)",
+    unit: "Pack(100 sheets)",
     hsCode: "4801.00",
     cat: "Newsprint, in rolls or sheets",
     weight: 3,

@@ -112,8 +112,8 @@ export default function CartPage() {
                         {item.desc}
                       </p>
                       <p style={styles.detail}>
-                        Effective Price: $
-                        <span style={{ color: "green" }}>{item.price}</span>
+                        Effective Price:
+                        <span style={{ color: "green" }}>${item.price}</span>
                       </p>
                     </div>
                   </div>
@@ -138,7 +138,8 @@ export default function CartPage() {
                           padding: "6px",
                         }}
                       >
-                        {categories[getProductCat(item.id)].title}
+                        {categories[getProductCat(item.id)].unit}
+                        {item.qty > 1 ? "s" : ""}
                       </th>
                       <th
                         style={{
@@ -146,7 +147,7 @@ export default function CartPage() {
                           padding: "6px",
                         }}
                       >
-                        Price/ {categories[getProductCat(item.id)].unit}
+                        price
                       </th>
                     </tr>
                   </thead>
@@ -298,6 +299,24 @@ export default function CartPage() {
                 </button>
               </div>
             ))}
+            <Link href="/products">
+              <button
+                style={{
+                  display: "block",
+                  padding: "10px 20px",
+                  backgroundColor: "#ff6f20",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "5px",
+                  textDecoration: "none",
+                  fontWeight: "bold",
+                  width: "fit-content",
+                  margin: "auto",
+                }}
+              >
+                Shop More
+              </button>
+            </Link>
           </div>
 
           <div className="checkout-card">

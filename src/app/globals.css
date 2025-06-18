@@ -10,6 +10,8 @@ body {
   padding: 0;
   overflow-x: hidden;
   background-image: url("../../public/images/bg.svg");
+  background-position: center;
+  background-size: cover;
 }
 
 .searchBox {
@@ -218,18 +220,17 @@ nav a:hover {
   justify-content: center;
 }
 .shipping-box form {
-  width: 26%;
+  width: 24%;
   margin: 5px 0 0 0;
 }
 .shipping-box form:nth-child(1) {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .payment-step {
-  width: fit-content;
   border-radius: 50%;
   background-color: #ff6f20;
-  padding: 10px 19px;
+  padding: 8px 16px;
   font-weight: bold;
   color: white;
   font-size: 20px;
@@ -264,17 +265,18 @@ nav a:hover {
   border-color: #ff6f20;
 }
 .shipping-rates-box {
-  width: 26%;
   margin: 5px 0 0 0;
-  margin-left: 20px;
-  padding: 24px;
+  margin-left: 10px;
+  padding: 2px 15px;
+  border-radius: 8px;
+  background-color: white;
 }
 /* ship-option container */
 .ship-option {
   border: 1px solid #ddd; /* Default border */
   border-radius: 8px;
   margin-bottom: 15px;
-  padding: 15px;
+  padding: 10px;
   cursor: pointer;
   transition: all 0.2s ease-in-out; /* Smooth transition for hover/active states */
   display: flex;
@@ -306,7 +308,8 @@ nav a:hover {
 
 .ship-option-inner p:last-child {
   font-weight: bold;
-  color: #007bff; /* A distinct color for price */
+  color: #007bff;
+  margin-left: 10px;
 }
 
 /* Delivery time text */
@@ -340,14 +343,16 @@ nav a:hover {
   text-align: center;
 }
 .proceed-pay-btn {
-  padding: 12px;
+  display: block;
+  padding: 13px;
   background-color: #ff6f20;
   color: #fff;
   border: none;
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
-  margin: 20px auto 0 auto;
+  width: 200px;
+  margin: auto;
 }
 .about-section {
   background-color: #fff;
@@ -791,14 +796,14 @@ nav a:hover {
   .shipping-box {
     flex-direction: column;
   }
-  .shipping-box form,
+  .shipping-box form {
+    width: auto;
+    margin: 5px 10px;
+  }
   .shipping-rates-box {
-    width: 80%;
-    margin: auto;
+    margin: 5px 10px;
   }
-  .shipping-box form:nth-child(1) {
-    margin-right: auto;
-  }
+
   .proceed-pay-btn {
     position: static;
     width: 100%;
