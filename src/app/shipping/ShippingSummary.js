@@ -12,7 +12,7 @@ const ShippingSummary = ({
   handleSubmit,
 }) => {
   return (
-    <>
+    <div>
       <div style={styles.summary}>
         <div style={styles.summaryLine}>
           <span>Subtotal:</span>
@@ -39,7 +39,7 @@ const ShippingSummary = ({
 
       <div
         style={{
-          margin: "10px",
+          margin: "10px 0 10px 10px ",
           padding: "10px",
           backgroundColor: "white",
           borderRadius: "8px",
@@ -58,7 +58,8 @@ const ShippingSummary = ({
           )}
         </button>
       </div>
-    </>
+      <div />
+    </div>
   );
 };
 

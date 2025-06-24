@@ -43,7 +43,7 @@ export const styles = {
     textAlign: "center",
   },
   summary: {
-    margin: "10px",
+    margin: "10px 0 10px 10px",
     padding: "15px",
     background: "white",
     borderRadius: "8px",

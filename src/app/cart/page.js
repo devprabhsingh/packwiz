@@ -139,7 +139,6 @@ export default function CartPage() {
                         }}
                       >
                         {categories[getProductCat(item.id)].unit}
-                        {item.qty > 1 ? "s" : ""}
                       </th>
                       <th
                         style={{
@@ -147,7 +146,7 @@ export default function CartPage() {
                           padding: "6px",
                         }}
                       >
-                        price
+                        Price
                       </th>
                     </tr>
                   </thead>
@@ -299,7 +298,7 @@ export default function CartPage() {
                 </button>
               </div>
             ))}
-            <Link href="/products">
+            <Link style={{ textDecoration: "none" }} href="/products">
               <button
                 style={{
                   display: "block",
@@ -309,7 +308,7 @@ export default function CartPage() {
                   border: "none",
                   borderRadius: "5px",
                   textDecoration: "none",
-                  fontWeight: "bold",
+                  fontWeight: "normal",
                   width: "fit-content",
                   margin: "auto",
                 }}

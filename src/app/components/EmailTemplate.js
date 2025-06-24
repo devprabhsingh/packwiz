@@ -152,12 +152,8 @@ export const EmailTemplate = ({
         ></div>
 
         <p style={{ fontSize: "14px" }}>
-          If you need to{" "}
-          <strong style={{ color: "#ff6f20" }}>
-            change your delivery address
-          </strong>
-          , please reply to this email or call us at{" "}
-          <strong>437-775-7688</strong>.
+          If you need to change your delivery address , please reply to this
+          email or call us at <a href="tel:4377757688">+1 437-775-7688</a>.
         </p>
 
         <a

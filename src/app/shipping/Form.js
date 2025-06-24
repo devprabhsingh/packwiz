@@ -22,6 +22,10 @@ const Form = ({
     return false;
   };
 
+  const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -99,6 +103,13 @@ const Form = ({
     });
   };
 
+  const getLabel = (field) => {
+    if (field === "streetAddress") return "Street Address";
+    if (field === "phone") return "Phone Number";
+    if (field === "instructions") return "Delivery Instructions(optional)";
+    return field.charAt(0).toUpperCase() + field.slice(1);
+  };
+
   return (
     <>
       <form style={styles.form}>
@@ -154,12 +165,11 @@ const Form = ({
         {["streetAddress", "city", "state", "postalCode", "country"].map(
           (field) => (
             <div key={field} style={styles.fieldGroup}>
-              <label style={styles.label}>
-                {field === "streetAddress"
-                  ? "Street Address"
-                  : field.charAt(0).toUpperCase() + field.slice(1)}
+              <label style={styles.label} htmlFor={field}>
+                {getLabel(field)}
               </label>
               <input
+                id={field}
                 name={field}
                 value={formData[field] || ""}
                 onChange={handleChange}
@@ -178,48 +188,45 @@ const Form = ({
         </h3>
 
         {/* Contact Details */}
-        {["name", "email", "phone", "Delivery Instructions(Optional)"].map(
-          (field, idx) => (
-            <React.Fragment key={field}>
+        {["name", "email", "phone", "instructions"].map((field, idx) => (
+          <React.Fragment key={field}>
+            <div style={styles.fieldGroup}>
+              <label htmlFor={field} style={styles.label}>
+                {getLabel(field)}
+              </label>
+              <input
+                id={field}
+                type={field === "phone" ? "tel" : "text"}
+                name={field}
+                value={formData[field] || ""}
+                onChange={handleChange}
+                style={styles.input}
+                required
+                inputMode={field === "phone" ? "numeric" : undefined}
+                onWheel={(e) => field === "phone" && e.target.blur()} // hide spinner
+              />
+              {fieldErrors[field] && (
+                <p style={styles.error}>{fieldErrors[field]}</p>
+              )}
+            </div>
+
+            {field === "email" && (
               <div style={styles.fieldGroup}>
-                <label style={styles.label}>
-                  {field === "phone"
-                    ? "Phone Number"
-                    : field.charAt(0).toUpperCase() + field.slice(1)}
-                </label>
+                <label style={styles.label}>Confirm Email</label>
                 <input
-                  type={field === "phone" ? "number" : "text"}
-                  name={field}
-                  value={formData[field] || ""}
+                  type="text"
+                  name="confirmEmail"
+                  value={formData.confirmEmail || ""}
                   onChange={handleChange}
                   style={styles.input}
-                  required
-                  inputMode={field === "phone" ? "numeric" : undefined}
-                  onWheel={(e) => field === "phone" && e.target.blur()} // hide spinner
                 />
-                {fieldErrors[field] && (
-                  <p style={styles.error}>{fieldErrors[field]}</p>
+                {fieldErrors.confirmEmail && (
+                  <p style={styles.error}>{fieldErrors.confirmEmail}</p>
                 )}
               </div>
-
-              {field === "email" && (
-                <div style={styles.fieldGroup}>
-                  <label style={styles.label}>Confirm Email</label>
-                  <input
-                    type="text"
-                    name="confirmEmail"
-                    value={formData.confirmEmail || ""}
-                    onChange={handleChange}
-                    style={styles.input}
-                  />
-                  {fieldErrors.confirmEmail && (
-                    <p style={styles.error}>{fieldErrors.confirmEmail}</p>
-                  )}
-                </div>
-              )}
-            </React.Fragment>
-          )
-        )}
+            )}
+          </React.Fragment>
+        ))}
       </form>
     </>
   );

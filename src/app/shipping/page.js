@@ -17,6 +17,7 @@ const ShippingInfo = () => {
     setCustomerDetail,
     setShipFees,
     setCourierName,
+    setCod,
     cartItems,
   } = useCart();
 
@@ -54,35 +55,6 @@ const ShippingInfo = () => {
     (selectedRate?.price || 0)
   ).toFixed(2);
 
-  // Restore form data and fetch tax/ship on mount
-  useEffect(() => {
-    const saved = {
-      streetAddress: localStorage.getItem("streetAddress") || "",
-      city: localStorage.getItem("city") || "",
-      state: localStorage.getItem("state") || "",
-      postalCode: localStorage.getItem("postalCode") || "",
-      country: localStorage.getItem("country") || "",
-      phone: localStorage.getItem("phone") || "",
-      email: localStorage.getItem("email") || "",
-      confirmEmail: localStorage.getItem("email") || "",
-      name: localStorage.getItem("name") || "",
-    };
-
-    const savedAddressObj = localStorage.getItem("addressObj");
-    const address = savedAddressObj ? JSON.parse(savedAddressObj) : null;
-
-    setFormData(saved);
-    setAddressObj(address);
-
-    if (saved.state) {
-      getTaxRate(saved.state).then((rate) => {
-        setTaxRateValue(rate || 0);
-      });
-    }
-
-    if (address) getShipRates(address);
-  }, []);
-
   useEffect(() => {
     if (query.length < 2) return setResults([]);
     getAddresses(query).then(setResults);
@@ -105,12 +77,7 @@ const ShippingInfo = () => {
   const getShipRates = async (addr) => {
     setLoadingRates(true);
     const rates = await getShipCharge(addr, subTotal, cartItems);
-
     if (!rates || !rates.length) return setShipRateOpts([]);
-
-    // Modify specific couriers
-    rates[1].price = Number((rates[1].price * 1.05).toFixed(2));
-    rates[2].price = Number((rates[2].price * 1.051).toFixed(2));
 
     setShipRateOpts(rates);
     setSelectedRate(rates[0]);
@@ -128,11 +95,8 @@ const ShippingInfo = () => {
     setError("");
     setLoader(true);
     setCustomerDetail(formData);
-    setCourierName(selectedRate?.courierName || "");
-
-    // Save data
-    Object.entries(formData).forEach(([k, v]) => localStorage.setItem(k, v));
-    localStorage.setItem("addressObj", JSON.stringify(addressObj));
+    setCourierName(selectedRate?.shipService || "");
+    setCod(selectedRate?.cod || "");
 
     router.push("/payment");
   };
@@ -207,7 +171,7 @@ const ShippingInfo = () => {
         setFieldErrors={setFieldErrors}
         handleSubmit={handleSubmit}
       />
-      <div>
+      <div className="ship-summary" style={{ width: "27%" }}>
         <ShippingRates
           options={shipRateOpts}
           selectedRate={selectedRate}

@@ -149,9 +149,10 @@ export default function ItemDetail() {
           </table>
 
           <div>
-            <p>
-              Effective Price: <span style={{ color: "green" }}>${price}</span>
-            </p>
+            <h4>
+              Effective Price: ${price} X {quantity} ={" "}
+              <span style={{ color: "green" }}>${price * quantity}</span>
+            </h4>
           </div>
           <div className="qty-controls">
             <button onClick={decreaseQty}>-</button>

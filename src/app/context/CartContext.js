@@ -11,6 +11,7 @@ export const CartProvider = ({ children }) => {
   const [courierName, setCourierName] = useState("");
   const [customerDetail, setCustomerDetail] = useState(null);
   const [emailSent, setEmailSent] = useState(false);
+  const [cod, setCod] = useState(false);
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cartItems");
@@ -78,6 +79,8 @@ export const CartProvider = ({ children }) => {
         emailSent,
         courierName,
         setCourierName,
+        cod,
+        setCod,
       }}
     >
       {children}

@@ -10,18 +10,21 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
 
       {options.length > 0 ? (
         options.map((opt, idx) =>
-          opt?.price ? (
+          opt ? (
             <div
               key={idx}
               className={`ship-option ${selectedRate?.price === opt.price ? "selected" : ""}`}
               onClick={() => onSelect(idx)}
             >
               <div className="ship-option-inner">
-                <p>{opt.courierName}</p>
-                <p>${opt.price}</p>
+                {opt.price === 0 && <p style={{ color: "green" }}> Free</p>}
+                {opt.price !== 0 && (
+                  <p style={{ color: "green" }}>${opt.price}</p>
+                )}
+                <p>{opt.shipService}</p>
               </div>
               <p>Delivery within {opt.deliveryTime}</p>
-              {idx === 0 && (
+              {opt.cod === true && (
                 <p className="cod-available">Cash On Delivery Available</p>
               )}
             </div>
@@ -32,10 +35,10 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
           <img src="/images/loader.gif" alt="Loading..." />
         </div>
       ) : (
-        <i className="no-options-message">
+        <div className="no-options-message">
           Once you enter the address, you will see a list of courier options
           here.
-        </i>
+        </div>
       )}
     </div>
   );

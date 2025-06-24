@@ -36,17 +36,29 @@ const CashOnDeliverySection = ({
       </div>
 
       {loading ? (
-        <img src="/images/loader.gif" alt="loading..." />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <img src="/images/loader.gif" alt="loading..." />
+        </div>
       ) : (
         <p>{orderStatus}</p>
       )}
 
-      <button
-        onClick={handleCOD}
-        style={buttonDisabled ? styles.disabledStyle : styles.buttonStyle}
-      >
-        {loading ? "Processing" : "Submit your order"}
-      </button>
+      {loading ? (
+        <p style={{ textAlign: "center" }}>Processing...</p>
+      ) : (
+        <button
+          onClick={handleCOD}
+          style={buttonDisabled ? styles.disabledStyle : styles.buttonStyle}
+        >
+          Submit your order
+        </button>
+      )}
     </div>
   );
 };

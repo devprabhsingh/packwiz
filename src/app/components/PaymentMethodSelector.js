@@ -3,7 +3,7 @@ import "../payment/Payment.css";
 import { useCart } from "../context/CartContext";
 
 const PaymentMethodSelector = ({ paymentMethod, onSelect }) => {
-  const { courierName } = useCart();
+  const { cod } = useCart();
 
   return (
     <div className="payment-method-container">
@@ -19,7 +19,7 @@ const PaymentMethodSelector = ({ paymentMethod, onSelect }) => {
           <img src="/images/google-pay.png" alt="Google Pay" />
         </button>
 
-        {courierName === "Packwiz Delivery" && (
+        {cod && (
           <button
             onClick={() => onSelect("COD")}
             className={`payment-btn ${paymentMethod === "COD" ? "selected" : ""}`}

@@ -34,7 +34,6 @@ const Checkout = () => {
       !total ||
       !customerDetail ||
       !cartItems.length ||
-      !paymentMethod ||
       clientSecret // <- already created
     )
       return;
@@ -125,8 +124,6 @@ const Checkout = () => {
     } catch (err) {
       console.error("Error saving order:", err);
       setOrderStatus("Error while saving order.");
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -184,7 +181,6 @@ const Checkout = () => {
         router.push(
           `/payment-success?amount=${order.total}&type=COD&transactionID=${transactionId}`
         );
-        setLoading(false);
       } else {
         console.error("Email sending failed:", result.error);
         alert("Order placed, but email failed to send.");

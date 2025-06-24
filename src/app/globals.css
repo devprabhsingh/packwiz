@@ -338,9 +338,10 @@ nav a:hover {
 /* Placeholder text when no options are available */
 .no-options-message {
   font-size: 13px;
-  color: grey;
-  margin: 10px 0 30px 0;
+  color: rgb(99, 99, 99);
   text-align: center;
+  margin: 20px 0;
+  word-break: break-word;
 }
 .proceed-pay-btn {
   display: block;
@@ -681,7 +682,6 @@ nav a:hover {
     width: 83%;
     margin: 10px 0;
   }
-
   .first-div-inner {
     margin: 8px 8px 0 8px;
     font-size: 1.4rem !important;
@@ -787,8 +787,7 @@ nav a:hover {
     justify-content: space-around;
     margin: 0 auto;
   }
-  .cart-container {
-  }
+
   .item-info {
     flex: 0.8 !important;
     width: fit-content;
@@ -800,8 +799,13 @@ nav a:hover {
     width: auto;
     margin: 5px 10px;
   }
+  .ship-summary {
+    margin-right: 10px;
+    width: auto !important;
+  }
   .shipping-rates-box {
     margin: 5px 10px;
+    margin-right: 0;
   }
 
   .proceed-pay-btn {

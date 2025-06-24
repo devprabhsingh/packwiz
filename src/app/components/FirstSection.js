@@ -122,7 +122,7 @@ const FirstSection = () => {
                 loading="lazy"
               />
               <p>
-                $1 delivery within GTA<sup>*</sup>
+                Free delivery within GTA<sup>*</sup>
               </p>
               <img
                 src="/images/check.png"
@@ -270,14 +270,13 @@ const FirstSection = () => {
 };
 const styles = {
   maindiv: {
-    marginTop: "10px",
+    marginTop: "8px",
     height: "75vh",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
   },
-  firstDiv: {},
   firstdivinner: {
     display: "flex",
     flexDirection: "column",
@@ -316,7 +315,7 @@ const styles = {
     justifyContent: "center",
     backgroundColor: "white",
     color: "rgba(0,0,0,0.9)",
-    marginBottom: "10px",
+    marginBottom: "8px",
     padding: "8px 15px",
     borderRadius: "8px",
     fontSize: "1.6rem",

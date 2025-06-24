@@ -8,7 +8,7 @@ import "./PaymentSuccess.css";
 export default function PaymentSuccess() {
   const searchParams = useSearchParams();
   const amount = parseFloat(searchParams.get("amount") || "0");
-  const transactionId = searchParams.get("transactionId");
+  const transactionId = searchParams.get("transactionID");
   const type = searchParams.get("type");
   const [copied, setCopied] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -68,7 +68,8 @@ export default function PaymentSuccess() {
                 <p className="cod-message">
                   You have opted for{" "}
                   <span className="cod-tag">Cash on Delivery</span>. You will
-                  receive a call from us to confirm your delivery address.
+                  receive a call or email from us to confirm your delivery
+                  address.
                 </p>
               </>
             )}
