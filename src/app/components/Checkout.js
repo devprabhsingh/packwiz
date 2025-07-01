@@ -12,14 +12,14 @@ const idmap = {
   sw: 2,
   gl: 3,
   ct: 4,
-  gt: 4,
-  rt: 4,
-  gb: 5,
-  cv: 6,
-  fp: 7,
-  np: 8,
-  bw: 9,
-  pk: 10,
+  gt: 5,
+  rt: 6,
+  gb: 7,
+  cv: 8,
+  fp: 9,
+  np: 10,
+  bw: 11,
+  pk: 12,
 };
 
 const Checkout = () => {
@@ -172,7 +172,7 @@ const Checkout = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.localhost:3000/payment-success?amount=${total}&transactionId=${transactionId}&type=online`,
+        return_url: `http://www.packwiz.ca/payment-success?amount=${total}&transactionId=${transactionId}&type=online`,
       },
     });
 

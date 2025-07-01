@@ -396,7 +396,7 @@ export const categories = [
   {
     title: "Corrugated Boxes",
     subtitle: "Strong. Reliable. Built to protect your goods",
-    unit: "Box/es",
+    unit: "Boxes",
     hsCode: "48191000",
     cat: "Cartons, boxes and cases, of corrugated paper",
     weight: {
@@ -421,7 +421,7 @@ export const categories = [
   {
     title: "Moving Blankets",
     subtitle: "Strong. Reliable. Built to protect your goods",
-    unit: "Blanket/s",
+    unit: "Blankets",
     hsCode: "63079000",
     cat: "Other made-up textile articles, including non-woven blankets",
     weight: 2,
@@ -430,7 +430,7 @@ export const categories = [
   {
     title: "Stretch Wrap",
     subtitle: "Clear wrap, multiple uses",
-    unit: "Roll/s",
+    unit: "Rolls",
     hsCode: "39202000",
     cat: "Plates, sheets, film, foil and strip, of polymers of propylene",
     weight: 2.52,
@@ -441,7 +441,7 @@ export const categories = [
   {
     title: "Gloves",
     subtitle: "Tear resistant and durable Nitrile gloves",
-    unit: "Box/es(100pc)",
+    unit: "Cases",
     hsCode: "40151900",
     cat: "Gloves, other than surgical or medical, of vulcanized rubber",
     weight: 0.55,
@@ -450,7 +450,7 @@ export const categories = [
   {
     title: "Clear/Packaging Tape",
     subtitle: "Acrylic Clear Packaging Tape",
-    unit: "Roll/s",
+    unit: "Rolls",
     hsCode: "39191000",
     cat: "Self-adhesive tape,of plastics (e.g. acrylic), in rolls not exceeding 20 cm width",
     weight: 0.18,
@@ -459,7 +459,7 @@ export const categories = [
   {
     title: "Green Painter's Tape",
     subtitle: "The Best-in-class masking tape",
-    unit: "Roll/s",
+    unit: "Rolls",
     hsCode: "39191000",
     cat: "Self-adhesive masking tape (plastic-based)",
     weight: 0.17,
@@ -468,7 +468,7 @@ export const categories = [
   {
     title: "Red Tuck Tape",
     subtitle: "Epoxy resin tuck tape",
-    unit: "Roll/s",
+    unit: "Rolls",
     hsCode: "39191000",
     cat: "Construction adhesive tape (plastic-based)",
     weight: 0.2,
@@ -477,7 +477,7 @@ export const categories = [
   {
     title: "Garbage bags Black/Clear",
     subtitle: "Strong. Heavy duty bags",
-    unit: "Box/es(50pc)",
+    unit: "Boxes(50pc)",
     hsCode: "39232100",
     cat: "Sacks and bags (including garbage bags) of polymers of ethylene",
     weight: 7.5,
@@ -486,7 +486,7 @@ export const categories = [
   {
     title: "Coveralls",
     subtitle: "Tear proof and water proof is what you need",
-    unit: "Piece/s",
+    unit: "Pieces",
     hsCode: "62101000",
     cat: "Garments made of plastic sheeting, including disposable coveralls",
     weight: 0.2,
@@ -502,13 +502,6 @@ export const categories = [
     dimensions: { l: 6, w: 5, h: 1 },
   },
   {
-    title: "Bubble Cushion Wrap",
-    subtitle: "High quality plastic wrap to protect your goods",
-    unit: "Roll/s",
-    weight: 0.05,
-    dimensions: { l: 12, w: 12, h: 0.5 },
-  },
-  {
     title: "Newsprint Packing Paper",
     subtitle: "High quality packing paper to protect your goods",
     unit: "sheets",
@@ -516,6 +509,20 @@ export const categories = [
     cat: "Newsprint, in rolls or sheets",
     weight: 3,
     dimensions: { l: 24, w: 12, h: 5 },
+  },
+  {
+    title: "Bubble Cushion Wrap",
+    subtitle: "High quality plastic wrap to protect your goods",
+    unit: "Rolls",
+    weight: 0.05,
+    dimensions: { l: 12, w: 12, h: 0.5 },
+  },
+  {
+    title: "Moving Kit",
+    subtitle: "",
+    unit: "kits",
+    weight: 0.05,
+    dimensions: { l: 12, w: 12, h: 0.5 },
   },
 ];
 

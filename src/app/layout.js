@@ -12,7 +12,8 @@ const inter = Inter({
 
 export const metadata = {
   title: "Packwiz",
-  description: "Buy corrugated boxes tapes moving blankets packing supplies",
+  description:
+    "Buy corrugated boxes tapes moving blankets stretch wrap gloves packing supplies",
 };
 
 export default function RootLayout({ children }) {
