@@ -1,9 +1,5 @@
-"use client";
-import React from "react";
-import dynamic from "next/dynamic";
-const ProductGrid = dynamic(() => import("../components/ProductGrid"));
-import BackLinks from "../components/BackLinks";
-import SearchBar from "../components/Searchbar";
+import { Suspense } from "react";
+import ProductsClient from "./ProductsClient";
 
 export const metadata = {
   title: "Shop All Packing Products - Packwiz",
@@ -11,17 +7,10 @@ export const metadata = {
     "Explore our full range of packing products, including moving boxes, bubble wrap, tape dispensers, and more. Find the perfect packing solution.",
 };
 
-const Products = () => {
+export default function SearchResultsPage() {
   return (
-    <>
-      <div className="mobile-search">
-        <SearchBar />
-      </div>
-      <BackLinks title="" id="" />
-
-      <ProductGrid />
-    </>
+    <Suspense fallback={<div>Loading search results...</div>}>
+      <ProductsClient />
+    </Suspense>
   );
-};
-
-export default Products;
+}
