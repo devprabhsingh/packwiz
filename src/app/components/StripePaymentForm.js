@@ -56,7 +56,7 @@ const styles = {
     color: "white",
     width: "100%",
     padding: "1.25rem",
-    marginTop: "0.5rem",
+    marginTop: "1rem",
     borderRadius: "0.375rem",
     fontWeight: "bold",
     fontSize: "16px",

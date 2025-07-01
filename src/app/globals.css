@@ -384,7 +384,7 @@ nav a:hover,
 
 /* Selected ship option */
 .ship-option.selected {
-  border: 2px solid #ff6f20;
+  border: 2px solid green;
   background-color: #fff9f5;
   box-shadow: 0 4px 12px rgba(255, 111, 32, 0.2);
 }
