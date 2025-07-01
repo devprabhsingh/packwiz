@@ -1,7 +1,7 @@
 import React from "react";
 import "./reviewSection.css";
 
-const reviews = [
+const defaultReviews = [
   {
     name: "Sarah Thompson",
     location: "Toronto, ON",
@@ -49,58 +49,32 @@ const reviews = [
   },
 ];
 
-export default function ReviewSection({ reviewList, headline }) {
-  if (reviewList && reviewList.length > 0) {
-    return (
-      <section className="review-section">
-        <h2>{headline}</h2>
-        <div className="reviews-grid">
-          {reviewList.map((review, index) => (
-            <div className="review-card" key={index}>
-              <span className="review-icon">“</span>
-              <p className="review-text">{review.review}</p>
-              <div className="review-author">
-                <div>
-                  <p className="author-name">{review.customerName}</p>
-                  <p className="author-location">{review.location}</p>
-                  <p className="author-location">
-                    {review.date ? review.date : ""}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-        <p
-          style={{
-            color: "#777",
-            marginTop: "10px",
-            marginBottom: 0,
-            fontStyle: "italic",
-            textAlign: "center",
-          }}
-        >
-          Only verified and authentic reviews are displayed.
-        </p>
-      </section>
-    );
-  }
+export default function ReviewSection({
+  reviewList = null,
+  headline = "What Our Customers Say",
+}) {
+  const reviewsToRender =
+    reviewList && reviewList.length > 0
+      ? reviewList.map((r) => ({
+          text: r.review,
+          name: r.customerName,
+          location: r.location,
+          date: r.date,
+        }))
+      : defaultReviews;
+
   return (
     <section className="review-section">
-      <h2>What Our Customers Say</h2>
+      <h2>{headline}</h2>
       <div className="reviews-grid">
-        {reviews.map((review, index) => (
+        {reviewsToRender.map((review, index) => (
           <div className="review-card" key={index}>
             <span className="review-icon">“</span>
             <p className="review-text">{review.text}</p>
             <div className="review-author">
-              <div>
-                <p className="author-name">{review.name}</p>
-                <p className="author-location">{review.location}</p>
-                <p className="author-location">
-                  {review.date ? review.date : ""}
-                </p>
-              </div>
+              <p className="author-name">{review.name}</p>
+              <p className="author-location">{review.location}</p>
+              {review.date && <p className="author-date">{review.date}</p>}
             </div>
           </div>
         ))}

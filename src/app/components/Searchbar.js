@@ -42,7 +42,7 @@ export default function SearchBar() {
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleSearch}>
+      <button aria-label="Search Button" onClick={handleSearch}>
         <Search size={20} />
       </button>
     </div>

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 let isConnected = false;
-import { categories } from "./data/numberSheet";
+import { products, categories } from "./data/numberSheet";
 
 export function getProductCat(productId) {
   if (!productId) return null;
@@ -27,11 +27,20 @@ export function getProductCat(productId) {
     return 9;
   } else if (productId.startsWith("np")) {
     return 10;
+  } else if (productId.startsWith("bw")) {
+    return 11;
+  } else if (productId.startsWith("pk")) {
+    return 12;
   } else {
     return null; // or -1 if you want to handle unknown cases
   }
 }
-
+export function getStartingPrice(id) {
+  if (id > 11) {
+    return 0;
+  }
+  return products[id][0].priceTable.tier4;
+}
 export async function getAddresses(query) {
   const accessToken =
     "pk.eyJ1IjoicHJhYmgwMiIsImEiOiJja3ZpczV1Y2oydnkwMm9zMWllbjNhZHZ2In0.kU1X_il6kErpHzZxZB1I9Q"; // safer: store token in .env

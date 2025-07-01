@@ -1,5 +1,6 @@
 // components/CashOnDeliverySection.js
 
+import Image from "next/image";
 import React from "react";
 
 const CashOnDeliverySection = ({
@@ -11,7 +12,7 @@ const CashOnDeliverySection = ({
   return (
     <div style={styles.codMethodWrapper}>
       <div style={styles.codTitle} id="cod-title">
-        <img height="25px" width="25px" src="/images/cod.png" alt="cod" />
+        <Image height={25} width={25} src="/images/cod.png" alt="cod" />
         <span
           id="cod-title-cod"
           style={{ fontSize: "14px", color: "#4e4e4e", fontWeight: "700" }}
@@ -25,7 +26,7 @@ const CashOnDeliverySection = ({
           id="cod-inner-div"
           style={{ display: "flex", alignItems: "center", gap: "1rem" }}
         >
-          <img height="40px" width="40px" src="/images/cod.png" alt="cod" />
+          <Image height={40} width={40} src="/images/cod.png" alt="cod" />
           <p>Cash on Delivery (COD) selected</p>
         </div>
         <p id="cod-info" style={{ marginTop: "0.5rem" }}>
@@ -43,7 +44,12 @@ const CashOnDeliverySection = ({
             alignItems: "center",
           }}
         >
-          <img src="/images/loader.gif" alt="loading..." />
+          <Image
+            height={40}
+            width={40}
+            src="/images/loader.gif"
+            alt="loading..."
+          />
         </div>
       ) : (
         <p>{orderStatus}</p>

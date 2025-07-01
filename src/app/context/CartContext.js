@@ -12,6 +12,7 @@ export const CartProvider = ({ children }) => {
   const [customerDetail, setCustomerDetail] = useState(null);
   const [emailSent, setEmailSent] = useState(false);
   const [cod, setCod] = useState(false);
+  const [kit, setKit] = useState(false);
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cartItems");
@@ -35,6 +36,9 @@ export const CartProvider = ({ children }) => {
     });
   };
   const getPrice = (item) => {
+    if (item.id.startsWith("pk")) {
+      return item.price;
+    }
     const qty = item.qty;
     const p = item.priceTable;
     if (qty <= 4) return p.tier1;
@@ -81,6 +85,8 @@ export const CartProvider = ({ children }) => {
         setCourierName,
         cod,
         setCod,
+        kit,
+        setKit,
       }}
     >
       {children}

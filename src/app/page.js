@@ -1,9 +1,19 @@
+import dynamic from "next/dynamic";
 import FirstSection from "./components/FirstSection";
 import SearchBar from "./components/Searchbar";
-import ProductGrid from "./components/ProductGrid";
-import AboutSection from "./components/AboutSection";
-import ContactSection from "./components/ContactSection";
-import ReviewSection from "./components/ReviewSection";
+const ProductGrid = dynamic(() => import("./components/ProductGrid"), {
+  loading: () => <p>Loading...</p>,
+});
+const AboutSection = dynamic(() => import("./components/AboutSection"), {
+  loading: () => <p>Loading...</p>,
+});
+const ContactSection = dynamic(() => import("./components/ContactSection"), {
+  loading: () => <p>Loading...</p>,
+});
+const ReviewSection = dynamic(() => import("./components/ReviewSection"), {
+  loading: () => <p>Loading...</p>,
+});
+
 export default function HomePage() {
   return (
     <div style={styles.maindiv}>

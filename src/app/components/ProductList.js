@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
 import RequestForm from "./RequestForm";
@@ -7,201 +7,152 @@ import Image from "next/image";
 
 const ProductList = ({ id, modified, productList }) => {
   const router = useRouter();
-  const [quantities, setQuantities] = useState(new Array(8).fill(1));
-  const [addedProductId, setAddedProductId] = useState(null);
   const { addToCart } = useCart();
+
+  const [quantities, setQuantities] = useState(() => new Array(8).fill(1));
+  const [addedProductId, setAddedProductId] = useState(null);
   const [openForm, setOpenForm] = useState(false);
 
-  const updateQuantity = (index, value) => {
-    if (value === "" || value === null) {
-      // Handle clearing the input (set to 0 when empty)
-      setQuantities((prev) => {
-        const updated = [...prev];
-        updated[index] = 0;
-        return updated;
-      });
-    } else {
-      const newValue = Math.max(0, parseInt(value)); // Prevent negative values
-      setQuantities((prev) => {
-        const updated = [...prev];
-        updated[index] = newValue;
-        return updated;
-      });
-    }
-  };
+  // Adjust quantity array length if productList changes
+  useEffect(() => {
+    setQuantities((prev) => {
+      if (productList.length !== prev.length) {
+        return new Array(productList.length).fill(1);
+      }
+      return prev;
+    });
+  }, [productList.length]);
 
-  const getPrice = (qty, p) => {
-    if (qty <= 4) return p.tier1;
-    if (qty <= 9) return p.tier2;
-    if (qty <= 24) return p.tier3;
-    return p.tier4;
-  };
+  const gridTemplate = useMemo(() => {
+    const len = productList.length;
+    if (len === 1) return "1fr";
+    if (len === 2) return "repeat(2,1fr)";
+    if (modified) return "repeat(5,1fr)";
+    return "repeat(5,1fr)";
+  }, [productList.length, modified]);
 
-  const gridcss = () => {
-    let len = productList.length;
-    if (len === 1) {
-      return "1fr";
-    } else if (len === 2) {
-      return "repeat(2,1fr)";
-    } else if (modified) {
-      return "repeat(5,1fr)";
-    }
-    return "repeat(4,1fr)";
-  };
-  const boxTypesGrid = {
-    display: "grid",
-    gridTemplateColumns: gridcss(),
-    placeItems: "center",
-    gap: "10px",
-    maxWidth: modified ? "95%" : "1300px",
-    margin: "0 auto",
-    padding: "10px",
-  };
+  const boxTypesGrid = useMemo(
+    () => ({
+      display: "grid",
+      gridTemplateColumns: gridTemplate,
+      placeItems: "center",
+      gap: "10px",
+      maxWidth: modified ? "95%" : "1300px",
+      margin: "0 auto",
+      padding: "10px",
+    }),
+    [gridTemplate, modified]
+  );
 
-  const handleAddToCart = (product, qty, when) => {
-    const price = getPrice(qty, product.priceTable);
+  const getPrice = useCallback(
+    (qty, product) => {
+      if (productList[0].id.startsWith("pk")) return product.price;
+      if (qty <= 4) return product.priceTable.tier1;
+      if (qty <= 9) return product.priceTable.tier2;
+      if (qty <= 24) return product.priceTable.tier3;
+      return product.priceTable.tier4;
+    },
+    [productList]
+  );
 
-    const item = { ...product, qty: Number(qty), price };
+  const handleQuantityChange = useCallback((index, value) => {
+    const newValue =
+      value === "" || value === null ? 0 : Math.max(0, parseInt(value));
+    setQuantities((prev) => {
+      const updated = [...prev];
+      updated[index] = newValue;
+      return updated;
+    });
+  }, []);
 
-    addToCart(item);
-
-    setAddedProductId(product.id);
-    if (when === "now") {
-      router.push("/cart");
-    }
-  };
+  const handleAddToCart = useCallback(
+    (product, qty, when) => {
+      const price = getPrice(qty, product);
+      addToCart({ ...product, qty: Number(qty), price });
+      setAddedProductId(product.id);
+      if (when === "now") router.push("/cart");
+    },
+    [addToCart, getPrice, router]
+  );
 
   useEffect(() => {
     if (addedProductId !== null) {
-      const timer = setTimeout(() => {
-        setAddedProductId(null);
-      }, 1000);
+      const timer = setTimeout(() => setAddedProductId(null), 1000);
       return () => clearTimeout(timer);
     }
   }, [addedProductId]);
 
-  // Updated rendering logic for product cards with improved layout and styling
+  const handleProductClick = useCallback(
+    (product) => {
+      if (productList[0]?.id.startsWith("pk")) {
+        router.push(`/movingKits/${product.id}`);
+      } else {
+        router.push(`/ItemDetail/${product.id}`);
+      }
+    },
+    [productList, router]
+  );
+
   return (
     <div style={styles.innerContent} className={`${modified}inner`}>
-      {modified && (
-        <h2
-          style={{
-            backgroundColor: "white",
-            margin: "10px auto",
-            width: "fit-content",
-            borderRadius: "8px",
-            padding: "15px",
-          }}
-        >
-          Similar Products
-        </h2>
-      )}
+      {modified && <h2 style={styles.similarHeading}>Similar Products</h2>}
+
       <div
-        className="box-types-grid"
         style={boxTypesGrid}
+        className="box-types-grid"
         id={`${modified}grid`}
       >
-        {productList?.map((product, index) => {
+        {productList.map((product, index) => {
           const qty = quantities[index];
-          const pricePerUnit = getPrice(qty, product.priceTable);
+          const pricePerUnit = getPrice(qty, product);
 
           return (
             <div
+              key={product.id}
               className="box-type-card"
-              style={{
-                ...styles.boxTypeCard,
-                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-                borderRadius: "8px",
-                overflow: "hidden",
-                position: "relative",
-              }}
-              id={modified + "hover"}
-              key={index}
-              onClick={() => {
-                modified && router.push(`/ItemDetail/${product.id}`);
-              }}
+              style={styles.boxTypeCard}
+              id={`${modified}hover`}
             >
               <div>
                 <div
-                  style={{
-                    padding: "16px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                  onClick={() => {
-                    !modified && router.push(`/ItemDetail/${product.id}`);
-                  }}
-                  className={"item-info-expand-" + modified}
+                  style={styles.itemInfo}
+                  className={`item-info-expand-${modified} image-wrapper`}
+                  onClick={() => handleProductClick(product)}
                 >
-                  <div className="image-wrapper">
+                  <Image
+                    src={product.image || "/images/no-pictures.png"}
+                    alt={product.size || "size"}
+                    width={200}
+                    height={200}
+                    loading="lazy"
+                    style={{ borderRadius: "8px" }}
+                  />
+                  <div className="tooltip">Click to see more details</div>
+                  {product?.title?.length > 15 && (
                     <Image
-                      src={
-                        product.image
-                          ? product.image
-                          : "/images/no-pictures.png"
-                      }
-                      alt={product.size}
-                      loading="lazy"
-                      width={200}
-                      height={200}
-                      style={{ borderRadius: "8px" }}
+                      src="/images/hot.png"
+                      alt="hot"
+                      width={30}
+                      height={30}
+                      className="hot-icon"
+                      style={{ position: "absolute" }}
                     />
-                    {product.title.length > 15 && (
-                      <img
-                        src="/images/hot.png"
-                        alt="hot"
-                        className="hot-icon"
-                        style={{
-                          position: "absolute",
-                        }}
-                      />
-                    )}
-                  </div>
-
-                  <p
-                    style={{
-                      ...styles.boxTitle,
-                      fontSize: "18px",
-                      fontWeight: "600",
-                      marginTop: "12px",
-                      maxWidth: "80%",
-                    }}
-                  >
-                    {product.title}
-                  </p>
-                  <p
-                    style={{
-                      ...styles.boxSize,
-                      fontSize: "14px",
-                      color: "#555",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {product.id.startsWith("b")
-                      ? product.size
-                          .split("*")
-                          .map(
-                            (val, i) =>
-                              `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
-                          )
-                          .join(" × ")
-                      : product.size}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "13px",
-                      color: "#777",
-                      marginBottom: 12,
-                      wordBreak: "break-word",
-                      whiteSpace: "normal",
-                      overflowWrap: "anywhere",
-                      width: "70%",
-                    }}
-                  >
-                    {product.desc}
-                  </p>
+                  )}
                 </div>
+
+                <p style={styles.boxTitle}>{product.title || product.desc}</p>
+                <p style={styles.boxSize}>
+                  {product.id.startsWith("b")
+                    ? product.size
+                        .split("*")
+                        .map(
+                          (val, i) =>
+                            `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
+                        )
+                        .join(" × ")
+                    : product.size}
+                </p>
+                <p style={styles.boxDesc}>{product.desc}</p>
 
                 {modified ? (
                   <div>
@@ -211,18 +162,11 @@ const ProductList = ({ id, modified, productList }) => {
                     </span>
                   </div>
                 ) : (
-                  <div>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "8px",
-                      }}
-                    >
+                  <>
+                    <div style={styles.quantityControls}>
                       <button
                         style={styles.button}
-                        onClick={() => updateQuantity(index, qty - 1)}
+                        onClick={() => handleQuantityChange(index, qty - 1)}
                       >
                         -
                       </button>
@@ -232,43 +176,30 @@ const ProductList = ({ id, modified, productList }) => {
                         value={qty}
                         min="1"
                         onChange={(e) =>
-                          updateQuantity(index, parseInt(e.target.value))
+                          handleQuantityChange(index, e.target.value)
                         }
-                        style={{
-                          ...styles.qtyInput,
-                          width: "60px",
-                          textAlign: "center",
-                          borderRadius: "8px",
-                          padding: "6px",
-                        }}
+                        style={styles.qtyInput}
                       />
                       <button
                         style={styles.button}
-                        onClick={() => updateQuantity(index, qty + 1)}
+                        onClick={() => handleQuantityChange(index, qty + 1)}
                       >
                         +
                       </button>
                     </div>
 
-                    <div style={{ fontSize: "17px", margin: "16px" }}>
+                    <div style={styles.totalPrice}>
                       Total:{" "}
                       <strong style={{ color: "#1a8917" }}>
                         ${(qty * pricePerUnit).toFixed(2)}
                       </strong>
                     </div>
 
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        width: "100%",
-                      }}
-                    >
+                    <div style={styles.actionButtons}>
                       <button
                         onClick={() => handleAddToCart(product, qty, "now")}
                         style={{
                           ...styles.addToCartButton,
-                          borderRadius: "5px",
                           backgroundColor: "#ff6f20",
                           color: "white",
                         }}
@@ -286,7 +217,7 @@ const ProductList = ({ id, modified, productList }) => {
                         </button>
                       )}
                     </div>
-                  </div>
+                  </>
                 )}
               </div>
             </div>
@@ -294,7 +225,7 @@ const ProductList = ({ id, modified, productList }) => {
         })}
       </div>
 
-      <div className="" style={{ width: "100%", paddingBottom: "20px" }}>
+      <div style={{ width: "100%", paddingBottom: "20px" }}>
         <button
           style={{
             ...styles.addToCartButton,
@@ -305,7 +236,7 @@ const ProductList = ({ id, modified, productList }) => {
           onClick={() => {
             setOpenForm(true);
             window.scrollBy({
-              top: window.innerHeight * 0.2, // scroll down by 20% of viewport
+              top: window.innerHeight * 0.2,
               behavior: "smooth",
             });
           }}
@@ -313,6 +244,7 @@ const ProductList = ({ id, modified, productList }) => {
           Need more sizes?
         </button>
       </div>
+
       {openForm && (
         <div>
           <h3 style={{ textAlign: "center", marginBottom: "16px" }}>
@@ -326,75 +258,84 @@ const ProductList = ({ id, modified, productList }) => {
     </div>
   );
 };
+
 const styles = {
+  innerContent: {},
+  similarHeading: {
+    backgroundColor: "white",
+    margin: "10px auto",
+    width: "fit-content",
+    borderRadius: "8px",
+    padding: "15px",
+  },
   boxTypeCard: {
     background: "#fff",
     borderRadius: "8px",
     textAlign: "center",
-    boxShadow: "0 0 12px rgba(0, 0, 0, 0.5)",
+    boxShadow: "0 0 12px rgba(0,0,0,0.5)",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
-    padding: "10px 40px",
+    padding: "10px",
     justifyContent: "space-around",
-    minHeight: "500px",
+    minHeight: "400px",
     width: "250px",
+    overflow: "hidden",
+    position: "relative",
   },
-  cardparttwo: {
-    padding: "15px",
+  itemInfo: {
+    padding: "16px",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    alignItems: "center",
   },
   boxTitle: {
     fontWeight: "bold",
     fontSize: "16px",
-    margin: "4px 0 0 0",
+    margin: "12px 0 0",
   },
   boxSize: {
-    fontSize: "16px",
-    color: "rgba(0,0,0,0.8)",
-    margin: "3px 0",
+    fontSize: "14px",
+    color: "#555",
+    marginBottom: 4,
   },
-  pricing: {
-    width: "fit-content",
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "1.1rem",
-    marginBottom: "12px",
-  },
-  innercardparttwo: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
+  boxDesc: {
+    fontSize: "13px",
+    color: "#777",
+    marginBottom: 12,
+    wordBreak: "break-word",
+    overflowWrap: "anywhere",
+    width: "100%",
+    textAlign: "center",
   },
   quantityControls: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
-    margin: "20px 0",
+    justifyContent: "center",
+    gap: "8px",
   },
   button: {
     padding: "4px 10px",
     fontSize: "18px",
     cursor: "pointer",
   },
-
   qtyInput: {
-    width: "50px",
+    width: "60px",
     textAlign: "center",
-    fontSize: "16px",
-    padding: "5px",
-    borderRadius: "4px",
-    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "6px",
+  },
+  totalPrice: {
+    fontSize: "17px",
+    margin: "16px",
+  },
+  actionButtons: {
+    display: "flex",
+    justifyContent: "space-around",
+    width: "100%",
   },
   addToCartButton: {
     padding: "10px 15px",
-    backgroundColor: "#ff6f20",
-    color: "#fff",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",
@@ -402,4 +343,5 @@ const styles = {
     margin: "10px",
   },
 };
+
 export default ProductList;

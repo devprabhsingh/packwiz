@@ -1,5 +1,6 @@
 import React from "react";
 import { styles } from "./shipStyles";
+import Image from "next/image";
 
 const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
   return (
@@ -32,7 +33,12 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
         )
       ) : loading ? (
         <div style={styles.loader}>
-          <img src="/images/loader.gif" alt="Loading..." />
+          <Image
+            src="/images/loader.gif"
+            height={40}
+            width={40}
+            alt="Loading..."
+          />
         </div>
       ) : (
         <div className="no-options-message">

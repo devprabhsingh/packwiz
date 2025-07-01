@@ -99,9 +99,9 @@ export const EmailTemplate = ({
                 }}
               >
                 <td style={tdStyle}>{item.title}</td>
-                <td style={tdStyle}>{item.size}</td>
+                <td style={tdStyle}>{item.size || "N/A"}</td>
                 <td style={tdStyle}>
-                  {item.qty || item.quantity} {item.unit}
+                  {item.qty || item.quantity} {item.unit || "unit"}
                 </td>
                 <td style={tdStyle}>${item.price.toFixed(2)}</td>
               </tr>
@@ -114,7 +114,7 @@ export const EmailTemplate = ({
             <strong>Subtotal:</strong> ${subTotal.toFixed(2)}
           </p>
           <p>
-            <strong>Tax (13%):</strong> ${(Number(subTotal) * 0.13).toFixed(2)}
+            <strong>Tax :</strong> ${(Number(subTotal) * 0.13).toFixed(2)}
           </p>
           <p>
             <strong>Shipping Fee:</strong> ${shipFees.toFixed(2)}
@@ -157,7 +157,7 @@ export const EmailTemplate = ({
         </p>
 
         <a
-          href="http://www.localhost:3000/track-order"
+          href={`https://packwiz.ca/track-order?id=${transactionId}`}
           style={{
             display: "inline-block",
             backgroundColor: "#ff6f20",

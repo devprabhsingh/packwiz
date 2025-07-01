@@ -6,55 +6,63 @@ import { useParams, useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import { getProductCat } from "@/utils";
 import BackLinks from "@/app/components/BackLinks";
-import ProductList from "@/app/components/ProductList";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import ReviewSection from "@/app/components/ReviewSection";
 import Toast from "@/app/components/Toast";
 
+const ProductList = dynamic(() => import("../../components/ProductList"));
+const flatPs = products.flat();
+
 export default function ItemDetail() {
-  const params = useParams();
+  const { id } = useParams();
   const router = useRouter();
-  const id = params.id;
-  const flatPs = products.flat();
-  const letter = id.slice(0, id.length - 1);
-  const similarProducts = flatPs.filter(
-    (p) => p.id.startsWith(letter) && p.id !== id
-  );
-  const item = flatPs.find((item) => item.id == id);
-  const [price, setPrice] = useState(item.priceTable.tier1);
+  const { addToCart } = useCart();
+
+  const [item, setItem] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [addedProductId, setAddedProductId] = useState(null);
-  const { addToCart } = useCart();
   const [toast, setToast] = useState({
     show: false,
     message: "",
     type: "success",
   });
 
-  if (!item) {
-    return <div>Item not found.</div>;
-  }
+  // Find item on id change
+  useEffect(() => {
+    const foundItem = flatPs.find((p) => p.id === id) || null;
+    setItem(foundItem);
+    setQuantity(1); // reset quantity when item changes
+  }, [id]);
 
+  // Calculate price tier based on quantity and price table
   const getPrice = (qty, p) => {
+    if (!p) return 0;
     if (qty <= 4) return p.tier1;
     if (qty <= 9) return p.tier2;
     if (qty <= 24) return p.tier3;
     return p.tier4;
   };
 
-  useEffect(() => {
-    setPrice(getPrice(quantity, item.priceTable));
-  }, [quantity]);
+  const price = item ? getPrice(quantity, item.priceTable) : 0;
 
-  const increaseQty = () => setQuantity((prev) => prev + 1);
-  const decreaseQty = () => setQuantity((prev) => Math.max(1, prev - 1));
+  // Reset addedProductId after 1 second
+  useEffect(() => {
+    if (addedProductId !== null) {
+      const timer = setTimeout(() => setAddedProductId(null), 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [addedProductId]);
+
+  // Quantity control handlers
+  const increaseQty = () => setQuantity((q) => q + 1);
+  const decreaseQty = () => setQuantity((q) => Math.max(1, q - 1));
 
   const handleAddToCart = () => {
-    const price = getPrice(quantity, item.priceTable);
+    if (!item) return;
     const cartItem = { ...item, qty: quantity, price };
     addToCart(cartItem);
     setAddedProductId(item.id);
-
     setToast({
       show: true,
       message: (
@@ -71,25 +79,45 @@ export default function ItemDetail() {
       type: "success",
     });
   };
-  const handleCloseToast = () => {
-    setToast({ ...toast, show: false });
-  };
 
   const handleBuyNow = () => {
     handleAddToCart();
     router.push("/cart");
   };
 
-  useEffect(() => {
-    if (addedProductId !== null) {
-      const timer = setTimeout(() => setAddedProductId(null), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [addedProductId]);
+  const handleCloseToast = () => setToast((t) => ({ ...t, show: false }));
 
-  const category = categories[getProductCat(item.id)];
+  if (!item) return <div>Loading item...</div>;
 
+  // Compute similar products and category info
+  const letter = id.slice(0, id.length - 1);
+  const similarProducts = flatPs.filter(
+    (p) => p.id.startsWith(letter) && p.id !== id
+  );
+
+  const category = categories[getProductCat(item.id)] || { unit: "" };
   const reviews = reviewList.filter((r) => r.category === item.title);
+
+  // Price tiers for table display
+  const priceTiers = [
+    {
+      label: "Upto 4",
+      value: item.priceTable.tier1,
+      condition: quantity <= 4,
+    },
+    {
+      label: "5 - 9",
+      value: item.priceTable.tier2,
+      condition: quantity > 4 && quantity <= 9,
+    },
+    {
+      label: "10 - 24",
+      value: item.priceTable.tier3,
+      condition: quantity > 9 && quantity <= 24,
+    },
+    { label: "25+", value: item.priceTable.tier4, condition: quantity > 24 },
+  ];
+
   return (
     <>
       {toast.show && (
@@ -110,6 +138,7 @@ export default function ItemDetail() {
           <p>
             <strong>Size:</strong> {item.size}
           </p>
+
           <table className="price-table">
             <thead>
               <tr>
@@ -118,28 +147,7 @@ export default function ItemDetail() {
               </tr>
             </thead>
             <tbody>
-              {[
-                {
-                  label: "Upto 4",
-                  value: item.priceTable.tier1,
-                  condition: quantity <= 4,
-                },
-                {
-                  label: "5 - 9",
-                  value: item.priceTable.tier2,
-                  condition: quantity > 4 && quantity <= 9,
-                },
-                {
-                  label: "10 - 24",
-                  value: item.priceTable.tier3,
-                  condition: quantity > 9 && quantity <= 24,
-                },
-                {
-                  label: "25+",
-                  value: item.priceTable.tier4,
-                  condition: quantity > 24,
-                },
-              ].map((row, i) => (
+              {priceTiers.map((row, i) => (
                 <tr key={i} className={row.condition ? "highlight" : ""}>
                   <td>{row.label}</td>
                   <td>${row.value}</td>
@@ -151,9 +159,12 @@ export default function ItemDetail() {
           <div>
             <h4>
               Effective Price: ${price} X {quantity} ={" "}
-              <span style={{ color: "green" }}>${price * quantity}</span>
+              <span style={{ color: "green" }}>
+                ${(price * quantity).toFixed(2)}
+              </span>
             </h4>
           </div>
+
           <div className="qty-controls">
             <button onClick={decreaseQty}>-</button>
             <span>{quantity}</span>
@@ -175,7 +186,7 @@ export default function ItemDetail() {
             <h2>Features</h2>
             {item.features.map((feature, i) => (
               <p key={i}>
-                <img src="/images/check2.png" alt="check" />
+                <img src="/images/check.png" alt="check" />
                 {feature}
               </p>
             ))}

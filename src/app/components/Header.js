@@ -1,121 +1,137 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ShoppingCart, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "@/app/context/CartContext";
 import SearchBar from "./Searchbar";
 
 export default function Header() {
   const { cartItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
-  const closeMenu = () => setMenuOpen(false);
+  // Track window width for responsive layout
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    handleResize(); // Set initial width
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const totalItems = Object.values(cartItems).reduce(
-    (total, item) => total + item.qty,
-    0
-  );
+  const totalItems = cartItems.reduce((sum, item) => sum + item.qty, 0);
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/about", label: "About" },
+    { href: "/products", label: "Products" },
+    ...(windowWidth > 1300 ? [{ href: "/contact", label: "Contact us" }] : []),
+    { href: "/track-order", label: "Track order" },
+  ];
+
+  const renderLinks = (isMobile = false) =>
+    navLinks.map(({ href, label }) => (
+      <Link
+        key={href}
+        href={href}
+        onClick={isMobile ? () => setMenuOpen(false) : undefined}
+        style={isMobile ? styles.mobileLink : styles.eachLink}
+      >
+        {label}
+      </Link>
+    ));
+
   return (
-    <header style={styles.headerbox}>
-      {/* Mobile Menu Toggle Icon */}
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <div
-          className="menu-icon"
-          onClick={toggleMenu}
-          style={{ cursor: "pointer" }}
-        >
-          {menuOpen ? <X size={28} /> : <Menu size={28} />}
-        </div>
+    <header style={styles.headerBox}>
+      {/* Mobile Menu Icon */}
+      <div onClick={() => setMenuOpen((open) => !open)} style={styles.menuIcon}>
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
       </div>
+
       {/* Logo */}
       <Link href="/" style={{ backgroundColor: "white", margin: "5px" }}>
-        <img src="/images/logo.png" height="50px" width="auto" />
+        <Image
+          src="/images/logo.png"
+          alt="logo"
+          height={50}
+          width={150}
+          priority
+        />
       </Link>
+
       <SearchBar />
+
       {/* Desktop Nav */}
-      <nav className="nav-links" style={styles.navbox}>
-        <Link style={styles.eachLink} href="/">
-          Home
-        </Link>
-        <Link style={styles.eachLink} href="/about">
-          About
-        </Link>
-        <Link style={styles.eachLink} href="/products">
-          Products
-        </Link>
-        <Link style={styles.eachLink} href="/contact">
-          Contact us
-        </Link>
-        <Link style={styles.eachLink} href="/track-order">
-          Track order
-        </Link>
-      </nav>
-      {/* Mobile Nav */}
+      <nav style={styles.navBox}>{renderLinks()}</nav>
+
+      {/* Mobile Menu */}
       {menuOpen && (
-        <div className="mobile-menu" style={styles.mobileMenu}>
-          <Link className="mobileLink" href="/" onClick={closeMenu}>
-            Home
-          </Link>
-          <Link className="mobileLink" href="/about" onClick={closeMenu}>
-            About
-          </Link>
-          <Link className="mobileLink" href="/products" onClick={closeMenu}>
-            Products
-          </Link>
-          <Link className="mobileLink" href="/contact" onClick={closeMenu}>
-            Contact us
-          </Link>
-          <Link className="mobileLink" href="/track-order" onClick={closeMenu}>
-            Track order
+        <div style={styles.mobileMenu}>
+          {renderLinks(true)}
+          <Link
+            href="/cart"
+            onClick={() => setMenuOpen(false)}
+            style={styles.mobileLink}
+          >
+            Cart ({totalItems})
           </Link>
         </div>
-      )}{" "}
-      <Link className="mobileLink" href="/cart" onClick={closeMenu}>
-        <ShoppingCart style={{ width: "24px", height: "24px" }} />
-        {cartItems.length > 0 && (
-          <span style={styles.cartBadge}>{totalItems}</span>
-        )}
+      )}
+
+      {/* Cart Icon */}
+      <Link href="/cart" style={{ position: "relative", marginLeft: "10px" }}>
+        <ShoppingCart style={{ width: 24, height: 24 }} />
+        <span className="sr-only">
+          Go to cart{totalItems > 0 ? `, ${totalItems} items` : ""}
+        </span>
+        {totalItems > 0 && <span style={styles.cartBadge}>{totalItems}</span>}
       </Link>
     </header>
   );
 }
 
 const styles = {
-  headerbox: {
+  headerBox: {
     margin: "8px",
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
     padding: "10px",
-    zIndex: 1000, // keeps it above other elements
-    backgroundColor: "white", // prevent transparency issue
+    backgroundColor: "white",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
     borderRadius: "8px",
+    position: "relative",
+    zIndex: 1000,
   },
-
-  navbox: {
+  navBox: {
     display: "flex",
     justifyContent: "space-around",
     flex: "0.7",
   },
-
   eachLink: {
     color: "black",
     textDecoration: "none",
     fontSize: "20px",
     position: "relative",
+    margin: "0 10px",
+  },
+  menuIcon: {
+    display: "flex",
+    alignItems: "center",
+    cursor: "pointer",
   },
   cartBadge: {
     position: "absolute",
-    top: "-6px",
-    right: "-6px",
+    top: "-16px",
+    right: "-2px",
     background: "#ff6f20",
     color: "#fff",
     borderRadius: "50%",
-    padding: "3px 8px",
+    padding: "2.5px 7px",
     fontSize: "13px",
+    minWidth: "20px",
+    textAlign: "center",
   },
   mobileMenu: {
     position: "absolute",
@@ -124,11 +140,16 @@ const styles = {
     backgroundColor: "white",
     border: "1px solid #ddd",
     borderRadius: "8px",
-    padding: "25px",
-    zIndex: 100,
+    padding: "20px",
     display: "flex",
     flexDirection: "column",
-    gap: "20px",
-    boxShadow: "0px 4px 10px rgba(0,0,0,0.1)",
+    gap: "15px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+    zIndex: 100,
+  },
+  mobileLink: {
+    color: "black",
+    textDecoration: "none",
+    fontSize: "18px",
   },
 };

@@ -1,113 +1,79 @@
 "use client";
-import React from "react";
-import { products } from "@/data/numberSheet";
-import Image from "next/image";
+import React, { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { getStartingPrice } from "@/utils";
+import { pds } from "@/data/numberSheet";
 
-const pds = [
-  { id: 0, idKey: "bx", name: "Boxes", image: "/images/boxes.png" },
-  {
-    id: 1,
-    idKey: "mb",
-    name: "Moving Blankets",
-    image: "/images/moving_blankets.png",
-  },
-  {
-    id: 2,
-    idKey: "sw",
-    name: "Pallet Wrap",
-    image: "/images/shrink_wrap.png",
-  },
-  { id: 3, idKey: "g", name: "Gloves", image: "/images/gloves.png" },
-  {
-    id: 4,
-    idKey: "ct",
-    name: "Clear/Packaging Tape",
-    image: "/images/clear-tape.png",
-  },
-  {
-    id: 5,
-    idKey: "gt",
-    name: "Green Painter's Tape",
-    image: "/images/green-tape.png",
-  },
-  { id: 6, idKey: "rt", name: "Red Tuck Tape", image: "/images/red.png" },
-  {
-    id: 7,
-    idKey: "gb",
-    name: "Garbage Bags",
-    image: "/images/garbage_bags.png",
-  },
-  { id: 8, idKey: "cv", name: "Coveralls", image: "/images/coveralls.png" },
-  { id: 9, idKey: "fp", name: "Felt pads", image: "/images/felt_pads.png" },
-  {
-    id: 10,
-    idKey: "np",
-    name: "Newsprint Packing Paper",
-    image: "/images/packing-paper.png",
-  },
-];
-
-const ProductGrid = () => {
+const ProductGrid = React.memo(({ title }) => {
   const router = useRouter();
+
+  const multiPds = useMemo(() => [0, 3, 7, 8, 12], []);
+
+  const handleClick = useCallback(
+    (product, index) => {
+      if (product.name === "Bubble Cushion Wrap") {
+        if (multiPds.includes(product.id)) {
+          router.push(`/productinfo/${index}`);
+        } else {
+          router.push(`/ItemDetail/${product.idKey}01`);
+        }
+      } else {
+        if (product.id >= 12) {
+          router.push(`/movingKits/${product.idKey}`);
+        } else {
+          if (multiPds.includes(product.id)) {
+            router.push(`/productinfo/${index}`);
+          } else {
+            router.push(`/ItemDetail/${product.idKey}01`);
+          }
+        }
+      }
+    },
+    [router, multiPds]
+  );
 
   return (
     <div className="product-grid-main" style={styles.maindiv}>
-      <h1
-        style={{
-          textAlign: "center",
-          width: "25%",
-          fontSize: "1.9rem",
-          margin: "20px auto",
-        }}
-      >
-        Our Products
-      </h1>
+      <h1 style={styles.heading}>{title || "Our Products"}</h1>
       <div className="product-grid">
         {pds.map((product, index) => (
-          <div
-            onClick={() => {
-              const multiPds = [0, 3, 7, 8];
-
-              if (multiPds.includes(product.id)) {
-                router.push(`/productinfo/${index}`);
-              } else {
-                router.push(`/ItemDetail/${product.idKey + "01"}`);
-              }
-            }}
-            className="product-card"
-            key={product.id}
-          >
-            <div className="image-wrapper">
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={290}
-                height={290}
-                loading="lazy"
-              />
-            </div>
-            <p style={{ margin: 0 }} className="product-name">
-              {product.name}
-            </p>
-            <p
-              style={{
-                backgroundColor: "#ff6f20",
-                color: "white",
-                fontWeight: "bold",
-                margin: "10px",
-                padding: "10px",
-                borderRadius: "8px",
-              }}
+          <React.Fragment key={product.id}>
+            <div
+              onClick={() => handleClick(product, index)}
+              className="product-card"
             >
-              Shop
-            </p>
-          </div>
+              <div className="image-wrapper">
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={290}
+                  height={290}
+                  loading="lazy"
+                />
+              </div>
+              <p style={styles.productName} className="product-name">
+                {product.name}
+              </p>
+
+              {product.id < 12 && (
+                <p style={styles.priceText}>
+                  As low as ${getStartingPrice(product.id)}
+                </p>
+              )}
+
+              <p style={styles.shopButton}>Shop</p>
+            </div>
+
+            {product.name === "Bubble Cushion Wrap" && (
+              <h2 style={styles.subHeadline}>Explore Our Packing Kits</h2>
+            )}
+          </React.Fragment>
         ))}
       </div>
     </div>
   );
-};
+});
 
 const styles = {
   maindiv: {
@@ -120,5 +86,36 @@ const styles = {
     margin: "8px",
     borderRadius: "8px",
   },
+  heading: {
+    textAlign: "center",
+    width: "25%",
+    fontSize: "1.9rem",
+    margin: "20px auto",
+  },
+  productName: {
+    margin: 0,
+  },
+  priceText: {
+    margin: 0,
+    color: "#333",
+    fontStyle: "italic",
+    fontSize: "12px",
+  },
+  shopButton: {
+    backgroundColor: "#ff6f20",
+    color: "white",
+    fontWeight: "bold",
+    margin: "10px",
+    padding: "10px",
+    borderRadius: "8px",
+  },
+  subHeadline: {
+    gridColumn: "1 / -1",
+    textAlign: "center",
+    margin: "30px 0 10px",
+    fontSize: "1.5rem",
+  },
 };
+
+ProductGrid.displayName = "ProductGrid";
 export default ProductGrid;

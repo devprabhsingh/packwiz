@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import RequestForm from "./RequestForm";
+import Image from "next/image";
 
 export default function ContactSection() {
   const phone = "+1 (437) 775-7688";
-  const email = "isprabhsingh@gmail.com";
+  const email = "info@packwiz.ca";
   const [copied, setCopied] = useState(null);
+  const [showFormHeader, setShowFormHeader] = useState(true);
 
   const copyToClipboard = (text, type) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -16,62 +18,67 @@ export default function ContactSection() {
   };
 
   useEffect(() => {
-    if (window.innerWidth >= 700) {
-      const el = document.getElementById("contact-form-header");
-      if (el) el.style.display = "none";
+    if (typeof window !== "undefined" && window.innerWidth >= 700) {
+      setShowFormHeader(false);
     }
   }, []);
 
   return (
     <div style={styles.section}>
-      <h2 style={styles.title}>Need custom solutions. Let's connect.</h2>
+      <h2 style={styles.title}>Need custom solutions? Let&apos;s connect.</h2>
       <p style={styles.subtitle}>
         Get in touch with us the way that works best for you.
       </p>
       <div style={styles.container}>
         <div style={styles.leftPane}>
+          {showFormHeader && (
+            <h3 style={styles.formTitle} id="contact-form-header">
+              Request a Quote
+            </h3>
+          )}
           <RequestForm />
         </div>
         <div style={styles.rightPane}>
           <h3 style={styles.contactTitle}>Contact Information</h3>
 
-          <div className="info-wrapper" style={styles.infoWrapper}>
-            <div style={styles.infoCard}>
+          {[
+            {
+              label: "Phone",
+              value: phone,
+              href: `tel:${phone.replace(/[^+\d]/g, "")}`,
+              icon: "/images/call.png",
+              type: "phone",
+            },
+            {
+              label: "Email",
+              value: email,
+              href: `mailto:${email}`,
+              icon: "/images/email.png",
+              type: "email",
+            },
+          ].map((contact, index) => (
+            <div key={index} style={styles.infoCard}>
               <div style={styles.iconText}>
-                <span role="img" aria-label="phone" style={styles.icon}>
-                  📞
-                </span>
-                <a href="tel:+14377757688" style={styles.linkText}>
-                  +1 (437) 775-7688
+                <Image
+                  height={30}
+                  width={30}
+                  src={contact.icon}
+                  alt={contact.label}
+                  style={styles.icon}
+                />
+                <a href={contact.href} style={styles.linkText}>
+                  {contact.value}
                 </a>
               </div>
               <button
-                onClick={() => copyToClipboard(phone, "phone")}
+                onClick={() => copyToClipboard(contact.value, contact.type)}
                 style={styles.copyButton}
-                title="Copy phone"
+                title={`Copy ${contact.label}`}
               >
-                📋
+                {copied === contact.type ? "✅" : "📋"}
               </button>
             </div>
-
-            <div style={styles.infoCard}>
-              <div style={styles.iconText}>
-                <span role="img" aria-label="email" style={styles.icon}>
-                  📧
-                </span>
-                <a href="mailto:info@packwiz.ca" style={styles.linkText}>
-                  info@packwiz.ca
-                </a>
-              </div>
-              <button
-                onClick={() => copyToClipboard(email, "email")}
-                style={styles.copyButton}
-                title="Copy email"
-              >
-                📋
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>
@@ -84,55 +91,6 @@ const styles = {
     backgroundColor: "#f9f9f9",
     fontFamily: "'Segoe UI', sans-serif",
   },
-  infoWrapper: {
-    width: "100%",
-    maxWidth: "400px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "20px",
-    marginTop: "30px",
-  },
-
-  infoCard: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "16px 20px",
-    width: "90%",
-    borderRadius: "12px",
-    backgroundColor: "#fafafa",
-    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
-    transition: "transform 0.2s ease",
-  },
-
-  iconText: {
-    display: "flex",
-    alignItems: "center",
-
-    fontSize: "1rem",
-  },
-
-  icon: {
-    fontSize: "1.25rem",
-  },
-
-  linkText: {
-    color: "#0070f3",
-    textDecoration: "none",
-    fontWeight: 500,
-    fontSize: "1rem",
-  },
-
-  copyButton: {
-    backgroundColor: "#f0f0f0",
-    border: "none",
-    borderRadius: "8px",
-    padding: "6px 10px",
-    cursor: "pointer",
-    fontSize: "1rem",
-    transition: "background 0.3s ease",
-  },
-
   title: {
     textAlign: "center",
     fontSize: "2.5rem",
@@ -182,27 +140,30 @@ const styles = {
     fontWeight: 600,
     color: "#333",
   },
-  contactCard: {
+  infoCard: {
     display: "flex",
-    flexDirection: "column",
-    gap: "24px",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "16px 20px",
+    width: "90%",
+    borderRadius: "12px",
+    backgroundColor: "#fafafa",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.05)",
+    marginBottom: "20px",
   },
-  label: {
-    fontSize: "1rem",
-    color: "#666",
-    marginBottom: "4px",
-  },
-  row: {
+  iconText: {
     display: "flex",
     alignItems: "center",
-    gap: "10px",
-    flexWrap: "wrap",
+    fontSize: "1rem",
   },
-  link: {
-    fontSize: "1.1rem",
+  icon: {
+    marginRight: "10px",
+  },
+  linkText: {
     color: "#0070f3",
     textDecoration: "none",
     fontWeight: 500,
+    fontSize: "1rem",
   },
   copyButton: {
     backgroundColor: "#eee",
@@ -212,10 +173,5 @@ const styles = {
     cursor: "pointer",
     fontSize: "1rem",
     transition: "background 0.2s ease",
-  },
-  copiedMsg: {
-    fontSize: "0.85rem",
-    color: "green",
-    marginLeft: "4px",
   },
 };

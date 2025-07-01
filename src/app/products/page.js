@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import ProductGrid from "../components/ProductGrid";
+import dynamic from "next/dynamic";
+const ProductGrid = dynamic(() => import("../components/ProductGrid"));
 import BackLinks from "../components/BackLinks";
 import SearchBar from "../components/Searchbar";
+
 const Products = () => {
   return (
     <>

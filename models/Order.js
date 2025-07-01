@@ -31,7 +31,8 @@ const orderSchema = new mongoose.Schema(
     transactionId: { type: String },
     paymentMethod: { type: String },
     courierName: { type: String },
-    deliveryInstructions: { type: String },
+    instructions: { type: String },
+    status: { type: String },
   },
   { timestamps: true }
 );

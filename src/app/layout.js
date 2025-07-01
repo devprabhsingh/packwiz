@@ -1,4 +1,4 @@
-import { Onest, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
 import { CartProvider } from "./context/CartContext";

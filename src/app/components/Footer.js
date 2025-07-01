@@ -1,6 +1,6 @@
-import { AlignCenter } from "lucide-react";
 import React from "react";
-
+import Link from "next/link";
+import Image from "next/image";
 const Footer = () => {
   return (
     <footer style={styles.footer}>
@@ -10,49 +10,58 @@ const Footer = () => {
       <div style={styles.footerContent}>
         <div style={styles.footerSection}>
           <h4 style={styles.footerTitle}>Quick Links</h4>
-          <a href="/" style={styles.footerLink}>
+          <Link href="/" style={styles.footerLink}>
             Home
-          </a>
-          <a href="/products" style={styles.footerLink}>
+          </Link>
+          <Link href="/products" style={styles.footerLink}>
             Products
-          </a>
-          <a href="/contact" style={styles.footerLink}>
+          </Link>
+          <Link href="/contact" style={styles.footerLink}>
             Contact
-          </a>
-          <a href="/track-order" style={styles.footerLink}>
+          </Link>
+          <Link href="/track-order" style={styles.footerLink}>
             Track order
-          </a>
+          </Link>
         </div>
 
         <div style={styles.footerSection}>
           <h4 style={styles.footerTitle}>Contact</h4>
-          <p style={styles.footerText}>📞 +1 (437) 775-7688</p>
-          <p style={styles.footerText}>📧 info@packwiz.ca</p>
+          <p style={styles.footerText}>
+            <Image height={30} width={30} alt="call" src="/images/call.png" />
+
+            <a href="tel:+14377757688" style={styles.linkText}>
+              +1 (437) 775-7688
+            </a>
+          </p>
+          <p style={styles.footerText}>
+            <Image height={30} width={30} alt="email" src="/images/email.png" />
+            <a href="mailto:info@packwiz.ca" style={styles.linkText}>
+              info@packwiz.ca
+            </a>
+          </p>
         </div>
 
         <div style={styles.footerSection}>
           <h4 style={styles.footerTitle}>Follow Us</h4>
-          <a href="#" style={styles.footerLink}>
+          <Link
+            href="https://www.instagram.com/pack_wiz/"
+            style={styles.footerLink}
+          >
             Instagram
-          </a>
-          <a href="#" style={styles.footerLink}>
+          </Link>
+          <Link
+            href="https://www.facebook.com/profile.php?id=61577687830138"
+            style={styles.footerLink}
+          >
             Facebook
-          </a>
-          <a href="#" style={styles.footerLink}>
-            LinkedIn
-          </a>
+          </Link>
         </div>
       </div>
 
       <div style={styles.footerBottom}>
         <p style={styles.footerCopyright}>
           © {new Date().getFullYear()}{" "}
-          <img
-            height="50px"
-            width="140px"
-            src="/images/logo.png"
-            alt="Packwiz"
-          />
+          <Image height={50} width={140} src="/images/logo.png" alt="Packwiz" />
           . All rights reserved.
         </p>
       </div>
@@ -100,6 +109,15 @@ const styles = {
     fontSize: "0.95rem",
     color: "#444",
     margin: "2px",
+    display: "flex",
+    alignItems: "center",
+  },
+  linkText: {
+    color: "#0070f3",
+    textDecoration: "none",
+    fontWeight: 500,
+    fontSize: "1rem",
+    marginLeft: "10px",
   },
   footerBottom: {
     marginTop: "40px",

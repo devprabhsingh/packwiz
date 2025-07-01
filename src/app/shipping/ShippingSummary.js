@@ -1,5 +1,6 @@
 import React from "react";
 import { styles } from "./shipStyles";
+import Image from "next/image";
 
 const ShippingSummary = ({
   subTotal,
@@ -48,9 +49,10 @@ const ShippingSummary = ({
         {error && <p style={styles.error}>{error}</p>}
         <button onClick={handleSubmit} className="proceed-pay-btn">
           {loader ? (
-            <img
+            <Image
               src="/images/loader.gif"
-              style={{ height: 40, width: 40 }}
+              height={40}
+              width={40}
               alt="loading..."
             />
           ) : (

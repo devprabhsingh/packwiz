@@ -6,7 +6,21 @@ import PaymentMethodSelector from "./PaymentMethodSelector";
 import StripePaymentForm from "./StripePaymentForm";
 import CashOnDeliverySection from "./CashOnDeliverySection";
 import { categories } from "@/data/numberSheet";
-const idmap = { b: 0, m: 1, s: 2, g: 3, t: 4, gb: 5, c: 6, f: 7 };
+const idmap = {
+  bx: 0,
+  mb: 1,
+  sw: 2,
+  gl: 3,
+  ct: 4,
+  gt: 4,
+  rt: 4,
+  gb: 5,
+  cv: 6,
+  fp: 7,
+  np: 8,
+  bw: 9,
+  pk: 10,
+};
 
 const Checkout = () => {
   const router = useRouter();
@@ -65,7 +79,14 @@ const Checkout = () => {
     };
 
     createPaymentIntent();
-  }, [total, cartItems.length, customerDetail?.email, paymentMethod]);
+  }, [
+    total,
+    cartItems.length,
+    customerDetail?.email,
+    paymentMethod,
+    clientSecret,
+    customerDetail,
+  ]);
 
   const saveOrder = async () => {
     try {
@@ -81,6 +102,7 @@ const Checkout = () => {
           postalCode: customerDetail?.postalCode,
           country: customerDetail?.country,
         },
+        instructions: customerDetail?.instructions,
         items: cartItems.map((item) => {
           const prefix = Object.keys(idmap).find((key) =>
             item.id.startsWith(key)
@@ -91,10 +113,10 @@ const Checkout = () => {
             productId: item.id,
             title: item.title,
             quantity: item.qty,
-            size: item.size,
+            size: item.size || "",
             desc: item.desc,
             price: item.price,
-            unit,
+            unit: unit || "",
           };
         }),
         subTotal,
@@ -103,6 +125,7 @@ const Checkout = () => {
         paymentMethod,
         transactionId: transactionId || "",
         courierName,
+        status: "Order Recieved",
       };
 
       const res = await fetch("/api/saveOrder", {
@@ -179,13 +202,13 @@ const Checkout = () => {
 
       if (result.success) {
         router.push(
-          `/payment-success?amount=${order.total}&type=COD&transactionID=${transactionId}`
+          `/payment-success?amount=${order.total}&type=COD&transactionId=${transactionId}`
         );
       } else {
         console.error("Email sending failed:", result.error);
         alert("Order placed, but email failed to send.");
         router.push(
-          `/payment-success?amount=${order.total}&type=COD&transactionID=${transactionId}`
+          `/payment-success?amount=${order.total}&type=COD&transactionId=${transactionId}`
         );
       }
     } catch (err) {

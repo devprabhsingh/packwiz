@@ -1,13 +1,19 @@
-// next.config.mjs
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  compress: true, // ✅ Gzip compression
+  swcMinify: true, // ✅ Minify JS using SWC
+  reactStrictMode: true, // ✅ Helps catch React issues during development
+  productionBrowserSourceMaps: false, // ✅ Prevents exposing source maps in production
+  experimental: {
+    optimizeCss: true, // ✅ Optimize CSS output
+    scrollRestoration: true, // ✅ Better scroll behavior
+  },
+  images: {
+    formats: ["image/avif", "image/webp"], // ✅ Serve optimized images
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production", // ✅ Remove console.logs in production
+  },
+};
 
-import autoCert from "anchor-pki/auto-cert/integrations/next";
-
-// If using .ts instead of .mjs, you can use the following comment to suppress the error
-// @ts-expect-error - No type definitions available for anchor-pki
-const withAutoCert = autoCert({
-  enabledEnv: "development",
-});
-
-const nextConfig = {};
-
-export default withAutoCert(nextConfig);
+export default nextConfig;

@@ -9,6 +9,7 @@ export const styles = {
   header: {
     fontSize: "20px",
     marginBottom: "20px",
+    marginTop: "10px",
     textAlign: "center",
   },
   fieldGroup: {
