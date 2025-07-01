@@ -181,7 +181,7 @@ export const products = [
     {
       id: "rt01",
       title: "Red tuck tape",
-      desc: "Epoxy Resin Construction Sheathing Tape",
+      desc: "Epoxy Resin Tape",
       size: "50m",
       priceTable: { tier1: 8.95, tier2: 8.55, tier3: 8.5, tier4: 8 },
       features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],

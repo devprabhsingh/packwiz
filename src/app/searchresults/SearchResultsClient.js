@@ -177,16 +177,15 @@ export default function SearchResultsClient() {
 
   return (
     <div>
-      <SearchBar />
-      <BackLinks />
+      <div className="searchbarbox">
+        <SearchBar />
+      </div>
+
       <h1 className="search-results-title">
         Search Results for:{" "}
         <span
           style={{
             color: "#ff6f20",
-            backgroundColor: "white",
-            borderRadius: "8px",
-            padding: "5px",
           }}
         >
           {query}
@@ -196,7 +195,15 @@ export default function SearchResultsClient() {
       {results.length === 0 ? (
         <p style={{ textAlign: "center" }}>No products found.</p>
       ) : (
-        <ProductList productCat="search" productList={results} />
+        <div
+          style={{
+            backgroundColor: "white",
+            borderRadius: "8px",
+            margin: "8px",
+          }}
+        >
+          <ProductList productCat="search" productList={results} />
+        </div>
       )}
     </div>
   );

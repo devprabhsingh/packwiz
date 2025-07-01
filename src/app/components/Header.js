@@ -45,7 +45,11 @@ export default function Header() {
   return (
     <header style={styles.headerBox}>
       {/* Mobile Menu Icon */}
-      <div onClick={() => setMenuOpen((open) => !open)} style={styles.menuIcon}>
+      <div
+        className="menu-icon"
+        onClick={() => setMenuOpen((open) => !open)}
+        style={styles.menuIcon}
+      >
         {menuOpen ? <X size={28} /> : <Menu size={28} />}
       </div>
 
@@ -117,7 +121,7 @@ const styles = {
     margin: "0 10px",
   },
   menuIcon: {
-    display: "flex",
+    display: "none",
     alignItems: "center",
     cursor: "pointer",
   },

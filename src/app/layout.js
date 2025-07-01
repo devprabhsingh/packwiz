@@ -11,9 +11,9 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Packwiz",
+  title: "Packwiz | Corrugated Boxes, Tapes, & Packing Supplies in Canada",
   description:
-    "Buy corrugated boxes tapes moving blankets stretch wrap gloves packing supplies",
+    "Packwiz offers high-quality corrugated boxes, packing tapes, moving blankets, stretch wrap, gloves, and essential packing supplies. Fast shipping across Canada!",
 };
 
 export default function RootLayout({ children }) {

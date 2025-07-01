@@ -561,7 +561,17 @@ nav a:hover,
   margin: 8px;
   border-radius: 8px;
 }
-
+.search-results-title {
+  font-size: 25px;
+  text-align: center;
+  margin: 10px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+}
+.searchbarbox {
+  display: none;
+}
 /* Responsive styles */
 @media only screen and (max-width: 1200px) {
   .grid-item {
@@ -761,6 +771,9 @@ nav a:hover,
   header .mobileLink {
     margin-right: 0;
   }
+  .searchbarbox {
+    display: block;
+  }
   .box-type-card {
     width: 83%;
     margin: 10px 0;
@@ -814,7 +827,9 @@ nav a:hover,
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
   }
-
+  .menu-icon {
+    display: block;
+  }
   .product-card .product-name {
     font-size: 0.85rem !important;
   }
@@ -862,7 +877,6 @@ nav a:hover,
   }
   .search-results-title {
     font-size: 20px;
-    margin: 0px;
     text-align: center;
   }
 
