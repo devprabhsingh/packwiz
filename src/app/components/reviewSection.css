@@ -3,7 +3,7 @@
   background: linear-gradient(to bottom right, #fffdfc, #fff5ef);
   margin: 10px auto;
   border-radius: 8px;
-  margin: 10px;
+  margin: 5px;
 }
 
 .review-section h2 {
@@ -89,7 +89,7 @@
 
 @media (max-width: 768px) {
   .review-section {
-    margin: 10px;
+    margin: 5px;
   }
   .reviews-grid {
     display: block;

@@ -1,6 +1,6 @@
 .item-detail-container {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: space-around;
   gap: 40px;
   padding: 30px;
   margin: 10px;
@@ -9,8 +9,11 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   justify-content: center;
+  align-items: flex-start;
 }
-
+.third-div {
+  flex: 0.7;
+}
 .image-section {
   flex: 1;
   min-width: 280px;
@@ -31,7 +34,7 @@
 .info-section {
   flex: 2;
   min-width: 280px;
-  max-width: 600px;
+  max-width: 400px;
 }
 
 .info-section h1 {
@@ -144,6 +147,8 @@
 
 .features-section {
   flex: 1;
+  margin-top: 20px;
+  width: 300px;
   min-width: 240px;
 }
 

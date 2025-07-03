@@ -8,7 +8,7 @@ const FirstSectionServer = () => {
       <div className="first-section" style={styles.maindiv}>
         <div style={styles.firstDiv}>
           <div className="proud-box" style={styles.proudbox}>
-            We are proudly
+            <span style={{ fontWeight: "bold" }}>We are proudly</span>
             <Image
               src="/images/animflag.png"
               loading="lazy"
@@ -20,10 +20,9 @@ const FirstSectionServer = () => {
           </div>
 
           <div className="first-div-inner" style={styles.firstdivinner}>
-            <p style={styles.head1}>
-              For all your <span style={{ color: "#ff6f20" }}>packaging</span>{" "}
-              needs
-            </p>
+            <h1 style={styles.head1}>
+              Packwiz – Canada’s Trusted Packing Supplies Store
+            </h1>
 
             <div className="reelContainer">
               <div className="reelTrack">
@@ -121,7 +120,7 @@ const features = [
 
 const styles = {
   maindiv: {
-    marginTop: "8px",
+    marginTop: "5px",
     height: "75vh",
     display: "flex",
     flexDirection: "row",
@@ -140,7 +139,7 @@ const styles = {
     boxShadow: "0 4px 4px rgba(0,0,0,0.1)",
   },
   head1: {
-    fontSize: "1.6rem",
+    fontSize: "1.3rem",
     textAlign: "center",
     margin: 0,
   },
@@ -148,6 +147,7 @@ const styles = {
     fontSize: "1.4rem",
     margin: 0,
     fontDisplay: "swap",
+    textAlign: "center",
   },
   actionBtn: {
     width: "fit-content",
@@ -173,7 +173,7 @@ const styles = {
     justifyContent: "center",
     backgroundColor: "white",
     color: "rgba(0,0,0,0.9)",
-    marginBottom: "8px",
+    marginBottom: "5px",
     padding: "8px 15px",
     borderRadius: "8px",
     fontSize: "1.6rem",

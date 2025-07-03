@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import ReviewSection from "@/app/components/ReviewSection";
 import Toast from "@/app/components/Toast";
-
+import Head from "next/head";
 const ProductList = dynamic(() => import("../../components/ProductList"));
 const flatPs = products.flat();
 
@@ -118,8 +118,27 @@ export default function ItemDetail() {
     { label: "25+", value: item.priceTable.tier4, condition: quantity > 24 },
   ];
 
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Item",
+    name: item.title,
+    image: `https://packwiz.ca${item.image}`,
+    description: item.details,
+    brand: {
+      "@type": "Brand",
+      name: "Packwiz",
+    },
+  };
+
   return (
     <>
+      <Head>
+        <title>{item.name} | Packwiz</title>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+      </Head>
       {toast.show && (
         <Toast
           message={toast.message}
@@ -181,17 +200,23 @@ export default function ItemDetail() {
           </div>
         </div>
 
-        {item.features && (
-          <div className="features-section">
-            <h2>Features</h2>
-            {item.features.map((feature, i) => (
-              <p key={i}>
-                <img src="/images/check.png" alt="check" />
-                {feature}
-              </p>
-            ))}
-          </div>
-        )}
+        <div className="third-div">
+          <div
+            style={styles.details}
+            dangerouslySetInnerHTML={{ __html: item.details }}
+          />
+          {item.features && (
+            <div className="features-section">
+              <h2>Features</h2>
+              {item.features.map((feature, i) => (
+                <p key={i}>
+                  <img src="/images/check.png" alt="check" />
+                  {feature}
+                </p>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       {similarProducts.length > 0 ? (
@@ -229,3 +254,10 @@ export default function ItemDetail() {
     </>
   );
 }
+
+const styles = {
+  details: {
+    width: "100%",
+    color: "#777",
+  },
+};

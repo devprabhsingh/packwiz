@@ -71,6 +71,8 @@ export const products = [
         "Durable & Sturdy",
         "Double Stitched Binding",
       ],
+      details:
+        "Our premium quilted <strong>moving blankets</strong> are also known as <strong>furniture pads</strong> or <strong>furniture wraps</strong>. Perfect for protecting your valuable furniture during moves, storage, or renovations. Whether you call them <strong>furniture covers, moving pads</strong>, or <strong>quilted wraps</strong> — they do the same job: prevent scratches, dents, and dust.",
     },
   ],
   [
@@ -82,6 +84,8 @@ export const products = [
       priceTable: { tier1: 18.95, tier2: 16.95, tier3: 13.95, tier4: 12.95 },
       image: "/images/shrink_wrap.png",
       features: ["Heavy-duty", "Self-Adhering", "Multi-Purpose"],
+      details:
+        "Our industrial-grade <strong>stretch wrap</strong>, also known as <strong>pallet wrap</strong> or <strong>plastic stretch film</strong>, is perfect for securing items during moving, shipping, or storage. This high-performance <strong>moving wrap</strong> clings tightly to boxes, furniture, and irregular-shaped objects, keeping them stable and protected. Whether you’re wrapping a pallet, bundling loose items, or safeguarding furniture corners, our <strong>stretch film</strong> delivers exceptional tear resistance and clarity. Ideal for warehouses, movers, and homeowners alike.",
     },
   ],
 
@@ -94,6 +98,8 @@ export const products = [
       priceTable: { tier1: 14.59, tier2: 14, tier3: 12, tier4: 10 },
       image: "/images/gloves.png",
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
     },
     {
       id: "gl02",
@@ -102,6 +108,8 @@ export const products = [
       size: "Small",
       priceTable: { tier1: 14.99, tier2: 14.95, tier3: 12.95, tier4: 10.95 },
       image: "/images/gloves.png",
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
     },
     {
@@ -111,6 +119,8 @@ export const products = [
       size: "Medium",
       priceTable: { tier1: 14.99, tier2: 14.95, tier3: 12.95, tier4: 10.95 },
       image: "/images/gloves.png",
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
     },
     {
@@ -118,6 +128,8 @@ export const products = [
       title: "Nitrile 5 mil gloves",
       desc: "Powder & Latex Free",
       size: "Large",
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
       priceTable: { tier1: 14.99, tier2: 14.99, tier3: 12.95, tier4: 10.95 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.png",
@@ -129,6 +141,8 @@ export const products = [
       size: "Medium",
       priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
       image: "/images/gloves.png",
     },
     {
@@ -136,6 +150,8 @@ export const products = [
       title: "Nitrile 6 mil gloves",
       desc: "Heavy Duty Gloves",
       size: "Large",
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
       priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.png",
@@ -145,6 +161,8 @@ export const products = [
       title: "Nitrile 6 mil gloves",
       desc: "Heavy Duty Gloves",
       size: "X Large",
+      details:
+        "These <strong>disposable nitrile gloves</strong> offer excellent protection, comfort, and grip for cleaning, packing, and industrial use. Latex-free and powder-free, they’re perfect for both home and commercial environments.",
       priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.png",
@@ -160,6 +178,8 @@ export const products = [
       priceTable: { tier1: 2.7, tier2: 2.6, tier3: 2.5, tier4: 2.3 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.png",
+      details:
+        "Our durable <strong>clear tape</strong>, also known as <strong>packing tape</strong> or <strong>shipping tape</strong>, provides a strong, reliable seal for boxes and packages. Ideal for moving, storage, and shipping, this transparent tape offers excellent adhesion and tear resistance.",
     },
   ],
   [
@@ -175,6 +195,9 @@ export const products = [
         "High Temperature Resistant",
       ],
       image: "/images/green-tape.png",
+
+      details:
+        "High-quality <strong>green painters tape</strong> 2-inch wide, perfect for clean paint lines and easy removal without residue.",
     },
   ],
   [
@@ -186,6 +209,8 @@ export const products = [
       priceTable: { tier1: 8.95, tier2: 8.55, tier3: 8.5, tier4: 8 },
       features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],
       image: "/images/red.png",
+      details:
+        "Strong and durable <strong>red tuck tape</strong> designed for sealing cartons and packaging with excellent adhesion.",
     },
   ],
 
@@ -198,6 +223,8 @@ export const products = [
       priceTable: { tier1: 20, tier2: 20, tier3: 20, tier4: 20 },
       image: "/images/blackbag.png",
       features: ["3 mil thick", "Super Strong", "Unscented"],
+      details:
+        "Heavy-duty <strong>black garbage bags</strong> for reliable waste disposal in homes and commercial settings.",
     },
     {
       id: "gb02",
@@ -207,6 +234,8 @@ export const products = [
       priceTable: { tier1: 25, tier2: 25, tier3: 25, tier4: 25 },
       image: "/images/blackbag.png",
       features: ["3 mil thick", "Super Strong", "Unscented"],
+      details:
+        "Heavy-duty <strong>black garbage bags</strong> for reliable waste disposal in homes and commercial settings.",
     },
     {
       id: "gb03",
@@ -216,6 +245,8 @@ export const products = [
       features: ["Sturdy", "Convenient", "Multi-Purpose"],
       priceTable: { tier1: 25, tier2: 25, tier3: 25, tier4: 25 },
       image: "/images/clearbag.png",
+      details:
+        "Transparent <strong>clear garbage bags</strong> perfect for sorting and disposal with strong tear resistance.",
     },
   ],
   [
@@ -227,6 +258,8 @@ export const products = [
       priceTable: { tier1: 5, tier2: 4, tier3: 3.5, tier4: 3 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.png",
+      details:
+        "Durable <strong>waterproof coveralls</strong> available in all sizes, offering full protection against liquids and harsh weather.",
     },
     {
       id: "cv02",
@@ -236,6 +269,8 @@ export const products = [
       priceTable: { tier1: 5, tier2: 4, tier3: 3.5, tier4: 3 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.png",
+      details:
+        "Durable <strong>waterproof coveralls</strong> available in all sizes, offering full protection against liquids and harsh weather.",
     },
     {
       id: "cv03",
@@ -245,6 +280,8 @@ export const products = [
       priceTable: { tier1: 4, tier2: 3, tier3: 2.5, tier4: 2.2 },
       image: "/images/coveralls.png",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
+      details:
+        "Protective <strong>dustproof coveralls</strong> ideal for keeping clothes clean in dusty environments, suitable for various industries.",
     },
     {
       id: "cv04",
@@ -254,6 +291,8 @@ export const products = [
       priceTable: { tier1: 4, tier2: 3, tier3: 2.5, tier4: 2.2 },
       image: "/images/coveralls.png",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
+      details:
+        "Protective <strong>dustproof coveralls</strong> ideal for keeping clothes clean in dusty environments, suitable for various industries.",
     },
     {
       id: "cv05",
@@ -263,6 +302,8 @@ export const products = [
       priceTable: { tier1: 4, tier2: 3, tier3: 2.6, tier4: 2.3 },
       image: "/images/coveralls.png",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
+      details:
+        "Protective <strong>dustproof coveralls</strong> ideal for keeping clothes clean in dusty environments, suitable for various industries.",
     },
   ],
   [
@@ -274,6 +315,8 @@ export const products = [
       priceTable: { tier1: 6.5, tier2: 6, tier3: 5.5, tier4: 5 },
       image: "/images/felt_pads.png",
       features: ["Diversity of sizes", "Tenacious Adhesive", "Easy to put"],
+      details:
+        "Soft <strong>felt pads</strong> designed to protect floors and furniture from scratches and noise, suitable for all furniture legs.",
     },
   ],
   [
@@ -284,6 +327,8 @@ export const products = [
       size: "36in X 24in, 100 sheets",
       priceTable: { tier1: 20, tier2: 20, tier3: 20, tier4: 20 },
       image: "/images/packing-paper.png",
+      details:
+        "Eco-friendly <strong>newsprint packing paper</strong> ideal for wrapping fragile items and cushioning during moves and shipments.",
     },
     {
       id: "np02",
@@ -293,6 +338,8 @@ export const products = [
       priceTable: { tier1: 30, tier2: 26, tier3: 23.5, tier4: 23 },
       image: "/images/packing-paper.png",
       image2: "images/paper2.png",
+      details:
+        "Eco-friendly <strong>newsprint packing paper</strong> ideal for wrapping fragile items and cushioning during moves and shipments.",
     },
   ],
   [
@@ -304,6 +351,8 @@ export const products = [
       priceTable: { tier1: 35, tier2: 32, tier3: 30, tier4: 28 },
       image: "/images/bubble.png",
       features: ["3/16inch bubble size", "Strong", "Lightweight & Soft"],
+      details:
+        "Premium <strong>bubble wrap</strong> providing superior cushioning and protection for fragile items during shipping and storage.",
     },
     {
       id: "bw02",
@@ -313,6 +362,8 @@ export const products = [
       priceTable: { tier1: 45, tier2: 45, tier3: 45, tier4: 45 },
       image: "/images/bubble.png",
       features: ["3/16inch bubble size", "Strong", "Lightweight & Soft"],
+      details:
+        "Premium <strong>bubble wrap</strong> providing superior cushioning and protection for fragile items during shipping and storage.",
     },
   ],
   [
@@ -333,6 +384,8 @@ export const products = [
       ],
       price: 118,
       image: "/images/kit1.png",
+      details:
+        "Our all-in-one <strong>packing kits</strong> include everything you need for a safe and organized move — from <strong>boxes</strong> and <strong>tape</strong> to <strong>bubble wrap</strong> and <strong>stretch wrap</strong>. Designed for home and office moves, these <strong>moving supply kits</strong> save time and ensure your items stay protected during transport.",
     },
     {
       id: "pk02",
@@ -351,6 +404,8 @@ export const products = [
       ],
       price: 215.2,
       image: "/images/kit1.png",
+      details:
+        "Our all-in-one <strong>packing kits</strong> include everything you need for a safe and organized move — from <strong>boxes</strong> and <strong>tape</strong> to <strong>bubble wrap</strong> and <strong>stretch wrap</strong>. Designed for home and office moves, these <strong>moving supply kits</strong> save time and ensure your items stay protected during transport.",
     },
     {
       id: "pk03",
@@ -369,6 +424,8 @@ export const products = [
       ],
       price: 310.8,
       image: "/images/kit1.png",
+      details:
+        "Our all-in-one <strong>packing kits</strong> include everything you need for a safe and organized move — from <strong>boxes</strong> and <strong>tape</strong> to <strong>bubble wrap</strong> and <strong>stretch wrap</strong>. Designed for home and office moves, these <strong>moving supply kits</strong> save time and ensure your items stay protected during transport.",
     },
     {
       id: "pk04",
@@ -388,6 +445,8 @@ export const products = [
       ],
       price: 444.4,
       image: "/images/kit1.png",
+      details:
+        "Our all-in-one <strong>packing kits</strong> include everything you need for a safe and organized move — from <strong>boxes</strong> and <strong>tape</strong> to <strong>bubble wrap</strong> and <strong>stretch wrap</strong>. Designed for home and office moves, these <strong>moving supply kits</strong> save time and ensure your items stay protected during transport.",
     },
   ],
 ];

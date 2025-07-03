@@ -82,7 +82,7 @@ export default function ReviewSection({
       <p
         style={{
           color: "#777",
-          marginTop: "10px",
+          marginTop: "5px",
           marginBottom: 0,
           fontStyle: "italic",
           textAlign: "center",

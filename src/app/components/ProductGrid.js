@@ -35,7 +35,7 @@ const ProductGrid = React.memo(({ title }) => {
 
   return (
     <div className="product-grid-main" style={styles.maindiv}>
-      <h1 style={styles.heading}>{title || "Our Products"}</h1>
+      <h2 style={styles.heading}>{title || "Our Products"}</h2>
       <div className="product-grid">
         {pds.map((product, index) => (
           <React.Fragment key={product.id}>
@@ -83,7 +83,7 @@ const styles = {
     justifyContent: "space-around",
     backgroundColor: "white",
     paddingBottom: "30px",
-    margin: "8px",
+    margin: "5px",
     borderRadius: "8px",
   },
   heading: {
