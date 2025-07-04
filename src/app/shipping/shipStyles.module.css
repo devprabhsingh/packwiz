@@ -1,0 +1,108 @@
+.form {
+  padding: 0px 24px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.header {
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.fieldGroup {
+  width: 100%;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.input {
+  width: 93%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.error {
+  margin-top: 5px;
+  color: red;
+  font-size: 13px;
+  text-align: center;
+}
+
+.shipping {
+  margin-top: 36px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.summary {
+  margin: 5px 0 5px 5px;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+}
+
+.summaryLine {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.totalBox {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: green;
+}
+.backBtnBox {
+  background-color: white;
+  border-radius: 8px;
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+}
+
+.backBtn {
+  display: block;
+  padding: 10px 20px;
+  background-color: #ff6f20;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  width: fit-content;
+}
+
+/* Address input */
+.addressInput {
+  height: 5vh;
+  border-color: #ff6f20 !important;
+  outline-color: #ff6f20;
+  font-weight: 600;
+  height: auto;
+  min-height: 50px;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.5;
+  width: 93%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}

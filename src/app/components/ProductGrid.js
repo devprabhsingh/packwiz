@@ -34,7 +34,7 @@ const ProductGrid = React.memo(({ title }) => {
   );
 
   return (
-    <div className="product-grid-main" style={styles.maindiv}>
+    <div id="product-grid" className="product-grid-main" style={styles.maindiv}>
       <h2 style={styles.heading}>{title || "Our Products"}</h2>
       <div className="product-grid">
         {pds.map((product, index) => (

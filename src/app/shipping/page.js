@@ -7,7 +7,7 @@ import Link from "next/link";
 import Form from "./Form";
 import ShippingRates from "./ShippingRates";
 import ShippingSummary from "./ShippingSummary";
-import { styles } from "./shipStyles";
+import styles from "./shipStyles.module.css";
 
 const ShippingInfo = () => {
   const router = useRouter();
@@ -148,8 +148,8 @@ const ShippingInfo = () => {
 
   if (subTotal < 10) {
     return (
-      <div style={styles.backBtnBox}>
-        <Link href="/cart" style={styles.backBtn}>
+      <div className={styles.backBtnBox}>
+        <Link href="/cart" className={styles.backBtn}>
           Go back to cart
         </Link>
       </div>
@@ -157,7 +157,7 @@ const ShippingInfo = () => {
   }
 
   return (
-    <div className="shipping-box" style={styles.box}>
+    <div className="shipping-box">
       <Form
         query={query}
         selectedAddress={selectedAddress}

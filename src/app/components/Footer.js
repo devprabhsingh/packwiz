@@ -27,14 +27,19 @@ const Footer = () => {
         <div style={styles.footerSection}>
           <h4 style={styles.footerTitle}>Contact</h4>
           <p style={styles.footerText}>
-            <Image height={30} width={30} alt="call" src="/images/call.png" />
+            <Image height={30} width={30} alt="call" src="/images/call.webp" />
 
             <a href="tel:+14377757688" style={styles.linkText}>
               +1 (437) 775-7688
             </a>
           </p>
           <p style={styles.footerText}>
-            <Image height={30} width={30} alt="email" src="/images/email.png" />
+            <Image
+              height={30}
+              width={30}
+              alt="email"
+              src="/images/email.webp"
+            />
             <a href="mailto:info@packwiz.ca" style={styles.linkText}>
               info@packwiz.ca
             </a>
@@ -61,7 +66,12 @@ const Footer = () => {
       <div style={styles.footerBottom}>
         <p style={styles.footerCopyright}>
           © {new Date().getFullYear()}{" "}
-          <Image height={50} width={140} src="/images/logo.png" alt="Packwiz" />
+          <Image
+            height={50}
+            width={140}
+            src="/images/logo.webp"
+            alt="Packwiz"
+          />
           . All rights reserved.
         </p>
       </div>
@@ -99,6 +109,7 @@ const styles = {
     fontWeight: "bold",
     marginBottom: "8px",
     color: "#222",
+    marginTop: "5px",
   },
   footerLink: {
     color: "#0070f3",

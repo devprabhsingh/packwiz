@@ -14,7 +14,7 @@
 html,
 body {
   overflow-x: hidden;
-  background: url("/images/bg.svg") center/cover no-repeat;
+  background: url("/images/bg.webp") center/cover no-repeat;
   height: 100%;
   width: 100%;
   font-family: inherit;
@@ -33,7 +33,7 @@ nav a:hover,
 .back-navigation {
   background: #fffdfd;
   padding: 10px;
-  margin: 8px;
+  margin: 5px;
   border-radius: 8px;
 }
 
@@ -175,7 +175,7 @@ nav a:hover,
 /* Cart container */
 .cart-container {
   padding: 20px;
-  margin: 0 10px;
+  margin: 0 5px;
   background: #fff;
   border-radius: 8px;
 }
@@ -196,7 +196,7 @@ nav a:hover,
 }
 
 .shipping-box form:first-child {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 /* Payment step circle */
@@ -208,14 +208,6 @@ nav a:hover,
   color: #fff;
   font-size: 20px;
   margin-right: 10px;
-}
-
-/* Address input */
-.address-input {
-  height: 5vh;
-  border-color: #ff6f20 !important;
-  outline-color: #ff6f20;
-  font-weight: 600;
 }
 
 /* Address results */
@@ -244,7 +236,7 @@ nav a:hover,
 
 /* Shipping rates box */
 .shipping-rates-box {
-  margin-left: 10px;
+  margin-left: 5px;
   margin-top: 5px;
   padding: 2px 15px;
   border-radius: 8px;

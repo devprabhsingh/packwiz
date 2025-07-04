@@ -108,7 +108,15 @@ export default function CartPage() {
                             margin: 0,
                           }}
                         >
-                          {item.size}
+                          {item.id.startsWith("b")
+                            ? item.size
+                                .split("*")
+                                .map(
+                                  (val, i) =>
+                                    `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
+                                )
+                                .join(" × ")
+                            : item.size}
                         </p>
                         <p style={styles.detail}>
                           Effective Price:

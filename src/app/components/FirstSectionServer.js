@@ -10,7 +10,7 @@ const FirstSectionServer = () => {
           <div className="proud-box" style={styles.proudbox}>
             <span style={{ fontWeight: "bold" }}>We are proudly</span>
             <Image
-              src="/images/animflag.png"
+              src="/images/animflag.webp"
               loading="lazy"
               alt="Canadian"
               width={40}
@@ -77,7 +77,7 @@ const FirstSectionServer = () => {
                 />
                 <p>{feature.title}</p>
                 <Image
-                  src="/images/check.png"
+                  src="/images/check.webp"
                   alt="check"
                   width={30}
                   height={30}
@@ -95,27 +95,24 @@ const FirstSectionServer = () => {
 };
 
 const reelImages = [
-  "/images/boxes-r.png",
-  "/images/shrink_wrap-r.png",
-  "/images/coveralls-r.png",
-  "/images/felt_pads-r.png",
-  "/images/moving_blankets-r.png",
-  "/images/clear-tape-r.png",
-  "/images/green-tape-r.png",
-  "/images/red-r.png",
-  "/images/gloves.png",
-  "/images/garbage_bags-r.png",
+  "/images/boxes.webp",
+  "/images/shrink_wrap.webp",
+  "/images/coveralls.webp",
+  "/images/felt_pads.webp",
+  "/images/moving_blankets.webp",
+  "/images/clear-tape.webp",
+  "/images/green-tape.webp",
 ];
 
 const features = [
-  { title: "Free delivery within GTA*", icon: "/images/free_delivery.png" },
-  { title: "Next day delivery", icon: "/images/time_delivery.png" },
-  { title: "High quality products", icon: "/images/quality.png" },
-  { title: "Affordable prices", icon: "/images/affordable.png" },
-  { title: "Easy Exchanges", icon: "/images/easy_return.png" },
-  { title: "No minimum order", icon: "/images/no_min.png" },
-  { title: "Wholesale discounts", icon: "/images/discount.png" },
-  { title: "Custom solutions", icon: "/images/custom.png" },
+  { title: "Free delivery within GTA*", icon: "/images/free_delivery.webp" },
+  { title: "Next day delivery", icon: "/images/time_delivery.webp" },
+  { title: "High quality products", icon: "/images/quality.webp" },
+  { title: "Affordable prices", icon: "/images/affordable.webp" },
+  { title: "Easy Exchanges", icon: "/images/easy_return.webp" },
+  { title: "No minimum order", icon: "/images/no_min.webp" },
+  { title: "Wholesale discounts", icon: "/images/discount.webp" },
+  { title: "Custom solutions", icon: "/images/custom.webp" },
 ];
 
 const styles = {

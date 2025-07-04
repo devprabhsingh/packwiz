@@ -1,5 +1,5 @@
 import React from "react";
-import { styles } from "./shipStyles";
+import styles from "./shipStyles.module.css";
 
 const Form = ({
   query,
@@ -112,14 +112,14 @@ const Form = ({
 
   return (
     <>
-      <form style={styles.form}>
-        <h3 style={styles.header}>
+      <form className={styles.form}>
+        <h3 className={styles.header}>
           <span className="payment-step">1</span>Shipping & Payment
         </h3>
 
         {/* Address Search Field */}
-        <div style={styles.fieldGroup}>
-          <label style={styles.label}>Start typing your address</label>
+        <div className={styles.fieldGroup}>
+          <label className={styles.label}>Start typing your address</label>
           <textarea
             name="address"
             value={selectedAddress || query}
@@ -127,16 +127,8 @@ const Form = ({
               setQuery(e.target.value);
               setSelectedAddress("");
             }}
-            style={{
-              ...styles.input,
-              height: "auto",
-              minHeight: "50px",
-              resize: "none",
-              overflow: "hidden",
-              lineHeight: "1.5",
-            }}
             rows={2}
-            className="address-input"
+            className={styles.addressInput}
             required
           />
           {results.length > 0 && (
@@ -164,8 +156,8 @@ const Form = ({
         {/* Address Fields */}
         {["streetAddress", "city", "state", "postalCode", "country"].map(
           (field) => (
-            <div key={field} style={styles.fieldGroup}>
-              <label style={styles.label} htmlFor={field}>
+            <div key={field} className={styles.fieldGroup}>
+              <label className={styles.label} htmlFor={field}>
                 {getLabel(field)}
               </label>
               <input
@@ -173,25 +165,25 @@ const Form = ({
                 name={field}
                 value={formData[field] || ""}
                 onChange={handleChange}
-                style={styles.input}
+                className={styles.input}
               />
               {fieldErrors[field] && (
-                <p style={styles.error}>{fieldErrors[field]}</p>
+                <p className={styles.error}>{fieldErrors[field]}</p>
               )}
             </div>
           )
         )}
       </form>
-      <form style={styles.form} onSubmit={handleSubmit}>
-        <h3 style={styles.header}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h3 className={styles.header}>
           <span className="payment-step">2</span>Contact Details
         </h3>
 
         {/* Contact Details */}
         {["name", "email", "phone", "instructions"].map((field, idx) => (
           <React.Fragment key={field}>
-            <div style={styles.fieldGroup}>
-              <label htmlFor={field} style={styles.label}>
+            <div className={styles.fieldGroup}>
+              <label htmlFor={field} className={styles.label}>
                 {getLabel(field)}
               </label>
               <input
@@ -200,28 +192,28 @@ const Form = ({
                 name={field}
                 value={formData[field] || ""}
                 onChange={handleChange}
-                style={styles.input}
+                className={styles.input}
                 required
                 inputMode={field === "phone" ? "numeric" : undefined}
                 onWheel={(e) => field === "phone" && e.target.blur()} // hide spinner
               />
               {fieldErrors[field] && (
-                <p style={styles.error}>{fieldErrors[field]}</p>
+                <p className={styles.error}>{fieldErrors[field]}</p>
               )}
             </div>
 
             {field === "email" && (
-              <div style={styles.fieldGroup}>
-                <label style={styles.label}>Confirm Email</label>
+              <div className={styles.fieldGroup}>
+                <label className={styles.label}>Confirm Email</label>
                 <input
                   type="text"
                   name="confirmEmail"
                   value={formData.confirmEmail || ""}
                   onChange={handleChange}
-                  style={styles.input}
+                  className={styles.input}
                 />
                 {fieldErrors.confirmEmail && (
-                  <p style={styles.error}>{fieldErrors.confirmEmail}</p>
+                  <p className={styles.error}>{fieldErrors.confirmEmail}</p>
                 )}
               </div>
             )}

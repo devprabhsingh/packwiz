@@ -13,7 +13,6 @@ export async function generateMetadata({ searchParams }) {
       title: `Search Results for "${searchQuery}" | Packwiz`,
       description: `Find all packing and moving supplies related to "${searchQuery}" at Packwiz.`,
       url: `https://packwiz.com/search?page=${encodeURIComponent(searchQuery)}`, // Canonical URL for sharing
-      // images: ['/images/packwiz-search-og.png'], // Optional: a generic image for search results shares
     },
   };
 }

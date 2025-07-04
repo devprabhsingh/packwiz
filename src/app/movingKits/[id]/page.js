@@ -134,7 +134,7 @@ const MovingKit = () => {
             {kitData.items.map((item, index) => (
               <div key={item.id} style={styles.card}>
                 <Image
-                  src={item.image || "/images/default.png"}
+                  src={item.image || "/images/no_pictures.webp"}
                   alt={item.id}
                   width={120}
                   height={120}

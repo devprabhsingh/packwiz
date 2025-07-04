@@ -52,7 +52,7 @@ export default function Header() {
       {/* Logo */}
       <Link href="/" className="logo-link">
         <Image
-          src="/images/logo.png"
+          src="/images/logo.webp"
           alt="logo"
           height={50}
           width={150}

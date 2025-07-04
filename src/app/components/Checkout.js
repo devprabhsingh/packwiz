@@ -172,7 +172,7 @@ const Checkout = () => {
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `http://www.packwiz.ca/payment-success?amount=${total}&transactionId=${transactionId}&type=online`,
+        return_url: `https://www.packwiz.ca/payment-success?amount=${total}&transactionId=${transactionId}&type=online`,
       },
     });
 

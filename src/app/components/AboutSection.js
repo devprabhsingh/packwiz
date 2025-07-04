@@ -6,7 +6,7 @@ const AboutSection = () => {
     <section className="about-section">
       <div className="about-container">
         <div className="about-text">
-          <Image height={100} width={300} src="/images/logo.png" alt="logo" />
+          <Image height={100} width={300} src="/images/logo.webp" alt="logo" />
           <p>
             Packwiz began with one simple mission — make packing and moving
             hassle-free. What started in a small garage has grown into a trusted
@@ -23,7 +23,7 @@ const AboutSection = () => {
           </a>
         </div>
         <div className="about-image">
-          <img src="/images/aboutimg.png" alt="About Packwiz" loading="lazy" />
+          <img src="/images/aboutimg.webp" alt="About Packwiz" loading="lazy" />
         </div>
       </div>
     </section>

@@ -154,9 +154,19 @@ export default function ItemDetail() {
         <div className="info-section">
           <h1>{item.title}</h1>
           <p className="description">{item.desc}</p>
-          <p>
-            <strong>Size:</strong> {item.size}
+          <p style={{ marginBottom: "5px" }}>
+            <strong>Size: </strong>
+            {item.id.startsWith("b")
+              ? item.size
+                  .split("*")
+                  .map(
+                    (val, i) =>
+                      `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
+                  )
+                  .join(" × ")
+              : item.size}
           </p>
+          <p style={styles.inStock}>In Stock</p>
 
           <table className="price-table">
             <thead>
@@ -210,7 +220,7 @@ export default function ItemDetail() {
               <h2>Features</h2>
               {item.features.map((feature, i) => (
                 <p key={i}>
-                  <img src="/images/check.png" alt="check" />
+                  <img src="/images/check.webp" alt="check" />
                   {feature}
                 </p>
               ))}
@@ -226,7 +236,7 @@ export default function ItemDetail() {
           style={{
             backgroundColor: "#fff",
             borderRadius: "8px",
-            margin: "10px 10px 0 10px",
+            margin: "5px 5px 0 5px",
             padding: "10px 0",
           }}
         >
@@ -258,6 +268,12 @@ export default function ItemDetail() {
 const styles = {
   details: {
     width: "100%",
-    color: "#777",
+    color: "#444",
+  },
+  inStock: {
+    color: "green",
+    fontsize: "13px",
+    margin: 0,
+    marginBottom: "5px",
   },
 };

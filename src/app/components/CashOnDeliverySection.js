@@ -12,7 +12,7 @@ const CashOnDeliverySection = ({
   return (
     <div style={styles.codMethodWrapper}>
       <div style={styles.codTitle} id="cod-title">
-        <Image height={25} width={25} src="/images/cod.png" alt="cod" />
+        <Image height={25} width={25} src="/images/cod.webp" alt="cod" />
         <span
           id="cod-title-cod"
           style={{ fontSize: "14px", color: "#4e4e4e", fontWeight: "700" }}
@@ -26,7 +26,7 @@ const CashOnDeliverySection = ({
           id="cod-inner-div"
           style={{ display: "flex", alignItems: "center", gap: "1rem" }}
         >
-          <Image height={40} width={40} src="/images/cod.png" alt="cod" />
+          <Image height={40} width={40} src="/images/cod.webp" alt="cod" />
           <p>Cash on Delivery (COD) selected</p>
         </div>
         <p id="cod-info" style={{ marginTop: "0.5rem" }}>

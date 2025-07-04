@@ -46,14 +46,14 @@ export default function ContactSection() {
               label: "Phone",
               value: phone,
               href: `tel:${phone.replace(/[^+\d]/g, "")}`,
-              icon: "/images/call.png",
+              icon: "/images/call.webp",
               type: "phone",
             },
             {
               label: "Email",
               value: email,
               href: `mailto:${email}`,
-              icon: "/images/email.png",
+              icon: "/images/email.webp",
               type: "email",
             },
           ].map((contact, index) => (

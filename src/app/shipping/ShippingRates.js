@@ -1,11 +1,11 @@
 import React from "react";
-import { styles } from "./shipStyles";
+import styles from "./shipStyles.module.css";
 import Image from "next/image";
 
 const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
   return (
     <div className="shipping-rates-box">
-      <h3 style={styles.header}>
+      <h3 className={styles.header}>
         <span className="payment-step">3</span>Select your courier
       </h3>
 
@@ -32,7 +32,7 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
           ) : null
         )
       ) : loading ? (
-        <div style={styles.loader}>
+        <div className={styles.loader}>
           <Image
             src="/images/loader.gif"
             height={40}

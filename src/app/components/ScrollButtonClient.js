@@ -3,7 +3,10 @@ import React, { useCallback } from "react";
 
 export default function ScrollButton() {
   const handleScroll = useCallback(() => {
-    window.scrollTo({ top: 700, behavior: "smooth" });
+    const section = document.getElementById("product-grid");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   }, []);
 
   return (
@@ -13,15 +16,10 @@ export default function ScrollButton() {
       style={styles.scrollBtn}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          handleScroll();
-        }
-      }}
       aria-label="Scroll down"
     >
       <img
-        src="/images/darrow.png"
+        src="/images/darrow.webp"
         alt="scroll down"
         style={styles.scrollIcon}
         loading="lazy"

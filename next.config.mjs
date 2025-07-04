@@ -1,18 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  compress: true, // ✅ Gzip compression
-  swcMinify: true, // ✅ Minify JS using SWC
-  reactStrictMode: true, // ✅ Helps catch React issues during development
-  productionBrowserSourceMaps: false, // ✅ Prevents exposing source maps in production
+  compress: true,
+  reactStrictMode: true,
+  productionBrowserSourceMaps: false,
   experimental: {
-    optimizeCss: true, // ✅ Optimize CSS output
-    scrollRestoration: true, // ✅ Better scroll behavior
+    optimizeCss: true,
+    scrollRestoration: true,
   },
   images: {
-    formats: ["image/avif", "image/webp"], // ✅ Serve optimized images
+    formats: ["image/avif", "image/webp"],
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === "production", // ✅ Remove console.logs in production
+    removeConsole: process.env.NODE_ENV === "production",
   },
 };
 

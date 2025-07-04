@@ -16,7 +16,7 @@ const PaymentMethodSelector = ({ paymentMethod, onSelect }) => {
         >
           <span className="btn-left">Debit / Credit Card</span>
           <span style={{ marginLeft: "5px" }}>/</span>
-          <img src="/images/google-pay.png" alt="Google Pay" />
+          <img src="/images/google-pay.webp" alt="Google Pay" />
         </button>
 
         {cod && (

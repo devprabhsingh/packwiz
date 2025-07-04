@@ -120,7 +120,7 @@ const ProductList = ({ id, modified, productList }) => {
                   onClick={() => handleProductClick(product)}
                 >
                   <Image
-                    src={product.image || "/images/no-pictures.png"}
+                    src={product.image || "/images/no-pictures.webp"}
                     alt={product.size || "size"}
                     width={200}
                     height={200}
@@ -130,7 +130,7 @@ const ProductList = ({ id, modified, productList }) => {
                   <div className="tooltip">Click to see more details</div>
                   {product?.title?.length > 15 && (
                     <Image
-                      src="/images/hot.png"
+                      src="/images/hot.webp"
                       alt="hot"
                       width={30}
                       height={30}
@@ -153,6 +153,7 @@ const ProductList = ({ id, modified, productList }) => {
                     : product.size}
                 </p>
                 <p style={styles.boxDesc}>{product.desc}</p>
+                <p style={styles.inStock}>In Stock</p>
 
                 {modified ? (
                   <div>
@@ -235,10 +236,6 @@ const ProductList = ({ id, modified, productList }) => {
           }}
           onClick={() => {
             setOpenForm(true);
-            window.scrollBy({
-              top: window.innerHeight * 0.2,
-              behavior: "smooth",
-            });
           }}
         >
           Need more sizes?
@@ -307,6 +304,11 @@ const styles = {
     overflowWrap: "anywhere",
     width: "100%",
     textAlign: "center",
+  },
+  inStock: {
+    color: "green",
+    fontSize: "13px",
+    margin: "0 0 5px 0",
   },
   quantityControls: {
     display: "flex",

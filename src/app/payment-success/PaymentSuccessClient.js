@@ -71,7 +71,7 @@ export default function PaymentSuccessClient() {
               </>
             )}
             <p className="success-status">
-              <Image height={30} width={30} src="/images/check.png" alt="ok" />{" "}
+              <Image height={30} width={30} src="/images/check.webp" alt="ok" />{" "}
               Order receipt successfully sent to your provided email.
             </p>
 
