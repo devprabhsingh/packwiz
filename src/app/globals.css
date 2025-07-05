@@ -24,7 +24,11 @@ button {
   user-select: none;
   cursor: pointer;
 }
-
+.first-div {
+  height: 82vh;
+  width: 60%;
+  margin: 0 5px;
+}
 nav a:hover,
 .back-navigation a:active {
   color: #ff6f20 !important;
@@ -246,7 +250,7 @@ nav a:hover,
 /* Reel container and animation */
 .reelContainer {
   margin: 30px 0;
-  width: 400px;
+  max-width: 700px;
   height: 100px;
   overflow: hidden;
 }
@@ -254,7 +258,7 @@ nav a:hover,
 .reelTrack {
   display: flex;
   width: 200%;
-  animation: scrollReel 20s linear infinite alternate-reverse;
+  animation: scrollReel 30s linear infinite alternate-reverse;
   animation-fill-mode: forwards;
 }
 
@@ -518,7 +522,12 @@ nav a:hover,
   margin: 0 10px;
   font-size: 18px;
 }
-
+.second-div {
+  width: 40%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100%;
+}
 /* Inner container with light bg */
 .trueinner {
   background-color: #fcfcfc;
@@ -576,6 +585,9 @@ nav a:hover,
     justify-content: space-between !important;
     padding: 0 10px !important;
   }
+  .reelContainer {
+    width: 500px;
+  }
 }
 
 @media only screen and (max-width: 900px) {
@@ -587,7 +599,14 @@ nav a:hover,
   .second-div .grid-item {
     display: block;
   }
-
+  .second-div,
+  .first-div {
+    width: 100%;
+    height: auto;
+  }
+  .reelContainer {
+    width: 400px;
+  }
   .proud-box {
     padding: 0 !important;
     width: 100%;
@@ -651,6 +670,7 @@ nav a:hover,
 
   .cart-container {
     position: relative;
+    padding: 10px;
   }
   .cart-container .checkout-card {
     position: fixed;
@@ -689,6 +709,16 @@ nav a:hover,
   .cart-container .cart-item-delete {
     top: 10px;
     right: 10px;
+  }
+  .first-div-inner {
+    padding: 30px;
+  }
+  .first-div {
+    height: auto;
+    width: 100%;
+  }
+  .second-div {
+    width: 100%;
   }
 
   .item-info {
@@ -749,7 +779,7 @@ nav a:hover,
   .proud-box {
     font-size: 23px !important;
     width: auto;
-    margin: auto 5px;
+    margin: 5px;
   }
 
   .first-div-inner p:nth-child(1) {
@@ -759,6 +789,7 @@ nav a:hover,
     font-size: 16px;
     text-align: center;
   }
+
   .head2 {
     font-size: 1.2rem !important;
     text-align: center;
@@ -880,8 +911,6 @@ nav a:hover,
   }
 
   .about-text img {
-    height: 70px;
-    width: 210px;
   }
   .about-text p {
     font-size: 0.8rem;

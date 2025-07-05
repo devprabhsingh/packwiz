@@ -27,6 +27,22 @@ const faqs = [
     answer:
       "We offer eco-conscious options like recyclable newsprint packing paper and durable supplies that can be reused multiple times.",
   },
+  {
+    question: "Where do you offer free delivery in the GTA?",
+    answer:
+      "We provide free delivery on packing supplies across the Greater Toronto Area, including Brampton, Mississauga, Scarborough, Etobicoke, and North York, for orders over $50.",
+  },
+  {
+    question: "What size moving boxes do you sell?",
+    answer:
+      "We offer a range of moving box sizes including small, medium, large, and wardrobe boxes to suit apartments, condos, and houses of all sizes.",
+  },
+  {
+    question:
+      "Do you supply packing materials for businesses or restoration companies?",
+    answer:
+      "Yes, we work with restoration companies and businesses across Toronto and the GTA, offering reliable packing materials, fast service, and bulk pricing options.",
+  },
 ];
 
 export default function FAQ() {

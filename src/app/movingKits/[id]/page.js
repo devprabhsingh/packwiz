@@ -132,10 +132,10 @@ const MovingKit = () => {
           <h2 style={styles.subtitle}>What is Included</h2>
           <div className="scroll-box">
             {kitData.items.map((item, index) => (
-              <div key={item.id} style={styles.card}>
+              <div key={index} style={styles.card}>
                 <Image
                   src={item.image || "/images/no_pictures.webp"}
-                  alt={item.id}
+                  alt={index}
                   width={120}
                   height={120}
                   style={styles.image}

@@ -45,6 +45,9 @@ export default function ItemDetail() {
   };
 
   const price = item ? getPrice(quantity, item.priceTable) : 0;
+  const finalPrice = item
+    ? Number((price - (price * (item.discount || 0)) / 100).toFixed(2))
+    : 0;
 
   // Reset addedProductId after 1 second
   useEffect(() => {
@@ -60,7 +63,7 @@ export default function ItemDetail() {
 
   const handleAddToCart = () => {
     if (!item) return;
-    const cartItem = { ...item, qty: quantity, price };
+    const cartItem = { ...item, qty: quantity, price, finalPrice };
     addToCart(cartItem);
     setAddedProductId(item.id);
     setToast({
@@ -186,12 +189,36 @@ export default function ItemDetail() {
           </table>
 
           <div>
-            <h4>
-              Effective Price: ${price} X {quantity} ={" "}
-              <span style={{ color: "green" }}>
-                ${(price * quantity).toFixed(2)}
-              </span>
-            </h4>
+            {!item.discount ? (
+              <h4>
+                Effective Price: ${price} X {quantity} ={" "}
+                <span style={{ color: "green" }}>
+                  ${(price * quantity).toFixed(2)}
+                </span>
+              </h4>
+            ) : (
+              <div>
+                <span
+                  style={{
+                    backgroundColor: "#ff6f20",
+                    color: "white",
+                    padding: "3px 6px",
+                    borderRadius: "8px",
+                  }}
+                >
+                  {item.discount}% Off
+                </span>
+                <p>
+                  Effective Price:{" "}
+                  <span style={{ textDecoration: "line-through" }}>
+                    ${price}
+                  </span>
+                  <span style={{ color: "green", marginLeft: "10px" }}>
+                    ${finalPrice} x {quantity} = ${finalPrice * quantity}
+                  </span>
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="qty-controls">

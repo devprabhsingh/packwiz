@@ -37,7 +37,10 @@ export default function CartPage() {
   };
 
   // Pricing calculations
-  const subTotal = cartItems.reduce((sum, i) => sum + i.price * i.qty, 0);
+  const subTotal = cartItems.reduce(
+    (sum, i) => sum + (i.finalPrice || i.price) * i.qty,
+    0
+  );
 
   useEffect(() => {
     setSubTotal(Number(subTotal.toFixed(2)));
@@ -69,7 +72,7 @@ export default function CartPage() {
               textDecoration: "none",
               fontWeight: "bold",
               width: "fit-content",
-              margin: "auto",
+              margin: "10px auto",
             }}
             href="/products"
           >
@@ -96,7 +99,7 @@ export default function CartPage() {
                             fontSize: "14px",
                             color: "rgba(0,0,0,0.8)",
                             marginTop: "3px",
-                            marginBottom: 0,
+                            marginBottom: "3px",
                           }}
                         >
                           {item.desc}
@@ -105,7 +108,7 @@ export default function CartPage() {
                           style={{
                             fontSize: "14px",
                             color: "#ff6f20",
-                            margin: 0,
+                            margin: "3px 0",
                           }}
                         >
                           {item.id.startsWith("b")
@@ -118,10 +121,39 @@ export default function CartPage() {
                                 .join(" × ")
                             : item.size}
                         </p>
-                        <p style={styles.detail}>
-                          Effective Price:
-                          <span style={{ color: "green" }}>${item.price}</span>
-                        </p>
+                        {item.discount && (
+                          <p
+                            style={{
+                              backgroundColor: "#ff6f20",
+                              color: "white",
+                              borderRadius: "8px",
+                              width: "fit-content",
+                              padding: "3px 6px",
+                            }}
+                          >
+                            {item.discount}% Off
+                          </p>
+                        )}
+                        {item.discount ? (
+                          <p style={styles.detail}>
+                            Effective Price:
+                            <span style={{ textDecoration: "line-through" }}>
+                              ${item.price}
+                            </span>
+                            <span
+                              style={{ marginLeft: "10px", color: "green" }}
+                            >
+                              ${item.finalPrice}
+                            </span>
+                          </p>
+                        ) : (
+                          <p style={styles.detail}>
+                            Effective Price:
+                            <span style={{ marginLeft: "3px", color: "green" }}>
+                              ${item.price}
+                            </span>
+                          </p>
+                        )}
                       </div>
                     </div>
                   </Link>
@@ -293,12 +325,35 @@ export default function CartPage() {
                       </button>
                     </div>
                     <div>
-                      <p style={{ fontWeight: "bold", padding: "5px" }}>
-                        Subtotal:{" "}
-                        <span style={{ color: "green" }}>
-                          ${(item.price * item.qty).toFixed(2)}
-                        </span>
-                      </p>
+                      {!item.discount ? (
+                        <p style={{ fontWeight: "bold", padding: "5px" }}>
+                          Subtotal:{" "}
+                          <span style={{ color: "green" }}>
+                            ${(item.price * item.qty).toFixed(2)}
+                          </span>
+                        </p>
+                      ) : (
+                        <>
+                          <p style={{ fontWeight: "bold", padding: "5px" }}>
+                            Subtotal:{" "}
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                              }}
+                            >
+                              ${(item.price * item.qty).toFixed(2)}
+                            </span>
+                            <span
+                              style={{
+                                marginLeft: "10px",
+                                color: "green",
+                              }}
+                            >
+                              ${(item.finalPrice * item.qty).toFixed(2)}
+                            </span>
+                          </p>
+                        </>
+                      )}
                     </div>
                   </div>
                   <button

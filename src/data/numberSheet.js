@@ -65,6 +65,7 @@ export const products = [
         "Durable & Sturdy",
         "Double Stitched Binding",
       ],
+      discount: 10,
       details:
         "Our premium quilted <strong>moving blankets</strong> are also known as <strong>furniture pads</strong> or <strong>furniture wraps</strong>. Perfect for protecting your valuable furniture during moves, storage, or renovations. Whether you call them <strong>furniture covers, moving pads</strong>, or <strong>quilted wraps</strong> — they do the same job: prevent scratches, dents, and dust.",
     },
@@ -78,6 +79,7 @@ export const products = [
       priceTable: { tier1: 18.95, tier2: 16.95, tier3: 13.95, tier4: 12.95 },
       image: "/images/shrink_wrap.webp",
       features: ["Heavy-duty", "Self-Adhering", "Multi-Purpose"],
+      discount: 25,
       details:
         "Our industrial-grade <strong>stretch wrap</strong>, also known as <strong>pallet wrap</strong> or <strong>plastic stretch film</strong>, is perfect for securing items during moving, shipping, or storage. This high-performance <strong>moving wrap</strong> clings tightly to boxes, furniture, and irregular-shaped objects, keeping them stable and protected. Whether you’re wrapping a pallet, bundling loose items, or safeguarding furniture corners, our <strong>stretch film</strong> delivers exceptional tear resistance and clarity. Ideal for warehouses, movers, and homeowners alike.",
     },
@@ -172,6 +174,7 @@ export const products = [
       priceTable: { tier1: 2.7, tier2: 2.6, tier3: 2.5, tier4: 2.3 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
+      discount: 10,
       details:
         "Our durable <strong>clear tape</strong>, also known as <strong>packing tape</strong> or <strong>shipping tape</strong>, provides a strong, reliable seal for boxes and packages. Ideal for moving, storage, and shipping, this transparent tape offers excellent adhesion and tear resistance.",
     },

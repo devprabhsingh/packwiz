@@ -91,6 +91,12 @@
   .review-section {
     margin: 5px;
   }
+  .review-section h2 {
+    font-size: 1.8rem;
+  }
+  .review-text {
+    font-size: 0.9rem;
+  }
   .reviews-grid {
     display: block;
     max-height: 400px;
