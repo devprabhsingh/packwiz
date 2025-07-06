@@ -1,31 +1,35 @@
 import dynamic from "next/dynamic";
-import FirstSection from "./components/FirstSection";
-import SearchBar from "./components/Searchbar";
+import FirstSection from "../components/FirstSection";
+import SearchBar from "../components/Searchbar";
 import Head from "next/head";
-const ProductGrid = dynamic(() => import("./components/ProductGrid"), {
+
+const ProductGrid = dynamic(() => import("../components/ProductGrid"), {
   loading: () => <p>Loading...</p>,
 });
-const AboutSection = dynamic(() => import("./components/AboutSection"), {
+const AboutSection = dynamic(() => import("../components/AboutSection"), {
   loading: () => <p>Loading...</p>,
 });
-const ContactSection = dynamic(() => import("./components/ContactSection"), {
+const ContactSection = dynamic(() => import("../components/ContactSection"), {
   loading: () => <p>Loading...</p>,
 });
-const ReviewSection = dynamic(() => import("./components/ReviewSection"), {
+const ReviewSection = dynamic(() => import("../components/ReviewSection"), {
   loading: () => <p>Loading...</p>,
+});
+const LazyExtras = dynamic(() => import("../components/LazyExtras"), {
+  loading: () => <></>,
 });
 
 export default function HomePage() {
   return (
     <>
       <Head>
-        <title>Packwiz - Affordable Packing Supplies in GTA</title>
+        <title>
+          Packwiz - Packing Supplies, Boxes & Kits with Free GTA Delivery
+        </title>
         <meta
           name="description"
-          content="Shop bubble wrap, boxes, tape, and more at low prices. Free delivery in GTA."
+          content="Looking for packing supplies in Toronto? Get low-cost bubble wrap, boxes, tape, and kits with free GTA delivery. Smooth, stress-free moves start here."
         />
-
-        {/* LocalBusiness Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -158,6 +162,7 @@ export default function HomePage() {
         <AboutSection />
         <ReviewSection />
         <ContactSection />
+        <LazyExtras /> {/* ← Moved here instead of layout.js */}
       </div>
     </>
   );

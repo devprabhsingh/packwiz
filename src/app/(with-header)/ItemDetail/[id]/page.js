@@ -11,7 +11,7 @@ import Link from "next/link";
 import ReviewSection from "@/app/components/ReviewSection";
 import Toast from "@/app/components/Toast";
 import Head from "next/head";
-const ProductList = dynamic(() => import("../../components/ProductList"));
+const ProductList = dynamic(() => import("../../../components/ProductList"));
 const flatPs = products.flat();
 
 export default function ItemDetail() {

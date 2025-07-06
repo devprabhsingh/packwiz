@@ -3,7 +3,7 @@ import React from "react";
 import { products, categories } from "@/data/numberSheet";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
-const ProductList = dynamic(() => import("../../components/ProductList"));
+const ProductList = dynamic(() => import("../../../components/ProductList"));
 import BackLinks from "@/app/components/BackLinks";
 import SearchBar from "@/app/components/Searchbar";
 let productCat = "";

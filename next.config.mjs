@@ -8,7 +8,8 @@ const nextConfig = {
     scrollRestoration: true,
   },
   images: {
-    formats: ["image/avif", "image/webp"],
+    domains: ["packwiz.ca"],
+    formats: ["image/webp"],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",

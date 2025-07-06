@@ -1,0 +1,126 @@
+.maindiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  padding-bottom: 30px;
+  margin: 5px;
+  border-radius: 8px;
+}
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.productGrid a {
+  text-decoration: none;
+}
+
+.heading {
+  text-align: center;
+  width: 25%;
+  font-size: 1.9rem;
+  margin: 20px auto;
+}
+
+.productName {
+  margin: 0;
+}
+
+.priceText {
+  margin: 0;
+  color: #333;
+  font-style: italic;
+  font-size: 12px;
+}
+
+.shopButton {
+  background-color: #ff6f20;
+  color: white;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+.productCard {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  border-bottom: 3px solid white;
+  padding: 0 10px;
+}
+.productName {
+  padding: 10px;
+  font-weight: bold;
+  color: #000;
+  text-decoration: none !important;
+}
+.productCard:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
+}
+.imageWrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.itemImg {
+  width: 190px;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  margin: auto;
+}
+
+.imageWrapper:hover .tooltip {
+  opacity: 1;
+}
+.subHeadline {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin: 30px 0 10px;
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  .maindiv {
+    flex-direction: column;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .productGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .productGrid {
+    margin: auto;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+  }
+  .productCard .productName {
+    font-size: 0.85rem !important;
+  }
+  .itemImg {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    margin: auto;
+  }
+}

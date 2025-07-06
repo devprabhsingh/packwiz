@@ -3,9 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import { products } from "@/data/numberSheet";
 import { useEffect, useState } from "react";
-import ProductList from "../components/ProductList";
-import BackLinks from "../components/BackLinks";
-import SearchBar from "../components/Searchbar";
+import ProductList from "../../components/ProductList";
+import SearchBar from "../../components/Searchbar";
 
 // Basic plural -> singular conversion
 const simpleStem = (word) => {

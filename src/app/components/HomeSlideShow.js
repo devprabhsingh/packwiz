@@ -64,7 +64,6 @@ export default function HomeSlideshow() {
           width={50}
           alt="lightning"
           src={"/images/lightning.png"}
-          loading="lazy"
         />
         Deals of the month
         <Image
@@ -72,7 +71,6 @@ export default function HomeSlideshow() {
           width={50}
           alt="lightning"
           src={"/images/lightning.png"}
-          loading="lazy"
         />
       </h2>
       <div className={styles.slidesContainer}>
@@ -101,7 +99,6 @@ export default function HomeSlideshow() {
                   src={slide.img}
                   alt={slide.title}
                   className={styles.slideImage}
-                  loading="lazy"
                   width={250}
                   height={150}
                 />

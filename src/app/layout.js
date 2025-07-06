@@ -1,11 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./components/Header";
 import { CartProvider } from "./context/CartContext";
-import Footer from "./components/Footer";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
-import LazyExtras from "./components/LazyExtras";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -59,8 +56,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        <link rel="manifest" href="/manifest.json" />
-
+        {/* <link rel="manifest" href="/manifest.json" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-X5EC4D35N3"
           strategy="lazyOnload"
@@ -74,14 +70,11 @@ export default function RootLayout({ children }) {
               page_path: window.location.pathname,
             });
           `}
-        </Script>
+        </Script> */}
       </head>
       <body>
         <CartProvider>
-          <Header />
-          <main>{children}</main>
-          <LazyExtras />
-          <Footer />
+          {children}
           <Analytics />
         </CartProvider>
       </body>

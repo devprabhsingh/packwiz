@@ -68,7 +68,10 @@ const ProductList = ({ id, modified, productList }) => {
   const handleAddToCart = useCallback(
     (product, qty, when) => {
       const price = getPrice(qty, product);
-      addToCart({ ...product, qty: Number(qty), price });
+      const finalPrice = Number(
+        price - ((price / 100) * product.discount).toFixed(2)
+      );
+      addToCart({ ...product, qty: Number(qty), price, finalPrice });
       setAddedProductId(product.id);
       if (when === "now") router.push("/cart");
     },
@@ -105,7 +108,9 @@ const ProductList = ({ id, modified, productList }) => {
         {productList.map((product, index) => {
           const qty = quantities[index];
           const pricePerUnit = getPrice(qty, product);
-
+          const finalPrice = Number(
+            pricePerUnit - ((pricePerUnit / 100) * product.discount).toFixed(2)
+          );
           return (
             <div
               key={product.id}
@@ -188,13 +193,38 @@ const ProductList = ({ id, modified, productList }) => {
                         +
                       </button>
                     </div>
-
-                    <div style={styles.totalPrice}>
-                      Total:{" "}
-                      <strong style={{ color: "#1a8917" }}>
-                        ${(qty * pricePerUnit).toFixed(2)}
-                      </strong>
-                    </div>
+                    {product.discount && (
+                      <span
+                        style={{
+                          backgroundColor: "#ff6f20",
+                          padding: "3px 6px",
+                          color: "white",
+                          borderRadius: "8px",
+                        }}
+                      >
+                        {product.discount}% Off
+                      </span>
+                    )}
+                    {!product.discount ? (
+                      <div style={styles.totalPrice}>
+                        Total:{" "}
+                        <strong style={{ color: "#1a8917" }}>
+                          ${(qty * pricePerUnit).toFixed(2)}
+                        </strong>
+                      </div>
+                    ) : (
+                      <div style={styles.totalPrice}>
+                        Total:{" "}
+                        <strong style={{ textDecoration: "line-through" }}>
+                          ${(qty * pricePerUnit).toFixed(2)}
+                        </strong>
+                        <strong
+                          style={{ marginLeft: "10px", color: "#1a8917" }}
+                        >
+                          ${(qty * finalPrice).toFixed(2)}
+                        </strong>
+                      </div>
+                    )}
 
                     <div style={styles.actionButtons}>
                       <button
@@ -315,6 +345,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     gap: "8px",
+    marginBottom: "10px",
   },
   button: {
     padding: "4px 10px",

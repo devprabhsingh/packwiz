@@ -1,5 +1,5 @@
 import React from "react";
-import AboutSection from "../components/AboutSection";
+import AboutSection from "@/app/components/AboutSection";
 export const metadata = {
   title: "About Packwiz - Your Trusted Packing Supplier",
   description:
