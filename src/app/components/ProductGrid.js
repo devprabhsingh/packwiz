@@ -3,10 +3,9 @@ import React, { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getStartingPrice } from "@/utils";
-import { pds } from "@/data/numberSheet";
 import styles from "./productgrid.module.css";
 
-const ProductGrid = React.memo(({ title }) => {
+const ProductGrid = React.memo(({ title, pds }) => {
   const router = useRouter();
 
   const multiPds = useMemo(() => [0, 3, 7, 8, 12], []);
@@ -51,6 +50,8 @@ const ProductGrid = React.memo(({ title }) => {
                   width={290}
                   height={290}
                   className={styles.itemImg}
+                  placeholder="empty"
+                  priority={index === 0}
                 />
               </div>
               <p className={styles.productName}>{product.name}</p>

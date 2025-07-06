@@ -1,5 +1,17 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
+  trailingSlash: false,
+  async redirects() {
+    return [
+      {
+        source: "/index.html",
+        destination: "/", // Redirects to the root domain
+        permanent: true, // Uses a 308 Permanent Redirect
+      },
+    ];
+  },
+
   compress: true,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,

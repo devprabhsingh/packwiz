@@ -1,98 +1,67 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import "../ItemDetail.css";
 import { products, categories, reviewList } from "@/data/numberSheet";
-import { useParams, useRouter } from "next/navigation";
-import { useCart } from "@/app/context/CartContext";
 import { getProductCat } from "@/utils";
-import BackLinks from "@/app/components/BackLinks";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import ReviewSection from "@/app/components/ReviewSection";
-import Toast from "@/app/components/Toast";
-import Head from "next/head";
-const ProductList = dynamic(() => import("../../../components/ProductList"));
+import ItemDetailClient from "./ItemDetailClient";
 const flatPs = products.flat();
 
-export default function ItemDetail() {
-  const { id } = useParams();
-  const router = useRouter();
-  const { addToCart } = useCart();
+export async function generateMetadata({ params }) {
+  const { id } = await params;
+  const item = flatPs.find((p) => p.id === id);
 
-  const [item, setItem] = useState(null);
-  const [quantity, setQuantity] = useState(1);
-  const [addedProductId, setAddedProductId] = useState(null);
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-    type: "success",
-  });
+  if (!item) {
+    return {
+      title: "Product Not Found | Packwiz",
+      description: "The product you are looking for does not exist.",
+    };
+  }
 
-  // Find item on id change
-  useEffect(() => {
-    const foundItem = flatPs.find((p) => p.id === id) || null;
-    setItem(foundItem);
-    setQuantity(1); // reset quantity when item changes
-  }, [id]);
-
-  // Calculate price tier based on quantity and price table
-  const getPrice = (qty, p) => {
-    if (!p) return 0;
-    if (qty <= 4) return p.tier1;
-    if (qty <= 9) return p.tier2;
-    if (qty <= 24) return p.tier3;
-    return p.tier4;
+  return {
+    title: `${item.title} | Packwiz`,
+    description: item.desc, // Use a concise description for the meta tag
+    keywords: `${item.title}, ${item.title.toLowerCase()}, Packwiz, packaging, ${getProductCat(
+      item.id
+    )}`, // Example keywords
+    openGraph: {
+      title: `${item.title} | Packwiz`,
+      description: item.desc,
+      url: `https://packwiz.ca/ItemDetail/${item.id}`,
+      siteName: "Packwiz",
+      images: [
+        {
+          url: `https://packwiz.ca${item.image}`, // Absolute URL for Open Graph image
+          width: 800, // Example width
+          height: 600, // Example height
+          alt: item.title,
+        },
+      ],
+      type: "article", // More specific type for products
+    },
+    // Add canonical URL if needed, e.g., if there are multiple ways to reach this page
+    // canonical: `https://packwiz.ca/ItemDetail/${item.id}`,
   };
+}
 
-  const price = item ? getPrice(quantity, item.priceTable) : 0;
-  const finalPrice = item
-    ? Number((price - (price * (item.discount || 0)) / 100).toFixed(2))
-    : 0;
+// --- Main Server Component for the Product Detail Page ---
+export default async function ItemDetailPage({ params }) {
+  const { id } = await params;
+  const item = flatPs.find((p) => p.id === id);
 
-  // Reset addedProductId after 1 second
-  useEffect(() => {
-    if (addedProductId !== null) {
-      const timer = setTimeout(() => setAddedProductId(null), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [addedProductId]);
-
-  // Quantity control handlers
-  const increaseQty = () => setQuantity((q) => q + 1);
-  const decreaseQty = () => setQuantity((q) => Math.max(1, q - 1));
-
-  const handleAddToCart = () => {
-    if (!item) return;
-    const cartItem = { ...item, qty: quantity, price, finalPrice };
-    addToCart(cartItem);
-    setAddedProductId(item.id);
-    setToast({
-      show: true,
-      message: (
-        <>
-          Item added!{" "}
-          <a
-            href="/cart"
-            style={{ color: "#fff", textDecoration: "underline" }}
-          >
-            Go to cart
+  // Handle case where item is not found
+  if (!item) {
+    // You might want to render a more sophisticated 404 page here
+    return (
+      <div style={{ padding: "20px", textAlign: "center" }}>
+        <h1>Product Not Found</h1>
+        <p>The product you are looking for could not be found.</p>
+        <p>
+          <a href="/products" style={{ color: "#ff6f20" }}>
+            Explore other products
           </a>
-        </>
-      ),
-      type: "success",
-    });
-  };
+        </p>
+      </div>
+    );
+  }
 
-  const handleBuyNow = () => {
-    handleAddToCart();
-    router.push("/cart");
-  };
-
-  const handleCloseToast = () => setToast((t) => ({ ...t, show: false }));
-
-  if (!item) return <div>Loading item...</div>;
-
-  // Compute similar products and category info
+  // Prepare data that the client component needs, all done on the server
   const letter = id.slice(0, id.length - 1);
   const similarProducts = flatPs.filter(
     (p) => p.id.startsWith(letter) && p.id !== id
@@ -101,206 +70,52 @@ export default function ItemDetail() {
   const category = categories[getProductCat(item.id)] || { unit: "" };
   const reviews = reviewList.filter((r) => r.category === item.title);
 
-  // Price tiers for table display
+  // Price tiers for display (static part, can be pre-calculated)
   const priceTiers = [
-    {
-      label: "Upto 4",
-      value: item.priceTable.tier1,
-      condition: quantity <= 4,
-    },
-    {
-      label: "5 - 9",
-      value: item.priceTable.tier2,
-      condition: quantity > 4 && quantity <= 9,
-    },
-    {
-      label: "10 - 24",
-      value: item.priceTable.tier3,
-      condition: quantity > 9 && quantity <= 24,
-    },
-    { label: "25+", value: item.priceTable.tier4, condition: quantity > 24 },
+    { label: "Upto 4", value: item.priceTable.tier1 },
+    { label: "5 - 9", value: item.priceTable.tier2 },
+    { label: "10 - 24", value: item.priceTable.tier3 },
+    { label: "25+", value: item.priceTable.tier4 },
   ];
 
-  const schemaData = {
+  // --- JSON-LD Structured Data for Rich Results (Server-side) ---
+  const productSchema = {
     "@context": "https://schema.org",
-    "@type": "Item",
+    "@type": "Product",
     name: item.title,
-    image: `https://packwiz.ca${item.image}`,
-    description: item.details,
+    image: `https://packwiz.ca${item.image}`, // Absolute URL is crucial for schema
+    description: item.desc, // Use 'desc' for general product description
+    sku: item.id, // Unique identifier for the product
+    mpn: item.id, // Manufacturer Part Number (if applicable, can be item.id)
     brand: {
       "@type": "Brand",
       name: "Packwiz",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `https://packwiz.ca/ItemDetail/${item.id}`, // Canonical URL
+      priceCurrency: "CAD", // Assuming Canadian Dollars based on location
+      price: item.priceTable.tier1, // Use the lowest tier price as the base price for schema
+      itemCondition: "https://schema.org/NewCondition",
+      availability: "https://schema.org/InStock",
     },
   };
 
   return (
     <>
-      <Head>
-        <title>{item.name} | Packwiz</title>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
-        />
-      </Head>
-      {toast.show && (
-        <Toast
-          message={toast.message}
-          type={toast.type}
-          onClose={handleCloseToast}
-        />
-      )}
-      <BackLinks nextTitle={item.title} nextId={item.id} />
-      <div className="item-detail-container">
-        <div className="image-section">
-          <img src={item.image} alt={item.title} />
-        </div>
-        <div className="info-section">
-          <h1>{item.title}</h1>
-          <p className="description">{item.desc}</p>
-          <p style={{ marginBottom: "5px" }}>
-            <strong>Size: </strong>
-            {item.id.startsWith("b")
-              ? item.size
-                  .split("*")
-                  .map(
-                    (val, i) =>
-                      `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
-                  )
-                  .join(" × ")
-              : item.size}
-          </p>
-          <p style={styles.inStock}>In Stock</p>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
 
-          <table className="price-table">
-            <thead>
-              <tr>
-                <th>{category.unit}</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {priceTiers.map((row, i) => (
-                <tr key={i} className={row.condition ? "highlight" : ""}>
-                  <td>{row.label}</td>
-                  <td>${row.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <div>
-            {!item.discount ? (
-              <h4>
-                Effective Price: ${price} X {quantity} ={" "}
-                <span style={{ color: "green" }}>
-                  ${(price * quantity).toFixed(2)}
-                </span>
-              </h4>
-            ) : (
-              <div>
-                <span
-                  style={{
-                    backgroundColor: "#ff6f20",
-                    color: "white",
-                    padding: "3px 6px",
-                    borderRadius: "8px",
-                  }}
-                >
-                  {item.discount}% Off
-                </span>
-                <p>
-                  Effective Price:{" "}
-                  <span style={{ textDecoration: "line-through" }}>
-                    ${price}
-                  </span>
-                  <span style={{ color: "green", marginLeft: "10px" }}>
-                    ${finalPrice} x {quantity} = ${finalPrice * quantity}
-                  </span>
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className="qty-controls">
-            <button onClick={decreaseQty}>-</button>
-            <span>{quantity}</span>
-            <button onClick={increaseQty}>+</button>
-          </div>
-
-          <div className="action-buttons">
-            <button className="add-to-cart" onClick={handleAddToCart}>
-              {addedProductId === item.id ? "Added!" : "Add to Cart"}
-            </button>
-            <button className="buy-now" onClick={handleBuyNow}>
-              Buy Now
-            </button>
-          </div>
-        </div>
-
-        <div className="third-div">
-          <div
-            style={styles.details}
-            dangerouslySetInnerHTML={{ __html: item.details }}
-          />
-          {item.features && (
-            <div className="features-section">
-              <h2>Features</h2>
-              {item.features.map((feature, i) => (
-                <p key={i}>
-                  <img src="/images/check.webp" alt="check" />
-                  {feature}
-                </p>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {similarProducts.length > 0 ? (
-        <ProductList productList={similarProducts} modified={true} />
-      ) : (
-        <div
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: "8px",
-            margin: "5px 5px 0 5px",
-            padding: "10px 0",
-          }}
-        >
-          <Link
-            href="/products"
-            style={{
-              display: "block",
-              padding: "10px 20px",
-              backgroundColor: "#ff6f20",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              textDecoration: "none",
-              fontWeight: "bold",
-              width: "fit-content",
-              margin: "auto",
-            }}
-          >
-            Explore Other Products
-          </Link>
-        </div>
-      )}
-
-      <ReviewSection reviewList={reviews} headline={"Customer Reviews"} />
+      {/* Render the Client Component, passing down all necessary props */}
+      <ItemDetailClient
+        item={item}
+        similarProducts={similarProducts}
+        category={category}
+        reviews={reviews}
+        priceTiers={priceTiers}
+      />
     </>
   );
 }
-
-const styles = {
-  details: {
-    width: "100%",
-    color: "#444",
-  },
-  inStock: {
-    color: "green",
-    fontsize: "13px",
-    margin: 0,
-    marginBottom: "5px",
-  },
-};

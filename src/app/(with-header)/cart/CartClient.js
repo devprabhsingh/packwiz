@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import Link from "next/link";
 import { getProductCat } from "@/utils";
-import { categories } from "@/data/numberSheet";
+
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
-export default function CartPage() {
+export default function CartPage({ categories }) {
   const { setKit, cartItems, setSubTotal, removeFromCart, updateItemQuantity } =
     useCart();
   const searchParams = useSearchParams();

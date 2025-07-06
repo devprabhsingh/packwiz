@@ -1,5 +1,3 @@
-import mongoose from "mongoose";
-let isConnected = false;
 import { products, categories } from "./data/numberSheet";
 
 export function getProductCat(productId) {
@@ -157,21 +155,6 @@ export async function getShipCharge(a, subtotal, cartItems) {
     return getPrice(d, subtotal, cartItems);
   } catch (e) {
     console.error(e);
-  }
-}
-
-export async function dbConnect() {
-  if (isConnected) return;
-
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "packwiz",
-    });
-    isConnected = true;
-    console.log("✅ MongoDB connected");
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-    throw error;
   }
 }
 

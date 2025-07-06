@@ -1,16 +1,67 @@
-import { Suspense } from "react";
-import ProductsClient from "./ProductsClient";
+import dynamic from "next/dynamic";
 
-export const metadata = {
-  title: "Shop All Packing Products - Packwiz",
-  description:
-    "Explore our full range of packing products, including moving boxes, bubble wrap, tape dispensers, and more. Find the perfect packing solution.",
-};
+import BackLinks from "../../components/BackLinks";
+import SearchBar from "../../components/Searchbar";
 
-export default function SearchResultsPage() {
+const ProductGrid = dynamic(() => import("../../components/ProductGrid"), {
+  ssr: true,
+  loading: () => <p>Loading Products...</p>,
+});
+
+import { products, pds } from "@/data/numberSheet";
+
+export async function generateMetadata() {
+  const allProducts = products.flat();
+
+  const productStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": allProducts.map((product) => ({
+      "@type": "Product",
+      name: product.title,
+      image: [`https://www.packwiz.ca${product.image}`],
+      description: product.desc,
+      sku: product.id,
+      brand: {
+        "@type": "Brand",
+        name: "Packwiz",
+      },
+      offers: {
+        "@type": "Offer",
+        url: product.id.startsWith("pk")
+          ? `https://www.packwiz.ca/movingKits/${product.id}`
+          : `https://www.packwiz.ca/ItemDetail/${product.id}`,
+        priceCurrency: "CAD",
+
+        price: product.id.startsWith("pk")
+          ? product.price
+          : product.priceTable.tier4,
+        availability: "https://schema.org/InStock",
+        itemCondition: "https://schema.org/NewCondition",
+      },
+    })),
+  };
+
+  return {
+    title: "All Products | Packwiz",
+    description:
+      "Browse affordable packing supplies including boxes, bubble wrap, tape, and more.",
+    alternates: {
+      canonical: "https://www.packwiz.ca/products",
+    },
+    structuredData: productStructuredData,
+  };
+}
+
+export default function ProductsPage() {
   return (
-    <Suspense fallback={<div>Loading search results...</div>}>
-      <ProductsClient />
-    </Suspense>
+    <>
+      <div className="mobile-search">
+        <SearchBar />
+      </div>
+
+      <BackLinks title="" id="" />
+
+      <ProductGrid pds={pds} />
+    </>
   );
 }

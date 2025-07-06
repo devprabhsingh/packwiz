@@ -58,7 +58,7 @@ export default function HomeSlideshow() {
       className={styles.slideshow}
       aria-label="Featured products and delivery information"
     >
-      <h2 className={styles.dealsTitle}>
+      {/* <h2 className={styles.dealsTitle}>
         <Image
           height={50}
           width={50}
@@ -72,7 +72,7 @@ export default function HomeSlideshow() {
           alt="lightning"
           src={"/images/lightning.png"}
         />
-      </h2>
+      </h2> */}
       <div className={styles.slidesContainer}>
         {slides.map((slide, index) => (
           <article

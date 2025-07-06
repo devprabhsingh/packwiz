@@ -1,4 +1,4 @@
-import { dbConnect } from "@/utils";
+import { dbConnect } from "@/dbConnect";
 import { Order } from "../../../../models/Order";
 import { NextResponse } from "next/server";
 

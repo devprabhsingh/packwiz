@@ -2,7 +2,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "./context/CartContext";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,7 +32,7 @@ export const metadata = {
     title: "Buy Packing Supplies at Lowest Prices!",
     description:
       "Get high-quality bubble wrap, stretch film, boxes, and more at unbeatable rates. Shop now!",
-    url: "https://www.packwiz.ca",
+    url: "https://www.packwiz.ca", // This is fine as it's your preferred URL for Open Graph
     type: "website",
     images: [
       {
@@ -50,27 +49,18 @@ export const metadata = {
       "Get high-quality bubble wrap, stretch film, boxes, and more at unbeatable rates. Shop now!",
     images: ["https://www.packwiz.ca/images/social-share.webp"],
   },
+
+  metadataBase: new URL("https://www.packwiz.ca"),
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
       <head>
-        {/* <link rel="manifest" href="/manifest.json" />
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-X5EC4D35N3"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-X5EC4D35N3', {
-              page_path: window.location.pathname,
-            });
-          `}
-        </Script> */}
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body>
         <CartProvider>
