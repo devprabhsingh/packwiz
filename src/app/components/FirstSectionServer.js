@@ -19,7 +19,10 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "center",
+    backgroundColor:'#fbfbfb',
+    margin:'0 5px',
+    borderRadius:'8px'
   },
 };
 export default FirstSectionServer;

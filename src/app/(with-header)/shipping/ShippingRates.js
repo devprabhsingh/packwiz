@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
   return (
-    <div className="shipping-rates-box">
+    <div className={styles.shippingratesbox}>
       <h3 className={styles.header}>
         <span className="payment-step">3</span>Select your courier
       </h3>

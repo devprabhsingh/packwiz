@@ -136,10 +136,11 @@ nav a:hover,
 .shipping-box {
   display: flex;
   justify-content: center;
+   
 }
 
 .shipping-box form {
-  width: 24%;
+  width: 27%;
   margin-top: 5px;
 }
 
@@ -182,14 +183,6 @@ nav a:hover,
   border-color: #ff6f20;
 }
 
-/* Shipping rates box */
-.shipping-rates-box {
-  margin-left: 5px;
-  margin-top: 5px;
-  padding: 2px 15px;
-  border-radius: 8px;
-  background: #fff;
-}
 
 /* Reel container and animation */
 .reelContainer {
@@ -489,6 +482,7 @@ nav a:hover,
 .searchbarbox {
   display: none;
 }
+
 /* Responsive styles */
 @media only screen and (max-width: 1200px) {
   .cart-item-card table {
@@ -670,8 +664,12 @@ nav a:hover,
     display: block;
   }
   .box-type-card {
-    width: 83%;
-    margin: 5px 0;
+    width: 96% !important;
+    margin: 5px;
+  }
+ 
+  .contact-form-title{
+    width:70%;
   }
   .first-div-inner {
     margin: 5px 5px 0 5px;
@@ -749,6 +747,7 @@ nav a:hover,
   }
   .shipping-box {
     flex-direction: column;
+   
   }
   .shipping-box form {
     width: auto;
@@ -758,10 +757,7 @@ nav a:hover,
     margin-right: 5px;
     width: auto !important;
   }
-  .shipping-rates-box {
-    margin: 5px;
-    margin-right: 0;
-  }
+ 
 
   .proceed-pay-btn {
     position: static;
@@ -835,7 +831,7 @@ nav a:hover,
   padding: 20px;
   background-color: #fdfdfd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  height: 20vh;
+  height: 25vh;
   width: 40%;
   margin: 20px;
   position: sticky;

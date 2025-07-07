@@ -89,7 +89,7 @@ export default function PaymentSuccessClient() {
                 </p>
               </div>
             )}
-
+            <strong style={{textAlign:'center'}}>Please check your spam folder in case order confirmation email lands there.</strong>
             <div className="divider" />
             <p className="help-text">
               If you need to make any changes to your order, please reply to the

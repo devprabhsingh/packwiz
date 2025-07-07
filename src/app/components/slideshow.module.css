@@ -1,13 +1,14 @@
 .slideshow {
   position: relative;
   margin: 0 5px 0 0;
+
 }
 
 .slidesContainer {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
 }
 .dealsTitle {
   display: flex;
@@ -17,12 +18,11 @@
   margin-bottom: 5px;
   border-radius: 8px;
   background-color: white;
-  padding: 15px 10px;
+  padding:10px;
   text-align: center;
 }
 .slide {
   display: none;
-  padding: 10px 10px;
   text-align: center;
   background: #fff;
   gap: 1rem;
@@ -118,58 +118,6 @@
   transition: background-color 0.25s ease;
 }
 
-.btn:hover,
-.btn:focus {
-  background-color: rgb(215, 84, 14);
-}
-
-.slideshowControls {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.25rem;
-}
-
-.controlBtn {
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #fff;
-  padding: 0 0.5rem;
-  transition: color 0.25s ease;
-}
-
-.controlBtn:hover,
-.controlBtn:focus {
-  color: #fff;
-  outline: none;
-}
-
-.dots {
-  display: flex;
-  gap: 0.7rem;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #cbd5e0;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.dot.active {
-  background-color: #fff;
-}
-
-.dot:focus {
-  outline: 2px solid #fff;
-  outline-offset: 2px;
-}
 
 @media (max-width: 800px) {
   .dealsTitle {

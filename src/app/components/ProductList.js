@@ -273,13 +273,10 @@ const ProductList = ({ id, modified, productList }) => {
       </div>
 
       {openForm && (
-        <div>
-          <h3 style={{ textAlign: "center", marginBottom: "16px" }}>
-            Fill this out. Our team will contact you soon.
-          </h3>
-          <div style={{ width: "25%", margin: "auto", paddingBottom: "30px" }}>
+        <div style={{width:'80%',margin:'auto',paddingBottom:'20px'}}>
+         
             <RequestForm />
-          </div>
+          
         </div>
       )}
     </div>

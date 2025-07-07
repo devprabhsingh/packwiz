@@ -60,6 +60,13 @@ const Footer = () => {
           >
             Facebook
           </Link>
+            <Link
+            href="https://www.linkedin.com/company/packwiz-packing-supplies"
+            style={styles.footerLink}
+          >
+            Linkedin
+          </Link>
+          
         </div>
       </div>
 

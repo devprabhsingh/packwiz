@@ -9,7 +9,7 @@
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   color: #ff6f20;
-  gap: 1.25rem;
+
 }
 
 .cards {
@@ -58,7 +58,6 @@
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
-  padding: 20px;
   border-radius: 8px;
 }
 
@@ -106,7 +105,35 @@
   margin-top: 0.5rem;
   text-align: center;
 }
+.actionBtn {
+  width: fit-content;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #ff6f20;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px grey;
+}
 
+.buttonRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 100%;
+}
+
+.proudbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+ 
+  font-size: 1.6rem;
+  
+}
 @media (max-width: 768px) {
   .heroIntro {
     width: 97%;

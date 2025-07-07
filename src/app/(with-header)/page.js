@@ -20,9 +20,10 @@ const LazyExtras = dynamic(() => import("../components/LazyExtras"), {
 });
 
 export const metadata = {
-  title: "Packwiz - Packing Supplies, Boxes & Kits with Free GTA Delivery",
+  title: "Packwiz - Packing Supplies with Free GTA Delivery",
   description:
     "Looking for packing supplies in Toronto? Get low-cost bubble wrap, boxes, tape, and kits with free GTA delivery. Smooth, stress-free moves start here.",
+  robots: "index, follow",
 };
 
 export default function HomePage() {

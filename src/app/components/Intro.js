@@ -4,15 +4,17 @@ import styles from "./HeroIntro.module.css";
 export default function HeroIntro() {
   return (
     <section className={styles.heroIntro}>
-      <div className={styles.logoBox}>
-        <Image
-          src="/images/logo-shadow.webp"
-          alt="Packwiz Logo"
-          width={350}
-          height={120}
-          priority
-        />
-      </div>
+    <div className={styles.proudbox}>
+            <span style={{ fontWeight: "bold" }}>We are proudly</span>
+            <Image
+              src="/images/animflag.webp"
+              loading="lazy"
+              alt="Canadian"
+              width={40}
+              height={40}
+              style={{ margin: "10px" }}
+            />
+          </div>
       <div className={styles.contentBox}>
         <h1 className={styles.heading}>Affordable Packing Supplies in GTA</h1>
         <p className={styles.tagline}>
@@ -30,10 +32,26 @@ export default function HeroIntro() {
           </div>
           <div className={styles.card}>
             <h3>Trusted Quality</h3>
-            <p>Boxes, tape, bubble wrap & more.</p>
+            <p>Boxes, tapes & more.</p>
           </div>
         </div>
-
+         <div  className={styles.buttonRow}>
+              <a
+                href="tel:+14377757688"
+               
+                className={styles.actionBtn}
+              >
+                +1 437-775-7688
+              </a>
+              <p style={{ margin: "0 20px" }}>OR</p>
+              <a
+                href="/products"
+                
+                 className={styles.actionBtn}
+              >
+                Explore Products
+              </a>
+            </div>
         <p className={styles.mission}>
           Based in Toronto, packing pros with logistics experience.
         </p>
