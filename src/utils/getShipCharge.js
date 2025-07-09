@@ -1,4 +1,4 @@
-import categories from "./data/categories";
+import categories from "../data/categories";
 
 function getPrice(distance, subtotal, cartItems) {
   const items = cartItems.map((cItem) => {
