@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { products } from "@/data/numberSheet";
+import products from "@/data/products";
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Toast from "@/app/components/Toast";
@@ -135,7 +135,7 @@ const MovingKit = () => {
               <div key={index} style={styles.card}>
                 <Image
                   src={item.image || "/images/no_pictures.webp"}
-                  alt={index}
+                  alt={item.title}
                   width={120}
                   height={120}
                   style={styles.image}

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "@/app/context/CartContext";
 import Link from "next/link";
-import { getProductCat } from "@/utils";
+import { getProductCat } from "@/utils/getProductCat";
 
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";

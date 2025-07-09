@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import FirstSection from "../components/FirstSection";
 import SearchBar from "../components/Searchbar";
-import { pds } from "@/data/numberSheet";
+import pds from "@/data/pds";
 // Dynamic imports remain the same
 const ProductGrid = dynamic(() => import("../components/ProductGrid"), {
   loading: () => <p>Loading...</p>,

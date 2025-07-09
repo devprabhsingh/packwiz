@@ -19,10 +19,6 @@ const nextConfig = {
     optimizeCss: true,
     scrollRestoration: true,
   },
-  images: {
-    domains: ["packwiz.ca"],
-    formats: ["image/webp"],
-  },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

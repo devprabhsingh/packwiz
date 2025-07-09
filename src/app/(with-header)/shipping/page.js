@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../context/CartContext";
-import { getAddresses, getShipCharge, getTaxRate } from "@/utils";
+import { getAddresses } from "@/utils/getAddresses";
+import { getShipCharge } from "@/utils/getShipCharge";
+import { getTaxRate } from "@/utils/getTaxRate";
 import Link from "next/link";
 import Form from "./Form";
 import ShippingRates from "./ShippingRates";

@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { getStartingPrice } from "@/utils";
+import { getStartingPrice } from "@/utils/getStartingPrice";
 import styles from "./productgrid.module.css";
 
 const ProductGrid = React.memo(({ title, pds }) => {
@@ -37,7 +37,7 @@ const ProductGrid = React.memo(({ title, pds }) => {
     <div id="productGrid" className={styles.maindiv}>
       <h2 className={styles.heading}>{title || "Our Products"}</h2>
       <div className={styles.productGrid}>
-        {pds.map((product, index) => (
+        {pds?.map((product, index) => (
           <React.Fragment key={product.id}>
             <div
               onClick={() => handleClick(product, index)}

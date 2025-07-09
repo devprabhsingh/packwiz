@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { products, categories } from "@/data/numberSheet";
+import products from "@/data/products";
+import categories from "@/data/categories";
 import { useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 const ProductList = dynamic(() => import("../../../components/ProductList"));

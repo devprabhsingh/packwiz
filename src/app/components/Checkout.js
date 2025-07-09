@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import PaymentMethodSelector from "./PaymentMethodSelector";
 import StripePaymentForm from "./StripePaymentForm";
 import CashOnDeliverySection from "./CashOnDeliverySection";
-import { categories } from "@/data/numberSheet";
+import categories from "@/data/categories";
 const idmap = {
   bx: 0,
   mb: 1,

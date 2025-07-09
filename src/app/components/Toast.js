@@ -20,8 +20,9 @@ const Toast = ({ message, type = "success", onClose }) => {
     <div
       style={{
         position: "fixed",
-        top: "20px",
-        right: "20px",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%,-50%)",
         backgroundColor: colors[type] || "#333",
         color: "white",
         padding: "15px 20px",

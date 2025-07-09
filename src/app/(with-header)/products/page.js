@@ -8,7 +8,8 @@ const ProductGrid = dynamic(() => import("../../components/ProductGrid"), {
   loading: () => <p>Loading Products...</p>,
 });
 
-import { products, pds } from "@/data/numberSheet";
+import products from "@/data/products";
+import pds from "@/data/pds";
 
 export async function generateMetadata() {
   const allProducts = products.flat();

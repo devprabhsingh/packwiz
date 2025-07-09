@@ -1,32 +1,25 @@
-"use client"; // This directive is crucial to mark it as a Client Component
-
+"use client";
 import React, { useState, useEffect, useMemo } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import BackLinks from "@/app/components/BackLinks";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import ReviewSection from "@/app/components/ReviewSection";
 import Toast from "@/app/components/Toast";
+import styles from "../ItemDetail.module.css";
 
-// Import CSS
-import "../ItemDetail.css"; // Ensure this path is correct relative to this file
-
-// Dynamically import ProductList if it's a client component and only needed on the client
-// Otherwise, if ProductList can be a Server Component, import it directly in page.js
 const ProductList = dynamic(() => import("../../../components/ProductList"));
 
 export default function ItemDetailClient({
-  item, // Item data passed from the server component
-  similarProducts, // Similar products passed from the server component
-  category, // Category info passed from the server component
-  reviews, // Reviews data passed from the server component
-  priceTiers, // Pre-calculated price tiers from the server
+  item,
+  similarProducts,
+  category,
+  reviews,
+  priceTiers,
 }) {
-  const router = useRouter(); // For client-side navigation
-  const { addToCart } = useCart(); // Access cart context
-
-  // State for quantity, added product ID, and toast notification
+  const router = useRouter();
+  const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [addedProductId, setAddedProductId] = useState(null);
   const [toast, setToast] = useState({
@@ -35,31 +28,20 @@ export default function ItemDetailClient({
     type: "success",
   });
 
-  // Calculate current price based on quantity (memoized for performance)
   const { price, finalPrice } = useMemo(() => {
-    if (!item || !item.priceTable) {
-      return { price: 0, finalPrice: 0 };
-    }
-
+    if (!item || !item.priceTable) return { price: 0, finalPrice: 0 };
     let currentPrice = 0;
-    if (quantity <= 4) {
-      currentPrice = item.priceTable.tier1;
-    } else if (quantity <= 9) {
-      currentPrice = item.priceTable.tier2;
-    } else if (quantity <= 24) {
-      currentPrice = item.priceTable.tier3;
-    } else {
-      currentPrice = item.priceTable.tier4;
-    }
+    if (quantity <= 4) currentPrice = item.priceTable.tier1;
+    else if (quantity <= 9) currentPrice = item.priceTable.tier2;
+    else if (quantity <= 24) currentPrice = item.priceTable.tier3;
+    else currentPrice = item.priceTable.tier4;
 
     const discountedPrice = Number(
       (currentPrice - (currentPrice * (item.discount || 0)) / 100).toFixed(2)
     );
-
     return { price: currentPrice, finalPrice: discountedPrice };
-  }, [quantity, item]); // Recalculate only if quantity or item changes
+  }, [quantity, item]);
 
-  // Effect to hide the "Added!" message after a delay
   useEffect(() => {
     if (addedProductId !== null) {
       const timer = setTimeout(() => setAddedProductId(null), 1000);
@@ -67,27 +49,24 @@ export default function ItemDetailClient({
     }
   }, [addedProductId]);
 
-  // Quantity control handlers
   const increaseQty = () => setQuantity((prevQty) => prevQty + 1);
   const decreaseQty = () => setQuantity((prevQty) => Math.max(1, prevQty - 1));
 
-  // Handle adding item to cart
   const handleAddToCart = () => {
     if (!item) return;
-
     const cartItem = {
       ...item,
       qty: quantity,
-      price: price, // Current tier price
-      finalPrice: finalPrice, // Discounted price
+      price: price,
+      finalPrice: finalPrice,
     };
     addToCart(cartItem);
-    setAddedProductId(item.id); // Show "Added!" state
+    setAddedProductId(item.id);
     setToast({
       show: true,
       message: (
         <>
-          Item added!{" "}
+          <span>Item added! </span>
           <Link
             href="/cart"
             style={{ color: "#fff", textDecoration: "underline" }}
@@ -100,17 +79,14 @@ export default function ItemDetailClient({
     });
   };
 
-  // Handle "Buy Now" action (add to cart and navigate to cart)
   const handleBuyNow = () => {
-    handleAddToCart(); // First add to cart
-    router.push("/cart"); // Then navigate to cart page
+    handleAddToCart();
+    router.push("/cart");
   };
 
-  // Close toast notification
   const handleCloseToast = () =>
     setToast((prevToast) => ({ ...prevToast, show: false }));
 
-  // Determine which price tier row should be highlighted in the table
   const getPriceTierCondition = (label) => {
     if (label === "Upto 4") return quantity <= 4;
     if (label === "5 - 9") return quantity > 4 && quantity <= 9;
@@ -119,46 +95,8 @@ export default function ItemDetailClient({
     return false;
   };
 
-  // Inline styles object (can be moved to a separate CSS module if preferred)
-  const styles = {
-    details: {
-      width: "100%",
-      color: "#444",
-    },
-    inStock: {
-      color: "green",
-      fontSize: "13px", // Corrected 'fontsize' to 'fontSize'
-      margin: 0,
-      marginBottom: "5px",
-    },
-    // Common button styles (example, can be moved to CSS)
-    buttonBase: {
-      padding: "10px 20px",
-      borderRadius: "5px",
-      border: "none",
-      cursor: "pointer",
-      fontWeight: "bold",
-      transition: "background-color 0.3s ease",
-    },
-    addToCartButton: {
-      backgroundColor: "#ff6f20",
-      color: "#fff",
-      "&:hover": {
-        backgroundColor: "#e05a1e",
-      },
-    },
-    buyNowButton: {
-      backgroundColor: "#007bff",
-      color: "#fff",
-      "&:hover": {
-        backgroundColor: "#0056b3",
-      },
-    },
-  };
-
   return (
     <>
-      {/* Toast notification component */}
       {toast.show && (
         <Toast
           message={toast.message}
@@ -167,22 +105,18 @@ export default function ItemDetailClient({
         />
       )}
 
-      {/* BackLinks component */}
       <BackLinks nextTitle={item.title} nextId={item.id} />
 
-      <div className="item-detail-container">
-        {/* Product Image Section */}
-        <div className="image-section">
+      <div className={styles.itemDetailContainer}>
+        <div className={styles.imageSection}>
           <img src={item.image} alt={item.title} />
         </div>
 
-        {/* Product Info Section */}
-        <div className="info-section">
+        <div className={styles.infoSection}>
           <h1>{item.title}</h1>
-          <p className="description">{item.desc}</p>
-          <p style={{ marginBottom: "5px" }}>
+          <p className={styles.description}>{item.desc}</p>
+          <p>
             <strong>Size: </strong>
-            {/* Conditional size rendering based on item ID prefix */}
             {item.id.startsWith("b")
               ? item.size
                   .split("*")
@@ -193,10 +127,9 @@ export default function ItemDetailClient({
                   .join(" × ")
               : item.size}
           </p>
-          <p style={styles.inStock}>In Stock</p>
+          <p className={styles.inStock}>In Stock</p>
 
-          {/* Price Table */}
-          <table className="price-table">
+          <table className={styles.priceTable}>
             <thead>
               <tr>
                 <th>{category.unit}</th>
@@ -208,7 +141,7 @@ export default function ItemDetailClient({
                 <tr
                   key={i}
                   className={
-                    getPriceTierCondition(row.label) ? "highlight" : ""
+                    getPriceTierCondition(row.label) ? styles.highlight : ""
                   }
                 >
                   <td>{row.label}</td>
@@ -218,7 +151,6 @@ export default function ItemDetailClient({
             </tbody>
           </table>
 
-          {/* Price Display with/without Discount */}
           <div>
             {!item.discount ? (
               <h4>
@@ -229,17 +161,7 @@ export default function ItemDetailClient({
               </h4>
             ) : (
               <div>
-                <span
-                  style={{
-                    backgroundColor: "#ff6f20",
-                    color: "white",
-                    padding: "3px 6px",
-                    borderRadius: "8px",
-                    marginRight: "10px",
-                  }}
-                >
-                  {item.discount}% Off
-                </span>
+                <span className={styles.discountTag}>{item.discount}% Off</span>
                 <p>
                   Effective Price:{" "}
                   <span style={{ textDecoration: "line-through" }}>
@@ -254,48 +176,45 @@ export default function ItemDetailClient({
             )}
           </div>
 
-          {/* Quantity Controls */}
-          <div className="qty-controls">
-            <button onClick={decreaseQty} aria-label="Decrease quantity">
-              -
-            </button>
+          <div className={styles.qtyControls}>
+            <button onClick={decreaseQty}>-</button>
             <span>{quantity}</span>
-            <button onClick={increaseQty} aria-label="Increase quantity">
-              +
-            </button>
+            <button onClick={increaseQty}>+</button>
           </div>
 
-          {/* Action Buttons */}
-          <div className="action-buttons">
+          <div className={styles.actionButtons}>
             <button
-              className="add-to-cart"
+              className={styles.addToCartButton}
               onClick={handleAddToCart}
-              style={styles.addToCartButton}
-              disabled={addedProductId === item.id} // Disable button when "Added!"
+              disabled={addedProductId === item.id}
             >
               {addedProductId === item.id ? "Added!" : "Add to Cart"}
             </button>
-            <button
-              className="buy-now"
-              onClick={handleBuyNow}
-              style={styles.buyNowButton}
-            >
+            <button className={styles.buyNowButton} onClick={handleBuyNow}>
               Buy Now
             </button>
           </div>
         </div>
 
-        {/* Product Details and Features Section */}
-        <div className="third-div">
-          {/* Details (HTML content from item.details) */}
-          <div
-            style={styles.details}
-            dangerouslySetInnerHTML={{ __html: item.details }}
-          />
+        <div className={styles.thirdDiv}>
+          {item.specs && (
+            <div className={styles.specCard}>
+              <h2 className={styles.specTitle}>Specifications</h2>
+              <table className={styles.specTable}>
+                <tbody>
+                  {Object.entries(item.specs).map(([key, value]) => (
+                    <tr key={key}>
+                      <td className={styles.specLabel}>{key}</td>
+                      <td className={styles.specValue}>{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
 
-          {/* Features List (if available) */}
           {item.features && item.features.length > 0 && (
-            <div className="features-section">
+            <div className={styles.featuresSection}>
               <h2>Features</h2>
               {item.features.map((feature, i) => (
                 <p key={i}>
@@ -308,42 +227,18 @@ export default function ItemDetailClient({
         </div>
       </div>
 
-      {/* Similar Products Section */}
       {similarProducts && similarProducts.length > 0 ? (
         <ProductList productList={similarProducts} modified={true} />
       ) : (
-        <div
-          style={{
-            backgroundColor: "#fff",
-            borderRadius: "8px",
-            margin: "5px 5px 0 5px",
-            padding: "10px 0",
-            textAlign: "center", // Center the link
-          }}
-        >
-          <Link
-            href="/products"
-            style={{
-              display: "inline-block", // Use inline-block for centering with text-align
-              padding: "10px 20px",
-              backgroundColor: "#ff6f20",
-              color: "#fff",
-              border: "none",
-              borderRadius: "5px",
-              textDecoration: "none",
-              fontWeight: "bold",
-              // width: "fit-content", // Redundant with inline-block + text-align
-              // margin: "auto", // Redundant
-            }}
-          >
+        <div className={styles.exploreContainer}>
+          <Link href="/products" className={styles.exploreButton}>
             Explore Other Products
           </Link>
         </div>
       )}
 
-      {/* Customer Reviews Section */}
       {reviews && reviews.length > 0 && (
-        <ReviewSection reviewList={reviews} headline={"Customer Reviews"} />
+        <ReviewSection reviewList={reviews} headline="Customer Reviews" />
       )}
     </>
   );

@@ -1,56 +1,4 @@
-import { products, categories } from "./data/numberSheet";
-
-export function getProductCat(productId) {
-  if (!productId) return null;
-
-  if (productId.startsWith("bx")) {
-    return 0;
-  } else if (productId.startsWith("mb")) {
-    return 1;
-  } else if (productId.startsWith("sw")) {
-    return 2;
-  } else if (productId.startsWith("gl")) {
-    return 3;
-  } else if (productId.startsWith("ct")) {
-    return 4;
-  } else if (productId.startsWith("gt")) {
-    return 5;
-  } else if (productId.startsWith("rt")) {
-    return 6;
-  } else if (productId.startsWith("gb")) {
-    return 7;
-  } else if (productId.startsWith("cv")) {
-    return 8;
-  } else if (productId.startsWith("fp")) {
-    return 9;
-  } else if (productId.startsWith("np")) {
-    return 10;
-  } else if (productId.startsWith("bw")) {
-    return 11;
-  } else if (productId.startsWith("pk")) {
-    return 12;
-  } else {
-    return null; // or -1 if you want to handle unknown cases
-  }
-}
-export function getStartingPrice(id) {
-  if (id > 11) {
-    return 0;
-  }
-  return products[id][0].priceTable.tier4;
-}
-export async function getAddresses(query) {
-  const accessToken =
-    "pk.eyJ1IjoicHJhYmgwMiIsImEiOiJja3ZpczV1Y2oydnkwMm9zMWllbjNhZHZ2In0.kU1X_il6kErpHzZxZB1I9Q"; // safer: store token in .env
-  const mapboxUrl = `https://api.mapbox.com/search/geocode/v6/forward?q=${encodeURIComponent(
-    query
-  )}&country=ca&language=en&proximity=ip&access_token=${accessToken}`;
-
-  const mapboxRes = await fetch(mapboxUrl);
-  const mapboxData = await mapboxRes.json();
-
-  return mapboxData.features;
-}
+import categories from "./data/categories";
 
 function getPrice(distance, subtotal, cartItems) {
   const items = cartItems.map((cItem) => {
@@ -155,33 +103,5 @@ export async function getShipCharge(a, subtotal, cartItems) {
     return getPrice(d, subtotal, cartItems);
   } catch (e) {
     console.error(e);
-  }
-}
-
-export async function getTaxRate(province) {
-  switch (province) {
-    case "Alberta":
-    case "Yukon":
-    case "Nunavut":
-    case "Northwest Territories":
-      return 0.05;
-    case "British Columbia":
-    case "Manitoba":
-      return 0.12;
-    case "Saskatchewan":
-      return 0.11;
-    case "Quebec":
-      return 0.14975;
-    case "Ontario":
-      return 0.13;
-    case "New Brunswick":
-    case "Newfoundland & Labrador":
-    case "Prince Edward Island":
-      return 0.15;
-    case "Nova Scotia":
-      return 0.14;
-
-    default:
-      return 0;
   }
 }

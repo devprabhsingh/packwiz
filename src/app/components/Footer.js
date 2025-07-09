@@ -2,6 +2,9 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 const Footer = () => {
+  const emailUser = "info";
+  const emailDomain = "packwiz.ca";
+
   return (
     <footer style={styles.footer}>
       <i style={{ color: "grey", fontSize: "13px" }}>
@@ -40,8 +43,8 @@ const Footer = () => {
               alt="email"
               src="/images/email.webp"
             />
-            <a href="mailto:info@packwiz.ca" style={styles.linkText}>
-              info@packwiz.ca
+            <a href={`mailto:${emailUser}@${emailDomain}`}>
+              {emailUser}[at]{emailDomain.replace(".", "[dot]")}
             </a>
           </p>
         </div>
@@ -60,13 +63,12 @@ const Footer = () => {
           >
             Facebook
           </Link>
-            <Link
+          <Link
             href="https://www.linkedin.com/company/packwiz-packing-supplies"
             style={styles.footerLink}
           >
             Linkedin
           </Link>
-          
         </div>
       </div>
 

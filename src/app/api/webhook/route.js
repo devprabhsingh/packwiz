@@ -1,5 +1,5 @@
 import { Order } from "../../../../models/Order"; // your mongoose model
-import { dbConnect } from "@/dbConnect";
+import { dbConnect } from "@/utils/dbConnect";
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { Resend } from "resend";

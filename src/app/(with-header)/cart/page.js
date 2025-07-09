@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import CartClient from "./CartClient";
-import { categories } from "@/data/numberSheet";
+import categories from "@/data/categories";
 
 export default function CartPage() {
   return (

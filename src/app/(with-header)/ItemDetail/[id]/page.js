@@ -1,5 +1,7 @@
-import { products, categories, reviewList } from "@/data/numberSheet";
-import { getProductCat } from "@/utils";
+import products from "@/data/products";
+import categories from "@/data/categories";
+import reviewList from "@/data/reviewList";
+import { getProductCat } from "@/utils/getProductCat";
 import ItemDetailClient from "./ItemDetailClient";
 const flatPs = products.flat();
 
@@ -35,8 +37,6 @@ export async function generateMetadata({ params }) {
       ],
       type: "article", // More specific type for products
     },
-    // Add canonical URL if needed, e.g., if there are multiple ways to reach this page
-    // canonical: `https://packwiz.ca/ItemDetail/${item.id}`,
   };
 }
 
