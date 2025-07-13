@@ -119,7 +119,7 @@ const products = [
       title: "Pallet wrap",
       desc: "14inch, 80gauge Stretch Wrap/Pallet Wrap",
       size: "450m",
-      priceTable: { tier1: 18.95, tier2: 16.95, tier3: 13.95, tier4: 12.95 },
+      priceTable: { tier1: 17.95, tier2: 16.95, tier3: 13.95, tier4: 12.95 },
       image: "/images/shrink_wrap.webp",
       features: ["Heavy-duty", "Self-Adhering", "Multi-Purpose"],
       discount: 25,
@@ -509,7 +509,7 @@ const products = [
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: "36in X 24in, 420+ sheets",
-      priceTable: { tier1: 30.99, tier2: 29.99, tier3: 26.99, tier4: 25.99 },
+      priceTable: { tier1: 34.99, tier2: 31.99, tier3: 30.99, tier4: 26.99 },
       image: "/images/packing-paper.webp",
       specs: {
         color: "White",
