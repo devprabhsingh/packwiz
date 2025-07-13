@@ -25,6 +25,7 @@ const ShippingInfo = () => {
 
   const [formData, setFormData] = useState({
     streetAddress: "",
+    unit: "",
     city: "",
     state: "",
     postalCode: "",
@@ -36,7 +37,6 @@ const ShippingInfo = () => {
     instructions: "",
   });
 
-  const [addressObj, setAddressObj] = useState(null);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState("");
@@ -47,6 +47,7 @@ const ShippingInfo = () => {
   const [fieldErrors, setFieldErrors] = useState({});
   const [loader, setLoader] = useState(false);
   const [loadingRates, setLoadingRates] = useState(false);
+  const [manualMode, setManualMode] = useState(false);
 
   const safeSubTotal =
     typeof subTotal === "number" ? subTotal : parseFloat(subTotal) || 0;
@@ -65,6 +66,36 @@ const ShippingInfo = () => {
   useEffect(() => {
     if (shipRateOpts.length > 0) selectShipRate(0);
   }, [shipRateOpts]);
+
+  useEffect(() => {
+    const fetchManualShippingRates = async () => {
+      if (
+        manualMode &&
+        formData.city.trim() &&
+        formData.state.trim() &&
+        formData.country.trim().length > 2
+      ) {
+        const full_address = `${formData.city}, ${formData.state}, ${formData.country}`;
+
+        try {
+          const addressResults = await getAddresses(full_address);
+
+          const ctx = addressResults[0].properties.context;
+          if (addressResults?.[0]) {
+            await getShipRates(addressResults[0]);
+          }
+
+          const rate = await getTaxRate(ctx?.region?.name);
+          console.log(rate);
+          setTaxRateValue(rate || 0);
+        } catch (error) {
+          console.error("Error fetching manual shipping rates:", error);
+        }
+      }
+    };
+
+    fetchManualShippingRates();
+  }, [formData.city, formData.state, formData.country, manualMode]);
 
   const selectShipRate = (index) => {
     const rate = shipRateOpts[index];
@@ -129,11 +160,22 @@ const ShippingInfo = () => {
   };
 
   const selectAddress = (addr) => {
+    if (addr === "manual entry") {
+      setSelectedAddress("manual entry");
+      setResults([]);
+      setManualMode(true);
+      setFormData((prev) => ({
+        ...prev,
+        country: "Canada",
+      }));
+      return;
+    }
     const ctx = addr.properties.context;
     setSelectedAddress(addr.properties.full_address);
     setResults([]);
     setFieldErrors({});
-    setAddressObj(addr);
+    setManualMode(false);
+
     setFormData((prev) => ({
       ...prev,
       streetAddress: ctx?.address?.name || "",
@@ -142,7 +184,10 @@ const ShippingInfo = () => {
       postalCode: ctx?.postcode?.name || "",
       country: ctx?.country?.name || "",
     }));
+
     getShipRates(addr);
+    console.log(addr);
+    console.log(ctx?.region?.name);
     if (ctx?.region?.name) {
       getTaxRate(ctx.region.name).then((rate) => setTaxRateValue(rate || 0));
     }

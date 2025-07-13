@@ -25,8 +25,12 @@ export function getProductCat(productId) {
     return 10;
   } else if (productId.startsWith("bw")) {
     return 11;
-  } else if (productId.startsWith("pk")) {
+  } else if (productId.startsWith("db")) {
     return 12;
+  } else if (productId.startsWith("cc")) {
+    return 13;
+  } else if (productId.startsWith("pk")) {
+    return 14;
   } else {
     return null; // or -1 if you want to handle unknown cases
   }

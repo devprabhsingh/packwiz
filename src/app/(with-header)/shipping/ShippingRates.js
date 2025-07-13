@@ -46,6 +46,10 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
           here.
         </div>
       )}
+      <p style={{ color: "grey", fontSize: "13px", fontStyle: "italic" }}>
+        Note - Final Delivery times can differ. If there is a change, you will
+        be notified by email.
+      </p>
     </div>
   );
 };

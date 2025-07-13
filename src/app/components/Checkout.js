@@ -19,7 +19,9 @@ const idmap = {
   fp: 9,
   np: 10,
   bw: 11,
-  pk: 12,
+  db: 12,
+  cc: 13,
+  pk: 14,
 };
 
 const Checkout = () => {
@@ -97,6 +99,7 @@ const Checkout = () => {
         phone: customerDetail?.phone,
         address: {
           street: customerDetail?.streetAddress,
+          unit: customerDetail?.unit,
           city: customerDetail?.city,
           state: customerDetail.state,
           postalCode: customerDetail?.postalCode,

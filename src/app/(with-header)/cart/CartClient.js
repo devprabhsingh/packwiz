@@ -8,8 +8,14 @@ import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 
 export default function CartPage({ categories }) {
-  const { setKit, cartItems, setSubTotal, removeFromCart, updateItemQuantity } =
-    useCart();
+  const {
+    setKit,
+    cartItems,
+    clearCart,
+    setSubTotal,
+    removeFromCart,
+    updateItemQuantity,
+  } = useCart();
   const searchParams = useSearchParams();
   const kitFromQuery = searchParams.get("kit") === "true";
   const router = useRouter();
@@ -82,6 +88,27 @@ export default function CartPage({ categories }) {
       ) : (
         <div style={styles.mainbox}>
           <div className="cart-list">
+            <button
+              style={{
+                backgroundColor: "#e5e5e5ff",
+                padding: "8px",
+                borderRadius: "5px",
+                width: "fit-content",
+                marginLeft: "auto",
+                border: "none",
+                outline: "none",
+              }}
+              onClick={() => {
+                const confirmClear = window.confirm(
+                  "Are you sure you want to clear all items from the cart?"
+                );
+                if (confirmClear) {
+                  clearCart();
+                }
+              }}
+            >
+              clear all
+            </button>
             {cartItems.length > 0 &&
               cartItems.map((item) => (
                 <div key={item.id} className="cart-item-card">

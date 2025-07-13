@@ -80,7 +80,7 @@ const categories = [
   {
     title: "Newsprint Packing Paper",
     subtitle: "High quality packing paper to protect your goods",
-    unit: "sheets",
+    unit: "bundles",
     weight: 3,
     info: "Eco-friendly newsprint packing paper ideal for wrapping fragile items and filling empty spaces to prevent damage during transit.",
   },
@@ -90,6 +90,20 @@ const categories = [
     unit: "Rolls",
     weight: 0.05,
     info: "Premium bubble cushion wrap providing superior shock absorption and surface protection for delicate and breakable items.",
+  },
+  {
+    title: "Disposable Booties",
+    subtitle: "",
+    unit: "Pack",
+    weight: 0.1,
+    info: "Disposable booties: lightweight, waterproof shoe covers ideal for maintaining cleanliness in homes, clinics, and industrial settings.",
+  },
+  {
+    title: "Corrugated Corners",
+    subtitle: "",
+    unit: "Pack",
+    weight: 0.1,
+    info: "Disposable booties: lightweight, waterproof shoe covers ideal for maintaining cleanliness in homes, clinics, and industrial settings.",
   },
   {
     title: "Moving Kit",

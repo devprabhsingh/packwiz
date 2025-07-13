@@ -8,18 +8,18 @@ import styles from "./productgrid.module.css";
 const ProductGrid = React.memo(({ title, pds }) => {
   const router = useRouter();
 
-  const multiPds = useMemo(() => [0, 3, 7, 8, 12], []);
+  const multiPds = useMemo(() => [0, 3, 7, 8, 10, 12, 13, 14], []);
 
   const handleClick = useCallback(
     (product, index) => {
-      if (product.name === "Bubble Cushion Wrap") {
+      if (product.name === "Furniture Corners") {
         if (multiPds.includes(product.id)) {
           router.push(`/productinfo/${index}`);
         } else {
           router.push(`/ItemDetail/${product.idKey}01`);
         }
       } else {
-        if (product.id >= 12) {
+        if (product.id >= 14) {
           router.push(`/movingKits/${product.idKey}`);
         } else {
           if (multiPds.includes(product.id)) {
@@ -56,7 +56,7 @@ const ProductGrid = React.memo(({ title, pds }) => {
               </div>
               <p className={styles.productName}>{product.name}</p>
 
-              {product.id < 12 && (
+              {product.id < 14 && (
                 <p className={styles.priceText}>
                   As low as ${getStartingPrice(product.id)}
                 </p>
@@ -65,7 +65,7 @@ const ProductGrid = React.memo(({ title, pds }) => {
               <p className={styles.shopButton}>Shop</p>
             </div>
 
-            {product.name === "Bubble Cushion Wrap" && (
+            {product.name === "Furniture Corners" && (
               <h2 className={styles.subHeadline}>Explore Our Packing Kits</h2>
             )}
           </React.Fragment>

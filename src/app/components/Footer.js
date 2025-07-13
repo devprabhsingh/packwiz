@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 const Footer = () => {
-  const emailUser = "info";
+  const part1 = "info";
   const emailDomain = "packwiz.ca";
 
   return (
@@ -25,6 +25,9 @@ const Footer = () => {
           <Link href="/track-order" style={styles.footerLink}>
             Track order
           </Link>
+          <Link href="/privacy-policy" style={styles.footerLink}>
+            Privacy Policy
+          </Link>
         </div>
 
         <div style={styles.footerSection}>
@@ -43,8 +46,8 @@ const Footer = () => {
               alt="email"
               src="/images/email.webp"
             />
-            <a href={`mailto:${emailUser}@${emailDomain}`}>
-              {emailUser}[at]{emailDomain.replace(".", "[dot]")}
+            <a style={styles.linkText} href={`mailto:${part1}@${emailDomain}`}>
+              Click to email us
             </a>
           </p>
         </div>

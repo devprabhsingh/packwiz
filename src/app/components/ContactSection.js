@@ -7,7 +7,8 @@ import styles from "./contact.module.css";
 
 export default function ContactSection() {
   const phone = "+1 (437) 775-7688";
-  const email = "info@packwiz.ca";
+  const part1 = "info";
+  const email = "@packwiz.ca";
   const [copied, setCopied] = useState(null);
   const [showFormHeader, setShowFormHeader] = useState(true);
 
@@ -54,8 +55,8 @@ export default function ContactSection() {
             },
             {
               label: "Email",
-              value: email,
-              href: `mailto:${email}`,
+              value: "Click to Email",
+              href: `mailto:${part1 + email}`,
               icon: "/images/email.webp",
               type: "email",
             },

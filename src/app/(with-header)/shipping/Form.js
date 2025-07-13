@@ -14,6 +14,22 @@ const Form = ({
   setFieldErrors,
   handleSubmit,
 }) => {
+  const canadianProvinces = [
+    "Alberta",
+    "British Columbia",
+    "Manitoba",
+    "New Brunswick",
+    "Newfoundland and Labrador",
+    "Northwest Territories",
+    "Nova Scotia",
+    "Nunavut",
+    "Ontario",
+    "Prince Edward Island",
+    "Quebec",
+    "Saskatchewan",
+    "Yukon",
+  ];
+
   const isValidPhone = (phone) => {
     if (phone.length === 10) {
       const phoneRegex = /^\+?1?\s?[-.(]*\d{3}[-.)\s]*\d{3}[-.\s]*\d{4}$/;
@@ -106,6 +122,7 @@ const Form = ({
   const getLabel = (field) => {
     if (field === "streetAddress") return "Street Address";
     if (field === "phone") return "Phone Number";
+    if (field === "unit") return "Unit No./Apartment No.(if any)";
     if (field === "instructions") return "Delivery Instructions(optional)";
     return field.charAt(0).toUpperCase() + field.slice(1);
   };
@@ -118,6 +135,7 @@ const Form = ({
         </h3>
 
         {/* Address Search Field */}
+
         <div className={styles.fieldGroup}>
           <label className={styles.label}>Start typing your address</label>
           <textarea
@@ -131,7 +149,7 @@ const Form = ({
             className={styles.addressInput}
             required
           />
-          {results.length > 0 && (
+          {results.length > 0 && selectedAddress !== "manual entry" && (
             <div className="address-results">
               {results.map((a, index) => (
                 <button
@@ -149,17 +167,75 @@ const Form = ({
                   {a.properties.full_address}
                 </button>
               ))}
+              <button
+                style={{
+                  display: "block",
+                  width: "95%",
+                  padding: "10px",
+                  fontStyle: "italic",
+                  backgroundColor: "#dbd9d9ff",
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  selectAddress("manual entry");
+                }}
+              >
+                Address not listed? Add Manually
+              </button>
             </div>
           )}
         </div>
 
-        {/* Address Fields */}
-        {["streetAddress", "city", "state", "postalCode", "country"].map(
-          (field) => (
-            <div key={field} className={styles.fieldGroup}>
-              <label className={styles.label} htmlFor={field}>
-                {getLabel(field)}
-              </label>
+        {[
+          "streetAddress",
+          "unit",
+          "city",
+          "state",
+          "postalCode",
+          "country",
+        ].map((field) => (
+          <div key={field} className={styles.fieldGroup}>
+            <label className={styles.label} htmlFor={field}>
+              {getLabel(field)}
+            </label>
+
+            {/* State dropdown for manual mode */}
+            {selectedAddress === "manual entry" && field === "state" ? (
+              <select
+                id="state"
+                name="state"
+                value={formData.state}
+                onChange={handleChange}
+                className={styles.input}
+              >
+                <option value="">Select a province/territory</option>
+                {canadianProvinces.map((province) => (
+                  <option key={province} value={province}>
+                    {province}
+                  </option>
+                ))}
+              </select>
+            ) : selectedAddress === "manual entry" && field === "country" ? (
+              // Set country to Canada only
+              <input
+                id="country"
+                name="country"
+                value="Canada"
+                readOnly
+                className={styles.input}
+              />
+            ) : selectedAddress === "manual entry" && field === "city" ? (
+              // Free input, but visually hint to write Canadian city
+              <input
+                id="city"
+                name="city"
+                placeholder="Enter city"
+                value={formData.city}
+                onChange={handleChange}
+                className={styles.input}
+              />
+            ) : (
+              // Default input for all other cases
               <input
                 id={field}
                 name={field}
@@ -167,12 +243,12 @@ const Form = ({
                 onChange={handleChange}
                 className={styles.input}
               />
-              {fieldErrors[field] && (
-                <p className={styles.error}>{fieldErrors[field]}</p>
-              )}
-            </div>
-          )
-        )}
+            )}
+            {fieldErrors[field] && (
+              <p className={styles.error}>{fieldErrors[field]}</p>
+            )}
+          </div>
+        ))}
       </form>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h3 className={styles.header}>

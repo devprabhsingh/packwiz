@@ -27,6 +27,7 @@ export default function ItemDetailClient({
     message: "",
     type: "success",
   });
+  const [selectedImage, setSelectedImage] = useState(item.image);
 
   const { price, finalPrice } = useMemo(() => {
     if (!item || !item.priceTable) return { price: 0, finalPrice: 0 };
@@ -109,7 +110,23 @@ export default function ItemDetailClient({
 
       <div className={styles.itemDetailContainer}>
         <div className={styles.imageSection}>
-          <img src={item.image} alt={item.title} />
+          <img src={selectedImage} alt={item.title} />
+          <div className={styles.thumbnailContainer}>
+            <img
+              src={item.image}
+              alt="Thumbnail 1"
+              className={styles.thumbnail}
+              onClick={() => setSelectedImage(item.image)}
+            />
+            {item?.image2 && (
+              <img
+                src={item.image2}
+                alt="2"
+                className={styles.thumbnail}
+                onClick={() => setSelectedImage(item.image2)}
+              />
+            )}
+          </div>
         </div>
 
         <div className={styles.infoSection}>

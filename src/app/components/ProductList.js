@@ -4,6 +4,8 @@ import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
 import RequestForm from "./RequestForm";
 import Image from "next/image";
+import Link from "next/link";
+import Toast from "@/app/components/Toast";
 
 const ProductList = ({ id, modified, productList }) => {
   const router = useRouter();
@@ -12,6 +14,11 @@ const ProductList = ({ id, modified, productList }) => {
   const [quantities, setQuantities] = useState(() => new Array(8).fill(1));
   const [addedProductId, setAddedProductId] = useState(null);
   const [openForm, setOpenForm] = useState(false);
+  const [toast, setToast] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
 
   // Adjust quantity array length if productList changes
   useEffect(() => {
@@ -73,10 +80,28 @@ const ProductList = ({ id, modified, productList }) => {
       );
       addToCart({ ...product, qty: Number(qty), price, finalPrice });
       setAddedProductId(product.id);
+      setToast({
+        show: true,
+        message: (
+          <>
+            <span>Item added! </span>
+            <Link
+              href="/cart"
+              style={{ color: "#fff", textDecoration: "underline" }}
+            >
+              Go to cart
+            </Link>
+          </>
+        ),
+        type: "success",
+      });
       if (when === "now") router.push("/cart");
     },
     [addToCart, getPrice, router]
   );
+
+  const handleCloseToast = () =>
+    setToast((prevToast) => ({ ...prevToast, show: false }));
 
   useEffect(() => {
     if (addedProductId !== null) {
@@ -97,189 +122,198 @@ const ProductList = ({ id, modified, productList }) => {
   );
 
   return (
-    <div style={styles.innerContent} className={`${modified}inner`}>
-      {modified && <h2 style={styles.similarHeading}>Similar Products</h2>}
+    <>
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={handleCloseToast}
+        />
+      )}
 
-      <div
-        style={boxTypesGrid}
-        className="box-types-grid"
-        id={`${modified}grid`}
-      >
-        {productList.map((product, index) => {
-          const qty = quantities[index];
-          const pricePerUnit = getPrice(qty, product);
-          const finalPrice = Number(
-            pricePerUnit - ((pricePerUnit / 100) * product.discount).toFixed(2)
-          );
-          return (
-            <div
-              key={product.id}
-              className="box-type-card"
-              style={styles.boxTypeCard}
-              id={`${modified}hover`}
-            >
-              <div>
-                <div
-                  style={styles.itemInfo}
-                  className={`item-info-expand-${modified} image-wrapper`}
-                  onClick={() => handleProductClick(product)}
-                >
-                  <Image
-                    src={product.image || "/images/no-pictures.webp"}
-                    alt={product.size || "size"}
-                    width={200}
-                    height={200}
-                    loading="lazy"
-                    style={{ borderRadius: "8px" }}
-                  />
-                  <div className="tooltip">Click to see more details</div>
-                  {product?.title?.length > 15 && (
+      <div style={styles.innerContent} className={`${modified}inner`}>
+        {modified && <h2 style={styles.similarHeading}>Similar Products</h2>}
+
+        <div
+          style={boxTypesGrid}
+          className="box-types-grid"
+          id={`${modified}grid`}
+        >
+          {productList.map((product, index) => {
+            const qty = quantities[index];
+            const pricePerUnit = getPrice(qty, product);
+            const finalPrice = Number(
+              pricePerUnit -
+                ((pricePerUnit / 100) * product.discount).toFixed(2)
+            );
+            return (
+              <div
+                key={product.id}
+                className="box-type-card"
+                style={styles.boxTypeCard}
+                id={`${modified}hover`}
+              >
+                <div>
+                  <div
+                    style={styles.itemInfo}
+                    className={`item-info-expand-${modified} image-wrapper`}
+                    onClick={() => handleProductClick(product)}
+                  >
                     <Image
-                      src="/images/hot.webp"
-                      alt="hot"
-                      width={30}
-                      height={30}
-                      className="hot-icon"
-                      style={{ position: "absolute" }}
+                      src={product.image || "/images/no-pictures.webp"}
+                      alt={product.size || "size"}
+                      width={200}
+                      height={200}
+                      loading="lazy"
+                      style={{ borderRadius: "8px" }}
                     />
+                    <div className="tooltip">Click to see more details</div>
+                    {product?.title?.length > 15 && (
+                      <Image
+                        src="/images/hot.webp"
+                        alt="hot"
+                        width={30}
+                        height={30}
+                        className="hot-icon"
+                        style={{ position: "absolute" }}
+                      />
+                    )}
+                  </div>
+
+                  <p style={styles.boxTitle}>{product.title || product.desc}</p>
+                  <p style={styles.boxSize}>
+                    {product.id.startsWith("b")
+                      ? product.size
+                          .split("*")
+                          .map(
+                            (val, i) =>
+                              `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
+                          )
+                          .join(" × ")
+                      : product.size}
+                  </p>
+                  <p style={styles.boxDesc}>{product.desc}</p>
+                  <p style={styles.inStock}>In Stock</p>
+
+                  {modified ? (
+                    <div>
+                      Starts @{" "}
+                      <span style={{ color: "green" }}>
+                        ${(qty * pricePerUnit).toFixed(2)}
+                      </span>
+                    </div>
+                  ) : (
+                    <>
+                      <div style={styles.quantityControls}>
+                        <button
+                          style={styles.button}
+                          onClick={() => handleQuantityChange(index, qty - 1)}
+                        >
+                          -
+                        </button>
+                        <input
+                          className="qty-input"
+                          type="number"
+                          value={qty}
+                          min="1"
+                          onChange={(e) =>
+                            handleQuantityChange(index, e.target.value)
+                          }
+                          style={styles.qtyInput}
+                        />
+                        <button
+                          style={styles.button}
+                          onClick={() => handleQuantityChange(index, qty + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
+                      {product.discount && (
+                        <span
+                          style={{
+                            backgroundColor: "#ff6f20",
+                            padding: "3px 6px",
+                            color: "white",
+                            borderRadius: "8px",
+                          }}
+                        >
+                          {product.discount}% Off
+                        </span>
+                      )}
+                      {!product.discount ? (
+                        <div style={styles.totalPrice}>
+                          Total:{" "}
+                          <strong style={{ color: "#1a8917" }}>
+                            ${(qty * pricePerUnit).toFixed(2)}
+                          </strong>
+                        </div>
+                      ) : (
+                        <div style={styles.totalPrice}>
+                          Total:{" "}
+                          <strong style={{ textDecoration: "line-through" }}>
+                            ${(qty * pricePerUnit).toFixed(2)}
+                          </strong>
+                          <strong
+                            style={{ marginLeft: "10px", color: "#1a8917" }}
+                          >
+                            ${(qty * finalPrice).toFixed(2)}
+                          </strong>
+                        </div>
+                      )}
+
+                      <div style={styles.actionButtons}>
+                        <button
+                          onClick={() => handleAddToCart(product, qty, "now")}
+                          style={{
+                            ...styles.addToCartButton,
+                            backgroundColor: "#ff6f20",
+                            color: "white",
+                          }}
+                        >
+                          Buy Now
+                        </button>
+                        {addedProductId === product.id ? (
+                          <p style={styles.addToCartButton}>Added!</p>
+                        ) : (
+                          <button
+                            onClick={() => handleAddToCart(product, qty)}
+                            style={styles.addToCartButton}
+                          >
+                            Add to Cart
+                          </button>
+                        )}
+                      </div>
+                    </>
                   )}
                 </div>
-
-                <p style={styles.boxTitle}>{product.title || product.desc}</p>
-                <p style={styles.boxSize}>
-                  {product.id.startsWith("b")
-                    ? product.size
-                        .split("*")
-                        .map(
-                          (val, i) =>
-                            `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
-                        )
-                        .join(" × ")
-                    : product.size}
-                </p>
-                <p style={styles.boxDesc}>{product.desc}</p>
-                <p style={styles.inStock}>In Stock</p>
-
-                {modified ? (
-                  <div>
-                    Starts @{" "}
-                    <span style={{ color: "green" }}>
-                      ${(qty * pricePerUnit).toFixed(2)}
-                    </span>
-                  </div>
-                ) : (
-                  <>
-                    <div style={styles.quantityControls}>
-                      <button
-                        style={styles.button}
-                        onClick={() => handleQuantityChange(index, qty - 1)}
-                      >
-                        -
-                      </button>
-                      <input
-                        className="qty-input"
-                        type="number"
-                        value={qty}
-                        min="1"
-                        onChange={(e) =>
-                          handleQuantityChange(index, e.target.value)
-                        }
-                        style={styles.qtyInput}
-                      />
-                      <button
-                        style={styles.button}
-                        onClick={() => handleQuantityChange(index, qty + 1)}
-                      >
-                        +
-                      </button>
-                    </div>
-                    {product.discount && (
-                      <span
-                        style={{
-                          backgroundColor: "#ff6f20",
-                          padding: "3px 6px",
-                          color: "white",
-                          borderRadius: "8px",
-                        }}
-                      >
-                        {product.discount}% Off
-                      </span>
-                    )}
-                    {!product.discount ? (
-                      <div style={styles.totalPrice}>
-                        Total:{" "}
-                        <strong style={{ color: "#1a8917" }}>
-                          ${(qty * pricePerUnit).toFixed(2)}
-                        </strong>
-                      </div>
-                    ) : (
-                      <div style={styles.totalPrice}>
-                        Total:{" "}
-                        <strong style={{ textDecoration: "line-through" }}>
-                          ${(qty * pricePerUnit).toFixed(2)}
-                        </strong>
-                        <strong
-                          style={{ marginLeft: "10px", color: "#1a8917" }}
-                        >
-                          ${(qty * finalPrice).toFixed(2)}
-                        </strong>
-                      </div>
-                    )}
-
-                    <div style={styles.actionButtons}>
-                      <button
-                        onClick={() => handleAddToCart(product, qty, "now")}
-                        style={{
-                          ...styles.addToCartButton,
-                          backgroundColor: "#ff6f20",
-                          color: "white",
-                        }}
-                      >
-                        Buy Now
-                      </button>
-                      {addedProductId === product.id ? (
-                        <p style={styles.addToCartButton}>Added!</p>
-                      ) : (
-                        <button
-                          onClick={() => handleAddToCart(product, qty)}
-                          style={styles.addToCartButton}
-                        >
-                          Add to Cart
-                        </button>
-                      )}
-                    </div>
-                  </>
-                )}
               </div>
-            </div>
-          );
-        })}
-      </div>
-
-      <div style={{ width: "100%", paddingBottom: "20px" }}>
-        <button
-          style={{
-            ...styles.addToCartButton,
-            display: "block",
-            margin: "40px auto",
-            padding: "15px",
-          }}
-          onClick={() => {
-            setOpenForm(true);
-          }}
-        >
-          Need more sizes?
-        </button>
-      </div>
-
-      {openForm && (
-        <div style={{width:'80%',margin:'auto',paddingBottom:'20px'}}>
-         
-            <RequestForm />
-          
+            );
+          })}
         </div>
-      )}
-    </div>
+
+        <div style={{ width: "100%", paddingBottom: "20px" }}>
+          <button
+            style={{
+              ...styles.addToCartButton,
+              display: "block",
+              margin: "40px auto",
+              padding: "15px",
+            }}
+            onClick={() => {
+              setOpenForm(true);
+            }}
+          >
+            Need more sizes?
+          </button>
+        </div>
+
+        {openForm && (
+          <div style={{ width: "80%", margin: "auto", paddingBottom: "20px" }}>
+            <RequestForm />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
@@ -319,9 +353,9 @@ const styles = {
     margin: "12px 0 0",
   },
   boxSize: {
-    fontSize: "14px",
+    fontSize: "15px",
     color: "#555",
-    marginBottom: 4,
+    margin: 4,
   },
   boxDesc: {
     fontSize: "13px",

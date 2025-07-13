@@ -95,6 +95,7 @@ const products = [
       size: '72"L X 80"W',
       priceTable: { tier1: 11.99, tier2: 11.89, tier3: 11.99, tier4: 10.99 },
       image: "/images/moving_blankets.webp",
+      image2: "images/moving_blankets_2.webp",
       features: [
         "Soft & Comfortable",
         "Durable & Sturdy",
@@ -335,7 +336,7 @@ const products = [
       title: "Black garbage bags",
       desc: "Multi-purpose Trash Can Liners",
       size: "120cm X 140cm",
-      priceTable: { tier1: 20, tier2: 20, tier3: 20, tier4: 20 },
+      priceTable: { tier1: 26.99, tier2: 26.09, tier3: 25.49, tier4: 24.99 },
       image: "/images/blackbag.webp",
       features: ["3 mil thick", "Super Strong", "Unscented"],
       specs: {
@@ -491,7 +492,7 @@ const products = [
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: "36in X 24in, 100 sheets",
-      priceTable: { tier1: 20, tier2: 20, tier3: 20, tier4: 20 },
+      priceTable: { tier1: 14.99, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
       image: "/images/packing-paper.webp",
       specs: {
         color: "White",
@@ -508,7 +509,7 @@ const products = [
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: "36in X 24in, 420+ sheets",
-      priceTable: { tier1: 30, tier2: 26, tier3: 23.5, tier4: 23 },
+      priceTable: { tier1: 30.99, tier2: 29.99, tier3: 26.99, tier4: 25.99 },
       image: "/images/packing-paper.webp",
       specs: {
         color: "White",
@@ -559,6 +560,124 @@ const products = [
       },
     },
   ],
+  [
+    {
+      id: "db01",
+      title: "Disposable Recyclable Booties",
+      desc: "Eco-Friendly Shoe Covers",
+      size: "One Size Fits Most, 50pc",
+      priceTable: { tier1: 7.99, tier2: 7.55, tier3: 7.29, tier4: 6.99 },
+      image: "/images/recyclable-booties.webp",
+      features: [
+        "Recyclable Material",
+        "Elastic Fit",
+        "Dust & Dirt Protection",
+      ],
+      specs: {
+        color: "Blue",
+        material: "Non-woven recyclable polypropylene",
+        size: "One size fits most",
+        quantity: "50pc",
+        usage: "protecting floors in cleanrooms, homes, and healthcare",
+        suitableFor:
+          "contractors, movers, real estate showings, and visitors in sterile areas",
+      },
+    },
+    {
+      id: "db02",
+      title: "Disposable Plastic Booties",
+      desc: "Waterproof Shoe Covers",
+      size: "One Size Fits Most, 50pc",
+      priceTable: { tier1: 9.99, tier2: 9.55, tier3: 8.99, tier4: 8.55 },
+      image: "/images/plastic-booties.webp",
+      features: ["Water-Resistant", "Durable", "Elastic Openings"],
+      specs: {
+        color: "Clear or Blue",
+        material: "Polyethylene plastic",
+        size: "One size fits most",
+        quantity: "50pc",
+        usage: "preventing dirt, moisture, and contaminants",
+        suitableFor:
+          "construction sites, cleaning crews, and delivery personnel",
+      },
+    },
+  ],
+  [
+    {
+      id: "cc01",
+      title: "Corrugated Picture Corners",
+      desc: "Protective Cardboard Frame Corners",
+      size: "One Size, 25pc",
+      priceTable: { tier1: 9.99, tier2: 9.99, tier3: 8.99, tier4: 8.95 },
+      image: "/images/picture-corners.webp",
+      features: ["Cushioned Protection", "Recyclable", "Easy to Apply"],
+      specs: {
+        color: "Brown",
+        material: "Corrugated Cardboard",
+        size: "One Size, mutiple adjustments",
+        quantity: "25",
+        usage:
+          "protecting picture frames, mirrors, and artwork during shipping or storage",
+        suitableFor: "art galleries, framing shops, movers, and individuals",
+      },
+    },
+    {
+      id: "cc02",
+      title: "Corrugated Picture Corners",
+      desc: "Protective Cardboard Frame Corners",
+      size: "One Size fits all, 50pc",
+      priceTable: { tier1: 14.99, tier2: 14.99, tier3: 13.99, tier4: 13.95 },
+      image: "/images/picture-corners.webp",
+      features: ["Cushioned Protection", "Recyclable", "Easy to Apply"],
+      specs: {
+        color: "Brown",
+        material: "Corrugated Cardboard",
+        size: "One Size, mutiple adjustments",
+        quantity: "50",
+        usage:
+          "protecting picture frames, mirrors, and artwork during shipping or storage",
+        suitableFor: "art galleries, framing shops, movers, and individuals",
+      },
+    },
+    {
+      id: "cc03",
+      title: "Corrugated Furniture Corners",
+      desc: "Heavy-duty Cardboard Edge Protectors",
+      size: "One size fits all, 25pc",
+      priceTable: { tier1: 10.99, tier2: 10.99, tier3: 10.49, tier4: 9.99 },
+      image: "/images/furniture-corners.webp",
+      features: ["Impact Protection", "Durable", "Eco-Friendly"],
+      specs: {
+        color: "Brown",
+        material: "Corrugated Cardboard",
+        size: "One Size fits all",
+        quantity: "25",
+        usage:
+          "safeguarding furniture edges and corners from dents and scratches during transit",
+        suitableFor:
+          "furniture manufacturers, moving companies, warehouses, and homeowners",
+      },
+    },
+    {
+      id: "cc04",
+      title: "Corrugated Furniture Corners",
+      desc: "Heavy-duty Cardboard Edge Protectors",
+      size: "One Size fits all, 50pc",
+      priceTable: { tier1: 19.99, tier2: 19.99, tier3: 18.99, tier4: 18.95 },
+      image: "/images/furniture-corners.webp",
+      features: ["Impact Protection", "Durable", "Eco-Friendly"],
+      specs: {
+        color: "Brown",
+        material: "Corrugated Cardboard",
+        size: "One Size fits all",
+        quantity: "50",
+        usage:
+          "protecting picture frames, mirrors, and artwork during shipping or storage",
+        suitableFor: "art galleries, framing shops, movers, and individuals",
+      },
+    },
+  ],
+
   [
     {
       id: "pk01",

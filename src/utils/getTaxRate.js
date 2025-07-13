@@ -15,7 +15,7 @@ export async function getTaxRate(province) {
     case "Ontario":
       return 0.13;
     case "New Brunswick":
-    case "Newfoundland & Labrador":
+    case "Newfoundland and Labrador":
     case "Prince Edward Island":
       return 0.15;
     case "Nova Scotia":
