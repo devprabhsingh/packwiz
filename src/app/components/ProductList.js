@@ -46,7 +46,7 @@ const ProductList = ({ id, modified, productList }) => {
       gap: "10px",
       maxWidth: modified ? "95%" : "1300px",
       margin: "0 auto",
-      padding: "10px",
+      padding: "5px",
     }),
     [gridTemplate, modified]
   );
@@ -353,7 +353,7 @@ const styles = {
   },
   boxSize: {
     fontSize: "15px",
-    color: "#555",
+    color: "#ff6f20",
     margin: 4,
   },
   boxDesc: {

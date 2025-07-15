@@ -153,7 +153,7 @@ const Form = ({
             <div className={styles.addressResults}>
               {results.map((a, index) => (
                 <button
-                  className={style.addBtn}
+                  className={styles.addBtn}
                   onClick={(e) => {
                     e.preventDefault();
                     selectAddress(a);

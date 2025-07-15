@@ -96,8 +96,9 @@
 
 .addressResults {
   position: absolute;
+
   z-index: 100;
-  width: 100%; /* Should match input width or parent */
+  width: 93%; /* Should match input width or parent */
   left: 0;
   right: 0;
   margin: auto; /* Centers it if parent has fixed width */
@@ -116,17 +117,21 @@
   box-sizing: border-box;
 }
 
-.addrBtn:hover {
+.addrBtn:hover,
+.manualBtn:hover {
   background-color: #bcbaba;
   border-color: #ff6f20;
 }
 
 .manualBtn {
-  display: block;
-  width: 95%; /* Adjust to match content width */
   padding: 10px;
-  font-style: italic;
-  background-color: #dbd9d9ff;
+  background: hsl(0, 0%, 98%);
+  border: 1px solid #6b6868;
+  border-width: 0 1px 1px 1px; /* Only bottom and side borders */
+  outline: none;
+  cursor: pointer;
+  display: block;
+  width: 100%; /* Adjust to match content width */
   box-sizing: border-box;
 }
 

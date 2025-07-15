@@ -108,6 +108,36 @@ const keywordMap = {
     "chair leg pads",
     "floor protector pads",
   ],
+  "bubble cushion wrap": [
+    "bubble wrap",
+    "bubble pack",
+    "Air-filled plastic",
+    "Packing bubbles",
+  ],
+  "disposable booties": [
+    "disposable shoe covers",
+    "boot covers",
+    "Protective footwear covers",
+    "Fabric Booties",
+    "Plastic Boooties",
+    "medical booties",
+  ],
+  "furniture corners": [
+    "corner protectors",
+    "corner guards",
+    "edge bumpers",
+    "baby proofing corners",
+    "furniture bumpers",
+    "safety corners",
+  ],
+  "picture corners": [
+    "corner guards",
+    "edge bumpers",
+    "baby proofing corners",
+    "safety corners",
+    "frame corners",
+    "picture corners",
+  ],
 };
 export default function SearchResultsPage() {
   return (

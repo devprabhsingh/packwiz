@@ -98,9 +98,9 @@ const styles = {
     padding: "40px 20px 20px",
     borderTop: "1px solid #eee",
     fontFamily: "sans-serif",
-    borderRadius: "24px 24px 0 0",
+    borderRadius: "8px",
     boxShadow: "0 -4px 12px rgba(0,0,0,0.05)",
-    marginTop: "10px",
+    margin: "5px",
   },
   footerContent: {
     display: "flex",

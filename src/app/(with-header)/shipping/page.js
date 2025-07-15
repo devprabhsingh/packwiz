@@ -186,8 +186,7 @@ const ShippingInfo = () => {
     }));
 
     getShipRates(addr);
-    console.log(addr);
-    console.log(ctx?.region?.name);
+
     if (ctx?.region?.name) {
       getTaxRate(ctx.region.name).then((rate) => setTaxRateValue(rate || 0));
     }

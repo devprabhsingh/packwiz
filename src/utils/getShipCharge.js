@@ -67,7 +67,6 @@ function getPrice(distance, subtotal, cartItems, state) {
     }
   }
 
-  console.log(totalWeight);
   //  Add weight surcharge if needed
   if (atlantic.includes(state)) {
     shipRate += 0.4 * totalWeight;
