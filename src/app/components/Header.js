@@ -43,50 +43,64 @@ export default function Header() {
     ));
 
   return (
-    <header className="header-box">
-      {/* Mobile Menu Icon */}
-      <div className="menu-icon" onClick={() => setMenuOpen((open) => !open)}>
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+    <>
+      <div className="promo">
+        Use code{" "}
+        <span
+          style={{
+            backgroundColor: "#ff6f20",
+            color: "white",
+            padding: "2px 4px",
+          }}
+        >
+          WELCOME10
+        </span>{" "}
+        at checkout to get 10% Off
       </div>
-
-      {/* Logo */}
-      <Link href="/" className="logo-link">
-        <Image
-          src="/images/logo.webp"
-          alt="logo"
-          height={50}
-          width={150}
-          priority
-        />
-      </Link>
-
-      <SearchBar />
-
-      {/* Desktop Nav */}
-      <nav className="navBox">{renderLinks()}</nav>
-
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="mobileMenu">
-          {renderLinks(true)}
-          <Link
-            href="/cart"
-            onClick={() => setMenuOpen(false)}
-            className="mobileLink"
-          >
-            Cart ({totalItems})
-          </Link>
+      <header className="header-box">
+        <div className="menu-icon" onClick={() => setMenuOpen((open) => !open)}>
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </div>
-      )}
 
-      {/* Cart Icon */}
-      <Link href="/cart" className="cart-link">
-        <ShoppingCart style={{ width: 24, height: 24 }} />
-        <span className="sr-only">
-          Go to cart{totalItems > 0 ? `, ${totalItems} items` : ""}
-        </span>
-        {totalItems > 0 && <span className="cartBadge">{totalItems}</span>}
-      </Link>
-    </header>
+        {/* Logo */}
+        <Link href="/" className="logo-link">
+          <Image
+            src="/images/logo.webp"
+            alt="logo"
+            height={50}
+            width={150}
+            priority
+          />
+        </Link>
+
+        <SearchBar />
+
+        {/* Desktop Nav */}
+        <nav className="navBox">{renderLinks()}</nav>
+
+        {/* Mobile Menu */}
+        {menuOpen && (
+          <div className="mobileMenu">
+            {renderLinks(true)}
+            <Link
+              href="/cart"
+              onClick={() => setMenuOpen(false)}
+              className="mobileLink"
+            >
+              Cart ({totalItems})
+            </Link>
+          </div>
+        )}
+
+        {/* Cart Icon */}
+        <Link href="/cart" className="cart-link">
+          <ShoppingCart style={{ width: 24, height: 24 }} />
+          <span className="sr-only">
+            Go to cart{totalItems > 0 ? `, ${totalItems} items` : ""}
+          </span>
+          {totalItems > 0 && <span className="cartBadge">{totalItems}</span>}
+        </Link>
+      </header>
+    </>
   );
 }

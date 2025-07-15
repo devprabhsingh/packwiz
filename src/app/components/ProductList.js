@@ -167,15 +167,14 @@ const ProductList = ({ id, modified, productList }) => {
                       loading="lazy"
                       style={{ borderRadius: "8px" }}
                     />
-                    <div className="tooltip">Click to see more details</div>
+                    <div style={styles.toolTip}>Click to see more details</div>
                     {product?.title?.length > 15 && (
                       <Image
                         src="/images/hot.webp"
                         alt="hot"
                         width={30}
                         height={30}
-                        className="hot-icon"
-                        style={{ position: "absolute" }}
+                        style={styles.hotIcon}
                       />
                     )}
                   </div>
@@ -405,6 +404,34 @@ const styles = {
     cursor: "pointer",
     fontSize: "15px",
     margin: "10px",
+  },
+  toolTip: {
+    position: "absolute",
+    bottom: "10%",
+    left: "50%",
+    transform: "translateX(-50%)",
+    background: "#333",
+    zIndex: 10,
+    color: "#fff",
+    padding: "5px 10px",
+    borderRadius: "4px",
+    whiteSpace: "nowrap",
+    fontSize: "12px",
+    opacity: 0,
+    pointerEvents: "none",
+    transition: "opacity 0.2s ease",
+  },
+  hotIcon: {
+    position: "absolute",
+    top: "8px",
+    right: "8px",
+    height: "30px",
+    width: "30px",
+    background: "#fff",
+    padding: "4px 6px",
+    borderRadius: "50%",
+    fontSize: "14px",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
   },
 };
 

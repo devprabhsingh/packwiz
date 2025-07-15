@@ -16,9 +16,9 @@ export default function Payment() {
 
   if (total === undefined || Number.isNaN(total) || total < 1) {
     return (
-      <div style={styles.centered}>
-        <p style={styles.errorText}>Sorry! we hit a bump.</p>
-        <Link style={styles.button} href="/cart">
+      <div className="centered">
+        <p className="errorText">Sorry! we hit a bump.</p>
+        <Link className="button" href="/cart">
           Go back to cart
         </Link>
       </div>
@@ -49,38 +49,3 @@ export default function Payment() {
     </div>
   );
 }
-
-const styles = {
-  centered: {
-    height: "100vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-    backgroundColor: "white",
-    borderRadius: "8px",
-    margin: "10px",
-  },
-  errorText: {
-    fontSize: "1.2rem",
-    marginBottom: "1rem",
-  },
-  button: {
-    padding: "10px 20px",
-    backgroundColor: "#ff6f20",
-    color: "#fff",
-    border: "none",
-    borderRadius: "5px",
-    textDecoration: "none",
-    fontWeight: "bold",
-  },
-  loaderWrapper: {
-    height: "80vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
-  },
-};

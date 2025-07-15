@@ -1,12 +1,13 @@
 import React from "react";
-import styles from "./shipStyles.module.css";
+import styles from "./shipStyles.module.css"; // Import the CSS module
 import Image from "next/image";
+// Removed: import clsx from "clsx";
 
 const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
   return (
     <div className={styles.shippingratesbox}>
       <h3 className={styles.header}>
-        <span className="payment-step">3</span>Select your courier
+        <span className={styles.headerPaymentStep}>3</span>Select your courier
       </h3>
 
       {options.length > 0 ? (
@@ -14,10 +15,13 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
           opt ? (
             <div
               key={idx}
-              className={`ship-option ${selectedRate?.price === opt.price ? "selected" : ""}`}
+              // Manually construct the class string
+              className={`${styles.shipOption} ${
+                selectedRate?.price === opt.price ? styles.selected : ""
+              }`}
               onClick={() => onSelect(idx)}
             >
-              <div className="ship-option-inner">
+              <div className={styles.shipOptionInner}>
                 {opt.price === 0 && <p style={{ color: "green" }}> Free</p>}
                 {opt.price !== 0 && (
                   <p style={{ color: "green" }}>${opt.price}</p>
@@ -26,7 +30,9 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
               </div>
               <p>Delivery within {opt.deliveryTime}</p>
               {opt.cod === true && (
-                <p className="cod-available">Cash On Delivery Available</p>
+                <p className={styles.codAvailable}>
+                  Cash On Delivery Available
+                </p>
               )}
             </div>
           ) : null
@@ -41,12 +47,12 @@ const ShippingRates = ({ options, selectedRate, loading, onSelect }) => {
           />
         </div>
       ) : (
-        <div className="no-options-message">
+        <div className={styles.noOptionsMessage}>
           Once you enter the address, you will see a list of courier options
           here.
         </div>
       )}
-      <p style={{ color: "grey", fontSize: "13px", fontStyle: "italic" }}>
+      <p className={styles.noteText}>
         Note - Final Delivery times can differ. If there is a change, you will
         be notified by email.
       </p>

@@ -20,12 +20,17 @@ const BackLinks = ({ title, id, nextTitle, nextId }) => {
   }
 
   return (
-    <div className="back-navigation">
+    <div style={styles.backNav} className="back-navigation">
       {links.map((link, index) => (
         <React.Fragment key={link.href}>
           <Link
             href={link.href}
-            className={pathname === link.href ? "color-orange" : "color-blue"}
+            style={{
+              ...styles.backNavA,
+              ...(pathname === link.href
+                ? styles.colorOrange
+                : styles.colorBlue),
+            }}
           >
             {link.label}
           </Link>
@@ -35,5 +40,23 @@ const BackLinks = ({ title, id, nextTitle, nextId }) => {
     </div>
   );
 };
+const styles = {
+  backNav: {
+    background: "#fffdfd",
+    padding: "10px",
+    margin: "5px",
+    borderRadius: "8px",
+  },
 
+  backNavA: {
+    textDecoration: "none",
+  },
+  colorOrange: {
+    color: "#ff6f20",
+  },
+
+  colorBlue: {
+    color: "blue",
+  },
+};
 export default BackLinks;

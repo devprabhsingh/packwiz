@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import styles from "./shipStyles.module.css";
+import styles from "./shipStyles.module.css"; // Ensure this path is correct
 import Image from "next/image";
-import discountCodes from "@/data/discountCodes";
-import { useCart } from "../../context/CartContext";
+import discountCodes from "@/data/discountCodes"; // Assuming this path is correct
+import { useCart } from "../../context/CartContext"; // Assuming this path is correct
 
 const ShippingSummary = ({
   subTotal,
   taxRate,
   taxAmount,
   shipping,
-  error,
-  loader,
+  error, // This error likely comes from a parent component (e.g., related to address validation)
+  loader, // This loader likely controls the payment button
   handleSubmit,
 }) => {
   const [discountCode, setDiscountCode] = useState("");
@@ -31,14 +31,29 @@ const ShippingSummary = ({
     );
 
     if (found) {
+      // Check if discount has already been applied
+      if (isDiscountApplied) {
+        setDiscountError("Discount already applied.");
+        return;
+      }
+
       const value =
         found.type === "percent"
           ? (subTotal * found.amount) / 100
           : found.amount;
 
-      const discountedSubtotal = subTotal - value;
-      const finalTotal = (
-        discountedSubtotal +
+      // Ensure discount doesn't make subtotal negative
+      if (value > subTotal) {
+        setDiscountError("Discount value exceeds subtotal.");
+        setDiscountValue(0); // Reset discount
+        setDiscountPercent(0);
+        setIsDiscountApplied(false);
+        return;
+      }
+
+      const newDiscountedSubtotal = subTotal - value;
+      const newFinalTotal = (
+        newDiscountedSubtotal +
         taxAmount +
         (shipping || 0)
       ).toFixed(2);
@@ -47,14 +62,22 @@ const ShippingSummary = ({
       setDiscountPercent(found.type === "percent" ? found.amount : 0);
       setDiscountError("");
       setIsDiscountApplied(true);
-      setTotal(Number(finalTotal)); // <-- Now uses correct calculated value
+      setTotal(Number(newFinalTotal)); // Update context with new total
     } else {
       setDiscountValue(0);
       setDiscountPercent(0);
       setDiscountError("Invalid discount code");
       setIsDiscountApplied(false);
+      setTotal(Number(finalTotal)); // Recalculate total without discount
     }
   };
+
+  // Set total on initial render and when dependencies change
+  // This useEffect ensures setTotal is always in sync with finalTotal
+  // when component re-renders due to parent state changes (subTotal, taxAmount, shipping)
+  React.useEffect(() => {
+    setTotal(Number(finalTotal));
+  }, [finalTotal, setTotal]); // Depend on finalTotal and setTotal
 
   return (
     <div>
@@ -65,8 +88,10 @@ const ShippingSummary = ({
           <span>
             {isDiscountApplied ? (
               <>
-                <s style={{ color: "#888" }}>${subTotal.toFixed(2)}</s>{" "}
-                <span style={{ color: "green", fontWeight: "bold" }}>
+                <s className={styles.subtotalOldPrice}>
+                  ${subTotal.toFixed(2)}
+                </s>{" "}
+                <span className={styles.subtotalNewPrice}>
                   ${discountedSubtotal.toFixed(2)}
                 </span>
               </>
@@ -81,59 +106,50 @@ const ShippingSummary = ({
           <input
             type="text"
             value={discountCode}
-            onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
+            onChange={(e) => {
+              setDiscountCode(e.target.value.toUpperCase());
+              if (isDiscountApplied) {
+                // If discount was applied, clear it on input change
+                setDiscountValue(0);
+                setDiscountPercent(0);
+                setDiscountError("");
+                setIsDiscountApplied(false);
+                // The useEffect will update setTotal with the new non-discounted finalTotal
+              }
+            }}
             placeholder="Discount code"
             className={styles.discountInput}
-            style={{
-              padding: "5px 10px",
-              border: "1px solid #ccc",
-              borderRadius: "5px",
-              marginRight: "10px",
-              width: "60%",
-            }}
           />
           <button
             onClick={handleDiscountApply}
-            style={{
-              padding: "5px 12px",
-              backgroundColor: "#333",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
+            className={styles.discountApplyBtn}
+            disabled={isDiscountApplied} // Disable button if discount is already applied
           >
-            Apply
+            {isDiscountApplied ? "Applied" : "Apply"}
           </button>
         </div>
 
         {/* Success message */}
         {isDiscountApplied && (
-          <p
-            style={{
-              color: "green",
-              margin: "4px 0 8px 5px",
-              fontSize: "14px",
-            }}
-          >
-            Hurray! You got {discountPercent || `$${discountValue.toFixed(2)}`}%
+          <p className={styles.discountSuccessMessage}>
+            Hurray! You got{" "}
+            {discountPercent
+              ? `${discountPercent}%`
+              : `$${discountValue.toFixed(2)}`}{" "}
             off!
           </p>
         )}
 
-        {/* Error message */}
-        {discountError && (
-          <p className={styles.error} style={{ marginTop: "5px" }}>
-            {discountError}
-          </p>
-        )}
+        {/* Error message for discount */}
+        {discountError && <p className={styles.error}>{discountError}</p>}
 
         {/* Tax */}
         <div className={styles.summaryLine}>
           <span>
             Tax{" "}
             <span style={{ color: "grey" }}>
-              {Number(taxRate.toFixed(2)) * 100}%
+              {(taxRate * 100).toFixed(2)}%{" "}
+              {/* taxRate might already be a percentage, convert to string safely */}
             </span>
             :
           </span>
@@ -143,7 +159,8 @@ const ShippingSummary = ({
         {/* Shipping */}
         <div className={styles.summaryLine}>
           <span>Shipping:</span>
-          <span>${shipping?.toFixed(2) || 0}</span>
+          <span>${shipping?.toFixed(2) || "0.00"}</span>{" "}
+          {/* Ensure 0.00 if shipping is null/undefined */}
         </div>
 
         <hr />
@@ -156,16 +173,10 @@ const ShippingSummary = ({
       </div>
 
       {/* Payment Button */}
-      <div
-        style={{
-          margin: "5px 0 5px 5px ",
-          padding: "10px",
-          backgroundColor: "white",
-          borderRadius: "8px",
-        }}
-      >
-        {error && <p className={styles.error}>{error}</p>}
-        <button onClick={handleSubmit} className="proceed-pay-btn">
+      <div className={styles.paymentButtonContainer}>
+        {error && <p className={styles.error}>{error}</p>}{" "}
+        {/* This error is likely for payment process */}
+        <button onClick={handleSubmit} className={styles.proceedPayBtn}>
           {loader ? (
             <Image
               src="/images/loader.gif"

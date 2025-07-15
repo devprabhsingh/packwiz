@@ -204,7 +204,7 @@ const ShippingInfo = () => {
   }
 
   return (
-    <div className="shipping-box">
+    <div className={styles.shippingBox}>
       <Form
         query={query}
         selectedAddress={selectedAddress}
@@ -218,7 +218,7 @@ const ShippingInfo = () => {
         setFieldErrors={setFieldErrors}
         handleSubmit={handleSubmit}
       />
-      <div className="ship-summary" style={{ width: "27%" }}>
+      <div className={styles.shipSummary}>
         <ShippingRates
           options={shipRateOpts}
           selectedRate={selectedRate}

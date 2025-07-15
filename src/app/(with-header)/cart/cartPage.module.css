@@ -1,0 +1,370 @@
+/* CartPage.module.css */
+
+.cartContainer {
+  padding: 20px;
+  margin: 0 5px;
+  background: #fff;
+  border-radius: 8px;
+}
+.cartList {
+  /* Renamed from .cart-list to .cartList for consistency with CSS Modules */
+  position: relative; /* This is crucial for .clearAllBtn's absolute positioning */
+
+  flex: 1; /* Example: if it's a flex item */
+  margin-right: 20px; /* Example: space between list and checkout card */
+}
+.heading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.empty {
+  font-size: 18px;
+  text-align: center;
+  color: #555;
+}
+
+.mainbox {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  height: auto;
+  gap: 20px;
+}
+
+.cartItemCard {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.partone {
+  display: flex;
+  align-items: center;
+  width: 250px;
+}
+
+.priceTable {
+  width: 180px; /* Kept fixed width from original inline style */
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 15px; /* Added some top margin for separation */
+  border: 1px solid #ddd; /* Added a subtle border to the table */
+}
+
+.tableHeader {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  padding: 8px; /* Increased padding slightly */
+  text-align: left; /* Align text to left */
+  color: #333; /* Darker text color */
+}
+.tableCell {
+  border: 1px solid #eee; /* Lighter border for cells */
+  padding: 8px; /* Increased padding slightly */
+  text-align: left; /* Align text to left */
+  color: #555; /* Default cell text color */
+}
+
+.highlightRow {
+  font-weight: bold;
+  color: green;
+  background-color: rgb(255, 240, 200); /* Lighter orange for highlighting */
+  border: 1px solid #ffcc80; /* Subtle border for highlighted row */
+}
+.thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 15px;
+}
+
+.info {
+  flex: 1;
+  color: black;
+}
+
+.title {
+  margin: 0;
+  text-decoration: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.itemInfo p {
+  font-size: 14px;
+  margin: 3px 0;
+}
+
+.itemInfo p:nth-of-type(1) {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.itemInfo p:nth-of-type(2) {
+  color: #ff6f20;
+}
+
+.detail {
+  font-size: 15px;
+}
+
+.discountTag {
+  background-color: #ff6f20;
+  color: white;
+  border-radius: 8px;
+  width: fit-content;
+  padding: 3px 6px;
+  margin-top: 5px; /* Added for spacing */
+}
+
+.controlsBtnParent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qtyBtn {
+  padding: 4px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.qtyBtn:hover {
+  background-color: #e0e0e0;
+}
+
+.qty {
+  min-width: 24px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.subtotalText {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.subtotalValue {
+  color: green;
+  margin-left: 3px;
+}
+
+.subtotalOldPrice {
+  text-decoration: line-through;
+}
+
+.cartItemDelete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.cartItemDelete:hover {
+  color: #ff0000;
+}
+
+.shopNowBtn {
+  display: block;
+  padding: 10px 20px;
+  background-color: #ff6f20;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  width: fit-content;
+  margin: 10px auto;
+  transition: background-color 0.2s;
+}
+
+.shopNowBtn:hover {
+  background-color: #e65c19;
+}
+
+.clearAllBtn {
+  background-color: #e5e5e5;
+  padding: 8px;
+  border-radius: 5px;
+  width: fit-content;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  /* New positioning for top-right of cart-list */
+  position: absolute; /* Needs to be absolute within a relative parent */
+  top: 0; /* Align to the top */
+  right: 0; /* Align to the right */
+  z-index: 1; /* Ensure it's above other content if overlapping */
+}
+
+.clearAllBtn:hover {
+  background-color: #d0d0d0;
+}
+
+.shopMoreBtn {
+  display: block;
+  padding: 10px 20px;
+  background-color: #ff6f20;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: normal;
+  width: fit-content;
+  margin: auto;
+  transition: background-color 0.2s;
+  margin-top: 20px; /* Added some margin for separation */
+}
+
+.shopMoreBtn:hover {
+  background-color: #e65c19;
+}
+
+.checkoutCard {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  width: 550px; /* Increased from 300px to 350px, adjust as desired */
+  align-self: flex-start;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.checkoutBtn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #ff6f20;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.checkoutBtn:hover {
+  background-color: #e65c19;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cartContainer {
+    padding: 5px;
+  }
+  .mainbox {
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 0;
+    padding-bottom: 120px;
+  }
+
+  .priceTable {
+    display: none;
+  }
+  .clearAllBtn {
+    position: static; /* Reset to static for better flow on small screens */
+    margin-left: auto; /* Push to right */
+    margin-right: 0;
+    margin-bottom: 15px;
+    float: right; /* Add space below it */
+  }
+  .cartItemCard {
+    width: 100%;
+    align-items: center;
+    flex-direction: column; /* Limit width on smaller screens */
+  }
+
+  .checkoutCard {
+    width: 100%;
+    margin-top: 0;
+    max-width: 400px;
+    position: fixed; /* Makes the element stick to the viewport */
+    bottom: 0; /* Aligns it to the bottom of the viewport */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for true centering */
+    z-index: 100; /* Ensure it's above other content */
+    border-radius: 8px 8px 0 0; /* Optional: adjust border-radius for top corners only */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Add a top shadow to separate it visually */
+    padding: 15px 20px;
+  }
+  .controlsBtnParent {
+    align-items: center;
+  }
+  .partone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 26px;
+  }
+
+  .thumbnail {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .info {
+    width: 100%;
+  }
+
+  .controlsBtnParent {
+    flex-direction: column;
+    align-items: center;
+  }
+  .controls {
+    margin-bottom: 10px;
+  }
+}

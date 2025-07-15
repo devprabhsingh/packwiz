@@ -1,0 +1,85 @@
+/* About section */
+.aboutSection {
+  background-color: #fff;
+  padding: 80px 20px;
+}
+
+.aboutContainer {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+
+.aboutText {
+  flex: 1;
+  min-width: 300px;
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.aboutButton {
+  display: inline-block;
+  background-color: #ff6600;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-weight: bold;
+  margin: 10px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.aboutButton:hover {
+  background-color: #e05600;
+}
+
+.aboutImage {
+  flex: 1;
+  min-width: 300px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.aboutImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.aboutImage img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 520px) {
+  .aboutSection {
+    padding: 20px 0;
+  }
+
+  .aboutText p {
+    font-size: 0.8rem;
+    margin: 15px auto;
+    width: 90%;
+  }
+
+  .aboutImage {
+    min-width: 170px;
+    padding: 10px;
+  }
+}
+@media (max-width: 310px) {
+  .aboutImage .aboutText p {
+    width: 80%;
+    font-size: 1rem;
+  }
+}

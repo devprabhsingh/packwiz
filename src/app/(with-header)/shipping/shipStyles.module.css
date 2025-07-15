@@ -1,18 +1,59 @@
+/* shipStyles.module.css - CONSOLIDATED AND CLEANED */
+
+/* --- General Layout & Containers --- */
+.shippingBox {
+  display: flex;
+  justify-content: center;
+}
+
+/* --- Form Styles (for address input) --- */
 .form {
   padding: 10px 24px;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
+  width: 27%; /* Original width */
+  margin-top: 5px;
+  box-sizing: border-box; /* Ensures padding doesn't increase total width */
 }
 
 .header {
   font-size: 20px;
+  font-weight: bold; /* Added from a previous context */
   margin-bottom: 20px;
   margin-top: 10px;
   text-align: center;
+  color: #333; /* Added from a previous context */
 }
 
+.headerPaymentStep {
+  /* Specific style for the step number in headers */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #ff6f20; /* Orange color for the step number */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+.paymentStep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #ff6f20; /* Orange color for the step number */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 10px;
+}
 .fieldGroup {
   width: 100%;
   margin-bottom: 16px;
@@ -27,59 +68,290 @@
 }
 
 .input {
-  width: 93%;
+  width: 93%; /* Adjust if needed to fit padding */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
+  box-sizing: border-box; /* Include padding/border in width */
 }
 
-.error {
-  margin-top: 5px;
-  color: red;
-  font-size: 13px;
-  text-align: center;
+/* Address input (specific for textarea if used for address) */
+.addressInput {
+  min-height: 50px; /* Instead of height: 5vh */
+  border-color: #ff6f20 !important; /* Ensure it overrides .input border */
+  outline-color: #ff6f20;
+  font-weight: 600;
+  height: auto;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.5;
+  width: 93%; /* Keep consistent with .input */
+  padding: 10px;
+  border: 1px solid #ccc; /* Fallback */
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
-.shipping {
-  margin-top: 36px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
+.addressResults {
+  position: absolute;
+  z-index: 100;
+  width: 100%; /* Should match input width or parent */
+  left: 0;
+  right: 0;
+  margin: auto; /* Centers it if parent has fixed width */
+  box-sizing: border-box;
 }
 
-/* Shipping rates box */
+.addrBtn {
+  padding: 10px;
+  background: hsl(0, 0%, 98%);
+  border: 1px solid #6b6868;
+  border-width: 0 1px 1px 1px; /* Only bottom and side borders */
+  outline: none;
+  cursor: pointer;
+  display: block;
+  width: 95%; /* Adjust to match content width */
+  box-sizing: border-box;
+}
+
+.addrBtn:hover {
+  background-color: #bcbaba;
+  border-color: #ff6f20;
+}
+
+.manualBtn {
+  display: block;
+  width: 95%; /* Adjust to match content width */
+  padding: 10px;
+  font-style: italic;
+  background-color: #dbd9d9ff;
+  box-sizing: border-box;
+}
+
+/* --- Shipping Rates Box --- */
 .shippingratesbox {
-  margin-left: 5px;
-  margin-top: 5px;
-  padding: 8px 15px;
+  padding: 15px; /* Consolidated from both entries */
   border-radius: 8px;
-  background-color: #fff;
+  background-color: #fcfcfc; /* Consolidated from both entries */
+  margin-left: 5px; /* Original margin */
+  margin-top: 5px; /* Original margin */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Added subtle shadow for visual separation */
+  flex-grow: 1; /* Allow it to take available space in flex container */
+  max-width: 100%; /* Adjust as needed */
 }
 
+/* Ship option container */
+.shipOption {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.shipOption:hover {
+  border-color: #a0a0a0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Inner content */
+.shipOptionInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.shipOptionInner p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.shipOptionInner p:first-child {
+  font-weight: bold;
+}
+
+.shipOptionInner p:last-child {
+  font-weight: bold;
+  color: #007bff;
+  margin-left: 10px;
+}
+
+/* Delivery time and COD text */
+.shipOption p:not(.codAvailable) {
+  font-size: 14px;
+  color: #666;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.codAvailable {
+  font-size: 13px;
+  color: #28a745;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.selected {
+  /* For selected shipping option */
+  border: 2px solid green;
+  background-color: #fff9f5;
+  box-shadow: 0 4px 12px rgba(255, 111, 32, 0.2);
+}
+
+.noOptionsMessage {
+  font-size: 13px;
+  color: #636363;
+  text-align: center;
+  margin: 20px 0;
+  word-break: break-word;
+}
+
+/* --- Shipping Summary Styles --- */
 .summary {
+  /* Consolidated duplicate .summary entries */
   margin: 5px 0 5px 5px;
-  padding: 20px 15px;
+  padding: 20px 15px; /* Use the more specific padding */
   background: white;
   border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Keep shadow */
+
+  flex-grow: 1; /* Allow it to take available space in flex container */
+  max-width: 100%; /* Adjust as needed */
+  box-sizing: border-box;
 }
 
 .summaryLine {
+  /* Consolidated duplicate .summaryLine entries */
   display: flex;
   justify-content: space-between;
-  margin-bottom: 8px;
+  margin-bottom: 10px; /* Use the more specific margin */
+  font-size: 16px;
+  color: #333;
 }
-.totalBox {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+
+.summaryLine span:first-child {
+  font-weight: normal;
+}
+
+.summaryLine span:last-child {
   font-weight: bold;
-  color: green;
 }
+
+.subtotalOldPrice {
+  color: #888;
+  text-decoration: line-through;
+}
+
+.subtotalNewPrice {
+  color: green;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.discountInput {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  width: 60%;
+  box-sizing: border-box;
+}
+
+.discountApplyBtn {
+  padding: 5px 12px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.discountApplyBtn:hover {
+  background-color: #555;
+}
+
+.discountSuccessMessage {
+  color: green;
+  margin: 4px 0 8px 5px;
+  font-size: 14px;
+}
+
+/* --- Common/Shared Styles --- */
+.error {
+  /* Consolidated duplicate .error entries */
+  color: red;
+  margin-top: 5px;
+  font-size: 13px; /* Keep the smaller font size */
+  text-align: center; /* Keep text-align center if applicable for form errors */
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+.noteText {
+  color: grey;
+  font-size: 13px;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* --- Total Box & Payment Button --- */
+.totalBox {
+  /* Consolidated duplicate .totalBox entries */
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px; /* Use the more specific margin */
+  font-weight: bold;
+  color: #000; /* Revert to black from green - green was specific to a subtotal line */
+  font-size: 20px; /* From a previous context */
+  margin-top: 15px; /* From a previous context */
+  padding-top: 10px; /* From a previous context */
+  border-top: 1px solid #eee; /* From a previous context */
+}
+
+.paymentButtonContainer {
+  margin: 5px 0 5px 5px;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.proceedPayBtn {
+  display: block;
+  padding: 13px;
+  background-color: #ff6f20;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 200px;
+  margin: auto;
+  transition: background-color 0.2s ease;
+}
+
+.proceedPayBtn:hover {
+  background-color: #e65c19;
+}
+
+/* --- Back Button --- */
 .backBtnBox {
   background-color: white;
   border-radius: 8px;
-  height: 50vh;
+  height: 50vh; /* This might be too tall, consider adjusting */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -98,20 +370,44 @@
   width: fit-content;
 }
 
-/* Address input */
-.addressInput {
-  height: 5vh;
-  border-color: #ff6f20 !important;
-  outline-color: #ff6f20;
-  font-weight: 600;
-  height: auto;
-  min-height: 50px;
-  resize: none;
-  overflow: hidden;
-  line-height: 1.5;
-  width: 93%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  /* Changed from 520px to 768px for broader tablet support */
+  .shippingBox {
+    flex-direction: column;
+    align-items: center; /* Center items when stacked */
+  }
+
+  .form,
+  .shippingratesbox,
+  .summary {
+    width: 99%;
+
+    max-width: 450px;
+    margin: 0 5px;
+  }
+
+  .form {
+    margin-bottom: 5px;
+  }
+
+  .shippingratesbox {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+
+  .summary {
+    margin-top: 0; /* Adjust if previous element has margin-bottom */
+  }
+
+  .shipSummary {
+    width: auto !important;
+    margin-right: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .discountInput {
+    width: 55%; /* Make input slightly smaller to fit button better */
+  }
 }

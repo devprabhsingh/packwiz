@@ -45,9 +45,9 @@ export async function generateMetadata() {
   return {
     title: "All Products | Packwiz",
     description:
-      "Browse affordable packing supplies including boxes, bubble wrap, tape, and more.",
+      "Packwiz provides Canada's best value in packing supplies. Explore our wide range of corrugated moving boxes, premium bubble wrap, strong packing tapes, stretch film, and essential accessories designed for secure shipping and easy moves. Enjoy competitive pricing and fast, nationwide delivery for all your packing needs",
     alternates: {
-      canonical: "https://www.packwiz.ca/products",
+      canonical: "/products",
     },
     structuredData: productStructuredData,
   };

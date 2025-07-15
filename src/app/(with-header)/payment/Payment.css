@@ -16,6 +16,11 @@
   flex-direction: column;
   gap: 16px;
 }
+.pay-method-wrapper {
+  width: 60%;
+  min-height: 80vh;
+  margin: 5vh auto 0;
+}
 
 .payment-btn {
   display: flex;
@@ -46,4 +51,38 @@
   margin-left: 5px;
   height: 22px;
   width: auto;
+}
+/* ComponentName.module.css */
+
+.centered {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.errorText {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #ff6f20;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none; /* Ensures no underline for anchor tags styled as buttons */
+  font-weight: bold;
+  cursor: pointer; /* Indicate it's clickable */
+  transition: background-color 0.2s ease; /* Smooth hover effect */
+}
+
+.button:hover {
+  background-color: #e65c19; /* Slightly darker orange on hover */
 }

@@ -129,9 +129,9 @@ const Form = ({
 
   return (
     <>
-      <form className={styles.form}>
+      <form className={styles.form} style={{ marginRight: "5px" }}>
         <h3 className={styles.header}>
-          <span className="payment-step">1</span>Shipping & Payment
+          <span className={styles.paymentStep}>1</span>Shipping & Payment
         </h3>
 
         {/* Address Search Field */}
@@ -150,14 +150,10 @@ const Form = ({
             required
           />
           {results.length > 0 && selectedAddress !== "manual entry" && (
-            <div className="address-results">
+            <div className={styles.addressResults}>
               {results.map((a, index) => (
                 <button
-                  style={{
-                    display: "block",
-                    width: "95%",
-                    padding: "10px",
-                  }}
+                  className={style.addBtn}
                   onClick={(e) => {
                     e.preventDefault();
                     selectAddress(a);
@@ -168,13 +164,7 @@ const Form = ({
                 </button>
               ))}
               <button
-                style={{
-                  display: "block",
-                  width: "95%",
-                  padding: "10px",
-                  fontStyle: "italic",
-                  backgroundColor: "#dbd9d9ff",
-                }}
+                className={styles.manualBtn}
                 onClick={(e) => {
                   e.preventDefault();
                   selectAddress("manual entry");
@@ -252,7 +242,7 @@ const Form = ({
       </form>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h3 className={styles.header}>
-          <span className="payment-step">2</span>Contact Details
+          <span className={styles.paymentStep}>2</span>Contact Details
         </h3>
 
         {/* Contact Details */}

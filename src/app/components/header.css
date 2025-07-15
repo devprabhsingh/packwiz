@@ -1,3 +1,9 @@
+.promo {
+  text-align: center;
+  color: #2d3748;
+  padding: 3px 0;
+  background-color: white;
+}
 .header-box {
   margin: 5px;
   display: flex;

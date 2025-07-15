@@ -1,15 +1,16 @@
 import Image from "next/image";
 import React from "react";
 import WhyChooseUs from "./WhyChooseUs";
+import styles from "./about.module.css";
 
 const AboutSection = () => {
   return (
-    <section className="about-section">
-      <div className="about-container">
-        <div className="about-text">
+    <section className={styles.aboutSection}>
+      <div className={styles.aboutContainer}>
+        <div className={styles.aboutText}>
           <Image height={100} width={300} src="/images/logo.webp" alt="logo" />
 
-          <section className="about-s">
+          <section className={styles.aboutS}>
             <p>
               At <strong>Packwiz</strong>, we know moving can be stressful — but
               finding the right packing supplies shouldn’t be. That’s why we
@@ -51,11 +52,11 @@ const AboutSection = () => {
               Your move is our mission — protecting what matters to you is what
               matters to us.
             </p>
-            <a href="/products" className="about-button">
+            <a href="/products" className={styles.aboutButton}>
               Browse Products
             </a>
           </section>
-          <div className="about-image">
+          <div className={styles.aboutImage}>
             <img
               src="/images/aboutimg.webp"
               alt="About Packwiz"
