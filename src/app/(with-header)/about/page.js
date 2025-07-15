@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 const About = () => {
-  return <AboutSection styles={styles} />;
+  return <AboutSection />;
 };
 
 export default About;
