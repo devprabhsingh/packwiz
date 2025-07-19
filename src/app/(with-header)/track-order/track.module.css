@@ -1,4 +1,4 @@
-.track-container {
+.trackContainer {
   max-width: 600px;
   margin: 5px auto;
 
@@ -9,14 +9,14 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-.track-container h1 {
+.trackContainer h1 {
   font-size: 24px;
   text-align: center;
   margin-bottom: 25px;
   color: #222;
 }
 
-.track-options {
+.trackOptions {
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -24,7 +24,7 @@
   flex-wrap: wrap;
 }
 
-.track-options button {
+.trackOptions button {
   flex: 1;
   min-width: 140px;
   padding: 10px 16px;
@@ -38,25 +38,25 @@
   transition: all 0.3s ease;
 }
 
-.track-options button.selected {
+.trackOptions button.selected {
   border-color: #ff6f20;
   color: #ff6f20;
   background-color: #fff8f1;
 }
 
-.track-options button:hover {
+.trackOptions button:hover {
   border-color: #ff6f20;
   background-color: #fff3e5;
   color: #ff6f20;
 }
 
-.track-form {
+.trackForm {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.track-form input {
+.trackForm input {
   padding: 10px 14px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -65,11 +65,11 @@
   transition: border 0.2s ease;
 }
 
-.track-form input:focus {
+.trackForm input:focus {
   border-color: #ff6f20;
 }
 
-.track-form button {
+.trackForm button {
   background-color: #ff6f20;
   color: white;
   border: none;
@@ -81,20 +81,20 @@
   transition: background 0.3s ease;
 }
 
-.track-form button:hover {
+.trackForm button:hover {
   background-color: #e75f16;
 }
 
 @media screen and (max-width: 520px) {
-  .track-container {
+  .trackContainer {
     margin: 5px;
   }
-  .track-inputs {
+  .trackInputs {
     flex-direction: column;
     align-items: center;
   }
 
-  .track-inputs button {
+  .trackInputs button {
     width: 100%;
     font-size: 16px;
     padding: 13px !important;
@@ -105,19 +105,19 @@
   }
 }
 
-.track-container h2 {
+.trackContainer h2 {
   text-align: center;
   margin-bottom: 2rem;
   color: #333;
 }
 
-.track-inputs {
+.trackInputs {
   display: flex;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.track-inputs input {
+.trackInputs input {
   flex: 1;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -125,7 +125,7 @@
   font-size: 1rem;
 }
 
-.track-inputs button {
+.trackInputs button {
   background-color: #ff6f20;
   color: white;
   border: none;
@@ -136,32 +136,32 @@
   transition: background-color 0.3s;
 }
 
-.track-inputs button:hover {
+.trackInputs button:hover {
   background-color: #e55d11;
 }
 
-.error-msg {
+.errorMsg {
   color: red;
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.order-card {
+.orderCard {
   margin-top: 2rem;
 }
 
-.order-details {
+.orderDetails {
   background: #f9f9f9;
   padding: 1.5rem;
   border-radius: 12px;
   border: 1px solid #ddd;
 }
 
-.order-details h3 {
+.orderDetails h3 {
   margin-bottom: 0.5rem;
 }
 
-.status-badge {
+.statusBadge {
   display: inline-block;
   border-radius: 16px;
   font-size: 0.9rem;
@@ -193,7 +193,7 @@
   margin-top: 0.25rem;
 }
 
-.tx-id {
+.txId {
   font-size: 0.9rem;
   color: #888;
   margin-top: 1rem;

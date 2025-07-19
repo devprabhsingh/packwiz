@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer style={styles.footer}>
       <i style={{ color: "grey", fontSize: "13px" }}>
-        <sup>*</sup>Free delivery within GTA on order above $50 only.
+        <sup>*</sup>Free delivery within GTA on order above $100 only.
       </i>
       <div style={styles.footerContent}>
         <div style={styles.footerSection}>

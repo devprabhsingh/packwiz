@@ -117,7 +117,7 @@ export default function HomePage() {
         name: "Where do you offer free delivery in the GTA?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "We provide free delivery on packing supplies across the Greater Toronto Area, including Brampton, Mississauga, Scarborough, Etobicoke, and North York, for orders over $50.",
+          text: "We provide free delivery on packing supplies across the Greater Toronto Area for orders over $100.",
         },
       },
       {

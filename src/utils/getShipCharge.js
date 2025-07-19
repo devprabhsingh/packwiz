@@ -1,7 +1,33 @@
 import categories from "../data/categories";
 import { getProductCat } from "./getProductCat";
 
-function getPrice(distance, subtotal, cartItems, state) {
+function getPrice(distance, subtotal, cartItems, state, city) {
+  const freeCities = [
+    "old city of toronto",
+    "toronto",
+    "east york",
+    "etobicoke",
+    "north york",
+    "city of toronto",
+    "scarborough",
+    "york",
+  ];
+  if (freeCities.includes(city.toLowerCase()) && subtotal >= 100) {
+    return [
+      {
+        price: 0,
+        deliveryTime: "1-3 days",
+        cod: distance <= 25 ? true : false,
+        shipService: "Standard",
+      },
+      {
+        price: 10,
+        deliveryTime: "same day",
+        cod: distance < 25 ? true : false,
+        shipService: "Express",
+      },
+    ];
+  }
   const items = cartItems.map((cItem) => {
     // Ensure categories and getProductCat are defined and accessible
     const itemData = categories[getProductCat(cItem.id)];
@@ -87,8 +113,8 @@ function getPrice(distance, subtotal, cartItems, state) {
   // Calculate delivery time
   let dTime = "1-2 days";
   let cod = true;
-  if (distance > 60) {
-    dTime = "3-8 days";
+  if (distance > 50) {
+    dTime = "3-6 days";
     cod = false;
   }
 
@@ -143,7 +169,8 @@ export async function getShipCharge(a, subtotal, cartItems) {
     const { distance } = directionsData.routes[0]; // Duration not used in pricing calculation
     const d = distance / 1000;
     const state = a?.properties?.context?.region?.name || "";
-    return getPrice(d, subtotal, cartItems, state);
+    const city = a?.properties?.context?.city?.name || "";
+    return getPrice(d, subtotal, cartItems, state, city);
   } catch (e) {
     console.error(e);
   }

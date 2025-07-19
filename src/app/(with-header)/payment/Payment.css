@@ -86,3 +86,10 @@
 .button:hover {
   background-color: #e65c19; /* Slightly darker orange on hover */
 }
+
+@media (max-width: 700px) {
+  .pay-method-wrapper {
+    width: auto;
+    margin: 5px;
+  }
+}

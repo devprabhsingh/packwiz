@@ -83,21 +83,70 @@ export default async function ItemDetailPage({ params }) {
     "@context": "https://schema.org",
     "@type": "Product",
     name: item.title,
-    image: `https://packwiz.ca${item.image}`, // Absolute URL is crucial for schema
-    description: item.desc, // Use 'desc' for general product description
-    sku: item.id, // Unique identifier for the product
-    mpn: item.id, // Manufacturer Part Number (if applicable, can be item.id)
+    image: `https://packwiz.ca${item.image}`,
+    description: item.desc,
+    sku: item.id,
+    mpn: item.id, // Only include if item.id truly functions as an MPN
     brand: {
       "@type": "Brand",
       name: "Packwiz",
     },
     offers: {
       "@type": "Offer",
-      url: `https://packwiz.ca/ItemDetail/${item.id}`, // Canonical URL
-      priceCurrency: "CAD", // Assuming Canadian Dollars based on location
-      price: item.priceTable.tier1, // Use the lowest tier price as the base price for schema
+      url: `https://packwiz.ca/ItemDetail/${item.id}`,
+      priceCurrency: "CAD",
+      price: item.priceTable.tier1,
       itemCondition: "https://schema.org/NewCondition",
-      availability: "https://schema.org/InStock",
+      availability: "https://schema.org/InStock", // Ensure this is dynamic based on actual stock
+    },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      appliesToProduct: {
+        "@type": "Product",
+        hasProductReturnPolicy:
+          "https://schema.org/MerchantReturnFiniteReturnWindow",
+      },
+      merchantReturnDays: 30,
+      returnPolicyCategory: "https://schema.org/MerchantReturnByMail",
+      restockingFee: {
+        // Recommended: Explicitly state if there's a restocking fee
+        "@type": "MonetaryAmount",
+        currency: "CAD",
+        value: 0, // Set to your actual restocking fee, or 0 if none
+      },
+      returnShippingFeesAmount: {
+        "@type": "MonetaryAmount",
+        currency: "CAD",
+        value: 0, // Set to your actual return shipping cost, or 0 if free
+      },
+    },
+    shippingDetails: {
+      "@type": "ShippingDeliveryAvailability",
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "CA",
+      },
+      // REQUIRED: Shipping Rate
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        currency: "CAD", // Match your offers.priceCurrency
+        value: 30,
+      },
+
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        hasCutsOff: {
+          "@type": "DeliveryTimeSettings",
+          cutOffTime: "15:00", // Example: 3 PM EST
+          cutOffTimeTimezone: "America/Toronto",
+        },
+        transitTime: {
+          "@type": "QuantitativeValue",
+          minValue: 3,
+          maxValue: 5,
+          unitCode: "DAY",
+        },
+      },
     },
   };
 

@@ -1,5 +1,5 @@
 "use client";
-import "./header.css";
+import styles from "./FirstStyle.module.css";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingCart, Menu, X } from "lucide-react";
@@ -8,19 +8,16 @@ import { useCart } from "@/app/context/CartContext";
 import SearchBar from "./Searchbar";
 
 export default function Header() {
-  const { cartItems } = useCart();
+  const { totalItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
 
-  // Track window width for responsive layout
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
-    handleResize(); // Set initial width
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
-  const totalItems = cartItems.reduce((sum, item) => sum + item.qty, 0);
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -36,7 +33,7 @@ export default function Header() {
         key={href}
         href={href}
         onClick={isMobile ? () => setMenuOpen(false) : undefined}
-        className={isMobile ? "mobileLink" : "eachLink"}
+        className={isMobile ? styles.mobileLink : styles.eachLink}
       >
         {label}
       </Link>
@@ -44,7 +41,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="promo">
+      <div className={styles.promo}>
         Use code{" "}
         <span
           style={{
@@ -57,13 +54,15 @@ export default function Header() {
         </span>{" "}
         at checkout to get 10% Off
       </div>
-      <header className="header-box">
-        <div className="menu-icon" onClick={() => setMenuOpen((open) => !open)}>
+      <header className={styles.headerBox}>
+        <div
+          className={styles.menuIcon}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </div>
 
-        {/* Logo */}
-        <Link href="/" className="logo-link">
+        <Link href="/" className={styles.logoLink}>
           <Image
             src="/images/logo.webp"
             alt="logo"
@@ -75,30 +74,30 @@ export default function Header() {
 
         <SearchBar />
 
-        {/* Desktop Nav */}
-        <nav className="navBox">{renderLinks()}</nav>
+        <nav className={styles.navBox}>{renderLinks()}</nav>
 
-        {/* Mobile Menu */}
         {menuOpen && (
-          <div className="mobileMenu">
+          <div className={styles.mobileMenu}>
             {renderLinks(true)}
             <Link
+              prefetch={false}
               href="/cart"
               onClick={() => setMenuOpen(false)}
-              className="mobileLink"
+              className={styles.mobileLink}
             >
               Cart ({totalItems})
             </Link>
           </div>
         )}
 
-        {/* Cart Icon */}
-        <Link href="/cart" className="cart-link">
+        <Link href="/cart" className={styles.cartLink}>
           <ShoppingCart style={{ width: 24, height: 24 }} />
-          <span className="sr-only">
+          <span className={styles.srOnly}>
             Go to cart{totalItems > 0 ? `, ${totalItems} items` : ""}
           </span>
-          {totalItems > 0 && <span className="cartBadge">{totalItems}</span>}
+          {totalItems > 0 && (
+            <span className={styles.cartBadge}>{totalItems}</span>
+          )}
         </Link>
       </header>
     </>

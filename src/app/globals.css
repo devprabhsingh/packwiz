@@ -14,7 +14,7 @@
 html,
 body {
   overflow-x: hidden;
-  background: url("/images/bg.webp") center/cover no-repeat;
+  background-color: #ccc;
   height: 100%;
   width: 100%;
   font-family: inherit;
@@ -95,58 +95,6 @@ nav a:hover,
   color: #ff6f20 !important;
 }
 
-/* Payment select buttons */
-.pay-select-btns {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90%;
-  margin: auto;
-  gap: 10px;
-}
-
-.pay-select-btns button {
-  width: 45%;
-  padding: 15px;
-  font-size: 15px;
-  min-height: 20vh;
-  border: 1px solid transparent;
-  border-bottom: 3px solid white;
-  cursor: pointer;
-  outline: none;
-  background: none;
-}
-
-.pay-select-btns button:hover {
-  border-color: #ff6f20;
-}
-
-.pay-select-btns button div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pay-select-btns button span {
-  font-size: 12px;
-}
-
-.pay-select-btns button div span {
-  margin: 0 10px;
-  font-size: 18px;
-}
-.second-div {
-  width: 40%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  max-width: 100%;
-}
-/* Inner container with light bg */
-.trueinner {
-  background-color: #fcfcfc;
-  margin: 8px;
-  border-radius: 8px;
-}
 .search-results-title {
   font-size: 25px;
   text-align: center;
@@ -159,54 +107,7 @@ nav a:hover,
   display: none;
 }
 
-/* Responsive styles */
-@media only screen and (max-width: 1200px) {
-  nav {
-    display: none !important;
-    position: absolute;
-    flex-direction: column;
-  }
-
-  .menu-icon {
-    display: block !important;
-  }
-
-  header {
-    justify-content: space-between !important;
-    padding: 0 10px !important;
-  }
-}
-
-@media only screen and (max-width: 900px) {
-  .first-section {
-    flex-direction: column !important;
-    height: auto !important;
-  }
-
-  .second-div .grid-item {
-    display: block;
-  }
-  .second-div {
-    width: 100%;
-    height: auto;
-  }
-
-  .controls-btn-parent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .scroll-btn {
-    display: none !important;
-  }
-}
-
 @media (max-width: 700px) {
-  .pay-method-wrapper {
-    width: auto;
-    margin: 5px;
-  }
   #truegrid {
     display: flex !important;
     overflow-x: auto;
@@ -220,21 +121,6 @@ nav a:hover,
   }
   .box-types-grid {
     grid-template-columns: 1fr !important;
-  }
-
-  .controls-btn {
-    margin-top: 10px;
-  }
-
-  .first-div-inner {
-    padding: 30px;
-  }
-  .first-div {
-    height: auto;
-    width: 100%;
-  }
-  .second-div {
-    width: 100%;
   }
 
   .item-info {
@@ -290,53 +176,8 @@ nav a:hover,
     margin: 5px;
   }
 
-  .contact-form-title {
-    width: 70%;
-  }
-  .first-div-inner {
-    margin: 5px 5px 0 5px;
-    font-size: 1.4rem !important;
-  }
-  .proud-box {
-    font-size: 23px !important;
-    width: auto;
-    margin: 5px;
-  }
-
-  .first-div-inner p:nth-child(1) {
-    font-size: 1.4rem !important;
-  }
-  .first-div-inner i {
-    font-size: 16px;
-    text-align: center;
-  }
-
-  .head2 {
-    font-size: 1.2rem !important;
-    text-align: center;
-  }
-
-  .menu-icon {
-    display: block;
-  }
-
-  .price-table {
-    font-size: 14px;
-  }
-  .price-table td {
-    padding: 3px !important;
-  }
-  .quantity-controls {
-    margin: 0 !important;
-  }
   .total-price {
     margin: 7px !important;
-  }
-  .box-type-card {
-    flex-direction: column;
-  }
-  .box-types-grid {
-    padding: 0 !important;
   }
 
   .title-box h1 {

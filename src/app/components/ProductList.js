@@ -7,6 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Toast from "@/app/components/Toast";
 
+// Import your CSS module
+import styles from "./ProductList.module.css"; // Adjust path if needed
+
 const ProductList = ({ id, modified, productList }) => {
   const router = useRouter();
   const { addToCart } = useCart();
@@ -30,25 +33,12 @@ const ProductList = ({ id, modified, productList }) => {
     });
   }, [productList.length]);
 
-  const gridTemplate = useMemo(() => {
-    const len = productList.length;
-    if (len === 1) return "1fr";
-    if (len === 2) return "repeat(2,1fr)";
-    if (modified) return "repeat(5,1fr)";
-    return "repeat(5,1fr)";
-  }, [productList.length, modified]);
-
-  const boxTypesGrid = useMemo(
-    () => ({
-      display: "grid",
-      gridTemplateColumns: gridTemplate,
-      placeItems: "center",
-      gap: "10px",
-      maxWidth: modified ? "95%" : "1300px",
-      margin: "0 auto",
-      padding: "5px",
-    }),
-    [gridTemplate, modified]
+  // The gridTemplate and boxTypesGrid useMemo can now be simplified or removed,
+  // as the styling will be handled by CSS.
+  // We'll keep the 'modified' logic for max-width if you want that to remain dynamic.
+  const dynamicMaxWidth = useMemo(
+    () => (modified ? "95%" : "1300px"),
+    [modified]
   );
 
   const getPrice = useCallback(
@@ -76,7 +66,7 @@ const ProductList = ({ id, modified, productList }) => {
     (product, qty, when) => {
       const price = getPrice(qty, product);
       const finalPrice = Number(
-        price - ((price / 100) * product.discount).toFixed(2)
+        (price - (price / 100) * product.discount).toFixed(2)
       );
       addToCart({ ...product, qty: Number(qty), price, finalPrice });
       setAddedProductId(product.id);
@@ -131,32 +121,34 @@ const ProductList = ({ id, modified, productList }) => {
         />
       )}
 
-      <div style={styles.innerContent} className={`${modified}inner`}>
-        {modified && <h2 style={styles.similarHeading}>Similar Products</h2>}
+      {/* Apply styles using className from the imported CSS module */}
+      <div className={styles.innerContent}>
+        {modified && (
+          <h2 className={styles.similarHeading}>Similar Products</h2>
+        )}
 
         <div
-          style={boxTypesGrid}
-          className="box-types-grid"
+          className={`${styles.boxTypesGrid} ${modified}grid`} // Apply base grid style
+          style={{ maxWidth: dynamicMaxWidth }} // Keep dynamic max-width if needed
           id={`${modified}grid`}
         >
           {productList.map((product, index) => {
             const qty = quantities[index];
             const pricePerUnit = getPrice(qty, product);
             const finalPrice = Number(
-              pricePerUnit -
-                ((pricePerUnit / 100) * product.discount).toFixed(2)
+              (pricePerUnit - (pricePerUnit / 100) * product.discount).toFixed(
+                2
+              )
             );
             return (
               <div
                 key={product.id}
-                className="box-type-card"
-                style={styles.boxTypeCard}
+                className={styles.boxTypeCard} // Apply card style
                 id={`${modified}hover`}
               >
                 <div>
                   <div
-                    style={styles.itemInfo}
-                    className={`item-info-expand-${modified} image-wrapper`}
+                    className={`${styles.itemInfo} item-info-expand-${modified} image-wrapper`}
                     onClick={() => handleProductClick(product)}
                   >
                     <Image
@@ -167,20 +159,24 @@ const ProductList = ({ id, modified, productList }) => {
                       loading="lazy"
                       style={{ borderRadius: "8px" }}
                     />
-                    <div style={styles.toolTip}>Click to see more details</div>
+                    <div className={styles.toolTip}>
+                      Click to see more details
+                    </div>
                     {product?.title?.length > 15 && (
                       <Image
                         src="/images/hot.webp"
                         alt="hot"
                         width={30}
                         height={30}
-                        style={styles.hotIcon}
+                        className={styles.hotIcon}
                       />
                     )}
                   </div>
 
-                  <p style={styles.boxTitle}>{product.title || product.desc}</p>
-                  <p style={styles.boxSize}>
+                  <p className={styles.boxTitle}>
+                    {product.title || product.desc}
+                  </p>
+                  <p className={styles.boxSize}>
                     {product.id.startsWith("b")
                       ? product.size
                           .split("*")
@@ -191,8 +187,8 @@ const ProductList = ({ id, modified, productList }) => {
                           .join(" × ")
                       : product.size}
                   </p>
-                  <p style={styles.boxDesc}>{product.desc}</p>
-                  <p style={styles.inStock}>In Stock</p>
+                  <p className={styles.boxDesc}>{product.desc}</p>
+                  <p className={styles.inStock}>In Stock</p>
 
                   {modified ? (
                     <div>
@@ -203,25 +199,24 @@ const ProductList = ({ id, modified, productList }) => {
                     </div>
                   ) : (
                     <>
-                      <div style={styles.quantityControls}>
+                      <div className={styles.quantityControls}>
                         <button
-                          style={styles.button}
+                          className={styles.button}
                           onClick={() => handleQuantityChange(index, qty - 1)}
                         >
                           -
                         </button>
                         <input
-                          className="qty-input"
+                          className={`${styles.qtyInput} qty-input`}
                           type="number"
                           value={qty}
                           min="1"
                           onChange={(e) =>
                             handleQuantityChange(index, e.target.value)
                           }
-                          style={styles.qtyInput}
                         />
                         <button
-                          style={styles.button}
+                          className={styles.button}
                           onClick={() => handleQuantityChange(index, qty + 1)}
                         >
                           +
@@ -240,14 +235,14 @@ const ProductList = ({ id, modified, productList }) => {
                         </span>
                       )}
                       {!product.discount ? (
-                        <div style={styles.totalPrice}>
+                        <div className={styles.totalPrice}>
                           Total:{" "}
                           <strong style={{ color: "#1a8917" }}>
                             ${(qty * pricePerUnit).toFixed(2)}
                           </strong>
                         </div>
                       ) : (
-                        <div style={styles.totalPrice}>
+                        <div className={styles.totalPrice}>
                           Total:{" "}
                           <strong style={{ textDecoration: "line-through" }}>
                             ${(qty * pricePerUnit).toFixed(2)}
@@ -260,11 +255,11 @@ const ProductList = ({ id, modified, productList }) => {
                         </div>
                       )}
 
-                      <div style={styles.actionButtons}>
+                      <div className={styles.actionButtons}>
                         <button
                           onClick={() => handleAddToCart(product, qty, "now")}
+                          className={styles.addToCartButton}
                           style={{
-                            ...styles.addToCartButton,
                             backgroundColor: "#ff6f20",
                             color: "white",
                           }}
@@ -272,11 +267,11 @@ const ProductList = ({ id, modified, productList }) => {
                           Buy Now
                         </button>
                         {addedProductId === product.id ? (
-                          <p style={styles.addToCartButton}>Added!</p>
+                          <p className={styles.addToCartButton}>Added!</p>
                         ) : (
                           <button
                             onClick={() => handleAddToCart(product, qty)}
-                            style={styles.addToCartButton}
+                            className={styles.addToCartButton}
                           >
                             Add to Cart
                           </button>
@@ -292,8 +287,8 @@ const ProductList = ({ id, modified, productList }) => {
 
         <div style={{ width: "100%", paddingBottom: "20px" }}>
           <button
+            className={styles.addToCartButton}
             style={{
-              ...styles.addToCartButton,
               display: "block",
               margin: "40px auto",
               padding: "15px",
@@ -314,125 +309,6 @@ const ProductList = ({ id, modified, productList }) => {
       </div>
     </>
   );
-};
-
-const styles = {
-  innerContent: {},
-  similarHeading: {
-    backgroundColor: "white",
-    margin: "10px auto",
-    width: "fit-content",
-    borderRadius: "8px",
-    padding: "15px",
-  },
-  boxTypeCard: {
-    background: "#fff",
-    borderRadius: "8px",
-    textAlign: "center",
-    boxShadow: "0 0 12px rgba(0,0,0,0.5)",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    padding: "10px",
-    justifyContent: "space-around",
-    minHeight: "400px",
-    width: "250px",
-    overflow: "hidden",
-    position: "relative",
-  },
-  itemInfo: {
-    padding: "16px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  boxTitle: {
-    fontWeight: "bold",
-    fontSize: "16px",
-    margin: "12px 0 0",
-  },
-  boxSize: {
-    fontSize: "15px",
-    color: "#ff6f20",
-    margin: 4,
-  },
-  boxDesc: {
-    fontSize: "13px",
-    color: "#777",
-    marginBottom: 12,
-    wordBreak: "break-word",
-    overflowWrap: "anywhere",
-    width: "100%",
-    textAlign: "center",
-  },
-  inStock: {
-    color: "green",
-    fontSize: "13px",
-    margin: "0 0 5px 0",
-  },
-  quantityControls: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-    marginBottom: "10px",
-  },
-  button: {
-    padding: "4px 10px",
-    fontSize: "18px",
-    cursor: "pointer",
-  },
-  qtyInput: {
-    width: "60px",
-    textAlign: "center",
-    borderRadius: "8px",
-    padding: "6px",
-  },
-  totalPrice: {
-    fontSize: "17px",
-    margin: "16px",
-  },
-  actionButtons: {
-    display: "flex",
-    justifyContent: "space-around",
-    width: "100%",
-  },
-  addToCartButton: {
-    padding: "10px 15px",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    fontSize: "15px",
-    margin: "10px",
-  },
-  toolTip: {
-    position: "absolute",
-    bottom: "10%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    background: "#333",
-    zIndex: 10,
-    color: "#fff",
-    padding: "5px 10px",
-    borderRadius: "4px",
-    whiteSpace: "nowrap",
-    fontSize: "12px",
-    opacity: 0,
-    pointerEvents: "none",
-    transition: "opacity 0.2s ease",
-  },
-  hotIcon: {
-    position: "absolute",
-    top: "8px",
-    right: "8px",
-    height: "30px",
-    width: "30px",
-    background: "#fff",
-    padding: "4px 6px",
-    borderRadius: "50%",
-    fontSize: "14px",
-    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
-  },
 };
 
 export default ProductList;

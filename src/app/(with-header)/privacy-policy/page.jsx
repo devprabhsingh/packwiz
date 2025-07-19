@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
         handled, please contact us at:
       </p>
       <p>
-        <strong>Email:</strong> support@packwiz.ca
+        <strong>Email:</strong> info@packwiz.ca
       </p>
 
       <p className={styles.smallNote}>Last updated: July 13, 2025</p>

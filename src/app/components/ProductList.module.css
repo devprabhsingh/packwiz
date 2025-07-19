@@ -1,0 +1,260 @@
+/* ProductList.module.css or a global CSS file */
+
+/* General Layouts & Containers */
+.maindiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbfbfb;
+  margin: 0 5px;
+  border-radius: 8px;
+}
+
+.seconddiv {
+  width: 40%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+.innerContent {
+  /* Add any specific styles for .innerContent if they exist, otherwise this can be empty or removed */
+}
+
+/* Heading for Similar Products */
+.similarHeading {
+  background-color: white;
+  margin: 10px auto;
+  width: fit-content;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+/* Product Grid Styles (Default for Larger Screens) */
+.boxTypesGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Default for larger screens */
+  place-items: center;
+  gap: 10px;
+  max-width: 1300px; /* Base max-width */
+  margin: 0 auto;
+  padding: 5px;
+}
+
+/* Individual Product Card Styles */
+.boxTypeCard {
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column; /* Stacks content vertically within the card */
+  align-items: center;
+  padding: 10px;
+  justify-content: space-around;
+  min-height: 400px;
+  width: 250px; /* Base width for cards */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Item Information Section within Card */
+.itemInfo {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Needed for positioning tooltip and hot icon */
+  width: 100%; /* Ensure it takes full width of card */
+}
+
+/* Product Title and Description */
+.boxTitle {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 12px 0 0;
+}
+
+.boxSize {
+  font-size: 15px;
+  color: #ff6f20;
+  margin: 4px;
+}
+
+.boxDesc {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 12px;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  width: 100%;
+  text-align: center;
+}
+
+.inStock {
+  color: green;
+  font-size: 13px;
+  margin: 0 0 5px 0;
+}
+
+/* Quantity Controls */
+.quantityControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.button {
+  padding: 4px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+.qtyInput {
+  width: 60px;
+  text-align: center;
+  border-radius: 8px;
+  padding: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Price Display */
+.totalPrice {
+  font-size: 17px;
+  margin: 16px;
+}
+
+/* Action Buttons (Add to Cart, Buy Now) */
+.actionButtons {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.addToCartButton {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 10px;
+  background-color: #007bff; /* Default blue, will be overridden for Buy Now */
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.addToCartButton:hover {
+  background-color: #0056b3;
+}
+
+/* Special Elements */
+.toolTip {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  z-index: 10;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Show tooltip on hover over itemInfo */
+.itemInfo:hover .toolTip {
+  opacity: 1;
+}
+
+.hotIcon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 30px;
+  width: 30px;
+  background: #fff;
+  padding: 4px 6px;
+  border-radius: 50%;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Mobile Responsiveness --- */
+
+/* For screen sizes up to 768px (typical tablets and larger phones) */
+@media (max-width: 768px) {
+  .boxTypesGrid {
+    grid-template-columns: 1fr; /* Display items in a single column */
+    max-width: 90%; /* Adjust overall grid width */
+  }
+
+  .boxTypeCard {
+    width: 90%; /* Make cards wider on mobile */
+    max-width: 350px; /* Max width to prevent them from getting too big on some tablets */
+    min-height: auto; /* Allow height to adjust based on content */
+    margin-bottom: 15px; /* Add some space between cards */
+  }
+
+  .itemInfo {
+    padding: 10px; /* Reduce padding on mobile */
+  }
+
+  .boxTitle {
+    font-size: 15px; /* Slightly smaller font for titles */
+  }
+
+  .boxSize {
+    font-size: 14px; /* Slightly smaller font for sizes */
+  }
+
+  .boxDesc {
+    font-size: 12px; /* Slightly smaller font for descriptions */
+  }
+
+  .addToCartButton {
+    padding: 8px 12px; /* Smaller buttons */
+    font-size: 14px;
+    margin: 5px; /* Reduce margin */
+  }
+
+  .quantityControls {
+    gap: 5px; /* Smaller gap */
+  }
+
+  .button {
+    padding: 2px 8px; /* Smaller quantity buttons */
+    font-size: 16px;
+  }
+
+  .qtyInput {
+    width: 50px; /* Smaller quantity input */
+    padding: 4px;
+  }
+}
+
+/* For very small mobile screens (up to 480px) */
+@media (max-width: 480px) {
+  .boxTypeCard {
+    width: 95%; /* Make cards even wider for very small screens */
+  }
+
+  .similarHeading {
+    padding: 10px;
+    font-size: 1.2em;
+  }
+}

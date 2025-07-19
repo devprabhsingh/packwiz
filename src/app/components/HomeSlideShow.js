@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import styles from "./slideshow.module.css";
+import styles from "./FirstStyle.module.css";
 
 const slides = [
   {
@@ -95,7 +95,7 @@ export default function HomeSlideshow() {
                 />
               </div>
               <Link href={`/ItemDetail/${slide.id}`}>
-                <img
+                <Image
                   src={slide.img}
                   alt={slide.title}
                   className={styles.slideImage}

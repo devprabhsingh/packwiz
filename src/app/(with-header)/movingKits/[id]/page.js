@@ -29,7 +29,7 @@ const MovingKit = () => {
   }, [addedProductId]);
 
   useEffect(() => {
-    const selectedKit = products[12].find((item) => item.id === id);
+    const selectedKit = products[14].find((item) => item.id === id);
     if (!selectedKit) return;
 
     const enrichedItems = selectedKit.items.map((kitItem) => {

@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useMemo } from "react";
 
 const CartContext = createContext();
 
@@ -14,75 +14,103 @@ export const CartProvider = ({ children }) => {
   const [cod, setCod] = useState(false);
   const [kit, setKit] = useState(false);
 
+  // Load cart from localStorage once
   useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    if (storedCart) setCartItems(JSON.parse(storedCart));
+    try {
+      const storedCart = localStorage.getItem("cartItems");
+      if (storedCart) setCartItems(JSON.parse(storedCart));
+    } catch (e) {
+      console.error("Failed to load cartItems from localStorage", e);
+    }
   }, []);
 
+  // Save to localStorage only if cart changes
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    try {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    } catch (e) {
+      console.error("Failed to save cartItems to localStorage", e);
+    }
   }, [cartItems]);
 
-  const addToCart = (item) => {
-    setCartItems((prev) => {
-      // if already in cart, bump quantity
-      const exists = prev.find((i) => i.id === item.id);
-      if (exists) {
-        return prev.map((i) =>
-          i.id === item.id ? { ...i, qty: i.qty + item.qty } : i
-        );
-      }
-      return [...prev, item];
-    });
-  };
+  // Price tier logic
   const getPrice = (item) => {
-    if (item.id.startsWith("pk")) {
-      return item.price;
-    }
-    const qty = item.qty;
+    if (item.id.startsWith("pk")) return item.price;
+    const qty = item.qty || 1;
     const p = item.priceTable;
+    if (!p) return item.price || 0;
     if (qty <= 4) return p.tier1;
     if (qty <= 9) return p.tier2;
     if (qty <= 24) return p.tier3;
     return p.tier4;
   };
+
+  // Add to cart
+  const addToCart = (item) => {
+    setCartItems((prev) => {
+      const existing = prev.find((i) => i.id === item.id);
+      if (existing) {
+        return prev.map((i) =>
+          i.id === item.id
+            ? {
+                ...i,
+                qty: i.qty + item.qty,
+                price: getPrice({ ...i, qty: i.qty + item.qty }),
+              }
+            : i
+        );
+      }
+      return [...prev, { ...item, price: getPrice(item) }];
+    });
+  };
+
+  // Update quantity
   const updateItemQuantity = (id, newQty) => {
     setCartItems((prev) =>
       prev
         .map((i) =>
-          i.id === id ? { ...i, qty: newQty, price: getPrice(i) } : i
+          i.id === id
+            ? { ...i, qty: newQty, price: getPrice({ ...i, qty: newQty }) }
+            : i
         )
         .filter((i) => i.qty > 0)
     );
   };
 
+  // Remove item
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((i) => i.id !== id));
   };
 
-  const clearCart = () => {
-    setCartItems([]);
-  };
+  // Clear cart
+  const clearCart = () => setCartItems([]);
+
+  // Efficient derived value: total number of items
+  const totalItems = useMemo(() => {
+    return cartItems.reduce((sum, item) => sum + item.qty, 0);
+  }, [cartItems]);
+
   return (
     <CartContext.Provider
       value={{
         cartItems,
+        totalItems, // ✅ New optimized value
         addToCart,
         updateItemQuantity,
         removeFromCart,
+        clearCart,
         subTotal,
-        shipFees,
         setSubTotal,
+        shipFees,
         setShipFees,
         total,
         setTotal,
-        clearCart,
-        customerDetail,
-        setCustomerDetail,
-        setEmailSent,
-        emailSent,
         courierName,
         setCourierName,
+        customerDetail,
+        setCustomerDetail,
+        emailSent,
+        setEmailSent,
         cod,
         setCod,
         kit,

@@ -95,7 +95,7 @@ const products = [
       size: '72"L X 80"W',
       priceTable: { tier1: 11.99, tier2: 11.89, tier3: 11.99, tier4: 10.99 },
       image: "/images/moving_blankets.webp",
-      image2: "images/moving_blankets_2.webp",
+      image2: "/images/moving_blankets_2.webp",
       features: [
         "Soft & Comfortable",
         "Durable & Sturdy",
@@ -143,6 +143,7 @@ const products = [
       size: "Small",
       priceTable: { tier1: 14.59, tier2: 14, tier3: 12, tier4: 10 },
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       specs: {
         color: "Black",
@@ -162,6 +163,7 @@ const products = [
       size: "Small",
       priceTable: { tier1: 14.99, tier2: 14.95, tier3: 12.95, tier4: 10.95 },
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
       specs: {
         color: "Black",
         material: "nitrile rubber",
@@ -180,6 +182,7 @@ const products = [
       size: "Medium",
       priceTable: { tier1: 14.99, tier2: 14.95, tier3: 12.95, tier4: 10.95 },
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
       specs: {
         color: "Black",
         material: "nitrile rubber",
@@ -208,6 +211,7 @@ const products = [
       priceTable: { tier1: 14.99, tier2: 14.99, tier3: 12.95, tier4: 10.95 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
     },
     {
       id: "gl05",
@@ -226,6 +230,7 @@ const products = [
         suitableFor: "mechanics, janitorial, food processing, and safety tasks",
       },
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
     },
     {
       id: "gl06",
@@ -244,6 +249,7 @@ const products = [
       priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
     },
     {
       id: "gl07",
@@ -262,6 +268,7 @@ const products = [
       priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
+      image2: "/images/gloves2.webp",
     },
   ],
 
@@ -274,6 +281,7 @@ const products = [
       priceTable: { tier1: 2.7, tier2: 2.6, tier3: 2.5, tier4: 2.3 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
+      image2: "/images/clear-tape-2.webp",
       discount: 10,
       specs: {
         color: "Clear",
@@ -494,6 +502,7 @@ const products = [
       size: "36in X 24in, 100 sheets",
       priceTable: { tier1: 14.99, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
       image: "/images/packing-paper.webp",
+      image2: "/images/packing-paper-2.webp",
       specs: {
         color: "White",
         material: "unprinted recycled newsprint paper",
@@ -511,6 +520,7 @@ const products = [
       size: "36in X 24in, 420+ sheets",
       priceTable: { tier1: 34.99, tier2: 31.99, tier3: 30.99, tier4: 26.99 },
       image: "/images/packing-paper.webp",
+      image2: "/images/packing-paper-2.webp",
       specs: {
         color: "White",
         material: "unprinted recycled newsprint paper",

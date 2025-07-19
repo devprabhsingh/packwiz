@@ -1,85 +1,190 @@
-/* About section */
+/* about.module.css */
+
 .aboutSection {
-  background-color: #fff;
-  padding: 80px 20px;
+  background-color: #f8f8f8; /* Light background */
+  padding: 60px 20px;
+  font-family: sans-serif; /* Fallback font, consider defining a primary font in your global styles */
+  color: #333;
 }
 
 .aboutContainer {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 40px;
+  flex-direction: column; /* Stack sections on smaller screens */
+  gap: 60px; /* Space between aboutText and WhyChooseUs */
 }
 
 .aboutText {
-  flex: 1;
-  min-width: 300px;
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  color: #444;
-  font-size: 16px;
-  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Space between logo and aboutS */
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer, more pronounced shadow */
+  padding: 40px;
+  position: relative;
+  overflow: hidden; /* For pseudo-elements */
+}
+
+/* Optional: Subtle background gradient or pattern */
+.aboutText::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    #ffecd9 0%,
+    transparent 70%
+  ); /* Direct color */
+  border-radius: 50%;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.aboutText::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(
+    circle,
+    #c0e7fb 0%,
+    transparent 70%
+  ); /* Direct color */
+  border-radius: 50%;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.aboutText > * {
+  position: relative; /* Ensure content is above pseudo-elements */
+  z-index: 1;
+}
+
+/* Logo styling */
+.logo {
+  margin-bottom: 20px; /* Adjust spacing below logo */
+  align-self: center; /* Center the logo within aboutText */
+}
+
+/* Specific section for the main text content */
+.aboutS p {
+  line-height: 1.8;
   margin-bottom: 15px;
+  font-size: 1.05em; /* Slightly larger text for readability */
+  color: #555;
 }
 
-.aboutButton {
-  display: inline-block;
-  background-color: #ff6600;
-  color: #fff;
-  padding: 12px 24px;
-  border-radius: 6px;
+.aboutS strong {
+  color: #ff6f20; /* Highlight strong text with brand color */
+  font-weight: 700;
+}
+
+.aboutS ul {
+  list-style: none; /* Remove default bullet points */
+  padding: 0;
+  margin-bottom: 25px;
+}
+
+.aboutS li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  font-size: 1em;
+  color: #333;
+}
+
+/* Custom bullet points */
+.aboutS li::before {
+  content: "✔"; /* Checkmark unicode character */
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #1a8917; /* Green checkmark */
   font-weight: bold;
-  margin: 10px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  font-size: 1.1em;
 }
 
-.aboutButton:hover {
-  background-color: #e05600;
-}
-
+/* Image on the right side */
 .aboutImage {
-  flex: 1;
-  min-width: 300px;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Default to full width for mobile */
+  text-align: center;
+  order: -1; /* Place image above text on mobile */
+  margin-bottom: 30px; /* Space between image and text on mobile */
 }
 
 .aboutImage img {
-  width: 100%;
+  max-width: 100%;
   height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Soft shadow for the image */
+}
+
+/* Call to action button */
+.aboutButton {
+  display: inline-block;
+  background-color: #ff6f20; /* Brand orange */
+  color: #fff;
+  padding: 15px 30px;
   border-radius: 8px;
-  display: block;
-  transition: transform 0.4s ease;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+  box-shadow: 0 5px 15px rgba(255, 111, 32, 0.3); /* Shadow matching button color */
+  margin-top: 20px; /* Space above button */
 }
 
-.aboutImage img:hover {
-  transform: scale(1.05);
+.aboutButton:hover {
+  background-color: #e65c00; /* Darker orange on hover */
+  transform: translateY(-3px); /* Subtle lift effect */
+  box-shadow: 0 8px 20px rgba(255, 111, 32, 0.4);
 }
 
-@media (max-width: 520px) {
-  .aboutSection {
-    padding: 20px 0;
+/* --- Responsive Adjustments --- */
+@media (min-width: 768px) {
+  .aboutText {
+    flex-direction: row; /* Side-by-side on larger screens */
+    align-items: flex-start; /* Align content to the top */
+    gap: 40px;
+    padding: 60px;
   }
 
-  .aboutText p {
-    font-size: 0.8rem;
-    margin: 15px auto;
-    width: 90%;
+  .aboutContainer {
+    flex-direction: column; /* Keep main container as column */
+  }
+
+  .aboutS {
+    flex: 1; /* Allow text content to take available space */
   }
 
   .aboutImage {
-    min-width: 170px;
-    padding: 10px;
+    flex-shrink: 0; /* Prevent image from shrinking */
+    width: 400px; /* Fixed width for image on desktop */
+    margin-bottom: 0;
+    order: 0; /* Reset order for desktop */
+  }
+
+  .logo {
+    align-self: flex-start; /* Align logo to left on larger screens */
   }
 }
-@media (max-width: 310px) {
-  .aboutImage .aboutText p {
-    width: 80%;
-    font-size: 1rem;
+
+@media (min-width: 1024px) {
+  .aboutText {
+    gap: 80px; /* More space between text and image on very large screens */
+  }
+  .aboutContainer {
+    padding: 0 40px; /* Add some horizontal padding for very wide screens */
   }
 }

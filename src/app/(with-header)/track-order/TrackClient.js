@@ -1,7 +1,7 @@
 // app/track/page.js
 "use client";
 import React, { useEffect, useState } from "react";
-import "./track.css";
+import styles from "./track.module.css";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 
@@ -45,12 +45,12 @@ export default function TrackOrderPage() {
   };
 
   return (
-    <div className="track-container">
+    <div className={styles.trackContainer}>
       {!orderData && (
         <div>
           <h2>Track Your Order</h2>
 
-          <div className="track-inputs">
+          <div className={styles.trackInputs}>
             <input
               name="transactionId"
               type="text"
@@ -62,8 +62,8 @@ export default function TrackOrderPage() {
               Track by Transaction
             </button>
           </div>
-          <p className="or">OR</p>
-          <div className="track-inputs">
+          <p className={styles.or}>OR</p>
+          <div className={styles.trackInputs}>
             <input
               name="email"
               type="email"
@@ -75,7 +75,7 @@ export default function TrackOrderPage() {
               Track by Email
             </button>
           </div>
-          {error && <p className="error-msg">{error}</p>}
+          {error && <p className={styles.errorMsg}>{error}</p>}
           <div style={{ width: "fit-content", margin: "auto" }}>
             {loading && (
               <Image
@@ -89,7 +89,7 @@ export default function TrackOrderPage() {
         </div>
       )}
       {orderData && (
-        <div className="order-card">
+        <div className={styles.orderCard}>
           {Array.isArray(orderData) ? (
             orderData.map((order) => (
               <OrderDetails key={order._id} order={order} />
@@ -106,14 +106,14 @@ export default function TrackOrderPage() {
 function OrderDetails({ order }) {
   const orderDate = new Date(order.createdAt).toLocaleString();
   return (
-    <div className="order-details">
+    <div className={styles.orderDetails}>
       <div>
         <h4 style={{ marginBottom: 0 }}>Transaction ID:</h4>
         <p style={{ marginTop: "2px", width: "80%", wordBreak: "break-word" }}>
           {order.transactionId}
         </p>
       </div>
-      <p className={`status-badge`}>
+      <p className={styles.statusBadge}>
         Status: {order.status ? order.status : "Order Recieved"}
       </p>
       <i style={{ display: "block" }}>Order placed on {orderDate}</i>
@@ -121,14 +121,15 @@ function OrderDetails({ order }) {
         <h4>Customer Info</h4>
         <div>
           {" "}
-          <p className="order-date">Order Received: {orderDate}</p>Name:{" "}
-          {order.customerName}
+          <p className={styles.orderDate}>
+            Order Received: {orderDate}
+          </p>Name: {order.customerName}
         </div>
         <p>Email: {order.email}</p>
         <p>Phone: {order.phone}</p>
       </div>
 
-      <div className="section">
+      <div className={styles.section}>
         <h4>Shipping Address</h4>
         <p>
           {order.address.street}, {order.address.city}, {order.address.state},{" "}
@@ -136,10 +137,10 @@ function OrderDetails({ order }) {
         </p>
       </div>
 
-      <div className="section">
+      <div className={styles.section}>
         <h4>Items</h4>
         {order.items.map((item) => (
-          <div key={item._id} className="item">
+          <div key={item._id} className={styles.item}>
             <p>
               <strong>{item.title}</strong> — {item.size} × {item.quantity}unit
             </p>
@@ -149,7 +150,7 @@ function OrderDetails({ order }) {
         ))}
       </div>
 
-      <div className="section totals">
+      <div className={styles.section}>
         <p>Subtotal: ${order.subTotal}</p>
         <p>Shipping: ${order.shipFees}</p>
         <p>

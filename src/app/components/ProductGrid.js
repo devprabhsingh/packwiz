@@ -46,7 +46,7 @@ const ProductGrid = React.memo(({ title, pds }) => {
               <div className={styles.imageWrapper}>
                 <Image
                   src={product.image}
-                  alt={product.name}
+                  alt={product.alt}
                   width={290}
                   height={290}
                   className={styles.itemImg}

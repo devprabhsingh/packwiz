@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "./context/CartContext";
 import { Analytics } from "@vercel/analytics/next";
-import Script from "next/script";
+
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "600"],
@@ -61,24 +61,6 @@ export default function RootLayout({ children }) {
     <html lang="en" className={inter.variable}>
       <head>
         <link rel="manifest" href="/manifest.json" />
-        <Script
-          strategy="afterInteractive"
-          src={`https://www.googletagmanager.com/gtag/js?id=G-492422172`}
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-492422172', {
-                page_path: window.location.pathname,
-              });
-            `,
-          }}
-        />
       </head>
       <body>
         <CartProvider>

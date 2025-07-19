@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "./HeroIntro.module.css";
+import styles from "./FirstStyle.module.css";
 
 export default function HeroIntro() {
   return (
@@ -8,14 +8,13 @@ export default function HeroIntro() {
         <span style={{ fontWeight: "bold" }}>We are proudly</span>
         <Image
           src="/images/animflag.webp"
-          loading="lazy"
           alt="Canadian"
           width={40}
           height={40}
           style={{ margin: "10px" }}
         />
       </div>
-      <div className={styles.contentBox}>
+      <div className={styles.introDiv}>
         <h1
           style={{
             fontSize: "2rem",
@@ -38,7 +37,9 @@ export default function HeroIntro() {
           </div>
           <div className={styles.card}>
             <h3>Free Shipping</h3>
-            <p>On orders over $50.</p>
+            <p>
+              On orders over $100.<sup>*</sup>
+            </p>
           </div>
           <div className={styles.card}>
             <h3>Trusted Quality</h3>

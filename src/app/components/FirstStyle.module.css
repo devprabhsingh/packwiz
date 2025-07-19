@@ -1,0 +1,486 @@
+.promo {
+  text-align: center;
+  color: #2d3748;
+  padding: 3px 0;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 0 !important;
+}
+
+.headerBox {
+  margin: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  position: relative;
+  z-index: 1000;
+}
+
+.navBox {
+  display: flex;
+  justify-content: space-around;
+  flex: 0.7;
+}
+
+.eachLink {
+  color: black;
+  text-decoration: none;
+  font-size: 20px;
+  position: relative;
+  margin: 0 5px;
+}
+
+.menuIcon {
+  display: none;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cartBadge {
+  position: absolute;
+  top: -16px;
+  right: -2px;
+  background: #ff6f20;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2.5px 7px;
+  font-size: 13px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.mobileMenu {
+  position: absolute;
+  top: 65px;
+  left: 5px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.mobileLink {
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  position: relative;
+  padding: 10px;
+  margin-right: 15px;
+}
+
+.logoLink {
+  background-color: white;
+}
+
+.cartLink {
+  position: relative;
+  margin-right: 10px;
+}
+
+.srOnly {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.heroIntro {
+  width: 50%;
+  margin: 5px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  color: #ff6f20;
+}
+
+.maindiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #fbfbfb;
+  margin: 0 5px;
+  border-radius: 8px;
+}
+
+.seconddiv {
+  width: 40%;
+  box-sizing: border-box; /* Corrected from "borderBox" to "border-box" */
+  overflow-x: hidden;
+  max-width: 100%;
+}
+.cards {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #d0e4f1;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  flex: 1 1 150px;
+  max-width: 220px;
+  color: #ff6f20;
+  text-align: center;
+  transition: transform 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #123f6f;
+}
+
+.card p {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #cd4d07;
+}
+
+.logoBox {
+  display: flex;
+  justify-content: center;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  color: black;
+  text-align: center;
+  font-weight: 500;
+}
+.introDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 8px;
+}
+.features,
+.productList {
+  padding-left: 1.25rem;
+  color: #2b6cb0;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.features li::marker {
+  color: #3182ce;
+}
+
+.mission {
+  margin-top: 10px;
+}
+.mission,
+.products {
+  font-size: 1rem;
+  color: #2d3748;
+  font-weight: 500;
+  text-align: center;
+}
+
+.closing {
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #134085;
+  border-left: 4px solid #edf2f7;
+  padding-left: 1rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.actionBtn {
+  width: fit-content;
+  padding: 5px;
+  font-size: 16px;
+  background-color: #ff6f20;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px grey;
+}
+
+.buttonRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+}
+
+.proudbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+
+  font-size: 1.6rem;
+}
+@media (max-width: 900px) {
+  .navBox {
+    display: none !important;
+    position: absolute;
+    flex-direction: column;
+  }
+  .seconddiv {
+    width: 100%;
+    height: auto;
+  }
+  .menuIcon {
+    display: block;
+  }
+  .maindiv {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+}
+@media (max-width: 768px) {
+  .headerBox {
+    padding: 3px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .heroIntro {
+    width: 97%;
+    margin: 5px auto 0 auto;
+    padding: 0.5rem;
+  }
+  .actionBtn {
+    padding: 10px;
+    font-size: 14px;
+  }
+  .logoBox img {
+    width: 300px;
+    height: 100px;
+  }
+  .contentBox {
+    padding: 10px;
+  }
+  .cards {
+    justify-content: center;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
+
+  .features,
+  .productList {
+    font-size: 0.95rem;
+  }
+}
+
+.slideshow {
+  position: relative;
+  margin: 0 5px 0 0;
+}
+
+.slidesContainer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.dealsTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2d3748;
+  margin-bottom: 5px;
+  border-radius: 8px;
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+}
+.slide {
+  display: none;
+  text-align: center;
+  background: #fff;
+  gap: 1rem;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.imgBox {
+  width: 80%;
+}
+
+.active {
+  display: flex;
+  flex-direction: row;
+}
+
+.slideImage {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  margin: 0 auto 1rem auto;
+  object-fit: contain;
+}
+
+.onSaleTitle {
+  display: none;
+  font-weight: bold;
+  font-size: 1.3rem;
+  padding: 10px 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.slideTitle {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #2d3748;
+}
+
+.slideDescription {
+  font-size: 1rem;
+  color: #4a5568;
+  margin-bottom: 2rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.pricing {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #a0aec0;
+  margin-right: 0.75rem;
+}
+
+.discount {
+  background-color: rgb(237, 70, 70);
+  color: white;
+  font-weight: 700;
+  padding: 0 0.5rem;
+  border-radius: 4px;
+}
+
+.currentPrice {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: green;
+  margin-bottom: 0.5rem;
+}
+
+.promo {
+  font-size: 1rem;
+  color: #d69e2e;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #ff6f20;
+  color: white;
+  padding: 0.6rem 1.3rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.25s ease;
+}
+
+@media (max-width: 800px) {
+  .dealsTitle {
+    display: none;
+  }
+  .onSaleTitle {
+    display: flex;
+  }
+
+  .active {
+    flex-direction: column;
+    padding: 5px;
+  }
+
+  .slideshow {
+    margin: 5px;
+    height: auto;
+  }
+
+  .slideTitle {
+    font-size: 1.5rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .slideImage {
+    max-width: 200px;
+  }
+
+  .imgBox {
+    width: 100%;
+  }
+
+  .slideDescription {
+    font-size: 0.9rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  .promo {
+    font-size: 0.9rem;
+  }
+
+  .currentPrice {
+    font-size: 1rem;
+  }
+
+  .discount,
+  .oldPrice {
+    font-size: 0.9rem;
+  }
+
+  .oldPrice {
+    display: block;
+  }
+
+  .discount {
+    display: inline-block;
+    width: 50%;
+  }
+
+  .slideTitle,
+  .slideDescription {
+    margin-bottom: 1rem;
+  }
+}

@@ -314,8 +314,12 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+  margin-top: 10px;
 }
-
+#highlightedImg {
+  padding: 1px;
+  border: 3px solid #ff6f20;
+}
 .thumbnail {
   width: 60px;
   height: 60px;

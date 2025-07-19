@@ -116,6 +116,7 @@ export default function ItemDetailClient({
               src={item.image}
               alt="Thumbnail 1"
               className={styles.thumbnail}
+              id={selectedImage === item.image ? styles.highlightedImg : ""}
               onClick={() => setSelectedImage(item.image)}
             />
             {item?.image2 && (
@@ -123,6 +124,7 @@ export default function ItemDetailClient({
                 src={item.image2}
                 alt="2"
                 className={styles.thumbnail}
+                id={selectedImage === item.image2 ? styles.highlightedImg : ""}
                 onClick={() => setSelectedImage(item.image2)}
               />
             )}
