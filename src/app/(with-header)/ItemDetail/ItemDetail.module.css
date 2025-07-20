@@ -25,14 +25,14 @@
 
 .imageSection img {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   border-radius: 10px;
   object-fit: contain;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .ect {
   margin: 10px;
-  background-color: #fae2d5;
+  background-color: rgb(234, 232, 232);
   border-radius: 5px;
   padding: 10px;
   color: #454545;
@@ -280,9 +280,11 @@
 
   .imageSection img {
     width: 100%;
-    max-width: 250px;
+    max-width: 300px;
   }
-
+  .thirdDiv {
+    width: 100%;
+  }
   .specTable td {
     display: block;
     width: 100%;
@@ -310,7 +312,7 @@
 }
 
 .mainImage {
-  width: 300px;
+  width: 350px;
   height: 300px;
   object-fit: cover;
   border-radius: 8px;

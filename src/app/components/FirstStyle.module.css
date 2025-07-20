@@ -4,7 +4,7 @@
   padding: 3px 0;
   border-radius: 5px;
   background-color: white;
-  margin: 5px 0;
+  margin: 2px 0;
 }
 
 .headerBox {
@@ -57,8 +57,8 @@
 
 .cartBadge {
   position: absolute;
-  top: -16px;
-  right: -2px;
+  top: -10px;
+  right: 2px;
   background: #ff6f20;
   color: #fff;
   border-radius: 50%;
@@ -308,6 +308,15 @@
   background-color: white;
 
   font-size: 1.6rem;
+}
+
+.disclaimer {
+  text-align: center;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px 0;
+  margin: 10px 0;
+  color: #2d3748;
 }
 @media (max-width: 900px) {
   .navBox {

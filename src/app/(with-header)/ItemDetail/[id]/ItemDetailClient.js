@@ -113,7 +113,7 @@ export default function ItemDetailClient({
         <div className={styles.imageSection}>
           <Image
             height={300}
-            width={300}
+            width={350}
             src={selectedImage}
             alt={item.title}
           />

@@ -150,10 +150,14 @@ const ProductList = ({ id, modified, productList }) => {
                     <Image
                       src={product.image || "/images/no-pictures.webp"}
                       alt={product.size || "size"}
-                      width={200}
-                      height={200}
+                      width={230}
+                      height={180}
                       loading="lazy"
-                      style={{ borderRadius: "8px", objectFit: "cover" }}
+                      style={{
+                        borderRadius: "8px",
+                        objectFit: "contain",
+                        backgroundColor: "white",
+                      }}
                     />
                     <div className={styles.toolTip}>
                       Click to see more details

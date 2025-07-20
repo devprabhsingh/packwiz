@@ -28,7 +28,7 @@ const products = [
       size: "16*13*13",
       title: "1.5 Cube corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 2, tier2: 1.95, tier3: 1.9, tier4: 1.85 },
+      priceTable: { tier1: 2.09, tier2: 1.99, tier3: 1.99, tier4: 1.9 },
       image: "/images/1.5cube-2.webp",
       image2: "/images/box-thickness.webp",
       specs: {
@@ -50,7 +50,7 @@ const products = [
       size: "18*15*12.5",
       title: "2 Cube corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 2.49, tier2: 2.49, tier3: 2.39, tier4: 2.19 },
+      priceTable: { tier1: 2.59, tier2: 2.49, tier3: 2.39, tier4: 2.19 },
       image: "/images/2cube-2.webp",
       image2: "/images/box-thickness.webp",
       specs: {
@@ -75,7 +75,7 @@ const products = [
       title: "4 Cube corrugated box",
 
       desc: "32ECT single wall",
-      priceTable: { tier1: 4.09, tier2: 4, tier3: 3.9, tier4: 3.65 },
+      priceTable: { tier1: 4.29, tier2: 4.09, tier3: 3.95, tier4: 3.85 },
       image: "/images/4cube.webp",
       image3: "/images/box-thickness.webp",
       specs: {
@@ -123,9 +123,10 @@ const products = [
       title: "Moving Blankets",
       desc: "Polyster non-woven, Padded",
       size: '72"L X 80"W',
-      priceTable: { tier1: 11.99, tier2: 11.89, tier3: 11.99, tier4: 10.99 },
+      priceTable: { tier1: 11.99, tier2: 11.89, tier3: 11.89, tier4: 10.99 },
       image: "/images/moving_blankets.webp",
       image2: "/images/moving_blankets_2.webp",
+      image3: "/images/moving-blankets-3.webp",
       features: [
         "Soft & Comfortable",
         "Durable & Sturdy",
@@ -149,8 +150,9 @@ const products = [
       title: "Pallet wrap",
       desc: "14inch, 80gauge Stretch Wrap/Pallet Wrap",
       size: "450m",
-      priceTable: { tier1: 17.95, tier2: 16.95, tier3: 13.95, tier4: 12.95 },
+      priceTable: { tier1: 16.95, tier2: 16.95, tier3: 14.95, tier4: 12.95 },
       image: "/images/shrink_wrap.webp",
+      image2: "/images/shrink-wrap-2.webp",
       features: ["Heavy-duty", "Self-Adhering", "Multi-Purpose"],
       discount: 25,
       specs: {
@@ -169,11 +171,12 @@ const products = [
     {
       id: "gl01",
       title: "Nitrile 4 mil gloves",
-      desc: "Powder & Latex Free",
+      desc: "Lightweight Use",
       size: "Small",
-      priceTable: { tier1: 14.59, tier2: 14, tier3: 12, tier4: 10 },
+      priceTable: { tier1: 10.59, tier2: 10.49, tier3: 10.09, tier4: 9.99 },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       specs: {
         color: "Black",
@@ -189,11 +192,12 @@ const products = [
     {
       id: "gl02",
       title: "Nitrile 5 mil gloves",
-      desc: "Powder & Latex Free",
+      desc: "Standard",
       size: "Small",
-      priceTable: { tier1: 14.99, tier2: 14.95, tier3: 12.95, tier4: 10.95 },
+      priceTable: { tier1: 10.99, tier2: 10.95, tier3: 10.89, tier4: 10.79 },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
       specs: {
         color: "Black",
         material: "nitrile rubber",
@@ -208,11 +212,12 @@ const products = [
     {
       id: "gl03",
       title: "Nitrile 5 mil gloves",
-      desc: "Powder & Latex Free",
+      desc: "Standard",
       size: "Medium",
-      priceTable: { tier1: 14.99, tier2: 14.95, tier3: 12.95, tier4: 10.95 },
+      priceTable: { tier1: 10.99, tier2: 10.95, tier3: 10.89, tier4: 10.79 },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
       specs: {
         color: "Black",
         material: "nitrile rubber",
@@ -227,7 +232,7 @@ const products = [
     {
       id: "gl04",
       title: "Nitrile 5 mil gloves",
-      desc: "Powder & Latex Free",
+      desc: "Standard",
       size: "Large",
       specs: {
         color: "Black",
@@ -238,17 +243,18 @@ const products = [
         usage: "medical, industrial, and general-purpose protection",
         suitableFor: "healthcare, cleaning, automotive, and food handling",
       },
-      priceTable: { tier1: 14.99, tier2: 14.99, tier3: 12.95, tier4: 10.95 },
+      priceTable: { tier1: 10.99, tier2: 10.95, tier3: 10.89, tier4: 10.79 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
     },
     {
       id: "gl05",
       title: "Nitrile 6 mil gloves",
       desc: "Heavy Duty Gloves",
       size: "Medium",
-      priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
+      priceTable: { tier1: 11.99, tier2: 11.95, tier3: 11.89, tier4: 11.79 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       specs: {
         color: "Black",
@@ -261,6 +267,7 @@ const products = [
       },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
     },
     {
       id: "gl06",
@@ -276,10 +283,11 @@ const products = [
         usage: "heavy-duty protection in industrial and medical settings",
         suitableFor: "mechanics, janitorial, food processing, and safety tasks",
       },
-      priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
+      priceTable: { tier1: 11.99, tier2: 11.95, tier3: 11.89, tier4: 11.79 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
     },
     {
       id: "gl07",
@@ -295,10 +303,11 @@ const products = [
         usage: "heavy-duty protection in industrial and medical settings",
         suitableFor: "mechanics, janitorial, food processing, and safety tasks",
       },
-      priceTable: { tier1: 18, tier2: 17, tier3: 15, tier4: 11 },
+      priceTable: { tier1: 11.99, tier2: 11.95, tier3: 11.89, tier4: 11.79 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
+      image3: "/images/gloves-3.webp",
     },
   ],
 
@@ -308,7 +317,7 @@ const products = [
       title: "Acrylic Clear Tape",
       desc: "1.88inch wide, 2.5mil",
       size: "100m",
-      priceTable: { tier1: 2.7, tier2: 2.6, tier3: 2.5, tier4: 2.3 },
+      priceTable: { tier1: 2.6, tier2: 2.6, tier3: 2.5, tier4: 2.3 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
       image2: "/images/clear-tape-2.webp",
@@ -329,7 +338,7 @@ const products = [
       title: "Painter's Green Tape",
       desc: "Masking tape, 1.88inch Wide",
       size: "50m",
-      priceTable: { tier1: 6, tier2: 5.5, tier3: 5, tier4: 4.5 },
+      priceTable: { tier1: 5.95, tier2: 5.5, tier3: 5, tier4: 4.5 },
       features: [
         "Multi-Surface Use",
         "Leaves no residue",
@@ -353,7 +362,7 @@ const products = [
       title: "Red tuck tape",
       desc: "Epoxy Resin Tape",
       size: "50m",
-      priceTable: { tier1: 8.95, tier2: 8.55, tier3: 8.5, tier4: 8 },
+      priceTable: { tier1: 7.95, tier2: 8.55, tier3: 8.5, tier4: 8 },
       features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],
       image: "/images/red.webp",
       specs: {
@@ -445,7 +454,7 @@ const products = [
       title: "Coveralls",
       desc: "Waterproof",
       size: "2XL",
-      priceTable: { tier1: 5, tier2: 4, tier3: 3.5, tier4: 3 },
+      priceTable: { tier1: 4.99, tier2: 4.49, tier3: 3.5, tier4: 3 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.webp",
       specs: {
@@ -461,7 +470,7 @@ const products = [
       title: "Coveralls",
       desc: "Dustproof",
       size: "XL",
-      priceTable: { tier1: 4, tier2: 3, tier3: 2.5, tier4: 2.2 },
+      priceTable: { tier1: 3.99, tier2: 3.49, tier3: 2.5, tier4: 2.2 },
       image: "/images/coveralls.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
@@ -530,9 +539,10 @@ const products = [
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: "36in X 24in, 100 sheets",
-      priceTable: { tier1: 14.99, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
+      priceTable: { tier1: 13.99, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
       image: "/images/packing-paper.webp",
       image2: "/images/packing-paper-2.webp",
+
       specs: {
         color: "White",
         material: "unprinted recycled newsprint paper",
@@ -551,6 +561,7 @@ const products = [
       priceTable: { tier1: 34.99, tier2: 31.99, tier3: 30.99, tier4: 26.99 },
       image: "/images/packing-paper.webp",
       image2: "/images/packing-paper-2.webp",
+
       specs: {
         color: "White",
         material: "unprinted recycled newsprint paper",

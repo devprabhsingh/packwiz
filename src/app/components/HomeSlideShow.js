@@ -136,6 +136,9 @@ export default function HomeSlideshow() {
           </article>
         ))}
       </div>
+      <p className={styles.disclaimer}>
+        Get your moving supplies at lowest prices now.
+      </p>
     </section>
   );
 }

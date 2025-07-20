@@ -43,7 +43,7 @@ const ProductInfo = () => {
               textAlign: "center",
               width: "80%",
               margin: "10px auto",
-              backgroundColor: "#ffebe1ff",
+              backgroundColor: "#e9e9e9ff",
               borderRadius: "5px",
               padding: "10px",
             }}
