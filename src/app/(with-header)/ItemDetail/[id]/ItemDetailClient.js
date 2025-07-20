@@ -8,6 +8,7 @@ import Link from "next/link";
 import ReviewSection from "@/app/components/ReviewSection";
 import Toast from "@/app/components/Toast";
 import styles from "../ItemDetail.module.css";
+import Image from "next/image";
 
 const ProductList = dynamic(() => import("../../../components/ProductList"));
 
@@ -110,29 +111,49 @@ export default function ItemDetailClient({
 
       <div className={styles.itemDetailContainer}>
         <div className={styles.imageSection}>
-          <img src={selectedImage} alt={item.title} />
+          <Image
+            height={300}
+            width={300}
+            src={selectedImage}
+            alt={item.title}
+          />
           <div className={styles.thumbnailContainer}>
-            <img
+            <Image
               src={item.image}
               alt="Thumbnail 1"
+              height={120}
+              width={100}
               className={styles.thumbnail}
               id={selectedImage === item.image ? styles.highlightedImg : ""}
               onClick={() => setSelectedImage(item.image)}
             />
             {item?.image2 && (
-              <img
+              <Image
                 src={item.image2}
-                alt="2"
+                alt={item.image2}
+                height={120}
+                width={100}
                 className={styles.thumbnail}
                 id={selectedImage === item.image2 ? styles.highlightedImg : ""}
                 onClick={() => setSelectedImage(item.image2)}
               />
             )}
+            {item?.image3 && (
+              <Image
+                src={item.image3}
+                alt={item.image3}
+                height={120}
+                width={100}
+                className={styles.thumbnail}
+                id={selectedImage === item.image3 ? styles.highlightedImg : ""}
+                onClick={() => setSelectedImage(item.image3)}
+              />
+            )}
           </div>
           {item.id.startsWith("bx") && (
             <div className={styles.ect}>
-              <h4>What is ECT?</h4> ECT (Edge Crush Test) measures a box's
-              stacking strength. A 32 ECT box can withstand 32 pounds of
+              <h4>What is ECT?</h4> ECT (Edge Crush Test) measures stacking
+              strength of a box. A 32 ECT box can withstand 32 pounds of
               pressure per inch, ensuring your items are protected during
               stacking and shipping.
             </div>
@@ -245,7 +266,12 @@ export default function ItemDetailClient({
               <h2>Features</h2>
               {item.features.map((feature, i) => (
                 <p key={i}>
-                  <img src="/images/check.webp" alt="check icon" />
+                  <Image
+                    height={50}
+                    width={50}
+                    src="/images/check.webp"
+                    alt="check icon"
+                  />
                   {feature}
                 </p>
               ))}

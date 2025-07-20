@@ -170,7 +170,7 @@
 .heroIntro {
   width: 50%;
   margin: 5px;
-  padding: 2rem 1rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -186,7 +186,6 @@
   align-items: center;
   justify-content: center;
   background-color: #fbfbfb;
-
   border-radius: 8px;
 }
 
@@ -276,7 +275,7 @@
 .closing {
   font-size: 0.95rem;
   font-style: italic;
-  color: #134085;
+  color: #0d3b80;
   border-left: 4px solid #edf2f7;
   padding-left: 1rem;
   margin-top: 0.5rem;
@@ -284,7 +283,7 @@
 }
 .actionBtn {
   width: fit-content;
-  padding: 5px;
+  padding: 10px;
   font-size: 16px;
   background-color: #ff6f20;
   text-decoration: none;
@@ -382,6 +381,7 @@
   align-items: center;
   justify-content: center;
   color: #2d3748;
+  padding: 15px 0;
   margin-bottom: 5px;
   border-radius: 8px;
   background-color: white;

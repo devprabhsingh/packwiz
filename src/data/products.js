@@ -6,7 +6,9 @@ const products = [
       title: " 1 Cube Corrugated box",
       desc: "32ECT single wall",
       priceTable: { tier1: 1.49, tier2: 1.49, tier3: 1.39, tier4: 1.35 },
-      image: "/images/12inchcube.webp",
+      image: "/images/1cube.webp",
+      image2: "/images/box-thickness.webp",
+
       specs: {
         color: "Brown",
         boxType: "cube",
@@ -27,7 +29,8 @@ const products = [
       title: "1.5 Cube corrugated box",
       desc: "32ECT single wall",
       priceTable: { tier1: 2, tier2: 1.95, tier3: 1.9, tier4: 1.85 },
-      image: "/images/1.5cube.webp",
+      image: "/images/1.5cube-2.webp",
+      image2: "/images/box-thickness.webp",
       specs: {
         color: "Brown",
         boxType: "cuboid",
@@ -48,7 +51,8 @@ const products = [
       title: "2 Cube corrugated box",
       desc: "32ECT single wall",
       priceTable: { tier1: 2.49, tier2: 2.49, tier3: 2.39, tier4: 2.19 },
-      image: "/images/2cube.webp",
+      image: "/images/2cube-2.webp",
+      image2: "/images/box-thickness.webp",
       specs: {
         color: "Brown",
         boxType: "cuboid",
@@ -69,9 +73,11 @@ const products = [
       id: "bx04",
       size: "18*18*21",
       title: "4 Cube corrugated box",
+
       desc: "32ECT single wall",
       priceTable: { tier1: 4.09, tier2: 4, tier3: 3.9, tier4: 3.65 },
       image: "/images/4cube.webp",
+      image3: "/images/box-thickness.webp",
       specs: {
         color: "Brown",
         boxType: "cuboid",

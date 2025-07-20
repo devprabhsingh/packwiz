@@ -43,20 +43,20 @@ export default function HeroIntro() {
           </div>
           <div className={styles.card}>
             <h3>Trusted Quality</h3>
-            <p>Boxes, tapes & more.</p>
+            <p>Premium Boxes, Durable Tapes & More</p>
           </div>
         </div>
         <div className={styles.buttonRow}>
-          <a href="tel:+14377757688" className={styles.actionBtn}>
-            +1 437-775-7688
-          </a>
-          <p style={{ margin: "0 20px" }}>OR</p>
           <a href="/products" className={styles.actionBtn}>
             Explore Products
           </a>
+          <p style={{ margin: "0 20px" }}>OR</p>
+          <a href="tel:+14377757688" className={styles.actionBtn}>
+            +1 437-775-7688
+          </a>
         </div>
         <p className={styles.mission}>
-          Based in Toronto, packing pros with logistics experience.
+          Stress-Free Packing: Top-Quality Supplies, Unbeatable Prices
         </p>
 
         <p className={styles.closing}>

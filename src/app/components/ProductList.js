@@ -153,7 +153,7 @@ const ProductList = ({ id, modified, productList }) => {
                       width={200}
                       height={200}
                       loading="lazy"
-                      style={{ borderRadius: "8px" }}
+                      style={{ borderRadius: "8px", objectFit: "cover" }}
                     />
                     <div className={styles.toolTip}>
                       Click to see more details
