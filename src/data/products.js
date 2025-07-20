@@ -15,6 +15,11 @@ const products = [
         handleHoles: "no",
         weightCapacity: "30lbs",
       },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
     },
     {
       id: "bx02",
@@ -31,6 +36,11 @@ const products = [
         handleHoles: "no",
         weightCapacity: "46.8lbs",
       },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
     },
     {
       id: "bx03",
@@ -47,6 +57,11 @@ const products = [
         handleHoles: "yes",
         weightCapacity: "70.2lbs",
       },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
       details:
         "Our <strong>corrugated boxes</strong> are strong, durable, and ideal for shipping, moving, or storage. Made from high-quality kraft paper, these <strong>shipping boxes</strong> protect your items with excellent cushioning and crush resistance.",
     },
@@ -65,7 +80,11 @@ const products = [
         handleHoles: "yes",
         weightCapacity: "118.2lbs",
       },
-
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
       details:
         "Our <strong>corrugated boxes</strong> are strong, durable, and ideal for shipping, moving, or storage. Made from high-quality kraft paper, these <strong>shipping boxes</strong> protect your items with excellent cushioning and crush resistance.",
     },
@@ -84,6 +103,11 @@ const products = [
         handleHoles: "yes",
         weightCapacity: "60-100lbs",
       },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
     },
   ],
 

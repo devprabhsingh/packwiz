@@ -37,6 +37,19 @@ const ProductInfo = () => {
           <h3 style={{ fontStyle: "italic", color: "#ff6f20", margin: "10px" }}>
             {productCat.subtitle}
           </h3>
+          <p
+            style={{
+              color: "#000000bc",
+              textAlign: "center",
+              width: "80%",
+              margin: "10px auto",
+              backgroundColor: "#ffebe1ff",
+              borderRadius: "5px",
+              padding: "10px",
+            }}
+          >
+            {productCat.info}
+          </p>
         </div>
         <ProductList productList={productList1} />
       </div>

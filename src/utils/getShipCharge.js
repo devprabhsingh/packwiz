@@ -168,8 +168,10 @@ export async function getShipCharge(a, subtotal, cartItems) {
 
     const { distance } = directionsData.routes[0]; // Duration not used in pricing calculation
     const d = distance / 1000;
+
     const state = a?.properties?.context?.region?.name || "";
-    const city = a?.properties?.context?.city?.name || "";
+    const city = a?.properties?.context?.place?.name || "";
+
     return getPrice(d, subtotal, cartItems, state, city);
   } catch (e) {
     console.error(e);

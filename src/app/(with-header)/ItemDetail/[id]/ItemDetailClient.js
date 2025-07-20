@@ -129,6 +129,14 @@ export default function ItemDetailClient({
               />
             )}
           </div>
+          {item.id.startsWith("bx") && (
+            <div className={styles.ect}>
+              <h4>What is ECT?</h4> ECT (Edge Crush Test) measures a box's
+              stacking strength. A 32 ECT box can withstand 32 pounds of
+              pressure per inch, ensuring your items are protected during
+              stacking and shipping.
+            </div>
+          )}
         </div>
 
         <div className={styles.infoSection}>

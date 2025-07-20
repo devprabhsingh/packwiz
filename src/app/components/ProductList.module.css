@@ -1,28 +1,3 @@
-/* ProductList.module.css or a global CSS file */
-
-/* General Layouts & Containers */
-.maindiv {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: #fbfbfb;
-  margin: 0 5px;
-  border-radius: 8px;
-}
-
-.seconddiv {
-  width: 40%;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  max-width: 100%;
-}
-
-.innerContent {
-  /* Add any specific styles for .innerContent if they exist, otherwise this can be empty or removed */
-}
-
-/* Heading for Similar Products */
 .similarHeading {
   background-color: white;
   margin: 10px auto;
@@ -31,18 +6,16 @@
   padding: 15px;
 }
 
-/* Product Grid Styles (Default for Larger Screens) */
 .boxTypesGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Default for larger screens */
+  grid-template-columns: repeat(5, 1fr);
   place-items: center;
   gap: 10px;
-  max-width: 1300px; /* Base max-width */
+  max-width: 1300px;
   margin: 0 auto;
   padding: 5px;
 }
 
-/* Individual Product Card Styles */
 .boxTypeCard {
   background: #fff;
   border-radius: 8px;
@@ -55,25 +28,23 @@
   padding: 10px;
   justify-content: space-around;
   min-height: 400px;
-  width: 250px; /* Base width for cards */
+  width: 250px;
   overflow: hidden;
   position: relative;
 }
 
-/* Item Information Section within Card */
 .itemInfo {
   padding: 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Needed for positioning tooltip and hot icon */
-  width: 100%; /* Ensure it takes full width of card */
+  position: relative;
+  width: 100%;
 }
 
-/* Product Title and Description */
 .boxTitle {
   font-weight: bold;
-  font-size: 16px;
+  font-size: 17px;
   margin: 12px 0 0;
 }
 
@@ -84,8 +55,8 @@
 }
 
 .boxDesc {
-  font-size: 13px;
-  color: #777;
+  font-size: 14px;
+  color: #6f6f6f;
   margin-bottom: 12px;
   word-break: break-word;
   overflow-wrap: anywhere;
@@ -95,7 +66,7 @@
 
 .inStock {
   color: green;
-  font-size: 13px;
+  font-size: 14px;
   margin: 0 0 5px 0;
 }
 
@@ -110,7 +81,7 @@
 
 .button {
   padding: 4px 10px;
-  font-size: 18px;
+  font-size: 19px;
   cursor: pointer;
   border: 1px solid #ddd;
   background-color: #f0f0f0;
@@ -181,33 +152,17 @@
   opacity: 1;
 }
 
-.hotIcon {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  height: 30px;
-  width: 30px;
-  background: #fff;
-  padding: 4px 6px;
-  border-radius: 50%;
-  font-size: 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Mobile Responsiveness --- */
-
-/* For screen sizes up to 768px (typical tablets and larger phones) */
 @media (max-width: 768px) {
   .boxTypesGrid {
     grid-template-columns: 1fr; /* Display items in a single column */
-    max-width: 90%; /* Adjust overall grid width */
+    max-width: 90%;
   }
 
   .boxTypeCard {
-    width: 90%; /* Make cards wider on mobile */
-    max-width: 350px; /* Max width to prevent them from getting too big on some tablets */
-    min-height: auto; /* Allow height to adjust based on content */
-    margin-bottom: 15px; /* Add some space between cards */
+    width: 90%;
+    max-width: 350px;
+    min-height: auto;
+    margin-bottom: 15px;
   }
 
   .itemInfo {
@@ -229,28 +184,27 @@
   .addToCartButton {
     padding: 8px 12px; /* Smaller buttons */
     font-size: 14px;
-    margin: 5px; /* Reduce margin */
+    margin: 5px;
   }
 
   .quantityControls {
-    gap: 5px; /* Smaller gap */
+    gap: 5px;
   }
 
   .button {
-    padding: 2px 8px; /* Smaller quantity buttons */
+    padding: 2px 8px;
     font-size: 16px;
   }
 
   .qtyInput {
-    width: 50px; /* Smaller quantity input */
+    width: 50px;
     padding: 4px;
   }
 }
 
-/* For very small mobile screens (up to 480px) */
 @media (max-width: 480px) {
   .boxTypeCard {
-    width: 95%; /* Make cards even wider for very small screens */
+    width: 95%;
   }
 
   .similarHeading {

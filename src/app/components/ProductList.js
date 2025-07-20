@@ -23,7 +23,6 @@ const ProductList = ({ id, modified, productList }) => {
     type: "success",
   });
 
-  // Adjust quantity array length if productList changes
   useEffect(() => {
     setQuantities((prev) => {
       if (productList.length !== prev.length) {
@@ -33,9 +32,6 @@ const ProductList = ({ id, modified, productList }) => {
     });
   }, [productList.length]);
 
-  // The gridTemplate and boxTypesGrid useMemo can now be simplified or removed,
-  // as the styling will be handled by CSS.
-  // We'll keep the 'modified' logic for max-width if you want that to remain dynamic.
   const dynamicMaxWidth = useMemo(
     () => (modified ? "95%" : "1300px"),
     [modified]
@@ -162,15 +158,6 @@ const ProductList = ({ id, modified, productList }) => {
                     <div className={styles.toolTip}>
                       Click to see more details
                     </div>
-                    {product?.title?.length > 15 && (
-                      <Image
-                        src="/images/hot.webp"
-                        alt="hot"
-                        width={30}
-                        height={30}
-                        className={styles.hotIcon}
-                      />
-                    )}
                   </div>
 
                   <p className={styles.boxTitle}>

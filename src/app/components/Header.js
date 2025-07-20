@@ -10,20 +10,23 @@ import SearchBar from "./Searchbar";
 export default function Header() {
   const { totalItems } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
 
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/products", label: "Products" },
-    ...(windowWidth > 1300 ? [{ href: "/contact", label: "Contact us" }] : []),
+    { href: "/contact", label: "Contact us" },
     { href: "/track-order", label: "Track order" },
   ];
 
@@ -58,6 +61,10 @@ export default function Header() {
         <div
           className={styles.menuIcon}
           onClick={() => setMenuOpen((open) => !open)}
+          role="button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </div>
@@ -76,19 +83,21 @@ export default function Header() {
 
         <nav className={styles.navBox}>{renderLinks()}</nav>
 
-        {menuOpen && (
-          <div className={styles.mobileMenu}>
-            {renderLinks(true)}
-            <Link
-              prefetch={false}
-              href="/cart"
-              onClick={() => setMenuOpen(false)}
-              className={styles.mobileLink}
-            >
-              Cart ({totalItems})
-            </Link>
-          </div>
-        )}
+        <div
+          id="mobile-navigation"
+          className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ""}`}
+          aria-hidden={!menuOpen}
+        >
+          {renderLinks(true)}
+          <Link
+            prefetch={false}
+            href="/cart"
+            onClick={() => setMenuOpen(false)}
+            className={styles.mobileLink}
+          >
+            Cart ({totalItems})
+          </Link>
+        </div>
 
         <Link href="/cart" className={styles.cartLink}>
           <ShoppingCart style={{ width: 24, height: 24 }} />

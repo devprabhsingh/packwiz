@@ -30,7 +30,13 @@
   object-fit: contain;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
+.ect {
+  margin: 10px;
+  background-color: #fae2d5;
+  border-radius: 5px;
+  padding: 10px;
+  color: #454545;
+}
 .infoSection {
   flex: 2;
   min-width: 280px;

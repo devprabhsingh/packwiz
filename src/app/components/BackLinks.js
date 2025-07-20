@@ -42,7 +42,7 @@ const BackLinks = ({ title, id, nextTitle, nextId }) => {
 };
 const styles = {
   backNav: {
-    background: "#fffdfd",
+    background: "#efededff",
     padding: "10px",
     margin: "5px",
     borderRadius: "8px",
