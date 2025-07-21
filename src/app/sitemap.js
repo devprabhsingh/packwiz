@@ -3,11 +3,19 @@ import pds from "@/data/pds";
 export default async function sitemap() {
   const baseUrl = "https://www.packwiz.ca";
 
-  const productUrls = pds.map((product) => ({
-    url: `${baseUrl}/ItemDetail/${product.id}`,
-    lastModified: new Date(),
-    priority: 0.7, // Products are important
-  }));
+  const productUrls = pds.map((product) => {
+    let urlPath;
+    if ([0, 3, 7, 8, 10, 11, 12, 13].includes(product.id)) {
+      urlPath = `/productinfo/${product.id}`;
+    } else {
+      urlPath = `/ItemDetail/${product.idKey}01`;
+    }
+    return {
+      url: `${baseUrl}${urlPath}`,
+      lastModified: new Date(),
+      priority: 0.7, // Products are important
+    };
+  });
 
   return [
     {
