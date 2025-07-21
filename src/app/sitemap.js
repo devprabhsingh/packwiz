@@ -7,6 +7,8 @@ export default async function sitemap() {
     let urlPath;
     if ([0, 3, 7, 8, 10, 11, 12, 13].includes(product.id)) {
       urlPath = `/productinfo/${product.id}`;
+    } else if (product.id > 13) {
+      urlPath = `/ItemDetail/${product.idKey}`;
     } else {
       urlPath = `/ItemDetail/${product.idKey}01`;
     }
