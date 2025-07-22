@@ -344,7 +344,7 @@
   }
   .heroIntro {
     width: 97%;
-    margin: 5px auto 0 auto;
+    margin: 0;
     padding: 0.5rem;
   }
   .actionBtn {

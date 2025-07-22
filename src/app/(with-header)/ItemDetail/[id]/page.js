@@ -17,8 +17,8 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${item.title} | Packwiz`,
-    description: item.desc, // Use a concise description for the meta tag
+    title: `Professional grade ${item.title} | Packwiz`,
+    description: `As low as $${item.priceTable?.tier4 || item.price || "Lowest price"}, ${item.desc}`, // Use a concise description for the meta tag
     keywords: `${item.title}, ${item.title.toLowerCase()}, Packwiz, packaging, ${getProductCat(
       item.id
     )}`, // Example keywords
@@ -30,8 +30,8 @@ export async function generateMetadata({ params }) {
       images: [
         {
           url: `https://packwiz.ca${item.image}`, // Absolute URL for Open Graph image
-          width: 800, // Example width
-          height: 600, // Example height
+          width: 500, // Example width
+          height: 300, // Example height
           alt: item.title,
         },
       ],
