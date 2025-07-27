@@ -11,19 +11,23 @@ function getPrice(distance, subtotal, cartItems, state, city) {
     "city of toronto",
     "scarborough",
     "york",
+    "brampton",
+    "bolton",
+    "caledon",
+    "mississauga",
   ];
   if (freeCities.includes(city.toLowerCase()) && subtotal >= 100) {
     return [
       {
         price: 0,
         deliveryTime: "1-3 days",
-        cod: distance <= 25 ? true : false,
+        cod: distance <= 30 ? true : false,
         shipService: "Standard",
       },
       {
         price: 10,
         deliveryTime: "same day",
-        cod: distance < 25 ? true : false,
+        cod: distance <= 30 ? true : false,
         shipService: "Express",
       },
     ];
@@ -78,7 +82,7 @@ function getPrice(distance, subtotal, cartItems, state, city) {
       shipRate = 20 + Number((distance * 0.04).toFixed(2));
     } else if (distance > 50) {
       shipRate = 20 + Number((distance * 0.1).toFixed(2));
-    } else if (distance > 25) {
+    } else if (distance > 30) {
       shipRate = 15;
     } else {
       shipRate = 10;

@@ -28,6 +28,7 @@ export default function Header() {
     { href: "/products", label: "Products" },
     { href: "/contact", label: "Contact us" },
     { href: "/track-order", label: "Track order" },
+    { href: "/blog", label: "Our Blogs" },
   ];
 
   const renderLinks = (isMobile = false) =>

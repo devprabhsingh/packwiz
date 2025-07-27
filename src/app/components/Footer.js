@@ -22,6 +22,9 @@ const Footer = () => {
           <Link href="/contact" style={styles.footerLink}>
             Contact
           </Link>
+          <Link href="/blog" style={styles.footerLink}>
+            Blogs
+          </Link>
           <Link href="/track-order" style={styles.footerLink}>
             Track order
           </Link>
