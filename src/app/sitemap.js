@@ -41,6 +41,16 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date("2025-07-14T03:20:19+00:00"),
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/blog/moving-checklist`,
+      lastModified: new Date("2025-07-14T03:20:19+00:00"),
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/privacy-policy`,
       lastModified: new Date("2025-07-14T03:20:19+00:00"),
       priority: 0.8,

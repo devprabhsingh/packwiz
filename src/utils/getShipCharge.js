@@ -97,6 +97,13 @@ function getPrice(distance, subtotal, cartItems, state, city) {
     }
   }
 
+  // shipcharge acc to price
+  if (state === "Ontario") {
+    if (distance < 25 && subtotal > 45) {
+      shipRate = 0;
+    }
+  }
+
   //  Add weight surcharge if needed
   if (atlantic.includes(state)) {
     shipRate += 0.4 * totalWeight;
