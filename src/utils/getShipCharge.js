@@ -55,7 +55,7 @@ function getPrice(distance, subtotal, cartItems, state, city) {
   ];
   const territories = ["Yukon", "Northwest Territories", "Nunavut"];
   const western = ["British Columbia", "Alberta", "Saskatchewan", "Manitoba"];
-  let shipRate = 0;
+  let shipRate = 10;
 
   if (territories.includes(state)) {
     if (subtotal > 500) {

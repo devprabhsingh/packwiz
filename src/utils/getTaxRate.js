@@ -22,6 +22,6 @@ export async function getTaxRate(province) {
       return 0.14;
 
     default:
-      return 0;
+      return 0.13;
   }
 }

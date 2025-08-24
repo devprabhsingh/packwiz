@@ -85,7 +85,7 @@ const ShippingInfo = () => {
             await getShipRates(addressResults[0]);
           }
 
-          const rate = await getTaxRate(ctx?.region?.name);
+          const rate = await getTaxRate(ctx?.region?.name || formData.state);
           console.log(rate);
           setTaxRateValue(rate || 0);
         } catch (error) {

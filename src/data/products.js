@@ -5,7 +5,7 @@ const products = [
       size: "12*12*12",
       title: " 1 Cube Corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 1.49, tier2: 1.49, tier3: 1.39, tier4: 1.35 },
+      priceTable: { tier1: 2.49, tier2: 2.39, tier3: 2.29, tier4: 2.09 },
       image: "/images/1cube.webp",
       image2: "/images/box-thickness.webp",
 
@@ -28,7 +28,7 @@ const products = [
       size: "16*13*13",
       title: "1.5 Cube corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 2.09, tier2: 1.99, tier3: 1.99, tier4: 1.9 },
+      priceTable: { tier1: 2.59, tier2: 2.49, tier3: 2.39, tier4: 2.19 },
       image: "/images/1.5cube-2.webp",
       image2: "/images/box-thickness.webp",
       specs: {
@@ -50,7 +50,7 @@ const products = [
       size: "18*15*12.5",
       title: "2 Cube corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 2.59, tier2: 2.49, tier3: 2.39, tier4: 2.19 },
+      priceTable: { tier1: 2.69, tier2: 2.59, tier3: 2.49, tier4: 2.29 },
       image: "/images/2cube-2.webp",
       image2: "/images/box-thickness.webp",
       specs: {
@@ -75,7 +75,7 @@ const products = [
       title: "4 Cube corrugated box",
 
       desc: "32ECT single wall",
-      priceTable: { tier1: 4.29, tier2: 4.09, tier3: 3.95, tier4: 3.85 },
+      priceTable: { tier1: 4.79, tier2: 4.29, tier3: 4.15, tier4: 4.05 },
       image: "/images/4cube.webp",
       image3: "/images/box-thickness.webp",
       specs: {
@@ -99,7 +99,7 @@ const products = [
       size: "24*21*48",
       title: "Wardrobe box with metal bar",
       desc: "32ECT single wall",
-      priceTable: { tier1: 21.98, tier2: 21.45, tier3: 21.25, tier4: 19.95 },
+      priceTable: { tier1: 22.98, tier2: 21.45, tier3: 21.25, tier4: 19.95 },
       image: "/images/wardrobe.webp",
       specs: {
         color: "Brown",
@@ -315,9 +315,9 @@ const products = [
     {
       id: "ct01",
       title: "Acrylic Clear Tape",
-      desc: "1.88inch wide, 2.5mil",
-      size: "100m",
-      priceTable: { tier1: 2.6, tier2: 2.6, tier3: 2.5, tier4: 2.3 },
+      desc: "2 inch wide, 2 mil",
+      size: "100 meters",
+      priceTable: { tier1: 2.29, tier2: 2.25, tier3: 2.19, tier4: 1.99 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
       image2: "/images/clear-tape-2.webp",
@@ -359,15 +359,15 @@ const products = [
   [
     {
       id: "rt01",
-      title: "Red tuck tape",
-      desc: "Epoxy Resin Tape",
-      size: "50m",
-      priceTable: { tier1: 7.95, tier2: 8.55, tier3: 8.5, tier4: 8 },
+      title: "Construction Tuck Tape",
+      desc: "Strong Epoxy Resin Construction Tape",
+      size: "50 Meters",
+      priceTable: { tier1: 6.95, tier2: 6.55, tier3: 6.5, tier4: 5.95 },
       features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],
       image: "/images/red.webp",
       specs: {
         color: "Red",
-        material: "polyethylene film with acrylic adhesive",
+        material: "Polyethylene film with Acrylic adhesive",
         width: "2 inches",
         length: "50 meters",
         usage: "sealing insulation, vapor barriers, and epoxy resin molds",

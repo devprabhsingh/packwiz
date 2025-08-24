@@ -13,6 +13,7 @@ const ContactSection = dynamic(() => import("../components/ContactSection"), {
   loading: () => <p>Loading...</p>,
 });
 const ReviewSection = dynamic(() => import("../components/ReviewSection"), {
+  ssr: true,
   loading: () => <p>Loading...</p>,
 });
 const LazyExtras = dynamic(() => import("../components/LazyExtras"), {
