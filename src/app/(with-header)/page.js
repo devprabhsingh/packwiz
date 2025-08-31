@@ -38,10 +38,10 @@ export default function HomePage() {
     telephone: "+1-437-775-7688",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "571 Fenmar Drive",
+      streetAddress: "64 Caranci Crescent",
       addressLocality: "Brampton",
       addressRegion: "ON",
-      postalCode: "M9L 2R6",
+      postalCode: "L6P 1H1",
       addressCountry: "CA",
     },
     openingHoursSpecification: [

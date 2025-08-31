@@ -5,7 +5,7 @@ const products = [
       size: "12*12*12",
       title: " 1 Cube Corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 2.49, tier2: 2.39, tier3: 2.29, tier4: 2.09 },
+      priceTable: { tier1: 2.39, tier2: 2.19, tier3: 2.09, tier4: 1.89 },
       image: "/images/1cube.webp",
       image2: "/images/box-thickness.webp",
 
@@ -28,7 +28,7 @@ const products = [
       size: "16*13*13",
       title: "1.5 Cube corrugated box",
       desc: "32ECT single wall",
-      priceTable: { tier1: 2.59, tier2: 2.49, tier3: 2.39, tier4: 2.19 },
+      priceTable: { tier1: 2.29, tier2: 2.19, tier3: 2.09, tier4: 1.99 },
       image: "/images/1.5cube-2.webp",
       image2: "/images/box-thickness.webp",
       specs: {
@@ -75,7 +75,7 @@ const products = [
       title: "4 Cube corrugated box",
 
       desc: "32ECT single wall",
-      priceTable: { tier1: 4.79, tier2: 4.29, tier3: 4.15, tier4: 4.05 },
+      priceTable: { tier1: 4.79, tier2: 4.29, tier3: 4.15, tier4: 3.99 },
       image: "/images/4cube.webp",
       image3: "/images/box-thickness.webp",
       specs: {
@@ -121,8 +121,8 @@ const products = [
     {
       id: "mb01",
       title: "Moving Blankets",
-      desc: "Polyster non-woven, Padded",
-      size: '72"L X 80"W',
+      desc: "Non-woven, Padded, 1.94kg/pc",
+      size: "72in L X 80in W",
       priceTable: { tier1: 11.99, tier2: 11.89, tier3: 11.89, tier4: 10.99 },
       image: "/images/moving_blankets.webp",
       image2: "/images/moving_blankets_2.webp",
@@ -136,7 +136,7 @@ const products = [
       specs: {
         color: "Black",
         material: "thick quilted cotton blend",
-        padding: "high-density polyster filling",
+        padding: "high-density filling",
         usage: "heavy-duty protection",
         washable: "yes, but vaccumm preferred",
         suitableFor: "furniture, appliances, and large household items",
@@ -150,7 +150,7 @@ const products = [
       title: "Pallet wrap",
       desc: "14inch, 80gauge Stretch Wrap/Pallet Wrap",
       size: "450m",
-      priceTable: { tier1: 16.95, tier2: 16.95, tier3: 14.95, tier4: 12.95 },
+      priceTable: { tier1: 16.55, tier2: 16.15, tier3: 14.95, tier4: 12.95 },
       image: "/images/shrink_wrap.webp",
       image2: "/images/shrink-wrap-2.webp",
       features: ["Heavy-duty", "Self-Adhering", "Multi-Purpose"],
@@ -317,7 +317,7 @@ const products = [
       title: "Acrylic Clear Tape",
       desc: "2 inch wide, 2 mil",
       size: "100 meters",
-      priceTable: { tier1: 2.29, tier2: 2.25, tier3: 2.19, tier4: 1.99 },
+      priceTable: { tier1: 2.09, tier2: 1.99, tier3: 1.95, tier4: 1.89 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
       image2: "/images/clear-tape-2.webp",
@@ -338,7 +338,7 @@ const products = [
       title: "Painter's Green Tape",
       desc: "Masking tape, 1.88inch Wide",
       size: "50m",
-      priceTable: { tier1: 5.95, tier2: 5.5, tier3: 5, tier4: 4.5 },
+      priceTable: { tier1: 5.45, tier2: 5.15, tier3: 5, tier4: 4.5 },
       features: [
         "Multi-Surface Use",
         "Leaves no residue",
@@ -539,7 +539,7 @@ const products = [
       desc: "High quality recycled newsprint paper",
       title: "Packing paper",
       size: "36in X 24in, 100 sheets",
-      priceTable: { tier1: 13.99, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
+      priceTable: { tier1: 13.49, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
       image: "/images/packing-paper.webp",
       image2: "/images/packing-paper-2.webp",
 
@@ -579,7 +579,7 @@ const products = [
       title: "Bubble Cushion Wrap",
       desc: "Plastic Wrap",
       size: "12inch X 300ft",
-      priceTable: { tier1: 35, tier2: 32, tier3: 30, tier4: 28 },
+      priceTable: { tier1: 33.99, tier2: 29.99, tier3: 29.49, tier4: 27.99 },
       image: "/images/bubble.webp",
       features: ["3/16inch bubble size", "Strong", "Lightweight & Soft"],
       specs: {

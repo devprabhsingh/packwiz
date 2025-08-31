@@ -1,7 +1,6 @@
 const discountCodes = [
-  { code: "LLANA10", type: "percent", amount: 10 },
   { code: "WELCOME10", type: "percent", amount: 10 },
-  { code: "JAVAID25", type: "percent", amount: 25 },
+  { code: "KAYLA10", type: "percent", amount: 10 },
 ];
 
 export default discountCodes;

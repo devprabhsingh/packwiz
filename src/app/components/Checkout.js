@@ -155,11 +155,18 @@ const Checkout = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    saveOrder();
+    setLoading(true); // Await the saveOrder call and get the order object
 
-    setLoading(true);
+    const savedOrder = await saveOrder(); // If the order failed to save, stop the process and return
+
+    if (!savedOrder) {
+      setErrorMessage("Failed to save order. Please try again.");
+      setLoading(false);
+      return;
+    }
 
     if (!stripe || !elements) {
+      setLoading(false);
       return;
     }
 

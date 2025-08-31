@@ -70,7 +70,7 @@ export default function ReviewSection({
         <div style={styles.reviewHeadingAfter}></div>
       </h2>
 
-      <div style={styles.reviewsGrid}>
+      <div style={styles.reviewsGrid} className="reviewsGrid">
         {reviewsToRender.map((review, index) => (
           <div style={styles.reviewCard} key={index}>
             <span style={styles.reviewIcon}>“</span>

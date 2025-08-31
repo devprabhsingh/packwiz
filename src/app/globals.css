@@ -150,6 +150,10 @@ nav a:hover,
   .contact-container > div {
     margin-right: 0 !important;
   }
+
+  .reviewsGrid {
+    grid-template-columns: 1fr !important;
+  }
 }
 @media (max-width: 520px) {
   header .searchBox {

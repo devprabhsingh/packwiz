@@ -10,8 +10,8 @@ const slides = [
     title: "Clear Packing Tape",
     description: "Strong, transparent tape perfect for sealing boxes securely.",
     img: "/images/clear-tape.webp",
-    priceOld: 2.7,
-    priceCurrent: 2.43,
+    priceOld: 2.09,
+    priceCurrent: 1.88,
     discountPercent: 10,
   },
   {
@@ -30,8 +30,8 @@ const slides = [
     description:
       "Industrial-grade shrink wrap to keep your items tightly packed and safe.",
     img: "/images/shrink_wrap.webp",
-    priceOld: 18.95,
-    priceCurrent: 14.21,
+    priceOld: 16.55,
+    priceCurrent: 12.41,
     discountPercent: 25,
   },
 ];
