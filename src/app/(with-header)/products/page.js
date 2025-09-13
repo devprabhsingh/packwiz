@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-
 import BackLinks from "../../components/BackLinks";
 import SearchBar from "../../components/Searchbar";
 
@@ -10,6 +9,18 @@ const ProductGrid = dynamic(() => import("../../components/ProductGrid"), {
 
 import products from "@/data/products";
 import pds from "@/data/pds";
+
+// Utility function to convert a title to a URL-friendly slug
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+};
 
 export async function generateMetadata() {
   const allProducts = products.flat();
@@ -28,11 +39,11 @@ export async function generateMetadata() {
       },
       offers: {
         "@type": "Offer",
+        // The key change is here: use the slugified title for the URL
         url: product.id.startsWith("pk")
-          ? `https://www.packwiz.ca/movingKits/${product.id}`
-          : `https://www.packwiz.ca/ItemDetail/${product.id}`,
+          ? `https://www.packwiz.ca/moving-kits/${slugify(product.title)}`
+          : `https://www.packwiz.ca/item-details/${slugify(product.title)}`,
         priceCurrency: "CAD",
-
         price: product.id.startsWith("pk")
           ? product.price
           : product.priceTable.tier4,
@@ -59,9 +70,7 @@ export default function ProductsPage() {
       <div className="mobile-search">
         <SearchBar />
       </div>
-
       <BackLinks title="" id="" />
-
       <ProductGrid pds={pds} />
     </>
   );

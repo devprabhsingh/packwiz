@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useParams, useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 import BackLinks from "@/app/components/BackLinks";
 import dynamic from "next/dynamic";
@@ -9,18 +9,26 @@ import ReviewSection from "@/app/components/ReviewSection";
 import Toast from "@/app/components/Toast";
 import styles from "../ItemDetail.module.css";
 import Image from "next/image";
+import products from "@/data/products";
 
 const ProductList = dynamic(() => import("../../../components/ProductList"));
 
-export default function ItemDetailClient({
-  item,
-  similarProducts,
-  category,
-  reviews,
-  priceTiers,
-}) {
+// Utility function to convert a title to a URL-friendly slug
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/-+$/, "");
+};
+
+const ItemDetailClient = ({ category, reviews }) => {
   const router = useRouter();
+  const { slug } = useParams();
   const { addToCart } = useCart();
+
   const [quantity, setQuantity] = useState(1);
   const [addedProductId, setAddedProductId] = useState(null);
   const [toast, setToast] = useState({
@@ -28,21 +36,73 @@ export default function ItemDetailClient({
     message: "",
     type: "success",
   });
-  const [selectedImage, setSelectedImage] = useState(item.image);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedImage, setSelectedImage] = useState("");
+  const [similarProducts, setSimilarProducts] = useState([]);
+  const [categoryData, setCategoryData] = useState(null);
+  const [priceTiers, setPriceTiers] = useState([]);
 
+  // Flatten the products array once
+  const flatProducts = useMemo(() => products.flat(), []);
+
+  // Effect to find the product and set related states based on the slug
+  useEffect(() => {
+    // Find the product by its slug
+
+    const product = flatProducts.find((p) => slugify(p.title) === slug);
+
+    if (!product) {
+      router.push("/404");
+      return;
+    }
+
+    setSelectedProduct(product);
+    setSelectedImage(product.image);
+
+    // Find the category and similar products
+    const parentCategory = products.find((cat) =>
+      cat.some((item) => item.id === product.id)
+    );
+    if (parentCategory) {
+      setCategoryData({
+        name: parentCategory[0].categoryName || "Products",
+        unit: "Pcs",
+      }); // Assuming category name can be derived
+      setSimilarProducts(parentCategory.filter((p) => p.id !== product.id));
+
+      // Generate price tiers from priceTable
+      const tiers = Object.entries(product.priceTable || {}).map(
+        ([key, value]) => {
+          let label;
+          if (key === "tier1") label = "Upto 4";
+          else if (key === "tier2") label = "5 - 9";
+          else if (key === "tier3") label = "10 - 24";
+          else if (key === "tier4") label = "25+";
+          return { label, value };
+        }
+      );
+      setPriceTiers(tiers);
+    }
+  }, [slug, flatProducts, router]);
+
+  // Price and final price calculation
   const { price, finalPrice } = useMemo(() => {
-    if (!item || !item.priceTable) return { price: 0, finalPrice: 0 };
+    if (!selectedProduct || !selectedProduct.priceTable)
+      return { price: 0, finalPrice: 0 };
     let currentPrice = 0;
-    if (quantity <= 4) currentPrice = item.priceTable.tier1;
-    else if (quantity <= 9) currentPrice = item.priceTable.tier2;
-    else if (quantity <= 24) currentPrice = item.priceTable.tier3;
-    else currentPrice = item.priceTable.tier4;
+    if (quantity <= 4) currentPrice = selectedProduct.priceTable.tier1;
+    else if (quantity <= 9) currentPrice = selectedProduct.priceTable.tier2;
+    else if (quantity <= 24) currentPrice = selectedProduct.priceTable.tier3;
+    else currentPrice = selectedProduct.priceTable.tier4;
 
     const discountedPrice = Number(
-      (currentPrice - (currentPrice * (item.discount || 0)) / 100).toFixed(2)
+      (
+        currentPrice -
+        (currentPrice * (selectedProduct.discount || 0)) / 100
+      ).toFixed(2)
     );
     return { price: currentPrice, finalPrice: discountedPrice };
-  }, [quantity, item]);
+  }, [quantity, selectedProduct]);
 
   useEffect(() => {
     if (addedProductId !== null) {
@@ -51,19 +111,25 @@ export default function ItemDetailClient({
     }
   }, [addedProductId]);
 
-  const increaseQty = () => setQuantity((prevQty) => prevQty + 1);
-  const decreaseQty = () => setQuantity((prevQty) => Math.max(1, prevQty - 1));
+  const increaseQty = useCallback(
+    () => setQuantity((prevQty) => prevQty + 1),
+    []
+  );
+  const decreaseQty = useCallback(
+    () => setQuantity((prevQty) => Math.max(1, prevQty - 1)),
+    []
+  );
 
-  const handleAddToCart = () => {
-    if (!item) return;
+  const handleAddToCart = useCallback(() => {
+    if (!selectedProduct) return;
     const cartItem = {
-      ...item,
+      ...selectedProduct,
       qty: quantity,
       price: price,
       finalPrice: finalPrice,
     };
     addToCart(cartItem);
-    setAddedProductId(item.id);
+    setAddedProductId(selectedProduct.id);
     setToast({
       show: true,
       message: (
@@ -79,23 +145,41 @@ export default function ItemDetailClient({
       ),
       type: "success",
     });
-  };
+  }, [selectedProduct, quantity, price, finalPrice, addToCart]);
 
-  const handleBuyNow = () => {
+  const handleBuyNow = useCallback(() => {
     handleAddToCart();
     router.push("/cart");
-  };
+  }, [handleAddToCart, router]);
 
-  const handleCloseToast = () =>
-    setToast((prevToast) => ({ ...prevToast, show: false }));
+  const handleCloseToast = useCallback(
+    () => setToast((prevToast) => ({ ...prevToast, show: false })),
+    []
+  );
 
-  const getPriceTierCondition = (label) => {
-    if (label === "Upto 4") return quantity <= 4;
-    if (label === "5 - 9") return quantity > 4 && quantity <= 9;
-    if (label === "10 - 24") return quantity > 9 && quantity <= 24;
-    if (label === "25+") return quantity > 24;
-    return false;
-  };
+  const getPriceTierCondition = useCallback(
+    (label) => {
+      if (label === "Upto 4") return quantity <= 4;
+      if (label === "5 - 9") return quantity > 4 && quantity <= 9;
+      if (label === "10 - 24") return quantity > 9 && quantity <= 24;
+      if (label === "25+") return quantity > 24;
+      return false;
+    },
+    [quantity]
+  );
+
+  if (!selectedProduct) {
+    return (
+      <div className={styles.loading}>
+        <Image
+          height={50}
+          width={50}
+          alt="loading..."
+          src={"/images/loader.gif"}
+        />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -107,50 +191,69 @@ export default function ItemDetailClient({
         />
       )}
 
-      <BackLinks nextTitle={item.title} nextId={item.id} />
+      {/* BackLinks component now needs category and item from state */}
+      <BackLinks
+        category={categoryData}
+        nextTitle={selectedProduct.title}
+        nextId={selectedProduct.id}
+      />
 
       <div className={styles.itemDetailContainer}>
+        {/* ... (rest of the component remains largely the same, but uses selectedProduct, selectedImage, similarProducts from state) */}
         <div className={styles.imageSection}>
           <Image
             height={300}
             width={350}
             src={selectedImage}
-            alt={item.title}
+            alt={selectedProduct.title}
+            priority
           />
           <div className={styles.thumbnailContainer}>
             <Image
-              src={item.image}
+              src={selectedProduct.image}
               alt="Thumbnail 1"
               height={120}
               width={100}
               className={styles.thumbnail}
-              id={selectedImage === item.image ? styles.highlightedImg : ""}
-              onClick={() => setSelectedImage(item.image)}
+              id={
+                selectedImage === selectedProduct.image
+                  ? styles.highlightedImg
+                  : ""
+              }
+              onClick={() => setSelectedImage(selectedProduct.image)}
             />
-            {item?.image2 && (
+            {selectedProduct.image2 && (
               <Image
-                src={item.image2}
-                alt={item.image2}
+                src={selectedProduct.image2}
+                alt={selectedProduct.image2}
                 height={120}
                 width={100}
                 className={styles.thumbnail}
-                id={selectedImage === item.image2 ? styles.highlightedImg : ""}
-                onClick={() => setSelectedImage(item.image2)}
+                id={
+                  selectedImage === selectedProduct.image2
+                    ? styles.highlightedImg
+                    : ""
+                }
+                onClick={() => setSelectedImage(selectedProduct.image2)}
               />
             )}
-            {item?.image3 && (
+            {selectedProduct.image3 && (
               <Image
-                src={item.image3}
-                alt={item.image3}
+                src={selectedProduct.image3}
+                alt={selectedProduct.image3}
                 height={120}
                 width={100}
                 className={styles.thumbnail}
-                id={selectedImage === item.image3 ? styles.highlightedImg : ""}
-                onClick={() => setSelectedImage(item.image3)}
+                id={
+                  selectedImage === selectedProduct.image3
+                    ? styles.highlightedImg
+                    : ""
+                }
+                onClick={() => setSelectedImage(selectedProduct.image3)}
               />
             )}
           </div>
-          {item.id.startsWith("bx") && (
+          {selectedProduct.id.startsWith("bx") && (
             <div className={styles.ect}>
               <h4>What is ECT?</h4> ECT (Edge Crush Test) measures stacking
               strength of a box. A 32 ECT box can withstand 32 pounds of
@@ -161,26 +264,26 @@ export default function ItemDetailClient({
         </div>
 
         <div className={styles.infoSection}>
-          <h1>{item.title}</h1>
-          <p className={styles.description}>{item.desc}</p>
+          <h1>{selectedProduct.title}</h1>
+          <p className={styles.description}>{selectedProduct.desc}</p>
           <p>
             <strong>Size: </strong>
-            {item.id.startsWith("b")
-              ? item.size
+            {selectedProduct.id.startsWith("b")
+              ? selectedProduct.size
                   .split("*")
                   .map(
                     (val, i) =>
                       `${val}${i === 0 ? '"L' : i === 1 ? '"W' : '"H'}`
                   )
                   .join(" × ")
-              : item.size}
+              : selectedProduct.size}
           </p>
           <p className={styles.inStock}>In Stock</p>
 
           <table className={styles.priceTable}>
             <thead>
               <tr>
-                <th>{category.unit}</th>
+                <th>{category?.unit || "Pcs"}</th>
                 <th>Price</th>
               </tr>
             </thead>
@@ -200,7 +303,7 @@ export default function ItemDetailClient({
           </table>
 
           <div>
-            {!item.discount ? (
+            {!selectedProduct.discount ? (
               <h4>
                 Effective Price: ${price.toFixed(2)} X {quantity} ={" "}
                 <span style={{ color: "green" }}>
@@ -209,7 +312,9 @@ export default function ItemDetailClient({
               </h4>
             ) : (
               <div>
-                <span className={styles.discountTag}>{item.discount}% Off</span>
+                <span className={styles.discountTag}>
+                  {selectedProduct.discount}% Off
+                </span>
                 <p>
                   Effective Price:{" "}
                   <span style={{ textDecoration: "line-through" }}>
@@ -234,23 +339,22 @@ export default function ItemDetailClient({
             <button
               className={styles.addToCartButton}
               onClick={handleAddToCart}
-              disabled={addedProductId === item.id}
+              disabled={addedProductId === selectedProduct.id}
             >
-              {addedProductId === item.id ? "Added!" : "Add to Cart"}
+              {addedProductId === selectedProduct.id ? "Added!" : "Add to Cart"}
             </button>
             <button className={styles.buyNowButton} onClick={handleBuyNow}>
               Buy Now
             </button>
           </div>
         </div>
-
         <div className={styles.thirdDiv}>
-          {item.specs && (
+          {selectedProduct.specs && (
             <div className={styles.specCard}>
               <h2 className={styles.specTitle}>Specifications</h2>
               <table className={styles.specTable}>
                 <tbody>
-                  {Object.entries(item.specs).map(([key, value]) => (
+                  {Object.entries(selectedProduct.specs).map(([key, value]) => (
                     <tr key={key}>
                       <td className={styles.specLabel}>{key}</td>
                       <td className={styles.specValue}>{value}</td>
@@ -261,10 +365,10 @@ export default function ItemDetailClient({
             </div>
           )}
 
-          {item.features && item.features.length > 0 && (
+          {selectedProduct.features && selectedProduct.features.length > 0 && (
             <div className={styles.featuresSection}>
               <h2>Features</h2>
-              {item.features.map((feature, i) => (
+              {selectedProduct.features.map((feature, i) => (
                 <p key={i}>
                   <Image
                     height={50}
@@ -290,9 +394,10 @@ export default function ItemDetailClient({
         </div>
       )}
 
-      {reviews && reviews.length > 0 && (
-        <ReviewSection reviewList={reviews} headline="Customer Reviews" />
-      )}
+      {/* Assuming a separate reviews file/function will provide review data */}
+      <ReviewSection reviewList={reviews} headline="Customer Reviews" />
     </>
   );
-}
+};
+
+export default ItemDetailClient;

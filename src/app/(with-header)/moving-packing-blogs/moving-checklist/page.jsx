@@ -17,7 +17,10 @@ export default function MovingChecklist() {
           name="keywords"
           content="moving supplies Canada, moving boxes Canada, buy moving boxes online, moving kits Canada, packing materials Canada"
         />
-        <link rel="canonical" href="https://packwiz.ca/blog/moving-checklist" />
+        <link
+          rel="canonical"
+          href="https://packwiz.ca/moving-packing-blogs/moving-checklist"
+        />
       </Head>
 
       <article className={styles.article}>
@@ -40,11 +43,17 @@ export default function MovingChecklist() {
             Packwiz.ca
           </Link>
           , we deliver high-quality{" "}
-          <Link href="https://packwiz.ca/productinfo/0" target="_blank">
+          <Link
+            href="https://packwiz.ca/product-info/moving-boxes"
+            target="_blank"
+          >
             moving boxes
           </Link>
           , packing materials, and ready-made{" "}
-          <Link href="https://packwiz.ca/movingKits/pk01" target="_blank">
+          <Link
+            href="https://packwiz.ca/moving-kits/1-bedroom-apartment-condo-kit"
+            target="_blank"
+          >
             moving kits
           </Link>{" "}
           across Canada to help you move with ease.
@@ -68,7 +77,10 @@ export default function MovingChecklist() {
         </ul>
         <p>
           👉{" "}
-          <Link href="https://packwiz.ca/productinfo/0" target="_blank">
+          <Link
+            href="https://packwiz.ca/product-info/moving-boxes"
+            target="_blank"
+          >
             Shop Moving Boxes
           </Link>
         </p>
@@ -143,7 +155,10 @@ export default function MovingChecklist() {
         </ul>
         <p>
           👉{" "}
-          <Link href="https://packwiz.ca/movingKits/pk01" target="_blank">
+          <Link
+            href="https://packwiz.ca/movingKits/1-bedroom-apartment-condo-kit"
+            target="_blank"
+          >
             Order Your Moving Kit Today
           </Link>
         </p>

@@ -1,14 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
-import products from "@/data/products";
+import products from "@/data/products"; // This is the data array you provided
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Toast from "@/app/components/Toast";
-const flatProducts = products.flat();
+
+// Utility function to convert a title to a URL-friendly slug
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/[^\w-]+/g, "") // Remove all non-word chars
+    .replace(/--+/g, "-") // Replace multiple - with single -
+    .replace(/^-+/, "") // Trim - from start of text
+    .replace(/-+$/, ""); // Trim - from end of text
+};
 
 const MovingKit = () => {
-  const { id } = useParams();
+  const { slug } = useParams();
   const router = useRouter();
   const [kitData, setKitData] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -21,6 +32,9 @@ const MovingKit = () => {
   });
   const [toastTriggered, setToastTriggered] = useState(false);
 
+  // Memoize the flattened products array for efficiency
+  const flatProducts = useMemo(() => products.flat(), []);
+
   useEffect(() => {
     if (addedProductId !== null) {
       const timer = setTimeout(() => setAddedProductId(null), 1000);
@@ -29,8 +43,18 @@ const MovingKit = () => {
   }, [addedProductId]);
 
   useEffect(() => {
-    const selectedKit = products[14].find((item) => item.id === id);
-    if (!selectedKit) return;
+    // Correctly find the moving kit using the slug
+    // We assume the moving kits are in the last sub-array of your 'products' data
+    const movingKits = products[products.length - 1];
+
+    // Find the specific kit that matches the slug
+    const selectedKit = movingKits.find((item) => slugify(item.title) === slug);
+
+    if (!selectedKit) {
+      // Handle the case where the slug doesn't match any kit
+      router.push("/404"); // Redirect to a 404 page for a better user experience
+      return;
+    }
 
     const enrichedItems = selectedKit.items.map((kitItem) => {
       const itemDetails = flatProducts.find((p) => p.id === kitItem.id);
@@ -42,7 +66,7 @@ const MovingKit = () => {
     });
 
     setKitData({ ...selectedKit, items: enrichedItems });
-  }, [id]);
+  }, [slug, flatProducts, router]);
 
   useEffect(() => {
     if (!kitData) return;
@@ -55,6 +79,7 @@ const MovingKit = () => {
 
   const updateQty = (index, delta) => {
     setKitData((prev) => {
+      if (!prev) return prev;
       const updatedItems = [...prev.items];
       updatedItems[index].qty = Math.max(0, updatedItems[index].qty + delta);
       return {
@@ -132,7 +157,7 @@ const MovingKit = () => {
           <h2 style={styles.subtitle}>What is Included</h2>
           <div className="scroll-box">
             {kitData.items.map((item, index) => (
-              <div key={index} style={styles.card}>
+              <div key={item.id} style={styles.card}>
                 <Image
                   src={item.image || "/images/no_pictures.webp"}
                   alt={item.title}

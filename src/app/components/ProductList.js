@@ -10,6 +10,17 @@ import Toast from "@/app/components/Toast";
 // Import your CSS module
 import styles from "./ProductList.module.css"; // Adjust path if needed
 
+// Utility function to convert a title to a URL-friendly slug
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/-+$/, "");
+};
+
 const ProductList = ({ id, modified, productList }) => {
   const router = useRouter();
   const { addToCart } = useCart();
@@ -98,13 +109,15 @@ const ProductList = ({ id, modified, productList }) => {
 
   const handleProductClick = useCallback(
     (product) => {
-      if (productList[0]?.id.startsWith("pk")) {
-        router.push(`/movingKits/${product.id}`);
+      const productSlug = slugify(product.title);
+      // Construct the new URL using the slug
+      if (product.id.startsWith("pk")) {
+        router.push(`/movingKits/${productSlug}`);
       } else {
-        router.push(`/ItemDetail/${product.id}`);
+        router.push(`/item-details/${productSlug}`);
       }
     },
-    [productList, router]
+    [router]
   );
 
   return (
@@ -124,8 +137,8 @@ const ProductList = ({ id, modified, productList }) => {
         )}
 
         <div
-          className={`${styles.boxTypesGrid} ${modified}grid`} // Apply base grid style
-          style={{ maxWidth: dynamicMaxWidth }} // Keep dynamic max-width if needed
+          className={`${styles.boxTypesGrid} ${modified}grid`}
+          style={{ maxWidth: dynamicMaxWidth }}
           id={`${modified}grid`}
         >
           {productList.map((product, index) => {
@@ -139,7 +152,7 @@ const ProductList = ({ id, modified, productList }) => {
             return (
               <div
                 key={product.id}
-                className={styles.boxTypeCard} // Apply card style
+                className={styles.boxTypeCard}
                 id={`${modified}hover`}
               >
                 <div>

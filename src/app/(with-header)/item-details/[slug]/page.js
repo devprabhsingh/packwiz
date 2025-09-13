@@ -3,11 +3,34 @@ import categories from "@/data/categories";
 import reviewList from "@/data/reviewList";
 import { getProductCat } from "@/utils/getProductCat";
 import ItemDetailClient from "./ItemDetailClient";
+
+// Utility function to convert a title to a URL-friendly slug
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+};
+
+// Flatten the products array for easier searching
 const flatPs = products.flat();
 
+// --- Generate static paths for pre-rendering ---
+// This is an important step for Next.js to know which dynamic pages to build at build time.
+export async function generateStaticParams() {
+  return flatPs.map((product) => ({
+    slug: slugify(product.title),
+  }));
+}
+
+// --- Generate dynamic metadata for each page ---
 export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const item = flatPs.find((p) => p.id === id);
+  const { slug } = await params;
+  const item = flatPs.find((p) => slugify(p.title) === slug);
 
   if (!item) {
     return {
@@ -18,36 +41,32 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `Professional grade ${item.title} | Packwiz`,
-    description: `As low as $${item.priceTable?.tier4 || item.price || "Lowest price"}, ${item.desc}`, // Use a concise description for the meta tag
-    keywords: `${item.title}, ${item.title.toLowerCase()}, Packwiz, packaging, ${getProductCat(
-      item.id
-    )}`, // Example keywords
+    description: `As low as $${item.priceTable?.tier4 || item.price || "Lowest price"}, ${item.desc}`,
+    keywords: `${item.title}, ${item.title.toLowerCase()}, Packwiz, packaging, ${getProductCat(item.id)}`,
     openGraph: {
       title: `${item.title} | Packwiz`,
       description: item.desc,
-      url: `https://packwiz.ca/ItemDetail/${item.id}`,
+      url: `https://packwiz.ca/item-details/${slug}`,
       siteName: "Packwiz",
       images: [
         {
-          url: `https://packwiz.ca${item.image}`, // Absolute URL for Open Graph image
-          width: 500, // Example width
-          height: 300, // Example height
+          url: `https://packwiz.ca${item.image}`,
+          width: 500,
+          height: 300,
           alt: item.title,
         },
       ],
-      type: "article", // More specific type for products
+      type: "article",
     },
   };
 }
 
 // --- Main Server Component for the Product Detail Page ---
 export default async function ItemDetailPage({ params }) {
-  const { id } = await params;
-  const item = flatPs.find((p) => p.id === id);
+  const { slug } = await params;
+  const item = flatPs.find((p) => slugify(p.title) === slug);
 
-  // Handle case where item is not found
   if (!item) {
-    // You might want to render a more sophisticated 404 page here
     return (
       <div style={{ padding: "20px", textAlign: "center" }}>
         <h1>Product Not Found</h1>
@@ -61,16 +80,16 @@ export default async function ItemDetailPage({ params }) {
     );
   }
 
-  // Prepare data that the client component needs, all done on the server
-  const letter = id.slice(0, id.length - 1);
+  // Find and prepare the related data (all done on the server)
+  const letter = item.id.slice(0, item.id.length - 1);
   const similarProducts = flatPs.filter(
-    (p) => p.id.startsWith(letter) && p.id !== id
+    (p) => p.id.startsWith(letter) && p.id !== item.id
   );
 
+  // You might need to adjust this logic depending on how getProductCat works
   const category = categories[getProductCat(item.id)] || { unit: "" };
   const reviews = reviewList.filter((r) => r.category === item.title);
 
-  // Price tiers for display (static part, can be pre-calculated)
   const priceTiers = [
     { label: "Upto 4", value: item.priceTable.tier1 },
     { label: "5 - 9", value: item.priceTable.tier2 },
@@ -86,18 +105,18 @@ export default async function ItemDetailPage({ params }) {
     image: `https://packwiz.ca${item.image}`,
     description: item.desc,
     sku: item.id,
-    mpn: item.id, // Only include if item.id truly functions as an MPN
+    mpn: item.id,
     brand: {
       "@type": "Brand",
       name: "Packwiz",
     },
     offers: {
       "@type": "Offer",
-      url: `https://packwiz.ca/ItemDetail/${item.id}`,
+      url: `https://packwiz.ca/item-details/${slug}`,
       priceCurrency: "CAD",
       price: item.priceTable.tier1,
       itemCondition: "https://schema.org/NewCondition",
-      availability: "https://schema.org/InStock", // Ensure this is dynamic based on actual stock
+      availability: "https://schema.org/InStock",
     },
     hasMerchantReturnPolicy: {
       "@type": "MerchantReturnPolicy",
@@ -109,15 +128,14 @@ export default async function ItemDetailPage({ params }) {
       merchantReturnDays: 30,
       returnPolicyCategory: "https://schema.org/MerchantReturnByMail",
       restockingFee: {
-        // Recommended: Explicitly state if there's a restocking fee
         "@type": "MonetaryAmount",
         currency: "CAD",
-        value: 0, // Set to your actual restocking fee, or 0 if none
+        value: 0,
       },
       returnShippingFeesAmount: {
         "@type": "MonetaryAmount",
         currency: "CAD",
-        value: 0, // Set to your actual return shipping cost, or 0 if free
+        value: 0,
       },
     },
     shippingDetails: {
@@ -126,18 +144,16 @@ export default async function ItemDetailPage({ params }) {
         "@type": "DefinedRegion",
         addressCountry: "CA",
       },
-      // REQUIRED: Shipping Rate
       shippingRate: {
         "@type": "MonetaryAmount",
-        currency: "CAD", // Match your offers.priceCurrency
+        currency: "CAD",
         value: 30,
       },
-
       deliveryTime: {
         "@type": "ShippingDeliveryTime",
         hasCutsOff: {
           "@type": "DeliveryTimeSettings",
-          cutOffTime: "15:00", // Example: 3 PM EST
+          cutOffTime: "15:00",
           cutOffTimeTimezone: "America/Toronto",
         },
         transitTime: {
@@ -156,15 +172,9 @@ export default async function ItemDetailPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
-
-      {/* Render the Client Component, passing down all necessary props */}
-      <ItemDetailClient
-        item={item}
-        similarProducts={similarProducts}
-        category={category}
-        reviews={reviews}
-        priceTiers={priceTiers}
-      />
+      {/* Since the ItemDetailClient.js now fetches its own data,
+      we no longer need to pass these as props */}
+      <ItemDetailClient category={category} reviews={reviews} />
     </>
   );
 }

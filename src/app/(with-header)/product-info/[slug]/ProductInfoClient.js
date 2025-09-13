@@ -1,4 +1,4 @@
-// app/products/[id]/ProductInfoClient.js
+// app/product-info/ProductInfoClient.js
 "use client";
 
 import React from "react";
@@ -19,16 +19,13 @@ const ProductInfoClient = ({ productData, productCat }) => {
     );
   }
 
-  const productList1 = productData; // Assuming productData is the list you want to pass to ProductList
-
   return (
     <div style={styles.maindiv}>
       <div style={styles.boxesdiv}>
         <div className="mobile-search">
           <SearchBar />
         </div>
-        {/* Pass productCat.id for BackLinks if needed, or get it from props */}
-        <BackLinks title={productCat.title} id={productCat.id} />
+        <BackLinks title={productCat.title} />
         <div className="title-box" style={styles.titlebox}>
           <h1
             style={{
@@ -44,13 +41,14 @@ const ProductInfoClient = ({ productData, productCat }) => {
           </h3>
           <p style={styles.pInfo}>{productCat.info}</p>
         </div>
-        <ProductList productList={productList1} />
+        <ProductList productList={productData} />
       </div>
     </div>
   );
 };
 
 const styles = {
+  maindiv: {},
   boxesdiv: {
     backgroundColor: "white",
   },

@@ -1,6 +1,7 @@
 const categories = [
   {
-    title: "Corrugated Boxes",
+    id: "moving-boxes",
+    title: "Moving Boxes",
     subtitle: "Strong. Reliable. Built to protect your goods",
     unit: "Boxes",
     weight: {
@@ -15,6 +16,7 @@ const categories = [
     info: "Our heavy-duty single-wall large cuboid corrugated boxes offer reliable strength and durability for moving and storage needs. Designed with reinforced handles and sturdy construction, making them ideal for heavy items. Built to withstand rough handling, they provide excellent protection while being easy to carry and stack.",
   },
   {
+    id: "moving-blankets",
     title: "Moving Blankets",
     subtitle: "Strong. Reliable. Built to protect your goods",
     unit: "Blankets",
@@ -22,6 +24,7 @@ const categories = [
     info: "Protect your furniture and fragile belongings with these heavy-duty 72 x 80 inch moving blankets. Made from durable quilted fabric and thick padding, these furniture pads provide excellent cushioning against scratches, dents, and impact during moving or storage. Featuring reinforced edges for extra durability and easy care, these moving blankets are essential for safe, damage-free relocations.",
   },
   {
+    id: "stretch-wrap",
     title: "Stretch Wrap",
     subtitle: "Clear wrap, multiple uses",
     unit: "Rolls",
@@ -29,6 +32,7 @@ const categories = [
     info: "This 14 blown stretch wrap offers strong cling and puncture resistance to secure pallets and goods. With 1450 ft per roll, it ensures tight, stable loads for safe shipping and storage.",
   },
   {
+    id: "gloves",
     title: "Gloves",
     subtitle: "Tear resistant and durable Nitrile gloves",
     unit: "Cases",
@@ -36,6 +40,7 @@ const categories = [
     info: "Durable nitrile gloves provide reliable protection and a comfortable fit for medical, industrial, and everyday use. These powder-free gloves offer excellent puncture resistance and tactile sensitivity, making them ideal for hygiene and safety.",
   },
   {
+    id: "clear-packaging-tape",
     title: "Clear/Packaging Tape",
     subtitle: "Acrylic Clear Packaging Tape",
     unit: "Rolls",
@@ -43,6 +48,7 @@ const categories = [
     info: "Reliable acrylic clear packaging tape that offers strong adhesion and a clean finish. Ideal for sealing boxes securely during moving and storage.",
   },
   {
+    id: "green-painters-tape",
     title: "Green Painter's Tape",
     subtitle: "The Best-in-class masking tape",
     unit: "Rolls",
@@ -50,6 +56,7 @@ const categories = [
     info: "High-quality green painter’s tape designed for clean paint lines and easy removal. Perfect for interior painting and surface protection without residue.",
   },
   {
+    id: "red-tuck-tape",
     title: "Red Tuck Tape",
     subtitle: "Epoxy resin tuck tape",
     unit: "Rolls",
@@ -57,13 +64,15 @@ const categories = [
     info: "Durable red tuck tape reinforced with epoxy resin, providing excellent strength and adhesion for heavy-duty sealing and packaging applications.",
   },
   {
-    title: "Garbage bags Black/Clear",
+    id: "garbage-bags",
+    title: "Garbage bags",
     subtitle: "Strong. Heavy duty bags",
     unit: "Boxes(50pc)",
     weight: 7.5,
     info: "Heavy-duty garbage bags designed for strength and tear resistance. Suitable for residential and commercial waste disposal needs.",
   },
   {
+    id: "coveralls",
     title: "Coveralls",
     subtitle: "Tear proof and water proof is what you need",
     unit: "Pieces",
@@ -71,6 +80,7 @@ const categories = [
     info: "Durable tear- and waterproof coveralls offering excellent protection for messy jobs and industrial environments.",
   },
   {
+    id: "felt-pads",
     title: "Felt pads",
     subtitle: "Adhesive and good quality pads",
     unit: "Pack(117pc)",
@@ -78,6 +88,7 @@ const categories = [
     info: "High-quality adhesive felt pads designed to protect floors and furniture from scratches and noise caused by movement.",
   },
   {
+    id: "newsprint-packing-paper",
     title: "Newsprint Packing Paper",
     subtitle: "High quality packing paper to protect your goods",
     unit: "bundles",
@@ -85,6 +96,7 @@ const categories = [
     info: "Eco-friendly newsprint packing paper ideal for wrapping fragile items and filling empty spaces to prevent damage during transit.",
   },
   {
+    id: "bubble-cushion-wrap",
     title: "Bubble Cushion Wrap",
     subtitle: "High quality plastic wrap to protect your goods",
     unit: "Rolls",
@@ -92,6 +104,7 @@ const categories = [
     info: "Premium bubble cushion wrap providing superior shock absorption and surface protection for delicate and breakable items.",
   },
   {
+    id: "disposable-booties",
     title: "Disposable Booties",
     subtitle: "",
     unit: "Pack",
@@ -99,13 +112,15 @@ const categories = [
     info: "Disposable booties: lightweight, waterproof shoe covers ideal for maintaining cleanliness in homes, clinics, and industrial settings.",
   },
   {
-    title: "Corrugated Corners",
+    id: "corrugated-corners",
+    title: "Furniture Corners",
     subtitle: "",
     unit: "Pack",
     weight: 0.1,
     info: "Disposable booties: lightweight, waterproof shoe covers ideal for maintaining cleanliness in homes, clinics, and industrial settings.",
   },
   {
+    id: "moving-kit",
     title: "Moving Kit",
     subtitle: "All-in-one moving essentials",
     unit: "kits",

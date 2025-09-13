@@ -3,8 +3,8 @@ const products = [
     {
       id: "bx01",
       size: "12*12*12",
-      title: " 1 Cube Corrugated box",
-      desc: "32ECT single wall",
+      title: "1 Cube Corrugated Box - Small",
+      desc: "Small - 32 ECT",
       priceTable: { tier1: 2.39, tier2: 2.19, tier3: 2.09, tier4: 1.89 },
       image: "/images/1cube.webp",
       image2: "/images/box-thickness.webp",
@@ -26,8 +26,8 @@ const products = [
     {
       id: "bx02",
       size: "16*13*13",
-      title: "1.5 Cube corrugated box",
-      desc: "32ECT single wall",
+      title: "1.5 Cube corrugated Box - Medium",
+      desc: "Medium - 32 ECT",
       priceTable: { tier1: 2.29, tier2: 2.19, tier3: 2.09, tier4: 1.99 },
       image: "/images/1.5cube-2.webp",
       image2: "/images/box-thickness.webp",
@@ -48,8 +48,8 @@ const products = [
     {
       id: "bx03",
       size: "18*15*12.5",
-      title: "2 Cube corrugated box",
-      desc: "32ECT single wall",
+      title: "2 Cube corrugated Box - Medium",
+      desc: "Medium - 32 ECT",
       priceTable: { tier1: 2.69, tier2: 2.59, tier3: 2.49, tier4: 2.29 },
       image: "/images/2cube-2.webp",
       image2: "/images/box-thickness.webp",
@@ -72,9 +72,9 @@ const products = [
     {
       id: "bx04",
       size: "18*18*21",
-      title: "4 Cube corrugated box",
+      title: "4 Cube corrugated box - Large",
 
-      desc: "32ECT single wall",
+      desc: "Large - 32 ECT",
       priceTable: { tier1: 4.79, tier2: 4.29, tier3: 4.15, tier4: 3.99 },
       image: "/images/4cube.webp",
       image3: "/images/box-thickness.webp",
@@ -314,7 +314,7 @@ const products = [
   [
     {
       id: "ct01",
-      title: "Acrylic Clear Tape",
+      title: "Clear Packing Tape",
       desc: "2 inch wide, 2 mil",
       size: "100 meters",
       priceTable: { tier1: 2.09, tier2: 1.99, tier3: 1.95, tier4: 1.89 },
@@ -335,7 +335,7 @@ const products = [
   [
     {
       id: "gt01",
-      title: "Painter's Green Tape",
+      title: "Painters Masking Tape",
       desc: "Masking tape, 1.88inch Wide",
       size: "50m",
       priceTable: { tier1: 5.45, tier2: 5.15, tier3: 5, tier4: 4.5 },
@@ -359,7 +359,7 @@ const products = [
   [
     {
       id: "rt01",
-      title: "Construction Tuck Tape",
+      title: "Tuck Tape",
       desc: "Strong Epoxy Resin Construction Tape",
       size: "50 Meters",
       priceTable: { tier1: 6.95, tier2: 6.55, tier3: 6.5, tier4: 5.95 },
@@ -732,11 +732,11 @@ const products = [
   [
     {
       id: "pk01",
-      title: "1 Bedroom Apartment/Condo Kit",
+      title: "1 Bedroom Apartment-Condo Kit",
       desc: "Multiple Items",
       items: [
         { id: "bx01", qty: 5 },
-        { id: "bx01", qty: 8 },
+        { id: "bx02", qty: 8 },
         { id: "bx03", qty: 4 },
         { id: "bx04", qty: 2 },
         { id: "bx05", qty: 1 },
@@ -750,7 +750,7 @@ const products = [
     },
     {
       id: "pk02",
-      title: "2-3 Bedrooms House/Townhouse Kit",
+      title: "2-3 Bedrooms House-Townhouse Kit",
       desc: "Multiple Items",
       items: [
         { id: "bx01", qty: 10 },
@@ -768,7 +768,7 @@ const products = [
     },
     {
       id: "pk03",
-      title: "3-4 Bedrooms House Kit",
+      title: "3-4 Bedrooms House-Apartment Kit",
       desc: "Multiple Items",
       items: [
         { id: "bx01", qty: 15 },
@@ -786,7 +786,7 @@ const products = [
     },
     {
       id: "pk04",
-      title: "4+ Bedrooms House Kit",
+      title: "4+ Bedrooms House-Apartment Kit",
       desc: "Multiple Items",
       items: [
         { id: "bx01", qty: 20 },

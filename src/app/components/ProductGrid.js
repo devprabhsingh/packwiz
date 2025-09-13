@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getStartingPrice } from "@/utils/getStartingPrice";
 import styles from "./productgrid.module.css";
+import { slugify } from "@/utils/slugify";
 
 const ProductGrid = React.memo(({ title, pds }) => {
   const router = useRouter();
@@ -11,23 +12,16 @@ const ProductGrid = React.memo(({ title, pds }) => {
   const multiPds = useMemo(() => [0, 3, 7, 8, 10, 12, 13, 14], []);
 
   const handleClick = useCallback(
-    (product, index) => {
-      if (product.name === "Furniture Corners") {
-        if (multiPds.includes(product.id)) {
-          router.push(`/productinfo/${index}`);
-        } else {
-          router.push(`/ItemDetail/${product.idKey}01`);
-        }
+    (product) => {
+      // Generate a slug from the product's name
+      const productSlug = slugify(product.name);
+
+      if (product.id >= 14) {
+        router.push(`/moving-kits/${productSlug}`);
+      } else if (multiPds.includes(product.id)) {
+        router.push(`/product-info/${productSlug}`);
       } else {
-        if (product.id >= 14) {
-          router.push(`/movingKits/${product.idKey}`);
-        } else {
-          if (multiPds.includes(product.id)) {
-            router.push(`/productinfo/${index}`);
-          } else {
-            router.push(`/ItemDetail/${product.idKey}01`);
-          }
-        }
+        router.push(`/item-details/${productSlug}`);
       }
     },
     [router, multiPds]
@@ -40,7 +34,7 @@ const ProductGrid = React.memo(({ title, pds }) => {
         {pds?.map((product, index) => (
           <React.Fragment key={product.id}>
             <div
-              onClick={() => handleClick(product, index)}
+              onClick={() => handleClick(product)}
               className={styles.productCard}
             >
               <div className={styles.imageWrapper}>

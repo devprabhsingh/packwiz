@@ -11,7 +11,7 @@ export default function BlogIndex() {
   const blogs = [
     {
       title: "🏠 The Ultimate Moving Checklist",
-      slug: "/blog/moving-checklist",
+      slug: "/moving-packing-blogs/moving-checklist",
       excerpt:
         "A complete guide to essential moving supplies and ready-made moving kits for a stress-free move.",
     },
