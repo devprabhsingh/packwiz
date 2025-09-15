@@ -25,7 +25,8 @@ const ProductList = ({ id, modified, productList }) => {
   const router = useRouter();
   const { addToCart } = useCart();
 
-  const [quantities, setQuantities] = useState(() => new Array(8).fill(1));
+  // Example state initialization
+  const [quantities, setQuantities] = useState(productList.map(() => 0));
   const [addedProductId, setAddedProductId] = useState(null);
   const [openForm, setOpenForm] = useState(false);
   const [toast, setToast] = useState({
@@ -60,8 +61,9 @@ const ProductList = ({ id, modified, productList }) => {
   );
 
   const handleQuantityChange = useCallback((index, value) => {
-    const newValue =
-      value === "" || value === null ? 0 : Math.max(0, parseInt(value));
+    // If the value is empty or not a valid number, set it to an empty string
+    const newValue = value === "" ? "" : Math.max(0, parseInt(value));
+
     setQuantities((prev) => {
       const updated = [...prev];
       updated[index] = newValue;

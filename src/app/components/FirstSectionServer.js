@@ -3,7 +3,7 @@ import HeroIntro from "./Intro";
 import styles from "./FirstStyle.module.css";
 const FirstSectionServer = () => {
   return (
-    <div>
+    <div className={styles.firstSectionServer}>
       <div className={styles.maindiv}>
         <HeroIntro />
 

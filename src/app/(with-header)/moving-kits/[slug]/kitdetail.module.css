@@ -1,0 +1,269 @@
+/* movingkit.module.css */
+
+.container {
+  padding: 2rem 1rem;
+  background-color: #f8f8f8;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  color: #ff6f20;
+  font-size: 2.5rem;
+  padding: 1rem 0;
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.kitWrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+}
+
+.leftPane {
+  flex: 2;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.sectionHeader {
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.scrollBox {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+}
+
+.name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.25rem;
+  min-height: 30px;
+}
+
+.desc {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 0 0.5rem;
+  min-height: 30px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.button {
+  background-color: #ff6f20;
+  border: none;
+  color: white;
+  font-size: 1.25rem;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: #e5661d;
+}
+
+.qty {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.price {
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.price span {
+  color: #ff6f20;
+}
+
+/* Right Pane */
+.rightPane {
+  /* This pane is for desktop and should be hidden on mobile */
+  flex: 1;
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  align-self: flex-start;
+  min-width: 300px;
+}
+
+.summaryCard {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.summaryTitle {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+.toast-link-container {
+  display: block !important ;
+}
+.summaryText p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.totalContainer {
+  margin-top: 1.5rem;
+  border-top: 2px solid #eee;
+  padding-top: 1rem;
+}
+
+.totalLabel {
+  font-size: 1.2rem;
+  color: #555;
+  font-weight: 600;
+  margin: 0;
+}
+
+.totalPrice {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ff6f20;
+  margin: 0.5rem 0 0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.primaryBtn {
+  background-color: #ff6f20;
+  color: white;
+}
+
+.primaryBtn:hover {
+  background-color: #e5661d;
+}
+
+.secondaryBtn {
+  background-color: #333;
+  color: white;
+}
+
+.secondaryBtn:hover {
+  background-color: #555;
+}
+
+.mobileSummaryFixed {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  background-color: white; /* Match your card background */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .kitWrapper {
+    flex-direction: column;
+  }
+  .leftPane {
+    width: 100%;
+  }
+  .rightPane {
+    display: none;
+  }
+  .mobileSummaryFixed {
+    display: block;
+  }
+  .summaryCard {
+    display: none;
+  }
+  .title {
+    font-size: 2rem;
+    padding: 1rem;
+    text-align: left;
+  }
+}
+
+@media (min-width: 769px) {
+  .summaryCard {
+    display: block !important; /* Override mobile hiding */
+  }
+
+  .mobileSummaryFixed {
+    display: none; /* Hide the fixed bar on desktop */
+  }
+}

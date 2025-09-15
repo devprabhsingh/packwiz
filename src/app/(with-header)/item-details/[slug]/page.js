@@ -18,11 +18,14 @@ const slugify = (text) => {
 
 // Flatten the products array for easier searching
 const flatPs = products.flat();
+const isMovingKit = (product) => {
+  return product.title.toLowerCase().includes("kit");
+};
 
-// --- Generate static paths for pre-rendering ---
-// This is an important step for Next.js to know which dynamic pages to build at build time.
 export async function generateStaticParams() {
-  return flatPs.map((product) => ({
+  const validProducts = flatPs.filter((product) => !isMovingKit(product));
+
+  return validProducts.map((product) => ({
     slug: slugify(product.title),
   }));
 }

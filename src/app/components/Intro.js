@@ -24,7 +24,7 @@ export default function HeroIntro() {
             textAlign: "center",
           }}
         >
-          Affordable Packing Supplies in GTA
+          Affordable Packing Supplies all over Canada
         </h1>
         <p className={styles.tagline}>
           Moving is tough — finding supplies shouldn’t be.
@@ -52,7 +52,7 @@ export default function HeroIntro() {
           </a>
           <p style={{ margin: "0 20px" }}>OR</p>
           <a href="tel:+14377757688" className={styles.actionBtn}>
-            +1 437-775-7688
+            Order on Call
           </a>
         </div>
         <p className={styles.mission}>

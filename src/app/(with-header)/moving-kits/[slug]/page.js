@@ -5,18 +5,8 @@ import products from "@/data/products"; // This is the data array you provided
 import { useCart } from "@/app/context/CartContext";
 import Image from "next/image";
 import Toast from "@/app/components/Toast";
-
-// Utility function to convert a title to a URL-friendly slug
-const slugify = (text) => {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/[^\w-]+/g, "") // Remove all non-word chars
-    .replace(/--+/g, "-") // Replace multiple - with single -
-    .replace(/^-+/, "") // Trim - from start of text
-    .replace(/-+$/, ""); // Trim - from end of text
-};
+import { slugify } from "@/utils/slugify";
+import styles from "./kitdetail.module.css"; // The new CSS module
 
 const MovingKit = () => {
   const { slug } = useParams();
@@ -43,16 +33,11 @@ const MovingKit = () => {
   }, [addedProductId]);
 
   useEffect(() => {
-    // Correctly find the moving kit using the slug
-    // We assume the moving kits are in the last sub-array of your 'products' data
     const movingKits = products[products.length - 1];
-
-    // Find the specific kit that matches the slug
     const selectedKit = movingKits.find((item) => slugify(item.title) === slug);
 
     if (!selectedKit) {
-      // Handle the case where the slug doesn't match any kit
-      router.push("/404"); // Redirect to a 404 page for a better user experience
+      router.push("/404");
       return;
     }
 
@@ -105,18 +90,17 @@ const MovingKit = () => {
         show: true,
         message: (
           <>
-            Item added!{" "}
-            <a
-              href="/cart?kit=true"
-              style={{ color: "#fff", textDecoration: "underline" }}
-            >
-              Go to cart
-            </a>
+            <p> Item added!</p>
+            <div className="toast-link-container">
+              <a href="/cart?kit=true" className={styles.toastLink}>
+                Go to cart
+              </a>
+            </div>
           </>
         ),
         type: "success",
       });
-      setToastTriggered(false); // reset
+      setToastTriggered(false);
     }
   }, [kit, toastTriggered]);
 
@@ -131,7 +115,7 @@ const MovingKit = () => {
 
   if (!kitData)
     return (
-      <div style={styles.loading}>
+      <div className={styles.loading}>
         <Image
           height={50}
           width={50}
@@ -142,7 +126,7 @@ const MovingKit = () => {
     );
 
   return (
-    <div style={styles.container} className="container">
+    <div className={styles.container}>
       {toast.show && (
         <Toast
           message={toast.message}
@@ -150,61 +134,87 @@ const MovingKit = () => {
           onClose={handleCloseToast}
         />
       )}
-      <style>{responsiveCSS}</style>
-      <h1 style={styles.title}>{kitData.title}</h1>
-      <div className="kit-wrapper">
-        <div className="left-pane">
-          <h2 style={styles.subtitle}>What is Included</h2>
-          <div className="scroll-box">
+      <h1 className={styles.title}>{kitData.title}</h1>
+      <div className={styles.mainContentWrapper}></div>
+      <div className={styles.kitWrapper}>
+        <div className={styles.leftPane}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.subtitle}>What is Included</h2>
+            {/* You could add a simple description here */}
+          </div>
+          <div className={styles.scrollBox}>
             {kitData.items.map((item, index) => (
-              <div key={item.id} style={styles.card}>
+              <div key={item.id} className={styles.card}>
                 <Image
                   src={item.image || "/images/no_pictures.webp"}
                   alt={item.title}
-                  width={120}
-                  height={120}
-                  style={styles.image}
+                  width={150}
+                  height={150}
+                  className={styles.image}
                 />
-                <p style={styles.name}>{item.title}</p>
-                <p style={styles.desc}>{item.desc}</p>
-                <div style={styles.controls}>
+                <p className={styles.name}>{item.title}</p>
+                <p className={styles.desc}>{item.desc}</p>
+                <div className={styles.controls}>
                   <button
-                    style={styles.button}
+                    className={styles.button}
                     onClick={() => updateQty(index, -1)}
                   >
                     -
                   </button>
-                  <span style={styles.qty}>{item.qty}</span>
+                  <span className={styles.qty}>{item.qty}</span>
                   <button
-                    style={styles.button}
+                    className={styles.button}
                     onClick={() => updateQty(index, 1)}
                   >
                     +
                   </button>
                 </div>
-                <p style={styles.price}>
-                  Subtotal: ${(item.price * item.qty).toFixed(2)}
+                <p className={styles.price}>
+                  Subtotal: <span>${(item.price * item.qty).toFixed(2)}</span>
                 </p>
               </div>
             ))}
           </div>
         </div>
-        <div className="right-pane">
-          <p style={styles.description}>
-            This moving kit is tailored for your space and includes a complete
-            set of supplies needed for packing and protection.
-          </p>
-          <p style={styles.description}>
-            You can increase or decrease the quantity of items in the kit. The
-            price will update accordingly.
-          </p>
-          <h2 style={styles.total}>Total: ${totalPrice.toFixed(2)}</h2>
-          <div style={styles.actions}>
-            <button onClick={handleAddToCart} style={styles.actionButton}>
+
+        <div className={styles.rightPane}>
+          <div className={styles.summaryCard}>
+            <h2 className={styles.summaryTitle}>Order Summary</h2>
+            <div className={styles.summaryText}>
+              <p>
+                This moving kit is tailored for your space and includes a
+                complete set of supplies needed for packing and protection.
+              </p>
+              <p>
+                You can increase or decrease the quantity of items in the kit.
+                The price will update accordingly.
+              </p>
+            </div>
+            <div className={styles.totalContainer}>
+              <h2 className={styles.totalLabel}>Total:</h2>
+              <h2 className={styles.totalPrice}>${totalPrice.toFixed(2)}</h2>
+            </div>
+            <div className={styles.actions}>
+              <button onClick={handleAddToCart} className={styles.primaryBtn}>
+                Add to Cart
+              </button>
+              <button onClick={handleBuyNow} className={styles.secondaryBtn}>
+                Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.mobileSummaryFixed}>
+        <div className={styles.summaryContent}>
+          <div className={styles.totalContainer}>
+            <span className={styles.totalLabel}>Total:</span>
+            <h2 className={styles.totalPrice}>${totalPrice.toFixed(2)}</h2>
+          </div>
+          <div className={styles.mobileActions}>
+            <button onClick={handleAddToCart} className={styles.primaryBtn}>
               Add to Cart
-            </button>
-            <button onClick={handleBuyNow} style={styles.buyButton}>
-              Buy Now
             </button>
           </div>
         </div>
@@ -212,166 +222,5 @@ const MovingKit = () => {
     </div>
   );
 };
-
-const styles = {
-  container: {
-    padding: "16px",
-    paddingTop: 0,
-    backgroundColor: "white",
-    minHeight: "100vh",
-    fontFamily: "Arial, sans-serif",
-  },
-  title: {
-    color: "#ff6f20",
-    fontSize: "2rem",
-    padding: "16px",
-    marginTop: 0,
-    textAlign: "center",
-  },
-  subtitle: {
-    fontSize: "1.3rem",
-    marginBottom: "10px",
-  },
-  card: {
-    backgroundColor: "white",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    padding: "10px",
-    textAlign: "center",
-  },
-  image: {
-    objectFit: "contain",
-    marginBottom: "10px",
-  },
-  name: {
-    fontSize: "1rem",
-    color: "black",
-    marginBottom: 0,
-    minHeight: "30px",
-  },
-  desc: {
-    marginTop: 0,
-    color: "grey",
-    minHeight: "30px",
-  },
-  controls: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "10px",
-  },
-  button: {
-    backgroundColor: "#ff6f20",
-    border: "none",
-    color: "white",
-    fontSize: "1.2rem",
-    padding: "5px 10px",
-    margin: "0 10px",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  qty: {
-    fontSize: "1rem",
-    color: "#333",
-  },
-  price: {
-    marginTop: "10px",
-    color: "#333",
-    fontWeight: "bold",
-  },
-  total: {
-    fontSize: "1.4rem",
-    color: "black",
-    marginTop: "20px",
-    textAlign: "center",
-  },
-  actions: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "12px",
-    marginTop: "30px",
-    flexWrap: "wrap",
-  },
-  actionButton: {
-    backgroundColor: "#333",
-    color: "white",
-    padding: "10px 20px",
-    fontSize: "1rem",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  buyButton: {
-    backgroundColor: "#ff6f20",
-    color: "white",
-    padding: "10px 20px",
-    fontSize: "1rem",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-  loading: {
-    textAlign: "center",
-    padding: "100px",
-    fontSize: "1.2rem",
-  },
-};
-
-const responsiveCSS = `
-.container{
-  padding:0 !important;
-}
-.kit-wrapper {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.left-pane {
-  flex: 2;
-  background-color: #f1f1f1;
-  border-radius: 10px;
-  padding:10px;
-  max-height: 70vh;
-  overflow-y: auto;
-}
-
-.scroll-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  
-}
-
-.right-pane {
-  flex: 1;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  height: fit-content;
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .container>h1{
-    font-size:25px !important;
-    padding:15px;
-    margin:0 !important;
-  }
-  .kit-wrapper {
-    flex-direction: column;
-  }
-  .left-pane, .right-pane {
-    width: 90%;
-    margin:auto;
-  }
-  .scroll-box {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  }
-  .right-pane {
-    margin-top: 20px;
-  }
-}
-`;
 
 export default MovingKit;

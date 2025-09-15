@@ -30,7 +30,7 @@ const Toast = ({ message, type = "success", onClose }) => {
         boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
         zIndex: 9999,
         maxWidth: "300px",
-        fontSize: "14px",
+        fontSize: "15px",
       }}
     >
       {message}

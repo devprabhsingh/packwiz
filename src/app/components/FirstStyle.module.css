@@ -1,9 +1,18 @@
+.stickyHeaderWrapper {
+  position: sticky; /* Changed from 'sticky' to 'fixed' */
+  top: 0;
+  left: 0; /* Add this to ensure it spans the full width */
+  width: 100%; /* Ensures it fills the entire viewport width */
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 .promo {
   text-align: center;
   color: black;
   padding: 3px 0;
   border-radius: 5px;
-  background-color: white;
+  background-color: rgb(244, 242, 242);
   margin: 2px 0;
 }
 
@@ -15,8 +24,6 @@
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  position: relative;
-  z-index: 1000;
 }
 
 .navBox {

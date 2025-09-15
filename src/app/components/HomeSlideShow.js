@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import styles from "./FirstStyle.module.css";
-
+import { slugify } from "@/utils/slugify";
 const slides = [
   {
     id: "ct01",
@@ -16,7 +16,7 @@ const slides = [
   },
   {
     id: "mb01",
-    title: "Moving Blanket",
+    title: "Moving Blankets",
     description:
       "Protect your furniture and fragile items during transport with our durable moving blankets.",
     img: "/images/moving_blankets.webp",
@@ -26,7 +26,7 @@ const slides = [
   },
   {
     id: "sw01",
-    title: "Shrink Wrap",
+    title: "Pallet Wrap",
     description:
       "Industrial-grade shrink wrap to keep your items tightly packed and safe.",
     img: "/images/shrink_wrap.webp",
@@ -94,7 +94,7 @@ export default function HomeSlideshow() {
                   style={{ transform: "rotateZ(30deg)" }}
                 />
               </div>
-              <Link href={`/ItemDetail/${slide.id}`}>
+              <Link href={`/item-details/${slugify(slide.title)}`}>
                 <Image
                   src={slide.img}
                   alt={slide.title}
@@ -126,7 +126,7 @@ export default function HomeSlideshow() {
                 </div>
               </div>
               <a
-                href={`/ItemDetail/${slide.id}`}
+                href={`/item-details/${slugify(slide.title)}`}
                 className={styles.btn}
                 aria-label={`View ${slide.title} product page`}
               >
