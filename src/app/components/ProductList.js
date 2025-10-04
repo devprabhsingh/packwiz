@@ -26,7 +26,7 @@ const ProductList = ({ id, modified, productList }) => {
   const { addToCart } = useCart();
 
   // Example state initialization
-  const [quantities, setQuantities] = useState(productList.map(() => 0));
+  const [quantities, setQuantities] = useState(productList.map(() => 1));
   const [addedProductId, setAddedProductId] = useState(null);
   const [openForm, setOpenForm] = useState(false);
   const [toast, setToast] = useState({

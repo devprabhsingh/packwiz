@@ -539,7 +539,7 @@ const products = [
       desc: "High quality recycled newsprint paper",
       title: "Packing paper 100 Sheets",
       size: "36in X 24in, 100 sheets",
-      priceTable: { tier1: 13.49, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
+      priceTable: { tier1: 12.49, tier2: 12.09, tier3: 11.99, tier4: 10.99 },
       image: "/images/packing-paper.webp",
       image2: "/images/packing-paper-2.webp",
 
