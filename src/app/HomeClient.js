@@ -1,40 +1,32 @@
-import dynamic from "next/dynamic";
-import FirstSection from "../components/FirstSection";
-import SearchBar from "../components/Searchbar";
-import pds from "@/data/pds";
-// Dynamic imports remain the same
-const ProductGrid = dynamic(() => import("../components/ProductGrid"), {
-  loading: () => <p>Loading...</p>,
-});
-const AboutSection = dynamic(() => import("../components/AboutSection"), {
-  loading: () => <p>Loading...</p>,
-});
-const ContactSection = dynamic(() => import("../components/ContactSection"), {
-  loading: () => <p>Loading...</p>,
-});
-const ReviewSection = dynamic(() => import("../components/ReviewSection"), {
-  ssr: true,
-  loading: () => <p>Loading...</p>,
-});
-const LazyExtras = dynamic(() => import("../components/LazyExtras"), {
-  loading: () => <></>,
-});
+// app/HomeClient.js
+"use client";
 
-export const metadata = {
-  title: "Packwiz - Packing Supplies with Free GTA Delivery",
-  description:
-    "Looking for packing supplies in Toronto? Get low-cost bubble wrap, boxes, tape, and kits with free GTA delivery. Smooth, stress-free moves start here.",
-  robots: "index, follow",
-};
+import { lazy, Suspense } from "react";
+import FirstSection from "./components/FirstSection";
+import SearchBar from "./components/Searchbar";
+import useOnScreen from "./hooks/useonscreen";
+import Script from "next/script";
 
-export default function HomePage() {
-  // Define your structured data as JavaScript objects
+// Lazy-load the components that appear below the fold
+const LazyProductGrid = lazy(() => import("./components/ProductGrid"));
+const LazyAboutSection = lazy(() => import("./components/AboutSection"));
+const LazyContactSection = lazy(() => import("./components/ContactSection"));
+const LazyReviewSection = lazy(() => import("./components/ReviewSection"));
+const LazyExtras = lazy(() => import("./components/LazyExtras"));
+
+export default function HomeClient() {
+  const [aboutRef, aboutIsVisible] = useOnScreen();
+  const [reviewRef, reviewIsVisible] = useOnScreen();
+  const [contactRef, contactIsVisible] = useOnScreen();
+  const [lazyRef, lazyIsVisible] = useOnScreen();
+
+  // Structured data objects
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Packwiz",
-    image: "https://www.packwiz.ca/images/logo.webp", // Use full absolute URL
-    url: "https://www.packwiz.ca", // Use full absolute URL
+    image: "https://www.packwiz.ca/images/logo.webp",
+    url: "https://www.packwiz.ca",
     telephone: "+1-437-775-7688",
     address: {
       "@type": "PostalAddress",
@@ -142,33 +134,65 @@ export default function HomePage() {
 
   return (
     <>
-      <script
+      {/* JSON-LD structured data in head */}
+      <Script
+        id="local-business-schema"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(localBusinessSchema),
         }}
-        key="local-business-schema" // Recommended for unique scripts
       />
-      <script
+      <Script
+        id="faq-schema"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        key="faq-schema" // Recommended for unique scripts
       />
 
-      {/* Your page content */}
-      <div style={styles.maindiv}>
+      <div>
         <div className="mobile-search">
           <SearchBar />
         </div>
         <FirstSection />
-        <ProductGrid pds={pds} />
-        <AboutSection />
-        <ReviewSection />
-        <ContactSection />
-        <LazyExtras />
+
+        <div ref={aboutRef}>
+          {aboutIsVisible && (
+            <>
+              <Suspense fallback={<p>Loading products…</p>}>
+                <LazyProductGrid />
+              </Suspense>
+              <Suspense fallback={<p>Loading about…</p>}>
+                <LazyAboutSection />
+              </Suspense>
+            </>
+          )}
+        </div>
+
+        <div ref={reviewRef}>
+          {reviewIsVisible && (
+            <Suspense fallback={<p>Loading reviews…</p>}>
+              <LazyReviewSection />
+            </Suspense>
+          )}
+        </div>
+
+        <div ref={contactRef}>
+          {contactIsVisible && (
+            <Suspense fallback={<p>Loading contact…</p>}>
+              <LazyContactSection />
+            </Suspense>
+          )}
+        </div>
+
+        <div ref={lazyRef}>
+          {lazyIsVisible && (
+            <Suspense fallback={null}>
+              <LazyExtras />
+            </Suspense>
+          )}
+        </div>
       </div>
     </>
   );
 }
-
-const styles = {};

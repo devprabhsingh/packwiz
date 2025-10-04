@@ -1,12 +1,12 @@
 "use client";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { getStartingPrice } from "@/utils/getStartingPrice";
 import styles from "./productgrid.module.css";
 import { slugify } from "@/utils/slugify";
-
-const ProductGrid = React.memo(({ title, pds }) => {
+import pds from "@/data/pds";
+const ProductGrid = React.memo(() => {
   const router = useRouter();
 
   const multiPds = useMemo(() => [0, 3, 7, 8, 10, 12, 13, 14], []);
@@ -29,7 +29,7 @@ const ProductGrid = React.memo(({ title, pds }) => {
 
   return (
     <div id="productGrid" className={styles.maindiv}>
-      <h1 className={styles.heading}>{title || "Our Products"}</h1>
+      <h1 className={styles.heading}>{"Our Products"}</h1>
       <div className={styles.productGrid}>
         {pds?.map((product, index) => (
           <React.Fragment key={product.id}>

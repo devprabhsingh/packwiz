@@ -173,7 +173,7 @@ const products = [
       title: "Nitrile 4 mil gloves",
       desc: "Lightweight Use",
       size: "Small",
-      priceTable: { tier1: 10.59, tier2: 10.49, tier3: 10.09, tier4: 9.99 },
+      priceTable: { tier1: 8.09, tier2: 7.79, tier3: 7.49, tier4: 6.99 },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
       image3: "/images/gloves-3.webp",
@@ -194,7 +194,7 @@ const products = [
       title: "Nitrile 5 mil gloves",
       desc: "Standard",
       size: "Small",
-      priceTable: { tier1: 10.99, tier2: 10.95, tier3: 10.89, tier4: 10.79 },
+      priceTable: { tier1: 8.09, tier2: 7.79, tier3: 7.49, tier4: 6.99 },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
       image3: "/images/gloves-3.webp",
@@ -214,7 +214,7 @@ const products = [
       title: "Nitrile 5 mil gloves",
       desc: "Standard",
       size: "Medium",
-      priceTable: { tier1: 10.99, tier2: 10.95, tier3: 10.89, tier4: 10.79 },
+      priceTable: { tier1: 8.09, tier2: 7.79, tier3: 7.49, tier4: 6.99 },
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
       image3: "/images/gloves-3.webp",
@@ -243,7 +243,7 @@ const products = [
         usage: "medical, industrial, and general-purpose protection",
         suitableFor: "healthcare, cleaning, automotive, and food handling",
       },
-      priceTable: { tier1: 10.99, tier2: 10.95, tier3: 10.89, tier4: 10.79 },
+      priceTable: { tier1: 8.09, tier2: 7.79, tier3: 7.49, tier4: 6.99 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
@@ -254,7 +254,7 @@ const products = [
       title: "Nitrile 6 mil gloves",
       desc: "Heavy Duty Gloves",
       size: "Medium",
-      priceTable: { tier1: 11.99, tier2: 11.95, tier3: 11.89, tier4: 11.79 },
+      priceTable: { tier1: 8.09, tier2: 7.79, tier3: 7.49, tier4: 6.99 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       specs: {
         color: "Black",
@@ -283,7 +283,7 @@ const products = [
         usage: "heavy-duty protection in industrial and medical settings",
         suitableFor: "mechanics, janitorial, food processing, and safety tasks",
       },
-      priceTable: { tier1: 11.99, tier2: 11.95, tier3: 11.89, tier4: 11.79 },
+      priceTable: { tier1: 8.49, tier2: 7.79, tier3: 7.49, tier4: 7.09 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
@@ -303,7 +303,7 @@ const products = [
         usage: "heavy-duty protection in industrial and medical settings",
         suitableFor: "mechanics, janitorial, food processing, and safety tasks",
       },
-      priceTable: { tier1: 11.99, tier2: 11.95, tier3: 11.89, tier4: 11.79 },
+      priceTable: { tier1: 8.29, tier2: 7.89, tier3: 7.59, tier4: 7.09 },
       features: ["Thick Disposable Gloves", "Enhanced Grip", "Versatile Use"],
       image: "/images/gloves.webp",
       image2: "/images/gloves2.webp",
@@ -317,7 +317,7 @@ const products = [
       title: "Clear Packing Tape",
       desc: "2 inch wide, 2 mil",
       size: "100 meters",
-      priceTable: { tier1: 2.09, tier2: 1.99, tier3: 1.95, tier4: 1.89 },
+      priceTable: { tier1: 1.89, tier2: 1.85, tier3: 1.8, tier4: 1.75 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
       image2: "/images/clear-tape-2.webp",
@@ -338,7 +338,7 @@ const products = [
       title: "Painters Masking Tape",
       desc: "Masking tape, 1.88inch Wide",
       size: "50m",
-      priceTable: { tier1: 5.45, tier2: 5.15, tier3: 5, tier4: 4.5 },
+      priceTable: { tier1: 3.05, tier2: 3, tier3: 3, tier4: 2.9 },
       features: [
         "Multi-Surface Use",
         "Leaves no residue",
@@ -362,7 +362,7 @@ const products = [
       title: "Tuck Tape",
       desc: "Strong Epoxy Resin Construction Tape",
       size: "50 Meters",
-      priceTable: { tier1: 6.95, tier2: 6.55, tier3: 6.5, tier4: 5.95 },
+      priceTable: { tier1: 4.95, tier2: 4.55, tier3: 4.5, tier4: 4.5 },
       features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],
       image: "/images/red.webp",
       specs: {
@@ -434,10 +434,10 @@ const products = [
   [
     {
       id: "cv01",
-      title: "Coveralls",
+      title: "Disposable Microporous Coveralls XL",
       desc: "Waterproof",
       size: "XL",
-      priceTable: { tier1: 5, tier2: 4, tier3: 3.5, tier4: 3 },
+      priceTable: { tier1: 3, tier2: 3, tier3: 3, tier4: 2.9 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.webp",
       specs: {
@@ -451,10 +451,10 @@ const products = [
     },
     {
       id: "cv02",
-      title: "Coveralls",
+      title: "Disposable Microporous Coveralls 2XL",
       desc: "Waterproof",
       size: "2XL",
-      priceTable: { tier1: 4.99, tier2: 4.49, tier3: 3.5, tier4: 3 },
+      priceTable: { tier1: 3.09, tier2: 3.09, tier3: 3.05, tier4: 2.95 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.webp",
       specs: {
@@ -467,10 +467,10 @@ const products = [
     },
     {
       id: "cv03",
-      title: "Coveralls",
+      title: "Disposable Coveralls XL",
       desc: "Dustproof",
       size: "XL",
-      priceTable: { tier1: 3.99, tier2: 3.49, tier3: 2.5, tier4: 2.2 },
+      priceTable: { tier1: 2.5, tier2: 2.5, tier3: 2.4, tier4: 2.2 },
       image: "/images/coveralls.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
@@ -484,10 +484,10 @@ const products = [
     },
     {
       id: "cv04",
-      title: "Coveralls",
+      title: "Disposable Coveralls 2XL",
       desc: "Dustproof",
       size: "2XL",
-      priceTable: { tier1: 4, tier2: 3, tier3: 2.5, tier4: 2.2 },
+      priceTable: { tier1: 2.5, tier2: 2.5, tier3: 2.4, tier4: 2.2 },
       image: "/images/coveralls.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
@@ -500,10 +500,10 @@ const products = [
     },
     {
       id: "cv05",
-      title: "Coveralls",
+      title: "Disposable Coveralls 3XL",
       desc: "Dustproof",
       size: "3XL",
-      priceTable: { tier1: 4, tier2: 3, tier3: 2.6, tier4: 2.3 },
+      priceTable: { tier1: 2.5, tier2: 2.5, tier3: 2.4, tier4: 2.2 },
       image: "/images/coveralls.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
@@ -537,7 +537,7 @@ const products = [
     {
       id: "np01",
       desc: "High quality recycled newsprint paper",
-      title: "Packing paper",
+      title: "Packing paper 100 Sheets",
       size: "36in X 24in, 100 sheets",
       priceTable: { tier1: 13.49, tier2: 12.99, tier3: 11.99, tier4: 10.99 },
       image: "/images/packing-paper.webp",
@@ -556,7 +556,7 @@ const products = [
     {
       id: "np02",
       desc: "High quality recycled newsprint paper",
-      title: "Packing paper",
+      title: "Packing paper 420 sheets",
       size: "36in X 24in, 420+ sheets",
       priceTable: { tier1: 34.99, tier2: 31.99, tier3: 30.99, tier4: 26.99 },
       image: "/images/packing-paper.webp",
@@ -576,7 +576,7 @@ const products = [
   [
     {
       id: "bw01",
-      title: "Bubble Cushion Wrap",
+      title: "Bubble Cushion Wrap BW01",
       desc: "Plastic Wrap",
       size: "12inch X 300ft",
       priceTable: { tier1: 33.99, tier2: 29.99, tier3: 29.49, tier4: 27.99 },
@@ -594,7 +594,7 @@ const products = [
     },
     {
       id: "bw02",
-      title: "Bubble Cushion Wrap",
+      title: "Bubble Cushion Wrap BW02",
       desc: "Plastic Wrap",
       size: "24inch X 150ft",
       priceTable: { tier1: 45, tier2: 45, tier3: 45, tier4: 45 },
@@ -656,7 +656,7 @@ const products = [
   [
     {
       id: "cc01",
-      title: "Corrugated Picture Corners",
+      title: "Corrugated Picture Corners CC01",
       desc: "Protective Cardboard Frame Corners",
       size: "One Size, 25pc",
       priceTable: { tier1: 9.99, tier2: 9.99, tier3: 8.99, tier4: 8.95 },
@@ -674,7 +674,7 @@ const products = [
     },
     {
       id: "cc02",
-      title: "Corrugated Picture Corners",
+      title: "Corrugated Picture Corners CC02",
       desc: "Protective Cardboard Frame Corners",
       size: "One Size fits all, 50pc",
       priceTable: { tier1: 14.99, tier2: 14.99, tier3: 13.99, tier4: 13.95 },
@@ -692,7 +692,7 @@ const products = [
     },
     {
       id: "cc03",
-      title: "Corrugated Furniture Corners",
+      title: "Corrugated Furniture Corners CC03",
       desc: "Heavy-duty Cardboard Edge Protectors",
       size: "One size fits all, 25pc",
       priceTable: { tier1: 10.99, tier2: 10.99, tier3: 10.49, tier4: 9.99 },
@@ -711,7 +711,7 @@ const products = [
     },
     {
       id: "cc04",
-      title: "Corrugated Furniture Corners",
+      title: "Corrugated Furniture Corners CC04",
       desc: "Heavy-duty Cardboard Edge Protectors",
       size: "One Size fits all, 50pc",
       priceTable: { tier1: 19.99, tier2: 19.99, tier3: 18.99, tier4: 18.95 },

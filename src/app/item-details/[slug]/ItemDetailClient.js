@@ -11,7 +11,7 @@ import styles from "../ItemDetail.module.css";
 import Image from "next/image";
 import products from "@/data/products";
 
-const ProductList = dynamic(() => import("../../../components/ProductList"));
+const ProductList = dynamic(() => import("../../components/ProductList"));
 
 // Utility function to convert a title to a URL-friendly slug
 const slugify = (text) => {
@@ -47,8 +47,6 @@ const ItemDetailClient = ({ category, reviews }) => {
 
   // Effect to find the product and set related states based on the slug
   useEffect(() => {
-    // Find the product by its slug
-
     const product = flatProducts.find((p) => slugify(p.title) === slug);
 
     if (!product) {

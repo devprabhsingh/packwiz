@@ -10,8 +10,8 @@ const slides = [
     title: "Clear Packing Tape",
     description: "Strong, transparent tape perfect for sealing boxes securely.",
     img: "/images/clear-tape.webp",
-    priceOld: 2.09,
-    priceCurrent: 1.88,
+    priceOld: 1.89,
+    priceCurrent: 1.7,
     discountPercent: 10,
   },
   {
@@ -101,6 +101,7 @@ export default function HomeSlideshow() {
                   className={styles.slideImage}
                   width={250}
                   height={150}
+                  loading="eager"
                 />
               </Link>
               <div style={{ padding: "0 15px" }}>

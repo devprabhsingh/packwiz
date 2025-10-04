@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 import BackLinks from "@/app/components/BackLinks";
 import SearchBar from "@/app/components/Searchbar";
 
-const ProductList = dynamic(() => import("../../../components/ProductList"));
+const ProductList = dynamic(() => import("../../components/ProductList"));
 
 const ProductInfoClient = ({ productData, productCat }) => {
   if (!productCat || !productData) {

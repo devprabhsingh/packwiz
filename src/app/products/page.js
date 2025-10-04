@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
-import BackLinks from "../../components/BackLinks";
-import SearchBar from "../../components/Searchbar";
+import BackLinks from "../components/BackLinks";
+import SearchBar from "../components/Searchbar";
 
-const ProductGrid = dynamic(() => import("../../components/ProductGrid"), {
+const ProductGrid = dynamic(() => import("../components/ProductGrid"), {
   ssr: true,
   loading: () => <p>Loading Products...</p>,
 });

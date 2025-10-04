@@ -1,0 +1,50 @@
+import HomeClient from "./HomeClient";
+
+export const metadata = {
+  title: "Packwiz | Boxes, Wraps & Packing Supplies Canada",
+  description:
+    "Packwiz offers high-quality corrugated boxes, packing tapes, moving blankets, stretch wrap, gloves, and essential packing supplies. Fast shipping across Canada!",
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-48x48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon-96x96.png", sizes: "96x96", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  appleWebApp: {
+    title: "Packwiz",
+  },
+  openGraph: {
+    title: "Buy Packing Supplies at Lowest Prices!",
+    description:
+      "Get high-quality bubble wrap, stretch film, boxes, and more at unbeatable rates. Shop now!",
+    url: "https://www.packwiz.ca",
+    type: "website",
+    images: [
+      {
+        url: "https://www.packwiz.ca/images/social-share.webp",
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Buy Packing Supplies at Lowest Prices!",
+    description:
+      "Get high-quality bubble wrap, stretch film, boxes, and more at unbeatable rates. Shop now!",
+    images: ["https://www.packwiz.ca/images/social-share.webp"],
+  },
+  metadataBase: new URL("https://www.packwiz.ca"),
+  alternates: {
+    canonical: "/",
+  },
+};
+
+export default function Page() {
+  return <HomeClient />;
+}

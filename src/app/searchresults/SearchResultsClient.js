@@ -2,8 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState, useCallback } from "react"; // Added useCallback
-import ProductList from "../../components/ProductList";
-import SearchBar from "../../components/Searchbar";
+import ProductList from "../components/ProductList";
+import SearchBar from "../components/Searchbar";
 
 // Basic plural -> singular conversion
 const simpleStem = (word) => {
