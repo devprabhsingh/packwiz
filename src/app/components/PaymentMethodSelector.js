@@ -1,5 +1,5 @@
 import React from "react";
-import "../(with-header)/payment/Payment.css";
+import "../payment/Payment.css";
 import { useCart } from "../context/CartContext";
 
 const PaymentMethodSelector = ({ paymentMethod, onSelect }) => {

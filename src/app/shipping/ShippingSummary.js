@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./shipStyles.module.css"; // Ensure this path is correct
 import Image from "next/image";
 import discountCodes from "@/data/discountCodes"; // Assuming this path is correct
-import { useCart } from "../../context/CartContext"; // Assuming this path is correct
+import { useCart } from "../context/CartContext";
 
 const ShippingSummary = ({
   subTotal,
