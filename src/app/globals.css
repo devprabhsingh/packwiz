@@ -18,6 +18,12 @@ body {
   height: 100%;
   width: 100%;
   font-family: inherit;
+  user-select: none;
+
+  /* Vendor prefixes for wider browser support (Safari, older browsers) */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 button {

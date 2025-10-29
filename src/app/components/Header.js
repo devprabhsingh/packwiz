@@ -46,18 +46,30 @@ export default function Header() {
   return (
     <>
       <div className={styles.stickyHeaderWrapper}>
-        <div className={styles.promo}>
-          Use code{" "}
-          <span
-            style={{
-              backgroundColor: "#ff6f20",
-              color: "white",
-              padding: "2px 4px",
-            }}
-          >
-            WELCOME10
-          </span>{" "}
-          at checkout to get 10% Off
+        <div className={styles.logoPromo}>
+          <Link href="/" className={styles.logoLink}>
+            <Image
+              src="/images/logo1.png"
+              alt="logo"
+              height={60}
+              width={250}
+              priority
+            />
+          </Link>
+
+          <div className={styles.promo}>
+            Use code{" "}
+            <span
+              style={{
+                backgroundColor: "#ff6f20",
+                color: "white",
+                padding: "2px 4px",
+              }}
+            >
+              WELCOME10
+            </span>{" "}
+            at checkout to get 10% Off
+          </div>
         </div>
         <header className={styles.headerBox} id="header">
           <div
@@ -70,21 +82,17 @@ export default function Header() {
           >
             {menuOpen ? <X size={28} /> : <Menu size={28} />}
           </div>
-
-          <Link href="/" className={styles.logoLink}>
+          <Link href="/" className={styles.logoLinkMobile}>
             <Image
-              src="/images/logo.webp"
+              src="/images/logo1.png"
               alt="logo"
-              height={50}
-              width={150}
+              height={60}
+              width={250}
               priority
             />
           </Link>
-
-          <SearchBar />
-
           <nav className={styles.navBox}>{renderLinks()}</nav>
-
+          <SearchBar />
           <div
             id="mobile-navigation"
             className={`${styles.mobileMenu} ${

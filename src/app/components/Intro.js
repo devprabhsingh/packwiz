@@ -4,27 +4,29 @@ import styles from "./FirstStyle.module.css";
 export default function HeroIntro() {
   return (
     <section className={styles.heroIntro}>
-      <div className={styles.proudbox}>
-        <span style={{ fontWeight: "bold" }}>We are proudly</span>
-        <Image
-          src="/images/animflag.webp"
-          alt="Canadian"
-          width={40}
-          height={40}
-          style={{ margin: "10px" }}
-        />
-      </div>
       <div className={styles.introDiv}>
         <h1
           style={{
             fontSize: "2rem",
             fontWeight: 800,
-            color: "#2d3748",
+            color: "white",
             marginBottom: "0.5rem",
-            textAlign: "center",
           }}
         >
-          Affordable Packing Supplies all over Canada
+          Proudly Canadian. <br />
+          Affordable Packing Supplies
+          <br />{" "}
+          <span
+            style={{
+              color: "#ff6f20",
+              backgroundColor: "rgba(0,0,0,0.5)",
+              padding: "3px",
+              marginTop: "10px",
+              borderRadius: "5px",
+            }}
+          >
+            All Over Canada
+          </span>
         </h1>
         <p className={styles.tagline}>
           Moving is tough — finding supplies shouldn’t be.
@@ -46,8 +48,9 @@ export default function HeroIntro() {
             <p>Premium Boxes, Durable Tapes & More</p>
           </div>
         </div>
+
         <div className={styles.buttonRow}>
-          <a href="/products" className={styles.actionBtn}>
+          <a href="/products" className={styles.actionBtn2}>
             Explore Products
           </a>
           <p style={{ margin: "0 20px" }}>OR</p>
