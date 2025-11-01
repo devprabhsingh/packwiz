@@ -48,18 +48,26 @@ export const CartProvider = ({ children }) => {
   // Add to cart
   const addToCart = (item) => {
     setCartItems((prev) => {
-      const existing = prev.find((i) => i.id === item.id);
+      // Look for an existing item with the same ID AND selectedSize
+      // This is crucial for handling size variations correctly
+      const existing = prev.find(
+        (i) => i.id === item.id && i.selectedSize === item.selectedSize
+      );
+
       if (existing) {
-        return prev.map((i) =>
-          i.id === item.id
-            ? {
-                ...i,
-                qty: i.qty + item.qty,
-                price: getPrice({ ...i, qty: i.qty + item.qty }),
-              }
-            : i
+        return prev.map(
+          (
+            i // Only update the item if both ID and Size match
+          ) =>
+            i.id === item.id && i.selectedSize === item.selectedSize
+              ? {
+                  ...i,
+                  qty: i.qty + item.qty, // Recalculate price based on new total quantity
+                  price: getPrice({ ...i, qty: i.qty + item.qty }),
+                }
+              : i
         );
-      }
+      } // For a new item, spread all properties from `item`, including `selectedSize`
       return [...prev, { ...item, price: getPrice(item) }];
     });
   };
@@ -110,6 +118,7 @@ export const CartProvider = ({ children }) => {
         customerDetail,
         setCustomerDetail,
         emailSent,
+
         setEmailSent,
         cod,
         setCod,

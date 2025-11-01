@@ -24,10 +24,33 @@ const slugify = (text) => {
     .replace(/-+$/, "");
 };
 
+const SizeSelector = ({ sizes, selectedSize, onSelectSize }) => {
+  return (
+    <div className={styles.sizeSelector}>
+      <span className={styles.sizeSelectorLabel}>Size:</span>
+      {sizes.map((size) => (
+        <button
+          key={size}
+          onClick={() => onSelectSize(size)}
+          className={`
+            ${styles["size-selector__button"]} 
+            ${selectedSize === size ? styles["size-selector__button--selected"] : ""}
+          `}
+          aria-label={`Select size ${size}`}
+        >
+          {size}
+        </button>
+      ))}
+    </div>
+  );
+};
 const ItemDetailClient = ({ category, reviews }) => {
   const router = useRouter();
   const { slug } = useParams();
   const { addToCart } = useCart();
+
+  const availableSizes = ["S", "M", "L", "XL"];
+  const [selectedSize, setSelectedSize] = useState(availableSizes[0]);
 
   const [quantity, setQuantity] = useState(1);
   const [addedProductId, setAddedProductId] = useState(null);
@@ -124,6 +147,7 @@ const ItemDetailClient = ({ category, reviews }) => {
       ...selectedProduct,
       qty: quantity,
       price: price,
+      selectedSize,
       finalPrice: finalPrice,
     };
     addToCart(cartItem);
@@ -143,7 +167,7 @@ const ItemDetailClient = ({ category, reviews }) => {
       ),
       type: "success",
     });
-  }, [selectedProduct, quantity, price, finalPrice, addToCart]);
+  }, [selectedProduct, quantity, price, finalPrice, addToCart, selectedSize]);
 
   const handleBuyNow = useCallback(() => {
     handleAddToCart();
@@ -326,6 +350,14 @@ const ItemDetailClient = ({ category, reviews }) => {
               </div>
             )}
           </div>
+
+          {selectedProduct.id.startsWith("gl") && (
+            <SizeSelector
+              sizes={availableSizes}
+              selectedSize={selectedSize}
+              onSelectSize={(size) => setSelectedSize(size)}
+            />
+          )}
 
           <div className={styles.qtyControls}>
             <button onClick={decreaseQty}>-</button>

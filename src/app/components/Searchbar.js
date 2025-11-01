@@ -36,6 +36,7 @@ export default function SearchBar() {
   return (
     <div className="searchBox">
       <input
+        name="searchbar"
         type="text"
         placeholder="Search tapes, wraps, boxes..."
         value={query}

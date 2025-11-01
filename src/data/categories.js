@@ -24,8 +24,8 @@ const categories = [
     info: "Protect your furniture and fragile belongings with these heavy-duty 72 x 80 inch moving blankets. Made from durable quilted fabric and thick padding, these furniture pads provide excellent cushioning against scratches, dents, and impact during moving or storage. Featuring reinforced edges for extra durability and easy care, these moving blankets are essential for safe, damage-free relocations.",
   },
   {
-    id: "stretch-wrap",
-    title: "Stretch Wrap",
+    id: "pallet-wrap",
+    title: "Pallet Wrap",
     subtitle: "Clear wrap, multiple uses",
     unit: "Rolls",
     weight: 2.52,
@@ -40,8 +40,8 @@ const categories = [
     info: "Durable nitrile gloves provide reliable protection and a comfortable fit for medical, industrial, and everyday use. These powder-free gloves offer excellent puncture resistance and tactile sensitivity, making them ideal for hygiene and safety.",
   },
   {
-    id: "clear-packaging-tape",
-    title: "Clear/Packaging Tape",
+    id: "clear-packing-tape",
+    title: "Clear Packing Tape",
     subtitle: "Acrylic Clear Packaging Tape",
     unit: "Rolls",
     weight: 0.18,
@@ -49,7 +49,7 @@ const categories = [
   },
   {
     id: "green-painters-tape",
-    title: "Green Painter's Tape",
+    title: "Painters Masking Tape",
     subtitle: "The Best-in-class masking tape",
     unit: "Rolls",
     weight: 0.17,
@@ -57,7 +57,7 @@ const categories = [
   },
   {
     id: "red-tuck-tape",
-    title: "Red Tuck Tape",
+    title: "Tuck Tape",
     subtitle: "Epoxy resin tuck tape",
     unit: "Rolls",
     weight: 0.2,

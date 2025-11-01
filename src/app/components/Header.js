@@ -36,6 +36,7 @@ export default function Header() {
       <Link
         key={href}
         href={href}
+        prefetch={false}
         onClick={isMobile ? () => setMenuOpen(false) : undefined}
         className={isMobile ? styles.mobileLink : styles.eachLink}
       >

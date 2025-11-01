@@ -20,6 +20,7 @@ const orderSchema = new mongoose.Schema(
         title: String,
         quantity: Number,
         size: String,
+        selectedSize: String,
         desc: String,
         price: Number,
         unit: String,

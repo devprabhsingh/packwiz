@@ -9,7 +9,7 @@ import pds from "@/data/pds";
 const ProductGrid = React.memo(() => {
   const router = useRouter();
 
-  const multiPds = useMemo(() => [0, 3, 7, 8, 10, 12, 13, 14], []);
+  const multiPds = useMemo(() => [0, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14], []);
 
   const handleClick = useCallback(
     (product) => {

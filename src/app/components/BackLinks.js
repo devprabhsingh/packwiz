@@ -2,6 +2,14 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 const BackLinks = ({ title, id, nextTitle, nextId }) => {
   const pathname = usePathname();
@@ -12,11 +20,14 @@ const BackLinks = ({ title, id, nextTitle, nextId }) => {
   ];
 
   if (title && id) {
-    links.push({ href: `/productinfo/${id}`, label: title });
+    links.push({ href: `/product-info/${slugify(title)}`, label: title });
   }
 
   if (nextTitle) {
-    links.push({ href: `/ItemDetail/${nextId}`, label: nextTitle });
+    links.push({
+      href: `/item-details/${slugify(nextTitle)}`,
+      label: nextTitle,
+    });
   }
 
   return (

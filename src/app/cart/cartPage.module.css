@@ -10,7 +10,7 @@
   /* Renamed from .cart-list to .cartList for consistency with CSS Modules */
   position: relative; /* This is crucial for .clearAllBtn's absolute positioning */
 
-  flex: 1; /* Example: if it's a flex item */
+  flex: 0.9; /* Example: if it's a flex item */
   margin-right: 20px; /* Example: space between list and checkout card */
 }
 .heading {
@@ -38,12 +38,15 @@
 .cartItemCard {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
   border: 1px solid #eee;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   position: relative;
+  padding-right: 50px;
 }
 
 .partone {
@@ -56,7 +59,7 @@
   width: 180px; /* Kept fixed width from original inline style */
   border-collapse: collapse;
   font-size: 13px;
-  margin-top: 15px; /* Added some top margin for separation */
+  margin: 0 15px; /* Added some top margin for separation */
   border: 1px solid #ddd; /* Added a subtle border to the table */
 }
 
@@ -78,7 +81,7 @@
 .highlightRow {
   font-weight: bold;
   color: green;
-  background-color: rgb(255, 240, 200); /* Lighter orange for highlighting */
+  background-color: rgb(251, 234, 188); /* Lighter orange for highlighting */
   border: 1px solid #ffcc80; /* Subtle border for highlighted row */
 }
 .thumbnail {
@@ -90,7 +93,6 @@
 }
 
 .info {
-  flex: 1;
   color: black;
 }
 
@@ -99,18 +101,13 @@
   text-decoration: none;
   font-size: 18px;
   color: #333;
+  margin-bottom: 5px;
 }
-
-.itemInfo p {
-  font-size: 14px;
-  margin: 3px 0;
+.itemInfo1 {
+  font-style: italic;
 }
-
-.itemInfo p:nth-of-type(1) {
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.itemInfo p:nth-of-type(2) {
+.itemInfo2 {
+  margin: 5px 0;
   color: #ff6f20;
 }
 
@@ -168,6 +165,7 @@
 }
 
 .subtotalValue {
+  font-size: 16px;
   color: green;
   margin-left: 3px;
 }
@@ -211,21 +209,19 @@
 }
 
 .clearAllBtn {
-  background-color: #e5e5e5;
+  margin-bottom: 30px;
+  background-color: #a4a1a1;
   padding: 8px;
   border-radius: 5px;
   width: fit-content;
   border: none;
   outline: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  /* New positioning for top-right of cart-list */
-  position: absolute; /* Needs to be absolute within a relative parent */
-  top: 0; /* Align to the top */
-  right: 0; /* Align to the right */
-  z-index: 1; /* Ensure it's above other content if overlapping */
 }
-
+.clearBtnParent {
+  display: flex;
+  /* Pushes all child elements to the right edge of the container */
+  justify-content: flex-end;
+}
 .clearAllBtn:hover {
   background-color: #d0d0d0;
 }
@@ -282,7 +278,9 @@
   font-weight: bold;
   transition: background-color 0.2s;
 }
-
+.moreInfo p {
+  margin: 5px 0;
+}
 .checkoutBtn:hover {
   background-color: #e65c19;
 }
@@ -295,6 +293,9 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .cartList {
+    margin-right: 0;
+  }
   .cartContainer {
     padding: 5px;
   }
@@ -305,7 +306,9 @@
     gap: 0;
     padding-bottom: 120px;
   }
-
+  .itemInfo2 {
+    margin: 0;
+  }
   .priceTable {
     display: none;
   }
@@ -316,12 +319,17 @@
     margin-bottom: 15px;
     float: right; /* Add space below it */
   }
+  .controlsBtnParent {
+    margin-top: 0;
+  }
   .cartItemCard {
     width: 100%;
     align-items: center;
     flex-direction: column; /* Limit width on smaller screens */
   }
-
+  .info {
+    width: fit-content;
+  }
   .checkoutCard {
     width: 100%;
     margin-top: 0;
@@ -336,12 +344,14 @@
     padding: 15px 20px;
   }
   .controlsBtnParent {
-    align-items: center;
+    justify-content: center;
+
+    align-items: flex-start;
   }
   .partone {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
   }
 }
@@ -354,10 +364,6 @@
   .thumbnail {
     margin-right: 5px;
     margin-bottom: 10px;
-  }
-
-  .info {
-    width: 100%;
   }
 
   .controlsBtnParent {

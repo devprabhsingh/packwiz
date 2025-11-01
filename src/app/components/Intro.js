@@ -7,7 +7,7 @@ export default function HeroIntro() {
       <div className={styles.introDiv}>
         <h1
           style={{
-            fontSize: "2rem",
+            fontSize: "1.8rem",
             fontWeight: 800,
             color: "white",
             marginBottom: "0.5rem",

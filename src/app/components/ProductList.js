@@ -20,12 +20,36 @@ const slugify = (text) => {
     .replace(/--+/g, "-")
     .replace(/-+$/, "");
 };
+const SizeSelector = ({ sizes, selectedSize, onSelectSize }) => {
+  return (
+    <div className={styles.sizeSelector}>
+      <span className={styles.sizeSelectorLabel}>Size:</span>
+      {sizes.map((size) => (
+        <button
+          key={size}
+          onClick={() => onSelectSize(size)}
+          className={`
+            ${styles["size-selector__button"]} 
+            ${selectedSize === size ? styles["size-selector__button--selected"] : ""}
+          `}
+          aria-label={`Select size ${size}`}
+        >
+          {size}
+        </button>
+      ))}
+    </div>
+  );
+};
 
 const ProductList = ({ id, modified, productList }) => {
   const router = useRouter();
   const { addToCart } = useCart();
 
   // Example state initialization
+  const availableSizes = ["S", "M", "L", "XL"];
+  const [selectedSizes, setSelectedSizes] = useState(
+    productList.map(() => availableSizes[0])
+  );
   const [quantities, setQuantities] = useState(productList.map(() => 1));
   const [addedProductId, setAddedProductId] = useState(null);
   const [openForm, setOpenForm] = useState(false);
@@ -72,12 +96,19 @@ const ProductList = ({ id, modified, productList }) => {
   }, []);
 
   const handleAddToCart = useCallback(
-    (product, qty, when) => {
+    (product, qty, index, when) => {
       const price = getPrice(qty, product);
+      const selectedSize = selectedSizes[index];
       const finalPrice = Number(
         (price - (price / 100) * product.discount).toFixed(2)
       );
-      addToCart({ ...product, qty: Number(qty), price, finalPrice });
+      addToCart({
+        ...product,
+        qty: Number(qty),
+        selectedSize: selectedSize,
+        price,
+        finalPrice,
+      });
       setAddedProductId(product.id);
       setToast({
         show: true,
@@ -96,7 +127,7 @@ const ProductList = ({ id, modified, productList }) => {
       });
       if (when === "now") router.push("/cart");
     },
-    [addToCart, getPrice, router]
+    [addToCart, getPrice, router, selectedSizes]
   );
 
   const handleCloseToast = () =>
@@ -122,6 +153,14 @@ const ProductList = ({ id, modified, productList }) => {
     [router]
   );
 
+  const handleSelectSize = useCallback((index, size) => {
+    setSelectedSizes((prev) => {
+      const updated = [...prev];
+      updated[index] = size;
+      return updated;
+    });
+  }, []);
+
   return (
     <>
       {toast.show && (
@@ -145,6 +184,7 @@ const ProductList = ({ id, modified, productList }) => {
         >
           {productList.map((product, index) => {
             const qty = quantities[index];
+            const currentSelectedSize = selectedSizes[index];
             const pricePerUnit = getPrice(qty, product);
             const finalPrice = Number(
               (pricePerUnit - (pricePerUnit / 100) * product.discount).toFixed(
@@ -260,10 +300,18 @@ const ProductList = ({ id, modified, productList }) => {
                           </strong>
                         </div>
                       )}
-
+                      {product.id.startsWith("gl") && (
+                        <SizeSelector
+                          sizes={availableSizes}
+                          selectedSize={currentSelectedSize}
+                          onSelectSize={(size) => handleSelectSize(index, size)}
+                        />
+                      )}
                       <div className={styles.actionButtons}>
                         <button
-                          onClick={() => handleAddToCart(product, qty, "now")}
+                          onClick={() =>
+                            handleAddToCart(product, qty, index, "now")
+                          }
                           className={styles.addToCartButton}
                           style={{
                             backgroundColor: "#ff6f20",
@@ -276,7 +324,7 @@ const ProductList = ({ id, modified, productList }) => {
                           <p className={styles.addToCartButton}>Added!</p>
                         ) : (
                           <button
-                            onClick={() => handleAddToCart(product, qty)}
+                            onClick={() => handleAddToCart(product, qty, index)}
                             className={styles.addToCartButton}
                           >
                             Add to Cart

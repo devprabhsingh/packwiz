@@ -6,7 +6,14 @@ import { getProductCat } from "@/utils/getProductCat";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import styles from "./cartPage.module.css";
-
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 export default function CartPage({ categories }) {
   const {
     setKit,
@@ -74,26 +81,31 @@ export default function CartPage({ categories }) {
         </div>
       ) : (
         <div className={styles.mainbox}>
-          <div className="cart-list">
-            {/* Added a clear all button class */}
-            <button
-              className={styles.clearAllBtn}
-              onClick={() => {
-                const confirmClear = window.confirm(
-                  "Are you sure you want to clear all items from the cart?"
-                );
-                if (confirmClear) {
-                  clearCart();
-                }
-              }}
-            >
-              Clear All
-            </button>
+          <div className={styles.cartList}>
+            <div className={styles.clearBtnParent}>
+              <button
+                className={styles.clearAllBtn}
+                onClick={() => {
+                  const confirmClear = window.confirm(
+                    "Are you sure you want to clear all items from the cart?"
+                  );
+                  if (confirmClear) {
+                    clearCart();
+                  }
+                }}
+              >
+                Clear All
+              </button>
+            </div>
+
             {cartItems.length > 0 &&
               cartItems.map((item) => (
-                <div key={item.id} className={styles.cartItemCard}>
+                <div
+                  key={item.title + item.selectedSize + item.price + item.size}
+                  className={styles.cartItemCard}
+                >
                   <Link
-                    href={`/ItemDetail/${item.id}`}
+                    href={`/item-details/${slugify(item.title)}`}
                     style={{ textDecoration: "none" }}
                   >
                     {" "}
@@ -106,8 +118,8 @@ export default function CartPage({ categories }) {
                       />
                       <div className={styles.info}>
                         <h3 className={styles.title}>{item.title}</h3>
-                        <p className={styles.itemInfo}>{item.desc}</p>
-                        <p className={styles.itemInfo}>
+                        <p className={styles.itemInfo1}>{item.desc}</p>
+                        <p className={styles.itemInfo2}>
                           {item.id.startsWith("b")
                             ? item.size
                                 .split("*")
@@ -120,35 +132,6 @@ export default function CartPage({ categories }) {
                                 .join(" × ")
                             : item.size}
                         </p>
-                        {item.discount && (
-                          <p className={styles.discountTag}>
-                            {item.discount}% Off
-                          </p>
-                        )}
-                        {item.discount ? (
-                          <p className={styles.detail}>
-                            Effective Price:{" "}
-                            <span className={styles.subtotalOldPrice}>
-                              ${item.price}
-                            </span>
-                            <span
-                              className={styles.subtotalValue}
-                              style={{ marginLeft: "10px" }}
-                            >
-                              ${item.finalPrice}
-                            </span>
-                          </p>
-                        ) : (
-                          <p className={styles.detail}>
-                            Effective Price:{" "}
-                            <span
-                              className={styles.subtotalValue}
-                              style={{ marginLeft: "3px" }}
-                            >
-                              ${item.price}
-                            </span>
-                          </p>
-                        )}
                       </div>
                     </div>
                   </Link>
@@ -201,6 +184,55 @@ export default function CartPage({ categories }) {
                     ""
                   )}
                   <div className={styles.controlsBtnParent}>
+                    <div className={styles.moreInfo}>
+                      <p>
+                        {item.id.startsWith("gl") && (
+                          <span style={{ color: "black" }}>
+                            Selected Size :{" "}
+                            <span
+                              style={{
+                                backgroundColor: "#ff6d00",
+                                color: "white",
+                                padding: "2px",
+                                borderRadius: "3px",
+                              }}
+                            >
+                              {item.selectedSize}
+                            </span>
+                          </span>
+                        )}
+                      </p>
+
+                      {item.discount && (
+                        <p className={styles.discountTag}>
+                          {item.discount}% Off
+                        </p>
+                      )}
+                      {item.discount ? (
+                        <p className={styles.detail}>
+                          Effective Price:{" "}
+                          <span className={styles.subtotalOldPrice}>
+                            ${item.price}
+                          </span>
+                          <span
+                            className={styles.subtotalValue}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            ${item.finalPrice}
+                          </span>
+                        </p>
+                      ) : (
+                        <p className={styles.detail}>
+                          Effective Price:{" "}
+                          <span
+                            className={styles.subtotalValue}
+                            style={{ marginLeft: "3px" }}
+                          >
+                            ${item.price}
+                          </span>
+                        </p>
+                      )}
+                    </div>
                     <div className={styles.controls}>
                       <button
                         className={styles.qtyBtn}

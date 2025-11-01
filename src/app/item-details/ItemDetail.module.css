@@ -42,7 +42,23 @@
   min-width: 280px;
   max-width: 400px;
 }
+.loading {
+  /* 1. Make the container take up the full viewport height and width */
+  position: fixed; /* Ensures it covers the entire screen, regardless of scroll */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Viewport Width */
+  height: 100vh; /* Viewport Height */
 
+  /* Optional: Add a background to slightly dim the content underneath */
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 1000; /* Ensures it sits above all other content */
+
+  /* 2. Apply Flexbox for centering */
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+}
 .infoSection h1 {
   font-size: 28px;
   margin-bottom: 12px;
@@ -115,6 +131,58 @@
 .qtyControls span {
   font-size: 16px;
   font-weight: 500;
+}
+.sizeSelector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 10px;
+}
+
+.sizeSelectorLabel {
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #374151; /* gray-700 */
+}
+
+.size-selector__button {
+  width: 2rem; /* w-10 */
+  height: 2rem; /* h-10 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  border-radius: 0.5rem; /* rounded-lg */
+  transition: all 200ms ease-in-out;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06); /* shadow-md */
+  outline: none;
+  cursor: pointer;
+
+  background-color: white;
+  color: #374151; /* gray-800 */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+}
+
+.size-selector__button:focus {
+  /* focus:ring-2 focus:ring-offset-2 */
+  box-shadow:
+    0 0 0 4px rgba(255, 255, 255, 0.5),
+    0 0 0 6px #ff6f009e;
+}
+
+.size-selector__button--selected {
+  background-color: #ff6d00; /* indigo-600 */
+  color: white;
+  box-shadow:
+    0 10px 15px -3px #ff6f009d,
+    0 4px 6px -4px rgba(79, 70, 229, 0.25); /* shadow-indigo-500/50 */
+  transform: scale(1.05);
+  border: none;
+  /* focus:ring-indigo-500 is handled by the general focus style above */
 }
 
 .actionButtons {
