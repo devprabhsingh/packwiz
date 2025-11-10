@@ -45,7 +45,7 @@ const pds = [
     id: 6,
     idKey: "rt",
     name: "Tuck Tape",
-    image: "/images/red.webp",
+    image: "/images/tuck-tape.webp",
     alt: "High-visibility red tuck tape for sealing, durable packing tape",
   },
   {
@@ -59,7 +59,7 @@ const pds = [
     id: 8,
     idKey: "cv",
     name: "Coveralls",
-    image: "/images/coveralls.webp",
+    image: "/images/coveralls-2.webp",
     alt: "Protective disposable coveralls for moving, cleaning supplies",
   },
   {
@@ -99,27 +99,35 @@ const pds = [
   },
   {
     id: 14,
+    idKey: "mc",
+    name: "Mattress Bags",
+    image: "/images/mattress-bag-2.webp",
+    alt: "Protective poly bags for mattress.",
+  },
+
+  {
+    id: 15,
     idKey: "pk01",
     name: "1 Bedroom Apartment-Condo Kit",
     image: "/images/kit1.webp",
     alt: "1 bedroom apartment moving kit, essential packing supplies Toronto",
   },
   {
-    id: 15,
+    id: 16,
     idKey: "pk02",
     name: "2-3 Bedrooms House-Townhouse Kit",
     image: "/images/kit1.webp",
     alt: "2-3 bedroom house moving kit, comprehensive packing boxes GTA",
   },
   {
-    id: 16,
+    id: 17,
     idKey: "pk03",
     name: "3-4 Bedrooms House-Apartment Kit",
     image: "/images/kit1.webp",
     alt: "3-4 bedroom house moving kit, complete moving supplies Toronto",
   },
   {
-    id: 17,
+    id: 18,
     idKey: "pk04",
     name: "4+ Bedrooms House-Apartment Kit",
     image: "/images/kit1.webp",

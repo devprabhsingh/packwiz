@@ -2,19 +2,19 @@ const products = [
   [
     {
       id: "bx01",
-      size: "12*12*12",
-      title: "1 Cube Corrugated Box - Small",
-      desc: "Small - 32 ECT",
-      priceTable: { tier1: 2.39, tier2: 2.19, tier3: 2.09, tier4: 1.89 },
-      image: "/images/1cube.webp",
+      size: "4*4*4",
+      title: "Corrugated Mug Box",
+      desc: "32 ECT",
+      priceTable: { tier1: 0.7, tier2: 0.6, tier3: 0.5, tier4: 0.4 },
+      image: "/images/cube4in.webp",
       image2: "/images/box-thickness.webp",
 
       specs: {
         color: "Brown",
         boxType: "cube",
         wallType: "single wall",
-        usage: "standard",
-        handleHoles: "no",
+        usage: "for small items like cups and mugs",
+
         weightCapacity: "30lbs",
       },
       features: [
@@ -25,19 +25,20 @@ const products = [
     },
     {
       id: "bx02",
-      size: "16*13*13",
-      title: "1.5 Cube corrugated Box - Medium",
-      desc: "Medium - 32 ECT",
-      priceTable: { tier1: 2.29, tier2: 2.19, tier3: 2.09, tier4: 1.99 },
-      image: "/images/1.5cube-2.webp",
+      size: "5*5*5",
+      title: "Cube Corrugated Box",
+      desc: "32 ECT",
+      priceTable: { tier1: 0.79, tier2: 0.75, tier3: 1.69, tier4: 0.59 },
+      image: "/images/cube5in.webp",
       image2: "/images/box-thickness.webp",
       specs: {
         color: "Brown",
-        boxType: "cuboid",
+        boxType: "cube",
         wallType: "single wall",
-        usage: "standard",
-        handleHoles: "no",
-        weightCapacity: "46.8lbs",
+        usage:
+          "Ideal for small cube-shaped products like mugs, candles, craft supplies, small electronics, or jewelry gift sets.",
+
+        weightCapacity: "30lbs",
       },
       features: [
         "Strong Stacking Power",
@@ -47,18 +48,133 @@ const products = [
     },
     {
       id: "bx03",
-      size: "18*15*12.5",
-      title: "2 Cube corrugated Box - Medium",
+      size: "6*4*4",
+      title: "Corrugated Box",
+      desc: "32 ECT",
+      priceTable: { tier1: 0.79, tier2: 0.75, tier3: 0.69, tier4: 0.59 },
+      image: "/images/cuboid644in.webp",
+      image2: "/images/box-thickness.webp",
+
+      specs: {
+        color: "Brown",
+        boxType: "cuboid",
+        wallType: "single wall",
+        usage: " for shipping jewellery, computer mice, phone hardware",
+
+        weightCapacity: "35lbs",
+      },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
+    },
+    {
+      id: "bx04",
+      size: "8*8*6",
+      title: "Corrugated Box",
+      desc: "Small - 32 ECT",
+      priceTable: { tier1: 0.98, tier2: 0.88, tier3: 0.88, tier4: 0.88 },
+      image: "/images/cuboid886in.webp",
+      image2: "/images/box-thickness.webp",
+
+      specs: {
+        color: "Brown",
+        boxType: "cuboid",
+        wallType: "single wall",
+        usage:
+          "for shipping small appliances, books, toiletries, glassware, or several packaged food items.",
+        weightCapacity: "40lbs",
+      },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
+    },
+    {
+      id: "bx05",
+      size: "10*10*10",
+      title: "Cube Corrugated Box",
+      desc: "32 ECT",
+      priceTable: { tier1: 1.19, tier2: 1.09, tier3: 0.99, tier4: 0.9 },
+      image: "/images/cube10in.webp",
+      image2: "/images/box-thickness.webp",
+
+      specs: {
+        color: "Brown",
+        boxType: "cube",
+        wallType: "single wall",
+        usage:
+          "for clothing, medium-sized electronics, small sports gear, or irregularly shaped gifts that need void fill.",
+
+        weightCapacity: "40lbs",
+      },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
+    },
+    {
+      id: "bx06",
+      size: "12*12*12",
+      title: "1 Cube Corrugated Box",
+      desc: "32 ECT",
+      priceTable: { tier1: 1.49, tier2: 1.45, tier3: 1.39, tier4: 1.34 },
+      image: "/images/cube12in.webp",
+      image2: "/images/box-thickness.webp",
+
+      specs: {
+        color: "Brown",
+        boxType: "cube",
+        wallType: "single wall",
+        usage:
+          "for kitchenware, shoes, small collections, or general household items.",
+        weightCapacity: "40lbs",
+      },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
+    },
+    {
+      id: "bx07",
+      size: "16*12*12",
+      title: "1.5 Cube corrugated Box - Medium",
       desc: "Medium - 32 ECT",
-      priceTable: { tier1: 2.69, tier2: 2.59, tier3: 2.49, tier4: 2.29 },
-      image: "/images/2cube-2.webp",
+      priceTable: { tier1: 1.99, tier2: 1.95, tier3: 1.89, tier4: 1.85 },
+      image: "/images/1.5cube.webp",
       image2: "/images/box-thickness.webp",
       specs: {
         color: "Brown",
         boxType: "cuboid",
         wallType: "single wall",
-        usage: "heavy",
-        handleHoles: "yes",
+        usage:
+          "for books (if not too many to keep weight down), photo albums, kitchen appliances, or filing documents.",
+        weightCapacity: "46.8lbs",
+      },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
+    },
+    {
+      id: "bx08",
+      size: "18*14*12",
+      title: "2 Cube corrugated Box - Medium",
+      desc: "Medium - 32 ECT",
+      priceTable: { tier1: 2.49, tier2: 2.45, tier3: 2.39, tier4: 2.29 },
+      image: "/images/2cube.webp",
+      image2: "/images/box-thickness.webp",
+      specs: {
+        color: "Brown",
+        boxType: "cuboid",
+        wallType: "single wall",
+        usage:
+          "for shipping large retail items, seasonal decorations, or bulky apparel.",
         weightCapacity: "70.2lbs",
       },
       features: [
@@ -70,20 +186,21 @@ const products = [
         "Our <strong>corrugated boxes</strong> are strong, durable, and ideal for shipping, moving, or storage. Made from high-quality kraft paper, these <strong>shipping boxes</strong> protect your items with excellent cushioning and crush resistance.",
     },
     {
-      id: "bx04",
-      size: "18*18*21",
+      id: "bx09",
+      size: "18*18*18",
       title: "4 Cube corrugated box - Large",
 
       desc: "Large - 32 ECT",
-      priceTable: { tier1: 4.79, tier2: 4.29, tier3: 4.15, tier4: 3.99 },
-      image: "/images/4cube.webp",
+      priceTable: { tier1: 3.59, tier2: 3.49, tier3: 3.45, tier4: 3.29 },
+      image: "/images/cube18in.webp",
       image3: "/images/box-thickness.webp",
       specs: {
         color: "Brown",
-        boxType: "cuboid",
+        boxType: "cube",
         wallType: "single wall",
-        usage: "heavy",
-        handleHoles: "yes",
+        usage:
+          "lightweight but bulky items like pillows, blankets, towels, or large decorative pieces.",
+
         weightCapacity: "118.2lbs",
       },
       features: [
@@ -95,7 +212,32 @@ const products = [
         "Our <strong>corrugated boxes</strong> are strong, durable, and ideal for shipping, moving, or storage. Made from high-quality kraft paper, these <strong>shipping boxes</strong> protect your items with excellent cushioning and crush resistance.",
     },
     {
-      id: "bx05",
+      id: "bx10",
+      size: "24*24*24",
+      title: "8 Cube corrugated box - X Large",
+
+      desc: "X Large",
+      priceTable: { tier1: 6.99, tier2: 6.69, tier3: 6.35, tier4: 5.99 },
+      image: "/images/8cube.webp",
+      image3: "/images/box-thickness.webp",
+      specs: {
+        color: "Brown",
+        boxType: "cube",
+        wallType: "single wall",
+        usage: "large lamp shades, stuffed animals, pillows, speakers",
+
+        weightCapacity: "99.45lbs",
+      },
+      features: [
+        "Strong Stacking Power",
+        "Crush-Resistant Protection",
+        "Reliable Moving Solution",
+      ],
+      details:
+        "Our <strong>corrugated boxes</strong> are strong, durable, and ideal for shipping, moving, or storage. Made from high-quality kraft paper, these <strong>shipping boxes</strong> protect your items with excellent cushioning and crush resistance.",
+    },
+    {
+      id: "bx11",
       size: "24*21*48",
       title: "Wardrobe box with metal bar",
       desc: "32ECT single wall",
@@ -120,8 +262,8 @@ const products = [
   [
     {
       id: "mb01",
-      title: "Moving Blankets",
-      desc: "Non-woven, Padded, 1.94kg/pc",
+      title: "Non-woven Moving Blankets",
+      desc: "Padded, 1.94kg/pc",
       size: "72in L X 80in W",
       priceTable: { tier1: 11.99, tier2: 11.89, tier3: 11.89, tier4: 10.99 },
       image: "/images/moving_blankets.webp",
@@ -139,6 +281,31 @@ const products = [
         padding: "high-density filling",
         usage: "heavy-duty protection",
         washable: "yes, but vaccumm preferred",
+        suitableFor: "furniture, appliances, and large household items",
+      },
+      discount: 10,
+    },
+    {
+      id: "mb02",
+      title: "Polyster Moving Blankets",
+      desc: "Padded, 1.62kg/pc",
+      size: "72in L X 80in W",
+      priceTable: { tier1: 14.99, tier2: 14.49, tier3: 13.89, tier4: 11.99 },
+      image: "/images/moving-blankets-polyster.webp",
+      image2: "/images/moving-blankets-polyster-2.webp",
+      image3: "/images/moving-blankets-polyster-3.webp",
+      features: [
+        "Soft & Comfortable",
+        "Durable & Sturdy",
+        "Double Stitched Binding",
+      ],
+
+      specs: {
+        color: "Black",
+        material: "polyster",
+        padding: "high-density filling",
+        usage: "premium and heavy-duty protection",
+        washable: "yes",
         suitableFor: "furniture, appliances, and large household items",
       },
       discount: 10,
@@ -171,7 +338,7 @@ const products = [
       desc: "14inch, 60 gauge Stretch Wrap/Pallet Wrap",
       size: "450m",
       priceTable: { tier1: 16.55, tier2: 16.15, tier3: 14.95, tier4: 12.95 },
-      image: "/images/shrink_wrap.webp",
+      image: "/images/pallet-wrap-2.webp",
       image2: "/images/shrink-wrap-2.webp",
       features: ["Self-Adhering", "Multi-Purpose", "Handy"],
       discount: 10,
@@ -289,8 +456,8 @@ const products = [
     {
       id: "ct01",
       title: "Clear Packing Tape",
-      desc: "2 inch wide, 2 mil",
-      size: "100 meters",
+      desc: "2 inch wide, 100 meters",
+      size: "2.2 mil thickness",
       priceTable: { tier1: 1.89, tier2: 1.85, tier3: 1.8, tier4: 1.75 },
       features: ["Ultra Strong", "High Transparency", "Easy To Use"],
       image: "/images/clear-tape.webp",
@@ -308,12 +475,12 @@ const products = [
     {
       id: "ct02",
       title: "Packwiz Clear Packing Tape",
-      desc: "2 inch wide, 1.5 mil",
-      size: "100 meters",
+      desc: "2 inch wide, 100 meters",
+      size: "1.5 mil thickness",
       priceTable: { tier1: 1.55, tier2: 1.49, tier3: 1.49, tier4: 1.49 },
       features: ["Strong", "High Transparency", "Easy To Use"],
-      image: "/images/clear-tape.webp",
-      image2: "/images/clear-tape-2.webp",
+      image: "/images/clear-tape-3.webp",
+      image2: "/images/clear-tape-4.webp",
 
       specs: {
         color: "Clear",
@@ -329,8 +496,8 @@ const products = [
     {
       id: "gt01",
       title: "Painters Masking Tape",
-      desc: "Masking tape, 1.88inch Wide",
-      size: "50m",
+      desc: "10 days removal",
+      size: "50meters, 1.88in wide",
       priceTable: { tier1: 3.05, tier2: 3, tier3: 3, tier4: 2.9 },
       features: [
         "Multi-Surface Use",
@@ -338,10 +505,34 @@ const products = [
         "High Temperature Resistant",
       ],
       image: "/images/green-tape.webp",
-
+      image2: "/images/green-tape-2.webp",
+      image3: "/images/green-tape-3.webp",
       specs: {
         color: "Green",
         material: "crepe paper with medium adhesive",
+        width: "2 inches",
+        length: "50 meters",
+        usage: "masking surfaces during painting and decorating",
+        suitableFor: "walls, trim, glass, wood, and metal surfaces",
+      },
+    },
+    {
+      id: "gt02",
+      title: "Painters Blue Tape",
+      desc: "30 days removal, Low Tack",
+      size: "50meters, 1.88in wide",
+      priceTable: { tier1: 3.05, tier2: 3, tier3: 3, tier4: 2.9 },
+      features: [
+        "Multi-Surface Use",
+        "Leaves no residue",
+        "High Temperature Resistant",
+      ],
+      image: "/images/blue-tape.webp",
+      image2: "/images/blue-tape-2.webp",
+      image3: "/images/blue-tape-3.webp",
+      specs: {
+        color: "Blue",
+        material: "crepe paper with low tack adhesive",
         width: "2 inches",
         length: "50 meters",
         usage: "masking surfaces during painting and decorating",
@@ -352,17 +543,37 @@ const products = [
   [
     {
       id: "rt01",
-      title: "Tuck Tape",
-      desc: "Strong Epoxy Resin Construction Tape",
+      title: "Strong Adhesive Red Tape",
+      desc: "80% as strong as Tuck Tape",
       size: "50 Meters",
-      priceTable: { tier1: 4.95, tier2: 4.55, tier3: 4.5, tier4: 4.5 },
+      priceTable: { tier1: 4.99, tier2: 4.89, tier3: 4.79, tier4: 4.69 },
       features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],
-      image: "/images/red.webp",
+      image: "/images/red-tape.webp",
+      image2: "/images/red-tape-2.webp",
       specs: {
         color: "Red",
         material: "Polyethylene film with Acrylic adhesive",
-        width: "2 inches",
+        width: "48mm",
         length: "50 meters",
+        usage: "sealing insulation, vapor barriers, and epoxy resin molds",
+        suitableFor:
+          "construction, HVAC, resin projects, and weatherproof sealing",
+      },
+    },
+    {
+      id: "rt02",
+      title: "Yitap Tuck Tape",
+      desc: "Strong Epoxy Resin Construction Tape",
+      size: "66 Meters",
+      priceTable: { tier1: 6.39, tier2: 6.09, tier3: 5.99, tier4: 5.89 },
+      features: ["Super Adhesive", "Very Sticky", "Permanent Bond"],
+      image: "/images/tuck-tape.webp",
+      image2: "/images/tuck-tape-2.webp",
+      specs: {
+        color: "Red",
+        material: "Polyethylene film with Acrylic adhesive",
+        width: "60mm",
+        length: "66 meters",
         usage: "sealing insulation, vapor barriers, and epoxy resin molds",
         suitableFor:
           "construction, HVAC, resin projects, and weatherproof sealing",
@@ -375,7 +586,7 @@ const products = [
       id: "gb01",
       title: "Black garbage bags",
       desc: "Multi-purpose Trash Can Liners",
-      size: "120cm X 140cm",
+      size: "120cm X 140cm, 50pcs",
       priceTable: { tier1: 26.99, tier2: 26.09, tier3: 25.49, tier4: 24.99 },
       image: "/images/blackbag.webp",
       features: ["3 mil thick", "Super Strong", "Unscented"],
@@ -392,7 +603,7 @@ const products = [
       id: "gb02",
       title: "Black garbage bags",
       desc: "Multi-purpose Trash Can Liners",
-      size: "100cm X 120cm",
+      size: "100cm X 120cm, 50pcs",
       priceTable: { tier1: 25, tier2: 25, tier3: 25, tier4: 25 },
       image: "/images/blackbag.webp",
       features: ["3 mil thick", "Super Strong", "Unscented"],
@@ -409,7 +620,7 @@ const products = [
       id: "gb03",
       title: "Clear garbage bags",
       desc: "Perfect for disposal of paper or office waste",
-      size: "120cm X 140cm",
+      size: "120cm X 140cm, 50pcs",
       features: ["Sturdy", "Convenient", "Multi-Purpose"],
       priceTable: { tier1: 25, tier2: 25, tier3: 25, tier4: 25 },
       image: "/images/clearbag.webp",
@@ -433,6 +644,7 @@ const products = [
       priceTable: { tier1: 3, tier2: 3, tier3: 3, tier4: 2.9 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.webp",
+      image2: "/images/coveralls-2.webp",
       specs: {
         color: "White",
         material: "polypropylene with waterproof coating",
@@ -450,6 +662,7 @@ const products = [
       priceTable: { tier1: 3.09, tier2: 3.09, tier3: 3.05, tier4: 2.95 },
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       image: "/images/coveralls.webp",
+      image2: "/images/coveralls-2.webp",
       specs: {
         color: "White",
         material: "polypropylene with waterproof coating",
@@ -465,6 +678,7 @@ const products = [
       size: "XL",
       priceTable: { tier1: 2.5, tier2: 2.5, tier3: 2.4, tier4: 2.2 },
       image: "/images/coveralls.webp",
+      image2: "/images/coveralls-dustproof.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
         color: "White",
@@ -482,6 +696,7 @@ const products = [
       size: "2XL",
       priceTable: { tier1: 2.5, tier2: 2.5, tier3: 2.4, tier4: 2.2 },
       image: "/images/coveralls.webp",
+      image2: "/images/coveralls-dustproof.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
         color: "White",
@@ -498,6 +713,7 @@ const products = [
       size: "3XL",
       priceTable: { tier1: 2.5, tier2: 2.5, tier3: 2.4, tier4: 2.2 },
       image: "/images/coveralls.webp",
+      image2: "/images/coveralls-dustproof.webp",
       features: ["One-Piece", "Hood Attached", "Lightweight & Soft"],
       specs: {
         color: "White",
@@ -516,6 +732,7 @@ const products = [
       size: "Round, Rectangular, Square",
       priceTable: { tier1: 6.5, tier2: 6, tier3: 5.5, tier4: 5 },
       image: "/images/felt_pads.webp",
+      image2: "/images/felt-pads-2.webp",
       features: ["Diversity of sizes", "Tenacious Adhesive", "Easy to put"],
       specs: {
         color: "Brown",
@@ -721,6 +938,144 @@ const products = [
       },
     },
   ],
+  [
+    {
+      id: "mc01",
+      title: "Twin Mattress Bag",
+      desc: "2 Mil Polyethylene, 1 Pc",
+      size: '39" x 16" x 96"(inches)',
+      priceTable: { tier1: 5.99, tier2: 5.49, tier3: 4.99, tier4: 4.75 },
+      image: "/images/2-mil-twin-mattress-bag.webp",
+      image2: "/images/mattress-bag.webp",
+      image3: "/images/mattress-bag-2.webp",
+      features: ["Dust & Dirt Barrier", "Moisture Resistant", "Economical"],
+      specs: {
+        color: "Clear",
+        material: "Polyethylene (2 Mil)",
+        size: '39" x 16" x 96", fits Twin and Twin XL',
+        quantity: "1",
+        usage:
+          "Protection of Twin/Twin XL mattresses during moves or short-term storage.",
+        suitableFor: "Residential moves, renters, temporary storage.",
+      },
+    },
+    {
+      id: "mc02",
+      title: "Queen Mattress Bag",
+      desc: "2 Mil Polyethylene, 1 Pc",
+      size: '60" x 16" x 96"(inches)',
+      priceTable: { tier1: 6.99, tier2: 6.49, tier3: 5.99, tier4: 5.75 },
+      image: "/images/2-mil-queen-mattress-bag.webp",
+      image2: "/images/mattress-bag.webp",
+      image3: "/images/mattress-bag-2.webp",
+      features: ["Dust & Dirt Barrier", "Moisture Resistant", "Economical"],
+      specs: {
+        color: "Clear",
+        material: "Polyethylene (2 Mil)",
+        size: '60" x 16" x 96"',
+        quantity: "1",
+        usage:
+          "Protection of Full (Double) and Queen mattresses during moves or short-term storage.",
+        suitableFor: "Residential moves, renters, temporary storage.",
+      },
+    },
+    {
+      id: "mc03",
+      title: "King Mattress Bag",
+      desc: "2 Mil Polyethylene, 1 Pc",
+      size: '78" x 16" x 100"(inches)',
+      priceTable: { tier1: 7.99, tier2: 7.49, tier3: 6.99, tier4: 6.75 },
+      image: "/images/2-mil-king-mattress-bag.webp",
+      image2: "/images/mattress-bag.webp",
+      image3: "/images/mattress-bag-2.webp",
+      features: ["Dust & Dirt Barrier", "Moisture Resistant", "Economical"],
+      specs: {
+        color: "Clear",
+        material: "Polyethylene (2 Mil)",
+        size: '78" x 16" x 100"',
+        quantity: "1",
+        usage:
+          "Protection of King and Cal King mattresses during moves or short-term storage.",
+        suitableFor: "Residential moves, renters, temporary storage.",
+      },
+    },
+
+    {
+      id: "mc04",
+      title: "Twin Mattress Bag - Heavy-Duty",
+      desc: "6 Mil Polyethylene, 1Pc",
+      size: '39" x 16" x 96"(inches)',
+      priceTable: { tier1: 11.99, tier2: 11.49, tier3: 10.99, tier4: 10.75 },
+      image: "/images/6-mil-twin-xl-mattress-bag.webp",
+      image2: "/images/mattress-bag.webp",
+      image3: "/images/mattress-bag-2.webp",
+      features: [
+        "Maximum Puncture Resistance",
+        "Extreme Durability",
+        "Pest/Bed Bug Barrier",
+      ],
+      specs: {
+        color: "Clear",
+        material: "Polyethylene (6 Mil)",
+        size: '39" x 16" x 96", fits Twin and Twin XL',
+        quantity: "1",
+        usage:
+          "Superior protection for Twin/Twin XL mattresses during storage or rough handling; essential for pest quarantine.",
+        suitableFor:
+          "Long-term storage, professional movers, cross-country moves, pest control.",
+      },
+    },
+    {
+      id: "mc05",
+      title: "Queen Mattress Bag - Heavy-Duty",
+      desc: "6 Mil Polyethylene, 1 Pc",
+      size: '60" x 16" x 96"(inches)',
+      priceTable: { tier1: 13.99, tier2: 13.49, tier3: 12.99, tier4: 12.75 },
+      image: "/images/6-mil-queen-mattress-bag.webp",
+      image2: "/images/mattress-bag.webp",
+      image3: "/images/mattress-bag-2.webp",
+      features: [
+        "Maximum Puncture Resistance",
+        "Extreme Durability",
+        "Pest/Bed Bug Barrier",
+      ],
+      specs: {
+        color: "Clear",
+        material: "Polyethylene (6 Mil)",
+        size: '60" x 16" x 96"',
+        quantity: "1",
+        usage:
+          "Superior protection for Full/Queen mattresses during storage or rough handling; essential for pest quarantine.",
+        suitableFor:
+          "Long-term storage, professional movers, cross-country moves, pest control.",
+      },
+    },
+    {
+      id: "mc06",
+      title: "King Mattress Bag - Heavy-Duty",
+      desc: "6 Mil Polyethylene, 1Pc",
+      size: '78" x 16" x 100"(inches)',
+      priceTable: { tier1: 15.99, tier2: 15.49, tier3: 14.99, tier4: 14.75 },
+      image: "/images/6-mil-king-mattress-bag.webp",
+      image2: "/images/mattress-bag.webp",
+      image3: "/images/mattress-bag-2.webp",
+      features: [
+        "Maximum Puncture Resistance",
+        "Extreme Durability",
+        "Pest/Bed Bug Barrier",
+      ],
+      specs: {
+        color: "Clear",
+        material: "Polyethylene (6 Mil)",
+        size: '78" x 16" x 100"',
+        quantity: "1",
+        usage:
+          "Superior protection for King/Cal King mattresses during storage or rough handling; essential for pest quarantine.",
+        suitableFor:
+          "Long-term storage, professional movers, cross-country moves, pest control.",
+      },
+    },
+  ],
 
   [
     {
@@ -737,6 +1092,8 @@ const products = [
         { id: "ct01", qty: 3 },
         { id: "np01", qty: 1 },
         { id: "mb01", qty: 2 },
+        { id: "mc02", qty: 1 },
+        { id: "mc03", qty: 1 },
       ],
       price: 118,
       image: "/images/kit1.webp",
@@ -755,6 +1112,9 @@ const products = [
         { id: "ct01", qty: 5 },
         { id: "np01", qty: 2 },
         { id: "mb01", qty: 4 },
+        { id: "mc01", qty: 1 },
+        { id: "mc02", qty: 2 },
+        { id: "mc03", qty: 2 },
       ],
       price: 215.2,
       image: "/images/kit1.webp",
@@ -773,6 +1133,9 @@ const products = [
         { id: "ct01", qty: 6 },
         { id: "np01", qty: 3 },
         { id: "mb01", qty: 6 },
+        { id: "mc01", qty: 1 },
+        { id: "mc02", qty: 2 },
+        { id: "mc03", qty: 2 },
       ],
       price: 310.8,
       image: "/images/kit1.webp",
@@ -791,6 +1154,9 @@ const products = [
         { id: "ct01", qty: 8 },
         { id: "np01", qty: 4 },
         { id: "mb01", qty: 10 },
+        { id: "mc04", qty: 2 },
+        { id: "mc05", qty: 2 },
+        { id: "mc06", qty: 3 },
       ],
       price: 444.4,
       image: "/images/kit1.webp",

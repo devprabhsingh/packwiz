@@ -94,7 +94,13 @@ export default function PrivacyPolicyPage() {
         </li>
       </ul>
 
-      <h2>6. Contact Us</h2>
+      <h2>6. Image Policy</h2>
+      <p>
+        Original product may differ than shown in the images. Images are edited
+        to provide a clear context about the product. Packaging of a product can
+        vary from the image shown.
+      </p>
+      <h2>7. Contact Us</h2>
       <p>
         If you have questions about this privacy policy or how your data is
         handled, please contact us at:
@@ -103,7 +109,7 @@ export default function PrivacyPolicyPage() {
         <strong>Email:</strong> info@packwiz.ca
       </p>
 
-      <p className={styles.smallNote}>Last updated: July 13, 2025</p>
+      <p className={styles.smallNote}>Last updated: Nov 10, 2025</p>
     </main>
   );
 }

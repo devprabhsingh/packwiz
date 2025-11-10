@@ -9,14 +9,17 @@ import pds from "@/data/pds";
 const ProductGrid = React.memo(() => {
   const router = useRouter();
 
-  const multiPds = useMemo(() => [0, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14], []);
+  const multiPds = useMemo(
+    () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15],
+    []
+  );
 
   const handleClick = useCallback(
     (product) => {
       // Generate a slug from the product's name
       const productSlug = slugify(product.name);
 
-      if (product.id >= 14) {
+      if (product.id >= 15) {
         router.push(`/moving-kits/${productSlug}`);
       } else if (multiPds.includes(product.id)) {
         router.push(`/product-info/${productSlug}`);
@@ -50,7 +53,7 @@ const ProductGrid = React.memo(() => {
               </div>
               <p className={styles.productName}>{product.name}</p>
 
-              {product.id < 14 && (
+              {product.id < 15 && (
                 <p className={styles.priceText}>
                   As low as ${getStartingPrice(product.id)}
                 </p>
@@ -59,7 +62,7 @@ const ProductGrid = React.memo(() => {
               <p className={styles.shopButton}>Shop</p>
             </div>
 
-            {product.name === "Furniture Corners" && (
+            {product.name === "Mattress Bags" && (
               <h2 className={styles.subHeadline}>Explore Our Packing Kits</h2>
             )}
           </React.Fragment>

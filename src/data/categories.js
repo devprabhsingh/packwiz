@@ -120,6 +120,15 @@ const categories = [
     info: "Disposable booties: lightweight, waterproof shoe covers ideal for maintaining cleanliness in homes, clinics, and industrial settings.",
   },
   {
+    id: "mattress-bags",
+    title: "Mattress Bags",
+    subtitle:
+      "Essential Mattress Defense: Premium 2 Mil and 6 Mil covers for Twin to King mattresses",
+    unit: "bags",
+    weight: 0.1,
+    info: "Packwiz provides durable mattress protection. Choose 2 Mil for moving or 6 Mil for heavy-duty, long-term storage and bed bug defense. Our gusseted bags fit Twin, Queen, and King sizes, guarding against dirt, moisture, and damage.",
+  },
+  {
     id: "moving-kit",
     title: "Moving Kit",
     subtitle: "All-in-one moving essentials",

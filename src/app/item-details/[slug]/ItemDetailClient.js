@@ -10,19 +10,8 @@ import Toast from "@/app/components/Toast";
 import styles from "../ItemDetail.module.css";
 import Image from "next/image";
 import products from "@/data/products";
-
+import { slugify } from "@/utils/slugify";
 const ProductList = dynamic(() => import("../../components/ProductList"));
-
-// Utility function to convert a title to a URL-friendly slug
-const slugify = (text) => {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-")
-    .replace(/-+$/, "");
-};
 
 const SizeSelector = ({ sizes, selectedSize, onSelectSize }) => {
   return (

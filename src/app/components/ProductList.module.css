@@ -7,13 +7,13 @@
 }
 
 .boxTypesGrid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  place-items: center;
-  gap: 10px;
+  display: flex; /* Use flexbox instead of grid */
+  justify-content: center;
+  align-items: stretch; /* Centers the items horizontally */
+  gap: 20px;
+  flex-wrap: wrap;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 5px;
 }
 
 .boxTypeCard {
@@ -27,8 +27,8 @@
   align-items: center;
   padding: 10px;
   justify-content: space-around;
-  min-height: 400px;
-  width: 250px;
+  min-height: 500px;
+  width: 300px;
   overflow: hidden;
   position: relative;
 }
@@ -45,7 +45,7 @@
 .boxTitle {
   font-weight: bold;
   font-size: 17px;
-  margin: 5px;
+  margin: 8px;
 }
 
 .boxSize {
@@ -56,11 +56,12 @@
 
 .boxDesc {
   font-size: 14px;
-  color: #6f6f6f;
+  color: #414040;
   margin-bottom: 12px;
   word-break: break-word;
   overflow-wrap: anywhere;
   width: 90%;
+  font-weight: bold;
   margin: auto;
   text-align: center;
 }
@@ -207,8 +208,9 @@
 
 @media (max-width: 768px) {
   .boxTypesGrid {
-    grid-template-columns: 1fr; /* Display items in a single column */
-    max-width: 90%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
   .boxTypeCard {

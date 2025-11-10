@@ -9,8 +9,8 @@
 
 .title {
   color: #ff6f20;
-  font-size: 2.5rem;
-  padding: 1rem 0;
+  font-size: 2rem;
+  padding: 0.3rem 0;
   margin: 0;
   text-align: center;
   font-weight: 700;
@@ -82,10 +82,11 @@
   min-height: 30px;
 }
 
-.desc {
+.size {
   font-size: 0.9rem;
-  color: #777;
+  color: #50504f;
   margin: 0 0 0.5rem;
+  font-weight: bold;
   min-height: 30px;
 }
 

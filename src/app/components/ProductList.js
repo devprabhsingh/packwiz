@@ -6,20 +6,10 @@ import RequestForm from "./RequestForm";
 import Image from "next/image";
 import Link from "next/link";
 import Toast from "@/app/components/Toast";
-
+import { slugify } from "@/utils/slugify";
 // Import your CSS module
 import styles from "./ProductList.module.css"; // Adjust path if needed
 
-// Utility function to convert a title to a URL-friendly slug
-const slugify = (text) => {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, "-")
-    .replace(/[^\w-]+/g, "")
-    .replace(/--+/g, "-")
-    .replace(/-+$/, "");
-};
 const SizeSelector = ({ sizes, selectedSize, onSelectSize }) => {
   return (
     <div className={styles.sizeSelector}>
@@ -268,6 +258,7 @@ const ProductList = ({ id, modified, productList }) => {
                           +
                         </button>
                       </div>
+
                       {product.discount && (
                         <span
                           style={{
@@ -280,6 +271,7 @@ const ProductList = ({ id, modified, productList }) => {
                           {product.discount}% Off
                         </span>
                       )}
+
                       {!product.discount ? (
                         <div className={styles.totalPrice}>
                           Total:{" "}
@@ -344,7 +336,7 @@ const ProductList = ({ id, modified, productList }) => {
             className={styles.addToCartButton}
             style={{
               display: "block",
-              margin: "40px auto",
+              margin: "20px auto",
               padding: "15px",
             }}
             onClick={() => {

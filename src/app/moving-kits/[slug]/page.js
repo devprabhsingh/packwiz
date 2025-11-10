@@ -46,7 +46,7 @@ const MovingKit = () => {
       return {
         ...itemDetails,
         qty: kitItem.qty,
-        price: itemDetails?.priceTable?.tier3 || 0,
+        price: itemDetails?.priceTable?.tier4 || 0,
       };
     });
 
@@ -153,7 +153,10 @@ const MovingKit = () => {
                   className={styles.image}
                 />
                 <p className={styles.name}>{item.title}</p>
-                <p className={styles.desc}>{item.desc}</p>
+                <p className={styles.size}>{item.size} inches</p>
+                <p style={{ margin: 0 }}>
+                  Price:<span style={{ color: "green" }}>{item.price}</span>
+                </p>
                 <div className={styles.controls}>
                   <button
                     className={styles.button}

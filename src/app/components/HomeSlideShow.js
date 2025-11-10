@@ -12,8 +12,8 @@ const slides = [
     description: "Strong, transparent tape perfect for sealing boxes securely.",
     img: "/images/clear-tape-slide.png",
     priceOld: 1.89,
-    priceCurrent: 1.7,
-    discountPercent: 10,
+    priceCurrent: 1.51,
+    discountPercent: 20,
   },
   {
     id: "mb01",

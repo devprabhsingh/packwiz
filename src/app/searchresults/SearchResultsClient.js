@@ -122,10 +122,6 @@ export default function SearchResultsClient({ keywordMap, products }) {
       }
     }
 
-    // --- Phase 2: If no category match, or to supplement category matches,
-    //             do a broader token-based match on all products ---
-    // This ensures we catch products that might be relevant but weren't strictly
-    // associated with a keywordMap category in their title/desc.
     if (scoredMatches.length === 0 || !categoryMatchedOnce) {
       // Only do this if no category match found, or if we want to broaden the search
       allProducts.forEach((product) => {

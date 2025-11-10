@@ -36,11 +36,16 @@ const ProductInfoClient = ({ productData, productCat }) => {
           >
             {productCat.title}
           </h1>
-          <h3 style={{ fontStyle: "italic", color: "#ff6f20", margin: "10px" }}>
+          <h3
+            style={{
+              fontStyle: "italic",
+              color: "#ff6f20",
+            }}
+          >
             {productCat.subtitle}
           </h3>
-          <p style={styles.pInfo}>{productCat.info}</p>
         </div>
+        <p style={styles.pInfo}>{productCat.info}</p>
         <ProductList productList={productData} />
       </div>
     </div>
@@ -63,7 +68,7 @@ const styles = {
     color: "#000000bc",
     textAlign: "center",
     width: "80%",
-    margin: "10px auto",
+    margin: "15px auto",
     backgroundColor: "#e9e9e9ff",
     borderRadius: "5px",
     padding: "10px",
